@@ -1,53 +1,21 @@
 // $Id$
 
+/**
+ * @namespace A unique namespace for the AJAX Solr library.
+ */
 AjaxSolr = function() {};
-/**
- * Returns whether an item is in the given array or not.
- * Don't add this to Array.prototype as it breaks for loops.
- *
- * @param items The array.
- * @param item An item that may or may not be in the array.
- * @return True if the item is in the given array.
- * @see http://www.prototypejs.org/api/array
- */
-AjaxSolr.contains = function(items, item) {
-  for (var i = 0; i < items.length; i++) {
-    if (items[i] == item) {
-      return true;
-    }
-  }
-  return false;
-}
 
 /**
- * @see Drupal.theme
- * Theme function from drupal.js.
+ * @namespace Baseclass for all classes
  */
-AjaxSolr.theme = function(func) {
-  for (var i = 1, args = []; i < arguments.length; i++) {
-    args.push(arguments[i]);
-  }
-
-  return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
-};
-
-/**
- * can't use jQuery's toString.call(obj) === "[object Array]", as it will may
- * return "[xpconnect wrapped native prototype]".
- *
- * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
- * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
- */
-AjaxSolr.isArray = function (obj) {
-  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
-}
-
 AjaxSolr.Class = function() {};
+
 /**
  * A class 'extends' itself into a subclass.
  *
+ * @static
  * @param properties The properties of the subclass.
- * @return A function that represents the subclass.
+ * @returns A function that represents the subclass.
  */
 AjaxSolr.Class.extend = function(properties) {
   var klass = this; // Safari dislikes 'class'
@@ -64,8 +32,57 @@ AjaxSolr.Class.extend = function(properties) {
 }
 
 /**
- * Extract extend() from jQuery.
- * @see jQuery.extend()
+ * Returns whether an item is in the given array or not.
+ * Don't add this to Array.prototype as it may break for loops.
+ *
+ * @static
+ * @param {Array} items The array.
+ * @param item An item that may or may not be in the array.
+ * @returns {Boolean} Whether the item is in the given array.
+ * @see http://www.prototypejs.org/api/array
+ */
+AjaxSolr.contains = function(items, item) {
+  for (var i = 0; i < items.length; i++) {
+    if (items[i] == item) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Taken from other JavaScript frameworks:
+
+/**
+ * A copy of Drupal's Drupal.theme function.
+ *
+ * @static
+ * @see http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js?revision=1.58
+ */
+AjaxSolr.theme = function(func) {
+  for (var i = 1, args = []; i < arguments.length; i++) {
+    args.push(arguments[i]);
+  }
+
+  return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
+};
+
+/**
+ * Can't use toString.call(obj) === "[object Array]", as it will may return
+ * "[xpconnect wrapped native prototype]", which is undesirable.
+ *
+ * @static
+ * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
+ * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
+ */
+AjaxSolr.isArray = function(obj) {
+  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
+}
+
+/**
+ * A simplified version of jQuery's extend function.
+ *
+ * @static
+ * @see http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
  */
 AjaxSolr.extend = function() {
   var target = arguments[0] || {}, i = 1, length = arguments.length, options;
