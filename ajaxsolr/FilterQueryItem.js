@@ -1,30 +1,41 @@
 // $Id$
 
 /**
- * Represents a Solr Filter Query.
+ * Represents a Solr filter query.
+ *
+ * @param properties A map of fields to set. Refer to the list of public fields.
+ * @class QueryItem
  */
-AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend({
+AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
+  /** @lends AjaxSolr.FilterQueryItem.prototype */
+  {
   /**
-   * The name of the item.
+   * The field name.
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  field: '',
+  field: null,
 
   /**
-   * The value of the item.
+   * The value.
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  value: '',
+  value: null,
 
   /**
    * Whether the value is publicly viewable.
    *
    * @field
    * @public
+   * @type Boolean
+   * @default null
    */
   hidden: false,
 
@@ -33,14 +44,16 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend({
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
   widgetId: null,
 
   /**
    * Transforms this item into Solr syntax.
    *
-   * @param skip Whether to skip encoding the value.
-   * @return Solr Filter Query syntax.
+   * @param {Boolean} skip Whether to skip encoding the value.
+   * @returns {String} Solr Filter Query syntax.
    */
   toSolr: function(skip) {
     return this.field + ':' + this.getValue().urlencode(skip);
@@ -49,8 +62,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend({
   /**
    * Prepares this item for inclusion in the URL hash.
    *
-   * @param skip Whether to skip encoding the value.
-   * @return A key-value pair for the URL hash.
+   * @returns {String} A key-value pair for the URL hash.
    */
   toHash: function() {
     return this.widgetId + ':' + this.getValue().urlencode();
@@ -59,7 +71,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend({
   /**
    * Parses a key-value pair from the URL hash.
    *
-   * @param A key-value pair from the URL hash.
+   * @param {String} A key-value pair from the URL hash.
    */
   parseHash: function(string) {
     var parts = string.split(':');
@@ -77,10 +89,10 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend({
   /**
    * Flattens the value into a quoted string.
    *
-   * @return A quoted string.
+   * @returns {String} A quoted string.
    */
   getValue: function() {
-    if (this.value.constructor == Array && this.value.length == 2) {
+    if (AjaxSolr.isArray(this.value) && this.value.length == 2) {
       return '[' + this.value[0] + ' TO ' + this.value[1] + ']';
     } else {
       return '"' + this.value + '"';
