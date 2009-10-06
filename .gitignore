@@ -1,0 +1,7 @@
+.svn/
+apachesolr_ajax.*
+includes/
+modules/
+widgets/apachesolr/
+widgets/images/
+README.txt
