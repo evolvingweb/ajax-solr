@@ -150,7 +150,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
     this.doRequest(0);
   },
 
-  selectOnly: function(keepId, items) {
+  selectOnlyItems: function(keepId, items) {
     for (var widgetId in this.widgets) {
       if (widgetId == keepId) {
         this.widgets[keepId].selectItems(items);
@@ -165,7 +165,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   /**
    * Removes all items from all widgets, except the given widget.
    */
-  deselectExcept: function(keepId) {
+  selectOnlyWidget: function(keepId) {
     for (var widgetId in this.widgets) {
       if (widgetId != keepId) {
         this.widgets[widgetId].deselectAll();

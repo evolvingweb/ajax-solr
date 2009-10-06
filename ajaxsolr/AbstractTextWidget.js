@@ -29,7 +29,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend({
   unclickHandler: function() {
     var me = this;
     return function() {
-      me.manager.deselectExcept(me.id);
+      me.manager.selectOnlyWidget(me.id);
       return false;
     };
   }
