@@ -1,9 +1,17 @@
 // $Id$
 
+/**
+ * Defines some date formats in strftime format.
+ *
+ * @field
+ * @private
+ */
 AjaxSolr.dateFormats = {
   /**
    * strftime()-compatible format for each date part.
-   * @see apachesolr_date_format_iso_by_gap()
+   *
+   * @field
+   * @private
    */
   datePartFormats: {
     'YEAR'   : '%Y',
@@ -16,6 +24,9 @@ AjaxSolr.dateFormats = {
 
   /**
    * strftime()-compatible format for each level of granularity.
+   *
+   * @field
+   * @private
    */
   longDateFormats: {
     'YEAR'   : '%Y',
@@ -27,6 +38,12 @@ AjaxSolr.dateFormats = {
   }
 }
 
+/**
+ * Baseclass for all date facet widgets.
+ *
+ * @class AbstractDateFacetWidget
+ * @extends AbstractFacetWidget
+ */
 AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
   replace: true,
 
@@ -35,22 +52,28 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  minDate: '',
+  minDate: null,
 
   /**
    * Latest date selectable.
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  maxDate: '',
+  maxDate: null,
 
   /**
    * Allow users to drill down to this level of granularity.
    *
    * @field
    * @public
+   * @type String
+   * @default "MINUTE"
    */
   granularity: 'MINUTE',
 
@@ -71,7 +94,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
   ],
 
   /**
-   * Stop-index for each date part in ISO 8601 format.
+   * Stop-index for each date part, when appearing in a date in ISO 8601 format.
    *
    * @static
    * @private
@@ -85,10 +108,6 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
     'SECOND' : 19
   },
 
-  /**
-   * @see apachesolr_search_date_range()
-   * @see apachesolr_date_gap_drilldown()
-   */
   alterQuery: function(queryObj) {
     if (this.selectedItems.length) {
       var gap = this.selectedItems[0][1].split('+1')[1];
@@ -145,9 +164,9 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
    * Given a date and a granularity, returns a data range in which the dates
    * are in ISO8601 format truncated to the given level of granularity.
    *
-   * @param date The date.
-   * @param granularity The granularity.
-   * @return The date range.
+   * @param {String} date The date.
+   * @param {String} granularity The granularity.
+   * @returns {String[]} The date range.
    */
   getValue: function(date, granularity) {
     index = this.indices[granularity];
@@ -158,6 +177,9 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
   /**
    * Array.indexOf() is undefined in IE, but rather than define it globally,
    * I just write this one function for the one case in which I need it.
+   *
+   * @param {String} part The date part to search for.
+   * @returns {Number} If found, the index of the date part; -1, otherwise.
    */
   indexOfPart: function(part) {
     for (var i = 0; i < this.parts.length; i++) {

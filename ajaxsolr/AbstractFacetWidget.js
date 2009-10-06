@@ -1,36 +1,49 @@
 // $Id$
 
+/**
+ * Baseclass for all facet widgets.
+ *
+ * @class AbstractFacetWidget
+ * @extends AbstractWidget
+ */
 AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
   /**
-   * Facet on this field.
+   * The field to facet on.
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  fieldName: '',
+  fieldName: null,
 
   /**
    * This field contains the human-readable versions of the values stored in
-   * the field fiendName.
+   * the field fieldName.
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  humanFieldName: '',
+  humanFieldName: null,
 
   /**
    * Maximum number of facet values to display.
    *
    * @field
    * @public
+   * @type Number
+   * @default null
    */
-  limit: '',
+  limit: null,
 
   /**
    * Facet fields returned by Solr.
    *
    * @field
    * @private
+   * @default null
    */
   facetFields: null,
 
@@ -39,6 +52,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
    *
    * @field
    * @private
+   * @default null
    */
   facetDates: null,
 
@@ -53,6 +67,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
       // we want to display only the human-readable facet values
       this.facetFields = data.facet_counts.facet_fields[this.humanFieldName];
       this.facetDates = data.facet_counts.facet_dates[this.humanFieldName];
+      // allow the child implementation to handle the result.
       this._handleResult();
     }
   },
@@ -60,15 +75,17 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
   /**
    * An abstract hook for child implementations.
    * Allow the child to handle the result without parsing the response.
+   *
+   * @throws If not defined in child implementation.
    */
   _handleResult: function() {
     throw 'Abstract method _handleResult';
   },
 
   /**
-   * Returns all the selected items as query items.
+   * Returns all the selected items as filter query items.
    *
-   * @return An array of FilterQueryItem objects.
+   * @returns {FilterQueryItem[]}
    */
   getItems: function() {
     var items = [];
@@ -85,8 +102,10 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   /**
+   * Returns a function to deselect the given value.
+   *
    * @param value The given value.
-   * @return A function to deselect the given value.
+   * @returns {Function}
    */
   unclickHandler: function(value) {
     var me = this;
@@ -97,8 +116,10 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   /**
+   * Returns a function to select the given value.
+   *
    * @param value The given value.
-   * @return A function to select the given value.
+   * @returns {Function}
    */
   clickHandler: function(value) {
     var me = this;
@@ -109,16 +130,20 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   /**
+   * Returns a string representation of the value to deselect.
+   *
    * @param value The value to deselect.
-   * @return A textual repesentation of the value.
+   * @returns {String}
    */
   unclickText: function(value) {
     return value;
   },
 
   /**
+   * Returns a string representation of the value to select.
+   *
    * @param value The value to select.
-   * @return A textual repesentation of the value.
+   * @returns {String}
    */
   clickText: function(value) {
     return value;

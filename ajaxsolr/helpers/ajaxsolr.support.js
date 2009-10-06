@@ -1,9 +1,10 @@
 // $Id$
 
 /**
- * URL-encodes a string.
+ * Optionally URL-encodes a string.
  *
- * @param skip Whether to skip encoding.
+ * @param {Boolean} skip Whether to skip encoding.
+ * @returns {String} The possibly-encoded string.
  */
 String.prototype.urlencode = function(skip) {
   if (skip) {
@@ -16,6 +17,8 @@ String.prototype.urlencode = function(skip) {
 
 /**
  * Strip whitespace from the beginning and end of a string.
+ *
+ * @returns {String} The trimmed string.
  */
 String.prototype.trim = function() {
   return this.replace(/^ +/, '').replace(/ +$/, '');
@@ -23,24 +26,30 @@ String.prototype.trim = function() {
 
 /**
  * Returns a date in ISO8601 format.
+ *
+ * @returns {Date} The date in ISO8601 format.
  */
 String.prototype.toDate = function() {
   return new Date().setISO8601(this);
 }
 
 /**
- * Returns the given date part as a formatted string.
+ * Returns a string representation of the given level of granularity, in the
+ * context of the date.
  *
- * @param part The given date part.
+ * @param {String} granularity The given level of granularity.
+ * @returns {String} The string representation of the level of granularity.
  */
-Date.prototype.datePartString = function(part) {
-  return jQuery.strftime(AjaxSolr.dateFormats.datePartFormats[part.toUpperCase()], this, true);
+Date.prototype.datePartString = function(granularity) {
+  return jQuery.strftime(AjaxSolr.dateFormats.datePartFormats[granularity.toUpperCase()], this, true);
 }
 
 /**
- * Returns a date in long-format according to the given level of granularity.
+ * Returns a string representation of the date, truncated to the given level of
+ * granularity.
  *
- * @param granularity The given level of granularity.
+ * @param {String} granularity The given level of granularity.
+ * @returns {String} The string representation of the date.
  */
 Date.prototype.toLongDateString = function(granularity) {
   return jQuery.strftime(AjaxSolr.dateFormats.longDateFormats[granularity.toUpperCase()], this, true);

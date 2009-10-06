@@ -1,45 +1,66 @@
 // $Id$
 
-AjaxSolr.AbstractWidget = AjaxSolr.Class.extend({
+/**
+ * Baseclass for all widgets. 
+ * 
+ * Handles the selection of items (filters) and provides abstract hooks for
+ * child classes.
+ *
+ * @param properties A map of fields to set. May be new or public fields.
+ * @class AbstractWidget
+ */
+AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
+  /** @lends AjaxSolr.AbstractWidget.prototype */
+  {
   /** 
    * A unique identifier of this widget.
    *
    * @field 
    * @public
+   * @type String
+   * @default null
    */
-  id: '', 
+  id: null,
 
   /** 
-   * A CSS classname representing the "target div" inside the html page.
+   * A CSS selector representing the "target div" inside the html page.
    * All UI changes will be performed inside this empty div.
    * 
    * @field 
    * @public
+   * @type String
+   * @default null
    */
-  target: '',
+  target: null,
 
   /** 
-   * A CSS classname representing the "container div" inside the html page.
+   * A CSS selector representing the "container div" inside the html page.
    * A widget need not necessarily have a container div.
    * 
    * @field 
    * @public
+   * @type String
+   * @default null
    */
-  container: '',
+  container: null,
 
   /**
    * A flag that indicates whether new selected items should replace old ones.
    *
    * @field
    * @private
+   * @type Boolean
+   * @default false
    */
   replace: false,
 
   /** 
-   * A flag that indicates whether we should animate the update of the target div.
+   * A flag that indicates whether we should animate the update of the target.
    * 
-   * @field 
+   * @field
    * @private
+   * @type Boolean
+   * @default false
    */
   animate: false,
 
@@ -48,14 +69,16 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend({
    *
    * @field
    * @private
+   * @type Array
+   * @default []
    */
   selectedItems: [],
 
   /**
    * Add the given items to the list of selected items.
    *
-   * @param items An array of items.
-   * @return True if selection changed.
+   * @param {Array} items The items to add.
+   * @returns {Boolean} Whether the selection changed.
    */
   selectItems: function(items) {
     if (this.replace) {
@@ -78,8 +101,8 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend({
   /**
    * Removes the given items from the list of selected items.
    *
-   * @param items An array of items.
-   * @return True if selection changed.
+   * @param {Array} items The items to remove.
+   * @returns {Boolean} Whether the selection changed.
    */
   deselectItems: function(items) {
     var start = this.selectedItems.length;

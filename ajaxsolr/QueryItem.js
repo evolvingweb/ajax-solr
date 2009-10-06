@@ -14,6 +14,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend(
    *
    * @field
    * @public
+   * @type String
    * @default null
    */
   value: null,

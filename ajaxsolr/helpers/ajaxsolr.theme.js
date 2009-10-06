@@ -1,8 +1,12 @@
 // $Id$
 
 /**
- * @param target The list to modify.
- * @param items The list of items to append to the list.
+ * Appends the given items to the given list, optionally inserting a separator
+ * between the items in the list.
+ *
+ * @param {String} list The list to append items to.
+ * @param {Array} items The list of items to append to the list.
+ * @param {String} [separator] A string to add between the items.
  */
 AjaxSolr.theme.prototype.list_items = function(list, items, separator) {
   jQuery(list).empty();

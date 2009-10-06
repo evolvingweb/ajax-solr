@@ -1,11 +1,18 @@
 // $Id$
 
+/**
+ * Baseclass for all result widgets.
+ *
+ * @class AbstractResultWidget
+ * @extends AbstractWidget
+ */
 AjaxSolr.AbstractResultWidget = AjaxSolr.AbstractWidget.extend({
   /**
    * The set of fields to return.
    *
    * @field
    * @public
+   * @default []
    */
   fields: [],
 
@@ -14,6 +21,7 @@ AjaxSolr.AbstractResultWidget = AjaxSolr.AbstractWidget.extend({
    *
    * @field
    * @public
+   * @default 0
    */
   rows: 0,
 
