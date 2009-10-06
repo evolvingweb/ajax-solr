@@ -1,0 +1,8 @@
+AJAX Solr is tri-licensed under the GNU General Public License (GPL) v2.0, the
+Apache License (ASL) v2.0, and the MIT License.
+
+AJAX Solr includes works under other copyright notices and distributed
+according to the terms of the GNU General Public License or a compatible
+license, including:
+
+  jQuery strftime plugin - Copyright (c) 2008 Emmanuel Benoît
