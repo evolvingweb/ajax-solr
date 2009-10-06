@@ -1,30 +1,28 @@
 // $Id$
 
 /**
- * Represents a Solr Query.
+ * Represents a Solr query.
+ *
+ * @param properties A map of fields to set. Refer to the list of public fields.
+ * @class QueryItem
  */
-AjaxSolr.QueryItem = AjaxSolr.Class.extend({
+AjaxSolr.QueryItem = AjaxSolr.Class.extend(
+  /** @lends AjaxSolr.QueryItem.prototype */
+  {
   /**
-   * The value of the item.
+   * The value.
    *
    * @field
    * @public
+   * @default null
    */
-  value: '',
-
-  /**
-   * The widget that manages this item.
-   *
-   * @field
-   * @public
-   */
-  widgetId: null,
+  value: null,
 
   /**
    * Transforms this item into Solr syntax.
    *
-   * @param skip Whether to skip encoding the value.
-   * @return Solr Query syntax.
+   * @param {Boolean} skip Whether to skip encoding the value.
+   * @returns {String} Solr Query syntax.
    */
   toSolr: function(skip) {
     return this.value.urlencode(skip);
@@ -33,8 +31,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend({
   /**
    * Prepares this item for inclusion in the URL hash.
    *
-   * @param skip Whether to skip encoding the value.
-   * @return A key-value pair for the URL hash.
+   * @returns {String} A key-value pair for the URL hash.
    */
   toHash: function() {
     return this.value.urlencode();
@@ -43,7 +40,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend({
   /**
    * Parses a key-value pair from the URL hash.
    *
-   * @param A key-value pair from the URL hash.
+   * @param {String} A key-value pair from the URL hash.
    */
   parseHash: function(string) {
     this.value = decodeURIComponent(string);
