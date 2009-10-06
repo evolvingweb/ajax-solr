@@ -15,7 +15,6 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type String
-   * @default null
    */
   value: null,
 
@@ -41,7 +40,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend(
   /**
    * Parses a key-value pair from the URL hash.
    *
-   * @param {String} A key-value pair from the URL hash.
+   * @param {String} string A key-value pair from the URL hash.
    */
   parseHash: function(string) {
     this.value = decodeURIComponent(string);

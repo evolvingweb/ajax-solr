@@ -18,7 +18,6 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * @field 
    * @public
    * @type String
-   * @default null
    */
   id: null,
 
@@ -29,7 +28,6 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * @field 
    * @public
    * @type String
-   * @default null
    */
   target: null,
 
@@ -40,7 +38,6 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * @field 
    * @public
    * @type String
-   * @default null
    */
   container: null,
 

@@ -42,9 +42,11 @@ AjaxSolr.dateFormats = {
  * Baseclass for all date facet widgets.
  *
  * @class AbstractDateFacetWidget
- * @extends AbstractFacetWidget
+ * @augments AjaxSolr.AbstractFacetWidget
  */
-AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
+AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
+  /** @lends AjaxSolr.AbstractDateFacetWidget.prototype */
+  {
   replace: true,
 
   /**
@@ -53,7 +55,6 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
    * @field
    * @public
    * @type String
-   * @default null
    */
   minDate: null,
 
@@ -63,7 +64,6 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend({
    * @field
    * @public
    * @type String
-   * @default null
    */
   maxDate: null,
 

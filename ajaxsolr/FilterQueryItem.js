@@ -4,7 +4,7 @@
  * Represents a Solr filter query.
  *
  * @param properties A map of fields to set. Refer to the list of public fields.
- * @class QueryItem
+ * @class FilterQueryItem
  */
 AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.FilterQueryItem.prototype */
@@ -15,7 +15,6 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type String
-   * @default null
    */
   field: null,
 
@@ -25,7 +24,6 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type String
-   * @default null
    */
   value: null,
 
@@ -35,7 +33,6 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type Boolean
-   * @default null
    */
   hidden: false,
 
@@ -45,7 +42,6 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type String
-   * @default null
    */
   widgetId: null,
 
@@ -71,7 +67,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
   /**
    * Parses a key-value pair from the URL hash.
    *
-   * @param {String} A key-value pair from the URL hash.
+   * @param {String} string A key-value pair from the URL hash.
    */
   parseHash: function(string) {
     var parts = string.split(':');

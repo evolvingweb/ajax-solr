@@ -4,16 +4,17 @@
  * Baseclass for all facet widgets.
  *
  * @class AbstractFacetWidget
- * @extends AbstractWidget
+ * @augments AjaxSolr.AbstractWidget
  */
-AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
+AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
+  /** @lends AjaxSolr.AbstractFacetWidget.prototype */
+  {
   /**
    * The field to facet on.
    *
    * @field
    * @public
    * @type String
-   * @default null
    */
   fieldName: null,
 
@@ -24,7 +25,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
    * @field
    * @public
    * @type String
-   * @default null
    */
   humanFieldName: null,
 
@@ -34,7 +34,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
    * @field
    * @public
    * @type Number
-   * @default null
    */
   limit: null,
 
@@ -43,7 +42,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
    *
    * @field
    * @private
-   * @default null
    */
   facetFields: null,
 
@@ -52,7 +50,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend({
    *
    * @field
    * @private
-   * @default null
    */
   facetDates: null,
 

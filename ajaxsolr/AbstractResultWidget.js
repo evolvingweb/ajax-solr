@@ -4,9 +4,11 @@
  * Baseclass for all result widgets.
  *
  * @class AbstractResultWidget
- * @extends AbstractWidget
+ * @augments AjaxSolr.AbstractWidget
  */
-AjaxSolr.AbstractResultWidget = AjaxSolr.AbstractWidget.extend({
+AjaxSolr.AbstractResultWidget = AjaxSolr.AbstractWidget.extend(
+  /** @lends AjaxSolr.AbstractResultWidget.prototype */
+  {
   /**
    * The set of fields to return.
    *

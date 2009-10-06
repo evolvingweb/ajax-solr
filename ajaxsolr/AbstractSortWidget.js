@@ -4,9 +4,11 @@
  * Baseclass for all sorting widgets.
  *
  * @class AbstractSortWidget
- * @extends AbstractWidget
+ * @augments AjaxSolr.AbstractWidget
  */
-AjaxSolr.AbstractSortWidget = AjaxSolr.AbstractWidget.extend({
+AjaxSolr.AbstractSortWidget = AjaxSolr.AbstractWidget.extend(
+  /** @lends AjaxSolr.AbstractSortWidget.prototype */
+  {
   /**
    * A list of available sort fields.
    *
@@ -21,7 +23,6 @@ AjaxSolr.AbstractSortWidget = AjaxSolr.AbstractWidget.extend({
    *
    * @field
    * @private
-   * @default null
    */
   sort: null,
 

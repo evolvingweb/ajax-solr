@@ -4,9 +4,11 @@
  * Baseclass for all free text widgets.
  *
  * @class AbstractTextWidget
- * @extends AbstractWidget
+ * @augments AjaxSolr.AbstractWidget
  */
-AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend({
+AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
+  /** @lends AjaxSolr.AbstractTextWidget.prototype */
+  {
   replace: true,
 
   alterQuery: function(queryObj) {

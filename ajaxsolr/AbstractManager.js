@@ -6,7 +6,7 @@
  * All public calls should be performed on the manager object.
  *
  * @param properties A map of fields to set. Refer to the list of public fields.
- * @class Manager
+ * @class AbstractManager
  */
 AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.AbstractManager.prototype */
@@ -28,7 +28,6 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type String
-   * @default null
    */
   passthruUrl: null,
 
