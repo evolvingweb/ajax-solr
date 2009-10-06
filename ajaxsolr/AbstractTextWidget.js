@@ -1,5 +1,11 @@
 // $Id$
 
+/**
+ * Baseclass for all free text widgets.
+ *
+ * @class AbstractTextWidget
+ * @extends AbstractWidget
+ */
 AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend({
   replace: true,
 
@@ -10,27 +16,15 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend({
   /**
    * Returns all the selected items as query items.
    *
-   * @return An array of QueryItem objects.
+   * @returns {QueryItem[]}
    */
   getItems: function() {
     var items = [];
     for (var i = 0; i < this.selectedItems.length; i++) {
       items.push(new AjaxSolr.QueryItem({
-        value: this.selectedItems[i],
-        widgetId: this.id
+        value: this.selectedItems[i]
       }));
     }
     return items;
-  },
-
-  /**
-   * @return A function to deselect all but this widget.
-   */
-  unclickHandler: function() {
-    var me = this;
-    return function() {
-      me.manager.selectOnlyWidget(me.id);
-      return false;
-    };
   }
 });
