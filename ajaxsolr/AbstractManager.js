@@ -4,13 +4,19 @@
  * The Manager acts as a container for all widgets. 
  * It stores Solr configuration and selection and delegates calls to the widgets.
  * All public calls should be performed on the manager object.
+ *
+ * @param properties A map of fields to set. Refer to the list of public fields.
+ * @class Manager
  */
-AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
+AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
+  /** @lends AjaxSolr.AbstractManager.prototype */
+  {
   /** 
    * The absolute URL to the Solr instance.
    *
    * @field
    * @public
+   * @type String
    * @default http://localhost:8983/solr/select/
    */
   solrUrl: 'http://localhost:8983/solr/select/',
@@ -21,8 +27,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
    *
    * @field
    * @public
+   * @type String
+   * @default null
    */
-  passthruUrl: '',
+  passthruUrl: null,
 
   /**
    * Filters to apply to all queries.
@@ -41,6 +49,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
    *
    * @field
    * @public
+   * @type String
+   * @default "body"
    */
   hlFl: 'body',
 
@@ -49,29 +59,34 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
    *
    * @field
    * @private 
+   * @default {}
    */
-  widgets: [],
+  widgets: {},
 
   /** 
-   * The starting result to display, so page = start/rows
+   * The Solr start offset parameter.
    *
    * @field
    * @private 
+   * @type Number
+   * @default 0
    */
   start: 0,
 
   /**
-   * A copy of the URL hash.
+   * A copy of the URL hash, so we can detect any changes to it.
    *
    * @field
    * @private
+   * @type String
+   * @default ""
    */
   hash: '',
 
   /** 
-   * Adds a widget to this manager.
+   * Adds a widget to the manager.
    *
-   * @param {AjaxSolr.AbstractWidget} widget An instance of AbstractWidget.
+   * @param {AjaxSolr.AbstractWidget} widget
    */
   addWidget: function(widget) { 
     if (this.canAddWidget(widget)) {
@@ -84,7 +99,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   /**
    * An abstract hook for child implementations.
    *
-   * @return True if ready to add widget to this manager.
+   * @param {AjaxSolr.AbstractWidget} widget
+   * @returns {Boolean} Whether the DOM is ready for the widget.
    */
   canAddWidget: function(widget) {
     return true;
@@ -119,8 +135,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   /** 
    * Adds the given items to the given widget, and runs the request.
    *
-   * @param widgetId The widgetId of the widget.
-   * @param items An array of items, or a single item.
+   * @param {String} widgetId The id of the widget.
+   * @param {Array} items The items to select.
    */
   selectItems: function(widgetId, items) {
     if (this.widgets[widgetId].selectItems(items)) {
@@ -131,8 +147,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   /** 
    * Removes the given items from the given widget, and runs the request.
    *
-   * @param widgetId The widgetId of the widget.
-   * @param items An array of items, or a single item.
+   * @param {String} widgetId The id of the widget.
+   * @param {Array} items The items to deselect.
    */  
   deselectItems: function(widgetId, items) {
     if (this.widgets[widgetId].deselectItems(items)) {
@@ -143,13 +159,20 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   /**
    * Removes all items from the given widget, and runs the request.
    *
-   * @param widgetId The widgetId of the widget.
+   * @param {String} widgetId The id of the widget.
    */
   deselectWidget: function(widgetId) {
     this.widgets[widgetId].deselectAll();
     this.doRequest(0);
   },
 
+  /**
+   * Removes all items from all widgets except the given widget, adds the given
+   * items to the given widget, and runs the request.
+   *
+   * @param {String} keepId The id of the widget.
+   * @param {Array} items The items to select.
+   */
   selectOnlyItems: function(keepId, items) {
     for (var widgetId in this.widgets) {
       if (widgetId == keepId) {
@@ -163,7 +186,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   },
 
   /**
-   * Removes all items from all widgets, except the given widget.
+   * Removes all items from all widgets except the given widget, and runs the
+   * request.
+   *
+   * @param {String} keepId The id of the widget.
    */
   selectOnlyWidget: function(keepId) {
     for (var widgetId in this.widgets) {
@@ -185,7 +211,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   },
 
   /**
-   * Load the query from the URL hash.
+   * Loads the query from the URL hash.
    */
   loadQueryFromHash: function() {
     // if the hash is empty, the page must be loading for the first time,
@@ -246,8 +272,12 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   },
 
   /**
-   * @param start The Solr start offset parameter.
-   * @return A query object for the given widget.
+   * Returns an object decorated with Solr parameters, e.g. q, fl, fq, start,
+   * rows, fields, dates, sort, etc. Used in alterQuery(), displayQuery(),
+   * executeRequest(), and saveQueryToHash().
+   *
+   * @param {Number} start The Solr start offset parameter.
+   * @returns The query object.
    */
   buildQuery: function(start) {
     var queryObj = {
@@ -272,8 +302,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
    * Transforms a query object into a string for execution.
    *
    * @param queryObj The query object built by buildQuery.
-   * @param skip Whether to skip URL encoding.
-   * @return The query object as a string.
+   * @param {Boolean} skip Whether to skip URL encoding.
+   * @returns {String} The query object as a string.
    */
   buildQueryString: function(queryObj, skip) {
     // Basic facet info. Return the top 40 items for each facet and ignore anything with 0 results
@@ -319,10 +349,11 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   },
 
   /** 
-   * Creates a query out of the current selection and calls all bound widgets to
-   * request their data from the server.
+   * Creates a query out of the current selection, starts any widget loading
+   * animations, display the query, request the data from the Solr server, and
+   * saves the query to the URL hash.
    *
-   * @param start The Solr start offset parameter.
+   * @param {Number} start The Solr start offset parameter.
    */
   doRequest: function(start) {
     var queryObj = this.buildQuery(start);
@@ -352,14 +383,17 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
    * Sends the request to Solr and handles the response.
    * Should use jsonCallback() to handle the request.
    *
-   * @param queryObj The query string built by buildQuery().
+   * @param queryObj The query object built by buildQuery.
+   * @throws If not defined in child implementation.
    */
   executeRequest: function(queryObj) {
     throw 'Abstract method executeRequest';
   },
 
   /**
-   * @return The callback to feed to jQuery.getJSON or jQuery.post.
+   * Returns the callback to feed to, e.g. jQuery.getJSON or jQuery.post.
+   *
+   * @returns {Function}
    */
   jsonCallback: function() {
     var me = this;
@@ -369,12 +403,14 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend({
   },
 
   /**
-   * This method is executed after the Solr response data arrives.
+   * This method is executed after the Solr response data arrives. Passes the
+   * Solr response to the widgets, for each widget to handle separately, and
+   * ends any widget loading animations.
    *
    * @param data The Solr response inside a JavaScript object.
    */
   handleResult: function(data) {
-    //For debugging purposes
+    // for debugging purposes
     this.responseCache = data;
 
     for (var widgetId in this.widgets) {
