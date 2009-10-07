@@ -8,7 +8,7 @@ communication with Solr. As such, you may use the library whether you develop
 using jQuery, MooTools, Prototype, Dojo, or any other framework. You need only
 define a Manager object that extends the provided AbstractManager object, and
 define the function executeRequest() on that object. A jQuery-compatible Manager
-is provided at widgets/managers/Manager.jquery.js.
+is provided at managers/Manager.jquery.js.
 
 AJAX Solr began as a fork of [SolrJS][1] by Matthias Epheser. We are indebted to
 that project for providing a great starting point for improvement.
