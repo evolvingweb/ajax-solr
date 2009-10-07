@@ -4,6 +4,7 @@ AJAX Solr is a JavaScript library for creating user interfaces to
 [Apache Solr][9].
 
 * [Documentation][10]
+* [JsDoc Documentation][11]
 
 It is JavaScript framework-agnostic, but requires an AJAX implementation to
 communication with Solr. As such, you may use the library whether you develop
@@ -126,4 +127,5 @@ jsrun.jar app/run.js -a -E="jquery.strftime.js" -p -r=3 -s -t=templates/jsdoc
 [7]: http://evolvingweb.ca/
 [8]: http://code.google.com/p/jsdoc-toolkit/
 [9]: http://lucene.apache.org/solr/
-[10]: http://ajaxsolr.ewdev.ca/docs/
+[10]: http://evolvingweb.github.com/ajax-solr
+[11]: http://evolvingweb.github.com/ajax-solr/docs/index.html
