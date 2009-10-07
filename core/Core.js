@@ -3,12 +3,12 @@
 /**
  * @namespace A unique namespace for the AJAX Solr library.
  */
-AjaxSolr = function() {};
+AjaxSolr = function () {};
 
 /**
  * @namespace Baseclass for all classes
  */
-AjaxSolr.Class = function() {};
+AjaxSolr.Class = function () {};
 
 /**
  * A class 'extends' itself into a subclass.
@@ -17,11 +17,11 @@ AjaxSolr.Class = function() {};
  * @param properties The properties of the subclass.
  * @returns A function that represents the subclass.
  */
-AjaxSolr.Class.extend = function(properties) {
+AjaxSolr.Class.extend = function (properties) {
   var klass = this; // Safari dislikes 'class'
   // The subclass is just a function that when called, instantiates itself.
   // Nothing is _actually_ shared between _instances_ of the same class.
-  var subClass = function(options) {
+  var subClass = function (options) {
     // 'this' refers to the subclass, which starts life as an empty object.
     // Add its parent's properties, its own properties, and any passed options.
     AjaxSolr.extend(this, new klass(options), properties, options);
@@ -41,7 +41,7 @@ AjaxSolr.Class.extend = function(properties) {
  * @returns {Boolean} Whether the item is in the given array.
  * @see http://www.prototypejs.org/api/array
  */
-AjaxSolr.contains = function(items, item) {
+AjaxSolr.contains = function (items, item) {
   for (var i = 0; i < items.length; i++) {
     if (items[i] == item) {
       return true;
@@ -58,7 +58,7 @@ AjaxSolr.contains = function(items, item) {
  * @static
  * @see http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js?revision=1.58
  */
-AjaxSolr.theme = function(func) {
+AjaxSolr.theme = function (func) {
   for (var i = 1, args = []; i < arguments.length; i++) {
     args.push(arguments[i]);
   }
@@ -74,7 +74,7 @@ AjaxSolr.theme = function(func) {
  * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
  * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
  */
-AjaxSolr.isArray = function(obj) {
+AjaxSolr.isArray = function (obj) {
   return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
 }
 
@@ -84,7 +84,7 @@ AjaxSolr.isArray = function(obj) {
  * @static
  * @see http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
  */
-AjaxSolr.extend = function() {
+AjaxSolr.extend = function () {
   var target = arguments[0] || {}, i = 1, length = arguments.length, options;
   for (; i < length; i++) {
     if ((options = arguments[i]) != null) {

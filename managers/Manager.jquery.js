@@ -1,14 +1,14 @@
 // $Id$
 
 AjaxSolr.Manager = AjaxSolr.AbstractManager.extend({
-  canAddWidget: function(widget) { 
+  canAddWidget: function (widget) { 
     return widget.target === undefined || jQuery(widget.target) && jQuery(widget.target).length;
   },
 
   /**
    * @see http://wiki.apache.org/solr/SolJSON#JSON_specific_parameters
    */
-  executeRequest: function(queryObj) { 
+  executeRequest: function (queryObj) { 
     var me = this;
     if (this.passthruUrl) {
       jQuery.post(this.passthruUrl + '?callback=?', { query: this.buildQueryString(queryObj, true) }, this.jsonCallback(), 'json');

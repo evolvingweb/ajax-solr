@@ -11,7 +11,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
   {
   replace: true,
 
-  alterQuery: function(queryObj) {
+  alterQuery: function (queryObj) {
     queryObj.q = queryObj.q.concat(this.getItems());
   },
 
@@ -20,7 +20,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    *
    * @returns {QueryItem[]}
    */
-  getItems: function() {
+  getItems: function () {
     var items = [];
     for (var i = 0; i < this.selectedItems.length; i++) {
       items.push(new AjaxSolr.QueryItem({

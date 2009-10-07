@@ -6,7 +6,7 @@
  * @param {Boolean} skip Whether to skip encoding.
  * @returns {String} The possibly-encoded string.
  */
-String.prototype.urlencode = function(skip) {
+String.prototype.urlencode = function (skip) {
   if (skip) {
     return this;
   }
@@ -20,7 +20,7 @@ String.prototype.urlencode = function(skip) {
  *
  * @returns {String} The trimmed string.
  */
-String.prototype.trim = function() {
+String.prototype.trim = function () {
   return this.replace(/^ +/, '').replace(/ +$/, '');
 }
 
@@ -29,7 +29,7 @@ String.prototype.trim = function() {
  *
  * @returns {Date} The date in ISO8601 format.
  */
-String.prototype.toDate = function() {
+String.prototype.toDate = function () {
   return new Date().setISO8601(this);
 }
 
@@ -40,7 +40,7 @@ String.prototype.toDate = function() {
  * @param {String} granularity The given level of granularity.
  * @returns {String} The string representation of the level of granularity.
  */
-Date.prototype.datePartString = function(granularity) {
+Date.prototype.datePartString = function (granularity) {
   return jQuery.strftime(AjaxSolr.dateFormats.datePartFormats[granularity.toUpperCase()], this, true);
 }
 
@@ -51,14 +51,14 @@ Date.prototype.datePartString = function(granularity) {
  * @param {String} granularity The given level of granularity.
  * @returns {String} The string representation of the date.
  */
-Date.prototype.toLongDateString = function(granularity) {
+Date.prototype.toLongDateString = function (granularity) {
   return jQuery.strftime(AjaxSolr.dateFormats.longDateFormats[granularity.toUpperCase()], this, true);
 }
 
 /**
  * @see http://dansnetwork.com/2008/11/01/javascript-iso8601rfc3339-date-parser/ 
  */
-Date.prototype.setISO8601 = function(dString) {
+Date.prototype.setISO8601 = function (dString) {
   var regexp = /(\d\d\d\d)(-)?(\d\d)(-)?(\d\d)(T)?(\d\d)(:)?(\d\d)(:)?(\d\d)(\.\d+)?(Z|([+-])(\d\d)(:)?(\d\d))/;
 
   if (dString.toString().match(new RegExp(regexp))) {

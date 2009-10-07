@@ -53,13 +53,13 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   facetDates: null,
 
-  alterQuery: function(queryObj) {
+  alterQuery: function (queryObj) {
     queryObj.fields.push(this.fieldName);
     queryObj.fields.push(this.humanFieldName);
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
-  handleResult: function(data) {
+  handleResult: function (data) {
     if (data.facet_counts) {
       // we want to display only the human-readable facet values
       this.facetFields = data.facet_counts.facet_fields[this.humanFieldName];
@@ -75,7 +75,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *
    * @throws If not defined in child implementation.
    */
-  _handleResult: function() {
+  _handleResult: function () {
     throw 'Abstract method _handleResult';
   },
 
@@ -84,7 +84,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *
    * @returns {FilterQueryItem[]}
    */
-  getItems: function() {
+  getItems: function () {
     var items = [];
     for (var i = 0; i < this.selectedItems.length; i++) {
       items.push(new AjaxSolr.FilterQueryItem({
@@ -104,9 +104,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @param value The given value.
    * @returns {Function}
    */
-  unclickHandler: function(value) {
+  unclickHandler: function (value) {
     var me = this;
-    return function() {
+    return function () {
       me.manager.deselectItems(me.id, [ value ]);
       return false;
     }
@@ -118,9 +118,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @param value The given value.
    * @returns {Function}
    */
-  clickHandler: function(value) {
+  clickHandler: function (value) {
     var me = this;
-    return function() {
+    return function () {
       me.manager.selectItems(me.id, [ value ]);
       return false;
     }
@@ -132,7 +132,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @param value The value to deselect.
    * @returns {String}
    */
-  unclickText: function(value) {
+  unclickText: function (value) {
     return value;
   },
 
@@ -142,7 +142,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @param value The value to select.
    * @returns {String}
    */
-  clickText: function(value) {
+  clickText: function (value) {
     return value;
   }
 });

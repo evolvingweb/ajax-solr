@@ -24,7 +24,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend(
    * @param {Boolean} skip Whether to skip encoding the value.
    * @returns {String} Solr Query syntax.
    */
-  toSolr: function(skip) {
+  toSolr: function (skip) {
     return this.value.urlencode(skip);
   },
 
@@ -33,7 +33,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend(
    *
    * @returns {String} A key-value pair for the URL hash.
    */
-  toHash: function() {
+  toHash: function () {
     return this.value.urlencode();
   },
 
@@ -42,7 +42,7 @@ AjaxSolr.QueryItem = AjaxSolr.Class.extend(
    *
    * @param {String} string A key-value pair from the URL hash.
    */
-  parseHash: function(string) {
+  parseHash: function (string) {
     this.value = decodeURIComponent(string);
   }
 });

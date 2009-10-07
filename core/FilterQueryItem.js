@@ -51,7 +51,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @param {Boolean} skip Whether to skip encoding the value.
    * @returns {String} Solr Filter Query syntax.
    */
-  toSolr: function(skip) {
+  toSolr: function (skip) {
     return this.field + ':' + this.getValue().urlencode(skip);
   },
 
@@ -60,7 +60,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    *
    * @returns {String} A key-value pair for the URL hash.
    */
-  toHash: function() {
+  toHash: function () {
     return this.widgetId + ':' + this.getValue().urlencode();
   },
 
@@ -69,7 +69,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    *
    * @param {String} string A key-value pair from the URL hash.
    */
-  parseHash: function(string) {
+  parseHash: function (string) {
     var parts = string.split(':');
     this.widgetId = parts[0];
     this.value = decodeURIComponent(parts.slice(1, parts.length).join(':'));
@@ -87,7 +87,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    *
    * @returns {String} A quoted string.
    */
-  getValue: function() {
+  getValue: function () {
     if (AjaxSolr.isArray(this.value) && this.value.length == 2) {
       return '[' + this.value[0] + ' TO ' + this.value[1] + ']';
     } else {

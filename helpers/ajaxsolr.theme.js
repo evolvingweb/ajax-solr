@@ -8,7 +8,7 @@
  * @param {Array} items The list of items to append to the list.
  * @param {String} [separator] A string to add between the items.
  */
-AjaxSolr.theme.prototype.list_items = function(list, items, separator) {
+AjaxSolr.theme.prototype.list_items = function (list, items, separator) {
   jQuery(list).empty();
   for (var i = 0; i < items.length; i++) {
     var li = jQuery('<li/>');

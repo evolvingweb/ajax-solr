@@ -36,6 +36,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @field
    * @public
+   * @default { q: [], fq: [], fl: [] }
    */
   filters: {
     q: [],
@@ -87,7 +88,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param {AjaxSolr.AbstractWidget} widget
    */
-  addWidget: function(widget) { 
+  addWidget: function (widget) { 
     if (this.canAddWidget(widget)) {
       widget.manager = this;
       this.widgets[widget.id] = widget;
@@ -101,7 +102,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {AjaxSolr.AbstractWidget} widget
    * @returns {Boolean} Whether the DOM is ready for the widget.
    */
-  canAddWidget: function(widget) {
+  canAddWidget: function (widget) {
     return true;
   },
 
@@ -111,13 +112,13 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * Loads the query from the hash, submits a request, and adds hash change
    * listeners to submit requests if the hash changes, e.g. back button click.
    */
-  init: function() {
+  init: function () {
     this.loadQueryFromHash();
     this.doInitialRequest();
 
     // Support the back button.
     var me = this;
-    window.setInterval(function() {
+    window.setInterval(function () {
       if (window.location.hash.length) {
         if (me.hash != window.location.hash) {
           me.loadQueryFromHash();
@@ -137,7 +138,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {String} widgetId The id of the widget.
    * @param {Array} items The items to select.
    */
-  selectItems: function(widgetId, items) {
+  selectItems: function (widgetId, items) {
     if (this.widgets[widgetId].selectItems(items)) {
       this.doRequest(0);
     }
@@ -149,7 +150,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {String} widgetId The id of the widget.
    * @param {Array} items The items to deselect.
    */  
-  deselectItems: function(widgetId, items) {
+  deselectItems: function (widgetId, items) {
     if (this.widgets[widgetId].deselectItems(items)) {
       this.doRequest(0);
     }
@@ -160,7 +161,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param {String} widgetId The id of the widget.
    */
-  deselectWidget: function(widgetId) {
+  deselectWidget: function (widgetId) {
     this.widgets[widgetId].deselectAll();
     this.doRequest(0);
   },
@@ -172,7 +173,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {String} keepId The id of the widget.
    * @param {Array} items The items to select.
    */
-  selectOnlyItems: function(keepId, items) {
+  selectOnlyItems: function (keepId, items) {
     for (var widgetId in this.widgets) {
       if (widgetId == keepId) {
         this.widgets[keepId].selectItems(items);
@@ -190,7 +191,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param {String} keepId The id of the widget.
    */
-  selectOnlyWidget: function(keepId) {
+  selectOnlyWidget: function (keepId) {
     for (var widgetId in this.widgets) {
       if (widgetId != keepId) {
         this.widgets[widgetId].deselectAll();
@@ -202,7 +203,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /**
    * Removes all items from all widgets, and runs the request.
    */
-  deselectAll: function() {
+  deselectAll: function () {
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].deselectAll();
     }
@@ -212,7 +213,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /**
    * Loads the query from the URL hash.
    */
-  loadQueryFromHash: function() {
+  loadQueryFromHash: function () {
     // if the hash is empty, the page must be loading for the first time,
     // so don't clobber items selected during afterAdditionToManager().
     if (window.location.hash.length) {
@@ -252,7 +253,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param queryObj The query object built by buildQuery.
    */
-  saveQueryToHash: function(queryObj) {
+  saveQueryToHash: function (queryObj) {
     var hash = '#';
     for (var i in queryObj.fq) {
       hash += 'fq=' + queryObj.fq[i].toHash() + '&';
@@ -278,7 +279,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {Number} start The Solr start offset parameter.
    * @returns The query object.
    */
-  buildQuery: function(start) {
+  buildQuery: function (start) {
     var queryObj = {
       fields: [],
       dates: []
@@ -304,7 +305,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {Boolean} skip Whether to skip URL encoding.
    * @returns {String} The query object as a string.
    */
-  buildQueryString: function(queryObj, skip) {
+  buildQueryString: function (queryObj, skip) {
     // Basic facet info. Return the top 40 items for each facet and ignore anything with 0 results
     var query = 'facet=true&facet.limit=40&facet.sort=true&facet.mincount=1&hl=true';
 
@@ -354,7 +355,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param {Number} start The Solr start offset parameter.
    */
-  doRequest: function(start) {
+  doRequest: function (start) {
     var queryObj = this.buildQuery(start);
 
     for (var widgetId in this.widgets) {
@@ -373,7 +374,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /**
    * Calls doRequest() with the current start offset.
    */
-  doInitialRequest: function() {
+  doInitialRequest: function () {
     this.doRequest(this.start);
   },
 
@@ -385,7 +386,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    * @throws If not defined in child implementation.
    */
-  executeRequest: function(queryObj) {
+  executeRequest: function (queryObj) {
     throw 'Abstract method executeRequest';
   },
 
@@ -394,9 +395,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @returns {Function}
    */
-  jsonCallback: function() {
+  jsonCallback: function () {
     var me = this;
-    return function(data) {
+    return function (data) {
       me.handleResult(data);
     }
   },
@@ -408,7 +409,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param data The Solr response inside a JavaScript object.
    */
-  handleResult: function(data) {
+  handleResult: function (data) {
     // for debugging purposes
     this.responseCache = data;
 

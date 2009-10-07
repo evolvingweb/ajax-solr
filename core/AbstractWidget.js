@@ -77,7 +77,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * @param {Array} items The items to add.
    * @returns {Boolean} Whether the selection changed.
    */
-  selectItems: function(items) {
+  selectItems: function (items) {
     if (this.replace) {
       this.deselectAll();
     }
@@ -101,7 +101,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * @param {Array} items The items to remove.
    * @returns {Boolean} Whether the selection changed.
    */
-  deselectItems: function(items) {
+  deselectItems: function (items) {
     var start = this.selectedItems.length;
     for (var i = 0; i < items.length; i++) {
       for (var j = this.selectedItems.length - 1; j >= 0; j--) {
@@ -119,7 +119,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
   /**
    * Removes all items from the current selection.
    */
-  deselectAll: function() {
+  deselectAll: function () {
     this.selectedItems = [];
     this.afterChangeSelection();
   },
@@ -132,7 +132,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    *
    * @param queryObj The query object built by buildQuery.
    */
-  alterQuery: function(queryObj) {},
+  alterQuery: function (queryObj) {},
 
   /**
    * An abstract hook for child implementations.
@@ -140,7 +140,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    *
    * @param queryObj The query object built by buildQuery.
    */
-  displayQuery: function(queryObj) {},
+  displayQuery: function (queryObj) {},
 
   /**
    * An abstract hook for child implementations.
@@ -148,29 +148,29 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    *
    * @param data The Solr response inside a JavaScript object.
    */
-  handleResult: function(data) {},
+  handleResult: function (data) {},
 
   /** 
    * An abstract hook for child implementations.
    * This method need only be defined if animate=true.
    */
-  startAnimation: function() {},
+  startAnimation: function () {},
 
   /** 
    * An abstract hook for child implementations.
    * This method need only be defined if animate=true.
    */
-  endAnimation: function() {},
+  endAnimation: function () {},
 
   /**
    * An abstract hook for child implementations.
    * This method should do any necessary one-time initializations.
    */
-  afterAdditionToManager: function() {},
+  afterAdditionToManager: function () {},
 
   /**
    * An abstract hook for child implementations.
    * This method is executed after items are selected or deselected.
    */
-  afterChangeSelection: function() {}
+  afterChangeSelection: function () {}
 });

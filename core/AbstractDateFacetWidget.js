@@ -108,7 +108,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     'SECOND' : 19
   },
 
-  alterQuery: function(queryObj) {
+  alterQuery: function (queryObj) {
     if (this.selectedItems.length) {
       var gap = this.selectedItems[0][1].split('+1')[1];
 
@@ -130,7 +130,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
-  unclickHandler: function(value, gap) {
+  unclickHandler: function (value, gap) {
     var me = this;
 
     // if called from outside this class, gap will not be set
@@ -141,7 +141,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     // deselecting a date selects the previous level of granularity
     gap = this.parts[this.indexOfPart(gap) - 1];
 
-    return function() {
+    return function () {
       if (gap) {
         me.manager.selectItems(me.id, [ me.getValue(value[0], gap) ]);
       }
@@ -152,11 +152,11 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     }
   },
 
-  unclickText: function(value) {
+  unclickText: function (value) {
     return value[0].toDate().toLongDateString(value[1].split('+1')[1]);
   },
 
-  clickText: function(value) {
+  clickText: function (value) {
     return value[0].toDate().datePartString(this.facetDates.gap.substring(2));
   },
 
@@ -168,7 +168,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
    * @param {String} granularity The granularity.
    * @returns {String[]} The date range.
    */
-  getValue: function(date, granularity) {
+  getValue: function (date, granularity) {
     index = this.indices[granularity];
     date = date.substring(0, index) + '0000-01-01T00:00:00Z'.substring(index);
     return [ date, date + '+1' + granularity ];
@@ -181,7 +181,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
    * @param {String} part The date part to search for.
    * @returns {Number} If found, the index of the date part; -1, otherwise.
    */
-  indexOfPart: function(part) {
+  indexOfPart: function (part) {
     for (var i = 0; i < this.parts.length; i++) {
       if(this.parts[i] == part) {
         return i;
