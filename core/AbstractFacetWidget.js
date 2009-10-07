@@ -61,10 +61,10 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
 
   handleResult: function (data) {
     if (data.facet_counts) {
-      // we want to display only the human-readable facet values
+      // We want to display only the human-readable facet values
       this.facetFields = data.facet_counts.facet_fields[this.humanFieldName];
       this.facetDates = data.facet_counts.facet_dates[this.humanFieldName];
-      // allow the child implementation to handle the result.
+      // Allow the child implementation to handle the result.
       this._handleResult();
     }
   },
@@ -88,7 +88,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     var items = [];
     for (var i = 0; i < this.selectedItems.length; i++) {
       items.push(new AjaxSolr.FilterQueryItem({
-        // the facet value that is selectable is the human-readable value, so
+        // The facet value that is selectable is the human-readable value, so
         // the filter query item should use the field for human-readable values
         field: this.humanFieldName,
         value: this.selectedItems[i],

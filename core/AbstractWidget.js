@@ -83,7 +83,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
     }
     var start = this.selectedItems.length;
     for (var i = 0; i < items.length; i++) {
-      // can't do loop as in deselectItems() because here we are testing if an
+      // Can't do loop as in deselectItems() because here we are testing if an
       // item is not in the array, rather than if an item is in the array
       if (!AjaxSolr.contains(this.selectedItems, items[i])) {
         this.selectedItems.push(items[i]);

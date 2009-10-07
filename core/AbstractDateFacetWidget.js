@@ -133,12 +133,12 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
   unclickHandler: function (value, gap) {
     var me = this;
 
-    // if called from outside this class, gap will not be set
+    // If called from outside this class, gap will not be set
     if (gap === undefined) {
       gap = value[1].split('+1')[1];
     }
 
-    // deselecting a date selects the previous level of granularity
+    // Deselecting a date selects the previous level of granularity
     gap = this.parts[this.indexOfPart(gap) - 1];
 
     return function () {

@@ -214,7 +214,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * Loads the query from the URL hash.
    */
   loadQueryFromHash: function () {
-    // if the hash is empty, the page must be loading for the first time,
+    // If the hash is empty, the page must be loading for the first time,
     // so don't clobber items selected during afterAdditionToManager().
     if (window.location.hash.length) {
       for (var widgetId in this.widgets) {
@@ -410,7 +410,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param data The Solr response inside a JavaScript object.
    */
   handleResult: function (data) {
-    // for debugging purposes
+    // For debugging purposes
     this.responseCache = data;
 
     for (var widgetId in this.widgets) {

@@ -75,7 +75,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
     this.value = decodeURIComponent(parts.slice(1, parts.length).join(':'));
     this.value = this.value.substring(1, this.value.length - 1);
 
-    // handle multiple values
+    // Handle multiple values
     var values = this.value.split(' TO ');
     if (values.length == 2) {
       this.value = values;
