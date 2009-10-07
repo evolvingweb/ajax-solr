@@ -13,7 +13,7 @@ String.prototype.urlencode = function (skip) {
   else {
     return encodeURIComponent(this);
   }
-}
+};
 
 /**
  * Strip whitespace from the beginning and end of a string.
@@ -22,7 +22,7 @@ String.prototype.urlencode = function (skip) {
  */
 String.prototype.trim = function () {
   return this.replace(/^ +/, '').replace(/ +$/, '');
-}
+};
 
 /**
  * Returns a date in ISO8601 format.
@@ -31,7 +31,7 @@ String.prototype.trim = function () {
  */
 String.prototype.toDate = function () {
   return new Date().setISO8601(this);
-}
+};
 
 /**
  * Returns a string representation of the given level of granularity, in the
@@ -42,7 +42,7 @@ String.prototype.toDate = function () {
  */
 Date.prototype.datePartString = function (granularity) {
   return jQuery.strftime(AjaxSolr.dateFormats.datePartFormats[granularity.toUpperCase()], this, true);
-}
+};
 
 /**
  * Returns a string representation of the date, truncated to the given level of
@@ -53,7 +53,7 @@ Date.prototype.datePartString = function (granularity) {
  */
 Date.prototype.toLongDateString = function (granularity) {
   return jQuery.strftime(AjaxSolr.dateFormats.longDateFormats[granularity.toUpperCase()], this, true);
-}
+};
 
 /**
  * @see http://dansnetwork.com/2008/11/01/javascript-iso8601rfc3339-date-parser/ 
@@ -88,4 +88,4 @@ Date.prototype.setISO8601 = function (dString) {
     this.setTime(Date.parse(dString));
   }
   return this;
-}
+};

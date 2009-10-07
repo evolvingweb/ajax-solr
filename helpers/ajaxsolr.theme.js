@@ -28,4 +28,4 @@ AjaxSolr.theme.prototype.list_items = function (list, items, separator) {
     }
     jQuery(list).append(li);
   }
-}
+};

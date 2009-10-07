@@ -29,7 +29,7 @@ AjaxSolr.Class.extend = function (properties) {
   // Allow the subclass to extend itself into further subclasses.
   subClass.extend = this.extend;
   return subClass;
-}
+};
 
 /**
  * Returns whether an item is in the given array or not.
@@ -48,7 +48,7 @@ AjaxSolr.contains = function (items, item) {
     }
   }
   return false;
-}
+};
 
 // Taken from other JavaScript frameworks:
 
@@ -76,7 +76,7 @@ AjaxSolr.theme = function (func) {
  */
 AjaxSolr.isArray = function (obj) {
   return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
-}
+};
 
 /**
  * A simplified version of jQuery's extend function.
@@ -103,4 +103,4 @@ AjaxSolr.extend = function () {
     }
   }
   return target;
-}
+};
