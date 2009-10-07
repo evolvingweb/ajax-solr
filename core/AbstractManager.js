@@ -175,7 +175,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   selectOnlyItems: function (keepId, items) {
     for (var widgetId in this.widgets) {
-      if (widgetId == keepId) {
+      if (widgetId === keepId) {
         this.widgets[keepId].selectItems(items);
       }
       else {
@@ -193,7 +193,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   selectOnlyWidget: function (keepId) {
     for (var widgetId in this.widgets) {
-      if (widgetId != keepId) {
+      if (widgetId !== keepId) {
         this.widgets[widgetId].deselectAll();
       }
     }

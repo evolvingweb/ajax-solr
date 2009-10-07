@@ -183,7 +183,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
    */
   indexOfPart: function (part) {
     for (var i = 0; i < this.parts.length; i++) {
-      if(this.parts[i] == part) {
+      if(this.parts[i] === part) {
         return i;
       }
     }
