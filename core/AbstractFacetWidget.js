@@ -54,8 +54,13 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   facetDates: null,
 
   alterQuery: function (queryObj) {
+    if (this.humanFieldName !== null) {
+      this.humanFieldName = this.fieldName;
+    }
     queryObj.fields.push(this.fieldName);
-    queryObj.fields.push(this.humanFieldName);
+    if (this.humanFieldName !== this.fieldName) {
+      queryObj.fields.push(this.humanFieldName);
+    }
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
