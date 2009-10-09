@@ -77,12 +77,8 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   /**
    * An abstract hook for child implementations.
    * Allow the child to handle the result without parsing the response.
-   *
-   * @throws If not defined in child implementation.
    */
-  _handleResult: function () {
-    throw 'Abstract method _handleResult';
-  },
+  _handleResult: function () {},
 
   /**
    * Returns all the selected items as filter query items.
