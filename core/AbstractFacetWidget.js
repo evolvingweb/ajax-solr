@@ -37,6 +37,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   limit: null,
 
+
+  /**
+   * Facet operator
+   *
+   * @field
+   * @public
+   * @type String
+   */
+  facetOperator: 'OR',
+
   /**
    * Whether the facet values are publicly viewable.
    *
