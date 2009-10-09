@@ -39,13 +39,14 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
 
 
   /**
-   * Facet operator
+   * Facet operator.
    *
    * @field
    * @public
    * @type String
+   * @default "AND"
    */
-  facetOperator: 'OR',
+  operator: 'AND',
 
   /**
    * Whether the facet values are publicly viewable.

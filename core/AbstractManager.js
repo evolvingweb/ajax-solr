@@ -321,8 +321,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     // Solr uses fq for facet based searching
     for (var i in queryObj.fq) {
-      if(!groups[queryObj.fq[i].widgetId]) {
-	groups[queryObj.fq[i].widgetId] = [];
+      if (!groups[queryObj.fq[i].widgetId]) {
+        groups[queryObj.fq[i].widgetId] = [];
       }
       groups[queryObj.fq[i].widgetId].push(queryObj.fq[i].toSolr());
     }
@@ -330,12 +330,12 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     var tags = [];
 
     for (var i in groups) {
-      if (this.widgets[i].facetOperator == 'OR') {
-	query += '&fq={!tag='+i+'}' + groups[i].join(' || ');
-	tags.push(i);
+      if (this.widgets[i].operator == 'OR') {
+        query += '&fq={!tag='+i+'}' + groups[i].join(' || ');
+        tags.push(i);
       }
       else {
-	query += '&fq=' + groups[i].join('&fq=');
+        query += '&fq=' + groups[i].join('&fq=');
       }
     }
     
@@ -343,7 +343,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     for (var i in queryObj.fields) {
       var exclude = '';
       if (tags.size != 0) {
-	exclude = '{!ex='+tags.join(' ex=')+'}';
+        exclude = '{!ex='+tags.join(' ex=')+'}';
       }
       
       query += '&facet.field=' + exclude + encodeURIComponent(queryObj.fields[i]);
