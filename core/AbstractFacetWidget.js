@@ -38,6 +38,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   limit: null,
 
   /**
+   * Whether the facet values are publicly viewable.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   * @default false
+   */
+  hidden: false,
+
+  /**
    * Facet fields returned by Solr.
    *
    * @field
@@ -93,6 +103,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
         // the filter query item should use the field for human-readable values
         field: this.humanFieldName,
         value: this.selectedItems[i],
+        hidden: this.hidden,
         widgetId: this.id
       }));
     }

@@ -33,6 +33,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @field
    * @public
    * @type Boolean
+   * @default false
    */
   hidden: false,
 
