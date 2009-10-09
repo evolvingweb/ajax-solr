@@ -325,21 +325,21 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     // Solr uses fq for facet based searching
     for (var i in queryObj.fq) {
-      if(!groups[queryObj.fq[i].widgetId]) {
-	groups[queryObj.fq[i].widgetId] = [];
+      if (!groups[queryObj.fq[i].widgetId]) {
+        groups[queryObj.fq[i].widgetId] = [];
       }
       groups[queryObj.fq[i].widgetId].push(queryObj.fq[i].toSolr());
     }
 
     for (var i in groups) {
-      if(this.widgets[i].facetOperator == 'OR') {
-	query += '&fq=' + groups[i].join(' || ');
+      if (this.widgets[i].operator == 'OR') {
+        query += '&fq=' + groups[i].join('||');
       }
       else {
-	query += '&fq=' + groups[i].join('&fq=');
+        query += '&fq=' + groups[i].join('&fq=');
       }
     }
-    
+
     // Solr uses q for free text searching
     var q = '';
     for (var i in queryObj.q) {

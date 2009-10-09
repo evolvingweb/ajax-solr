@@ -42,9 +42,11 @@ AjaxSolr.Class.extend = function (properties) {
  * @see http://www.prototypejs.org/api/array
  */
 AjaxSolr.contains = function (items, item) {
-  for (var i = 0; i < items.length; i++) {
-    if (items[i] == item) {
-      return true;
+  if (items) {
+    for (var i = 0; i < items.length; i++) {
+      if (items[i] == item) {
+        return true;
+      }
     }
   }
   return false;
