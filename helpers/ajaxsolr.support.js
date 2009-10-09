@@ -1,21 +1,6 @@
 // $Id$
 
 /**
- * Optionally URL-encodes a string.
- *
- * @param {Boolean} skip Whether to skip encoding.
- * @returns {String} The possibly-encoded string.
- */
-String.prototype.urlencode = function (skip) {
-  if (skip) {
-    return this;
-  }
-  else {
-    return encodeURIComponent(this);
-  }
-};
-
-/**
  * Strip whitespace from the beginning and end of a string.
  *
  * @returns {String} The trimmed string.

@@ -302,35 +302,34 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * Transforms a query object into a string for execution.
    *
    * @param queryObj The query object built by buildQuery.
-   * @param {Boolean} skip Whether to skip URL encoding.
    * @returns {String} The query object as a string.
    */
-  buildQueryString: function (queryObj, skip) {
+  buildQueryString: function (queryObj) {
     // Basic facet info. Return the top 40 items for each facet and ignore anything with 0 results
     var query = 'facet=true&facet.limit=40&facet.sort=true&facet.mincount=1&hl=true';
 
     // Fields is the list of facets that will have counts and such returned
     for (var i in queryObj.fields) {
-      query += '&facet.field=' + queryObj.fields[i].urlencode(skip);
+      query += '&facet.field=' + encodeURIComponent(queryObj.fields[i]);
     }
 
     for (var i in queryObj.dates) {
       var field = queryObj.dates[i].field;
-      query += '&facet.date=' + field.urlencode(skip);
-      query += '&f.' + field + '.facet.date.start=' + queryObj.dates[i].start.urlencode(skip);
-      query += '&f.' + field + '.facet.date.end=' + queryObj.dates[i].end.urlencode(skip);
-      query += '&f.' + field + '.facet.date.gap=' + queryObj.dates[i].gap.urlencode(skip);
+      query += '&facet.date=' + encodeURIComponent(field);
+      query += '&f.' + field + '.facet.date.start=' + encodeURIComponent(queryObj.dates[i].start);
+      query += '&f.' + field + '.facet.date.end=' + encodeURIComponent(queryObj.dates[i].end);
+      query += '&f.' + field + '.facet.date.gap=' + encodeURIComponent(queryObj.dates[i].gap);
     }
 
     // Solr uses fq for facet based searching
     for (var i in queryObj.fq) {
-      query += '&fq=' + queryObj.fq[i].toSolr(skip);
+      query += '&fq=' + queryObj.fq[i].toSolr();
     }
 
     // Solr uses q for free text searching
     var q = '';
     for (var i in queryObj.q) {
-      q += queryObj.q[i].toSolr(skip) + ' ';
+      q += queryObj.q[i].toSolr() + ' ';
     }
     query += '&q=' + q;
 
