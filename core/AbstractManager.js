@@ -308,10 +308,6 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     // Basic facet info. Return the top 40 items for each facet and ignore anything with 0 results
     var query = 'facet=true&facet.limit=40&facet.sort=true&facet.mincount=1&hl=true';
 
-    // Fields is the list of facets that will have counts and such returned
-    for (var i in queryObj.fields) {
-      query += '&facet.field=' + encodeURIComponent(queryObj.fields[i]);
-    }
 
     for (var i in queryObj.dates) {
       var field = queryObj.dates[i].field;
@@ -330,14 +326,27 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       }
       groups[queryObj.fq[i].widgetId].push(queryObj.fq[i].toSolr());
     }
+    
+    var tags = [];
 
     for (var i in groups) {
-      if(this.widgets[i].facetOperator == 'OR') {
-	query += '&fq=' + groups[i].join(' || ');
+      if (this.widgets[i].facetOperator == 'OR') {
+	query += '&fq={!tag='+i+'}' + groups[i].join(' || ');
+	tags.push(i);
       }
       else {
 	query += '&fq=' + groups[i].join('&fq=');
       }
+    }
+    
+    // Fields is the list of facets that will have counts and such returned
+    for (var i in queryObj.fields) {
+      var exclude = '';
+      if (tags.size != 0) {
+	exclude = '{!ex='+tags.join(' ex=')+'}';
+      }
+      
+      query += '&facet.field=' + exclude + encodeURIComponent(queryObj.fields[i]);
     }
     
     // Solr uses q for free text searching
