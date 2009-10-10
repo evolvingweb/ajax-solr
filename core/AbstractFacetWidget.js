@@ -37,7 +37,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   limit: null,
 
-
   /**
    * Facet operator.
    *

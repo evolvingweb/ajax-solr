@@ -255,10 +255,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   saveQueryToHash: function (queryObj) {
     var hash = '#';
-    for (var i in queryObj.fq) {
+    for (var i = 0; i < queryObj.fq.length; i++) {
       hash += 'fq=' + queryObj.fq[i].toHash() + '&';
     }
-    for (var i in queryObj.q) {
+    for (var i = 0; i < queryObj.q.length; i++) {
       hash += 'q=' + queryObj.q[i].toHash() + '&';
     }
     hash += 'start=' + queryObj.start;
@@ -308,8 +308,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     // Basic facet info. Return the top 40 items for each facet and ignore anything with 0 results
     var query = 'facet=true&facet.limit=40&facet.sort=true&facet.mincount=1&hl=true';
 
-
-    for (var i in queryObj.dates) {
+    for (var i = 0; i < queryObj.dates.length; i++) {
       var field = queryObj.dates[i].field;
       query += '&facet.date=' + encodeURIComponent(field);
       query += '&f.' + field + '.facet.date.start=' + encodeURIComponent(queryObj.dates[i].start);
@@ -317,41 +316,40 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       query += '&f.' + field + '.facet.date.gap=' + encodeURIComponent(queryObj.dates[i].gap);
     }
 
+    // Group the filter query items by widgetId, not by field, since widgets
+    // for the same field may have different operators.
     var groups = {};
 
-    // Solr uses fq for facet based searching
-    for (var i in queryObj.fq) {
-      if (!groups[queryObj.fq[i].widgetId]) {
+    for (var i = 0; i < queryObj.fq.length; i++) {
+      if (groups[queryObj.fq[i].widgetId] == undefined) {
         groups[queryObj.fq[i].widgetId] = [];
       }
       groups[queryObj.fq[i].widgetId].push(queryObj.fq[i].toSolr());
     }
-    
-    var tags = [];
 
-    for (var i in groups) {
-      if (this.widgets[i].operator == 'OR') {
-        query += '&fq={!tag='+i+'}' + groups[i].join(' || ');
-        tags.push(i);
+    // Collect the list of filter queries to be excluded in the facet count.
+    // All "OR" facets should be excluded in the facet count.
+    var ex = [];
+
+    for (var widgetId in groups) {
+      if (this.widgets[widgetId].operator == 'OR') {
+        ex.push(widgetId);
       }
-      else {
-        query += '&fq=' + groups[i].join('&fq=');
-      }
+      query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
     }
-    
-    // Fields is the list of facets that will have counts and such returned
-    for (var i in queryObj.fields) {
-      var exclude = '';
-      if (tags.size != 0) {
-        exclude = '{!ex='+tags.join(' ex=')+'}';
-      }
-      
-      query += '&facet.field=' + exclude + encodeURIComponent(queryObj.fields[i]);
+
+    // Build tags. http://wiki.apache.org/solr/SimpleFacetParameters
+    var tags = '';
+    if (ex.length) {
+      tags += '{!ex=' + ex.join(',') + '}';
     }
-    
-    // Solr uses q for free text searching
+
+    for (var i = 0; i < queryObj.fields.length; i++) {
+      query += '&facet.field=' + tags + encodeURIComponent(queryObj.fields[i]);
+    }
+
     var q = '';
-    for (var i in queryObj.q) {
+    for (var i = 0; i < queryObj.q.length; i++) {
       q += queryObj.q[i].toSolr() + ' ';
     }
     query += '&q=' + q;
@@ -439,8 +437,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       this.widgets[widgetId].handleResult(data);
     }
 
-    for (var i in this.widgets) {
-      this.widgets[i].endAnimation();
+    for (var widgetId in this.widgets) {
+      this.widgets[widgetId].endAnimation();
     }
   }
 });
