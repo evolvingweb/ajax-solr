@@ -58,6 +58,26 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   hidden: false,
 
   /**
+   * A flag that indicates whether new selected items should replace old ones.
+   *
+   * @field
+   * @private
+   * @type Boolean
+   * @default false
+   */
+  replace: false,
+
+  /**
+   * The list of selected items (filters).
+   *
+   * @field
+   * @private
+   * @type Array
+   * @default []
+   */
+  selectedItems: [],
+
+  /**
    * Facet fields returned by Solr.
    *
    * @field
@@ -72,6 +92,76 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @private
    */
   facetDates: null,
+
+  /**
+   * Add the given items to the list of selected items.
+   *
+   * @param {Array} items The items to add.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  selectItems: function (items) {
+    if (this.replace) {
+      this.clear();
+    }
+
+    return this.changeSelection(function () {
+      for (var i = 0; i < items.length; i++) {
+        if (!AjaxSolr.contains(this.selectedItems, items[i])) {
+          this.selectedItems.push(items[i]);
+        }
+      }
+    });
+  },
+
+  /**
+   * Removes the given items from the list of selected items.
+   *
+   * @param {Array} items The items to remove.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  deselectItems: function (items) {
+    return this.changeSelection(function () {
+      for (var i = 0; i < items.length; i++) {
+        for (var j = this.selectedItems.length - 1; j >= 0; j--) {
+          if (this.selectedItems[j] == items[i]) {
+            this.selectedItems.splice(j, 1);
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Removes all items from the current selection.
+   *
+   * @returns {Boolean} Whether the selection changed.
+   */
+  clear: function () {
+    return this.changeSelection(function () {
+      this.selectedItems = [];
+    });
+  },
+
+  /**
+   * Helper for selection functions.
+   *
+   * @param {Function} Selection function to call.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  changeSelection: function (func) {
+    var start = this.selectedItems.length;
+    func.apply(this);
+    if (this.selectedItems.length < start) {
+      this.afterChangeSelection();
+    }
+    return this.selectedItems.length < start;
+  },
+
+  /**
+   * An abstract hook for child implementations.
+   * This method is executed after items are selected or deselected.
+   */
+  afterChangeSelection: function () {},
 
   alterQuery: function (queryObj) {
     if (this.humanFieldName === null) {
@@ -129,7 +219,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   unclickHandler: function (value) {
     var me = this;
     return function () {
-      me.manager.deselectItems(me.id, [ value ]);
+      if (me.deselectItems([ value ])) {
+        me.manager.doRequest(0);
+      }
       return false;
     }
   },
@@ -143,7 +235,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   clickHandler: function (value) {
     var me = this;
     return function () {
-      me.manager.selectItems(me.id, [ value ]);
+      if (me.selectItems([ value ])) {
+        me.manager.doRequest(0);
+      }
       return false;
     }
   },

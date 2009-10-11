@@ -2,7 +2,7 @@
 
 /**
  * The Manager acts as a container for all widgets. 
- * It stores Solr configuration and selection and delegates calls to the widgets.
+ * It stores Solr configuration and delegates calls to the widgets.
  * All public calls should be performed on the manager object.
  *
  * @param properties A map of fields to set. Refer to the list of public fields.
@@ -36,10 +36,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @field
    * @public
-   * @default { q: [], fq: [], fl: [] }
+   * @default { q: "", fq: [], fl: [] }
    */
   filters: {
-    q: [],
+    q: '',
     fq: [],
     fl: []
   },
@@ -132,82 +132,16 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     }, 250);
   },
 
-  /** 
-   * Adds the given items to the given widget, and runs the request.
-   *
-   * @param {String} widgetId The id of the widget.
-   * @param {Array} items The items to select.
-   */
-  selectItems: function (widgetId, items) {
-    if (this.widgets[widgetId].selectItems(items)) {
-      this.doRequest(0);
-    }
-  },
-
-  /** 
-   * Removes the given items from the given widget, and runs the request.
-   *
-   * @param {String} widgetId The id of the widget.
-   * @param {Array} items The items to deselect.
-   */  
-  deselectItems: function (widgetId, items) {
-    if (this.widgets[widgetId].deselectItems(items)) {
-      this.doRequest(0);
-    }
-  },
-
   /**
-   * Removes all items from the given widget, and runs the request.
-   *
-   * @param {String} widgetId The id of the widget.
+   * Removes all filters from all facet widgets.
    */
-  deselectWidget: function (widgetId) {
-    this.widgets[widgetId].deselectAll();
-    this.doRequest(0);
-  },
-
-  /**
-   * Removes all items from all widgets except the given widget, adds the given
-   * items to the given widget, and runs the request.
-   *
-   * @param {String} keepId The id of the widget.
-   * @param {Array} items The items to select.
-   */
-  selectOnlyItems: function (keepId, items) {
+  reset: function () {
     for (var widgetId in this.widgets) {
-      if (widgetId === keepId) {
-        this.widgets[keepId].selectItems(items);
-      }
-      else {
-        this.widgets[widgetId].deselectAll();
+      // Assumes only facet widgets have a fieldName property.
+      if (this.widgets[widgetId].fieldName) {
+        this.widgets[widgetId].clear();
       }
     }
-    this.doRequest(0);
-  },
-
-  /**
-   * Removes all items from all widgets except the given widget, and runs the
-   * request.
-   *
-   * @param {String} keepId The id of the widget.
-   */
-  selectOnlyWidget: function (keepId) {
-    for (var widgetId in this.widgets) {
-      if (widgetId !== keepId) {
-        this.widgets[widgetId].deselectAll();
-      }
-    }
-    this.doRequest(0);
-  },
-
-  /**
-   * Removes all items from all widgets, and runs the request.
-   */
-  deselectAll: function () {
-    for (var widgetId in this.widgets) {
-      this.widgets[widgetId].deselectAll();
-    }
-    this.doRequest(0);
   },
 
   /**
@@ -215,10 +149,12 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   loadQueryFromHash: function () {
     // If the hash is empty, the page must be loading for the first time,
-    // so don't clobber items selected during afterAdditionToManager().
+    // so don't clobber properties set during afterAdditionToManager().
     if (window.location.hash.length) {
       for (var widgetId in this.widgets) {
-        this.widgets[widgetId].deselectAll();
+        if (this.widgets[widgetId].clear) {
+          this.widgets[widgetId].clear();
+        }
       }
     }
 
@@ -230,16 +166,13 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
         var item = new AjaxSolr.FilterQueryItem();
         item.parseHash(vars[i].substring(3));
 
-        if (this.widgets[item.widgetId]) {
+        if (this.widgets[item.widgetId] && this.widgets[item.widgetId].selectItems) {
           this.widgets[item.widgetId].selectItems([ item.value ]);
         }
       }
       else if (vars[i].substring(0, 2) == 'q=') {
-        var item = new AjaxSolr.QueryItem();
-        item.parseHash(vars[i].substring(2));
-
-        if (this.widgets.text) {
-          this.widgets.text.selectItems([ item.value ]);
+        if (this.widgets.text && this.widgets.text.set) {
+          this.widgets.text.set(decodeURIComponent(vars[i].substring(2)));
         }
       }
       else if (vars[i].substring(0, 6) == 'start=') {
@@ -258,9 +191,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     for (var i = 0; i < queryObj.fq.length; i++) {
       hash += 'fq=' + queryObj.fq[i].toHash() + '&';
     }
-    for (var i = 0; i < queryObj.q.length; i++) {
-      hash += 'q=' + queryObj.q[i].toHash() + '&';
-    }
+    hash += 'q=' + encodeURIComponent(queryObj.q) + '&';
     hash += 'start=' + queryObj.start;
 
     window.location.hash = hash;
@@ -285,7 +216,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       dates: []
     };
 
-    queryObj.q = this.filters.q.slice();
+    queryObj.q = this.filters.q;
     queryObj.fl = this.filters.fl.slice();
     queryObj.fq = this.filters.fq.slice();
     queryObj.start = start;
@@ -348,11 +279,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       query += '&facet.field=' + tags + encodeURIComponent(queryObj.fields[i]);
     }
 
-    var q = '';
-    for (var i = 0; i < queryObj.q.length; i++) {
-      q += queryObj.q[i].toSolr() + ' ';
-    }
-    query += '&q=' + q;
+    query += '&q=' + encodeURIComponent(queryObj.q);
 
     queryObj.fl.push('id');
 
@@ -369,9 +296,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   },
 
   /** 
-   * Creates a query out of the current selection, starts any widget loading
-   * animations, display the query, request the data from the Solr server, and
-   * saves the query to the URL hash.
+   * Creates a Solr query, starts any widget loading animations, displays the
+   * query, requests the data from the Solr server, and saves the query to the
+   * URL hash to support bookmarking and the back button.
    *
    * @param {Number} start The Solr start offset parameter.
    */

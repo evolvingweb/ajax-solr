@@ -143,10 +143,14 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
 
     return function () {
       if (gap) {
-        me.manager.selectItems(me.id, [ me.getValue(value[0], gap) ]);
+        if (me.selectItems([ me.getValue(value[0], gap) ])) {
+          me.manager.doRequest(0);
+        }
       }
       else {
-        me.manager.deselectWidget(me.id);
+        if (me.clear()) {
+          me.manager.doRequest(0);
+        }
       }
       return false;
     }

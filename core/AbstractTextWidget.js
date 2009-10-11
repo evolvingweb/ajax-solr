@@ -9,24 +9,61 @@
 AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractTextWidget.prototype */
   {
-  replace: true,
+  /**
+   * The main Solr query.
+   *
+   * @field
+   * @private
+   * @type String
+   * @default ""
+   */
+  q: '',
 
-  alterQuery: function (queryObj) {
-    queryObj.q = queryObj.q.concat(this.getItems());
+  /**
+   * Sets the main Solr query to the given string.
+   *
+   * @param {String} q The new Solr query.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  set: function (q) {
+    return this.changeSelection(function () {
+      this.q = q;
+    });
+  }
+
+  /**
+   * Sets the main Solr query to the empty string.
+   *
+   * @returns {Boolean} Whether the selection changed.
+   */
+  clear: function () {
+    return this.changeSelection(function () {
+      this.q = '';
+    });
   },
 
   /**
-   * Returns all the selected items as query items.
+   * Helper for selection functions.
    *
-   * @returns {QueryItem[]}
+   * @param {Function} Selection function to call.
+   * @returns {Boolean} Whether the selection changed.
    */
-  getItems: function () {
-    var items = [];
-    for (var i = 0; i < this.selectedItems.length; i++) {
-      items.push(new AjaxSolr.QueryItem({
-        value: this.selectedItems[i]
-      }));
+  changeSelection: function (func) {
+    var start = this.q;
+    func.apply(this);
+    if (this.q !== start) {
+      this.afterChangeSelection();
     }
-    return items;
+    return this.q !== start;
+  },
+
+  /**
+   * An abstract hook for child implementations.
+   * This method is executed after the main Solr query changes.
+   */
+  afterChangeSelection: function () {},
+
+  alterQuery: function (queryObj) {
+    queryObj.q = this.q;
   }
 });
