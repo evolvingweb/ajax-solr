@@ -19,16 +19,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   fieldName: null,
 
   /**
-   * This field contains the human-readable versions of the values stored in
-   * the field fieldName.
-   *
-   * @field
-   * @public
-   * @type String
-   */
-  humanFieldName: null,
-
-  /**
    * Maximum number of facet values to display.
    *
    * @field
@@ -164,21 +154,14 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   afterChangeSelection: function () {},
 
   alterQuery: function (queryObj) {
-    if (this.humanFieldName === null) {
-      this.humanFieldName = this.fieldName;
-    }
     queryObj.fields.push(this.fieldName);
-    if (this.humanFieldName !== this.fieldName) {
-      queryObj.fields.push(this.humanFieldName);
-    }
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
   handleResult: function (data) {
     if (data.facet_counts) {
-      // We want to display only the human-readable facet values
-      this.facetFields = data.facet_counts.facet_fields[this.humanFieldName];
-      this.facetDates = data.facet_counts.facet_dates[this.humanFieldName];
+      this.facetFields = data.facet_counts.facet_fields[this.fieldName];
+      this.facetDates = data.facet_counts.facet_dates[this.fieldName];
       // Allow the child implementation to handle the result.
       this._handleResult();
     }
@@ -199,9 +182,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     var items = [];
     for (var i = 0; i < this.selectedItems.length; i++) {
       items.push(new AjaxSolr.FilterQueryItem({
-        // The facet value that is selectable is the human-readable value, so
-        // the filter query item should use the field for human-readable values
-        field: this.humanFieldName,
+        field: this.fieldName,
         value: this.selectedItems[i],
         hidden: this.hidden,
         widgetId: this.id
