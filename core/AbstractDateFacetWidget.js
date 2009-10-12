@@ -110,14 +110,15 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
 
   alterQuery: function (queryObj) {
     if (this.selectedItems.length) {
-      var gap = this.selectedItems[0][1].split('+1')[1];
+      var parsed = AjaxSolr.parseValue(this.selectedItems[0]);
+      var gap = parsed.end.split('+1')[1];
 
       queryObj.dates.push({
         field:   this.field,
         limit:   this.limit,
         missing: this.missing,
-        start:   this.selectedItems[0][0] + '/' + gap,
-        end:     this.selectedItems[0][1] + '/' + gap,
+        start:   parsed.start + '/' + gap,
+        end:     parsed.end + '/' + gap,
         gap:     '+1' + this.parts[this.indexOfPart(gap) + 1]
       });
     }
@@ -137,9 +138,11 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
   unclickHandler: function (value, gap) {
     var me = this;
 
+    parsed = AjaxSolr.FilterQueryItem.parseValue(value);
+
     // If called from outside this class, gap will not be set
     if (gap === undefined) {
-      gap = value[1].split('+1')[1];
+      gap = parsed.end.split('+1')[1];
     }
 
     // Deselecting a date selects the previous level of granularity
@@ -147,7 +150,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
 
     return function () {
       if (gap) {
-        if (me.selectItems([ me.getValue(value[0], gap) ])) {
+        if (me.selectItems([ me.getValue(parsed.start, gap) ])) {
           me.manager.doRequest(0);
         }
       }
@@ -161,11 +164,13 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
   },
 
   unclickText: function (value) {
-    return value[0].toDate().toLongDateString(value[1].split('+1')[1]);
+    parsed = AjaxSolr.FilterQueryItem.parseValue(value);
+    return parsed.start.toDate().toLongDateString(parsed.end.split('+1')[1]);
   },
 
   clickText: function (value) {
-    return value[0].toDate().datePartString(this.facetDates.gap.substring(2));
+    parsed = AjaxSolr.FilterQueryItem.parseValue(value);
+    return parsed.start.toDate().datePartString(this.facetDates.gap.substring(2));
   },
 
   /**
@@ -174,12 +179,12 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
    *
    * @param {String} date The date.
    * @param {String} granularity The granularity.
-   * @returns {String[]} The date range.
+   * @returns {String} The date range.
    */
   getValue: function (date, granularity) {
     index = this.indices[granularity];
     date = date.substring(0, index) + '0000-01-01T00:00:00Z'.substring(index);
-    return [ date, date + '+1' + granularity ];
+    return '[' + date + ' TO ' + date + '+1' + granularity + ']';
   },
 
   /**
