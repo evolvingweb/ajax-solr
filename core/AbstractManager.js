@@ -41,6 +41,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   facetLimit: 20,
 
   /**
+   * Default facet.missing parameter.
+   *
+   * @field
+   * @public
+   * @type Number
+   */
+  facetMissing: false,
+
+  /**
    * Filters to apply to all queries.
    *
    * @field
@@ -286,6 +295,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       var field = queryObj.fields[i].field;
       query += '&facet.field=' + tags + encodeURIComponent(field);
       query += '&f.' + field + '.facet.limit=' + encodeURIComponent(queryObj.fields[i].limit);
+      query += '&f.' + field + '.facet.missing=' + encodeURIComponent(queryObj.fields[i].missing);
     }
 
     query += '&q=' + encodeURIComponent(queryObj.q);
@@ -301,6 +311,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     query += '&hl.fl=' + this.hlFl;
     query += '&facet.limit=' + this.facetLimit;
+    query += '&facet.missing=' + this.facetMissing;
 
     return query;
   },

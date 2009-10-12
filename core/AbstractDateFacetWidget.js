@@ -113,20 +113,22 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
       var gap = this.selectedItems[0][1].split('+1')[1];
 
       queryObj.dates.push({
-        field: this.field,
-        limit: this.limit,
-        start: this.selectedItems[0][0] + '/' + gap,
-        end:   this.selectedItems[0][1] + '/' + gap,
-        gap:   '+1' + this.parts[this.indexOfPart(gap) + 1]
+        field:   this.field,
+        limit:   this.limit,
+        missing: this.missing,
+        start:   this.selectedItems[0][0] + '/' + gap,
+        end:     this.selectedItems[0][1] + '/' + gap,
+        gap:     '+1' + this.parts[this.indexOfPart(gap) + 1]
       });
     }
     else {
       queryObj.dates.push({
-        field: this.field,
-        limit: this.limit,
-        start: this.minDate + '/YEAR',
-        end:   this.maxDate + '+1YEAR/YEAR',
-        gap:   '+1YEAR'
+        field:   this.field,
+        limit:   this.limit,
+        missing: this.missing,
+        start:   this.minDate + '/YEAR',
+        end:     this.maxDate + '+1YEAR/YEAR',
+        gap:     '+1YEAR'
       });
     }
     queryObj.fq = queryObj.fq.concat(this.getItems());

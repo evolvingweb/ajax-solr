@@ -19,7 +19,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   field: null,
 
   /**
-   * Maximum number of facet values to display.
+   * facet.limit parameter.
    *
    * @field
    * @public
@@ -37,6 +37,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @default 10
    */
   initialLimit: 10,
+
+  /**
+   * facet.missing parameter.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   * @default false
+   */
+  missing: false,
 
   /**
    * Facet operator.
@@ -167,7 +177,8 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   alterQuery: function (queryObj) {
     queryObj.fields.push({
       field: this.field,
-      limit: this.limit
+      limit: this.limit,
+      missing: this.missing
     });
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
