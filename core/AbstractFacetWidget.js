@@ -154,7 +154,10 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   afterChangeSelection: function () {},
 
   alterQuery: function (queryObj) {
-    queryObj.fields.push(this.field);
+    queryObj.fields.push({
+      field: this.field,
+      limit: this.limit
+    });
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 

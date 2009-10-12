@@ -283,7 +283,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     }
 
     for (var i = 0; i < queryObj.fields.length; i++) {
-      query += '&facet.field=' + tags + encodeURIComponent(queryObj.fields[i]);
+      var field = queryObj.fields[i].field;
+      query += '&facet.field=' + tags + encodeURIComponent(field);
+      query += '&f.' + field + '.facet.limit=' + encodeURIComponent(queryObj.fields[i].limit);
     }
 
     query += '&q=' + encodeURIComponent(queryObj.q);
