@@ -16,7 +16,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @public
    * @type String
    */
-  fieldName: null,
+  field: null,
 
   /**
    * Maximum number of facet values to display.
@@ -154,14 +154,14 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   afterChangeSelection: function () {},
 
   alterQuery: function (queryObj) {
-    queryObj.fields.push(this.fieldName);
+    queryObj.fields.push(this.field);
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
   handleResult: function (data) {
     if (data.facet_counts) {
-      this.facetFields = data.facet_counts.facet_fields[this.fieldName];
-      this.facetDates = data.facet_counts.facet_dates[this.fieldName];
+      this.facetFields = data.facet_counts.facet_fields[this.field];
+      this.facetDates = data.facet_counts.facet_dates[this.field];
       // Allow the child implementation to handle the result.
       this._handleResult();
     }
@@ -182,7 +182,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     var items = [];
     for (var i = 0; i < this.selectedItems.length; i++) {
       items.push(new AjaxSolr.FilterQueryItem({
-        field: this.fieldName,
+        field: this.field,
         value: this.selectedItems[i],
         hidden: this.hidden,
         widgetId: this.id

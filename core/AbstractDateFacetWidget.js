@@ -113,7 +113,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
       var gap = this.selectedItems[0][1].split('+1')[1];
 
       queryObj.dates.push({
-        field: this.fieldName,
+        field: this.field,
         start: this.selectedItems[0][0] + '/' + gap,
         end:   this.selectedItems[0][1] + '/' + gap,
         gap:   '+1' + this.parts[this.indexOfPart(gap) + 1]
@@ -121,7 +121,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     }
     else {
       queryObj.dates.push({
-        field: this.fieldName,
+        field: this.field,
         start: this.minDate + '/YEAR',
         end:   this.maxDate + '+1YEAR/YEAR',
         gap:   '+1YEAR'

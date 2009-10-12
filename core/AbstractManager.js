@@ -137,8 +137,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   reset: function () {
     for (var widgetId in this.widgets) {
-      // Assumes only facet widgets have a fieldName property.
-      if (this.widgets[widgetId].fieldName) {
+      // Assumes only facet widgets have a field property.
+      if (this.widgets[widgetId].field) {
         this.widgets[widgetId].clear();
       }
     }
