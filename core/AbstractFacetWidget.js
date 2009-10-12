@@ -24,8 +24,19 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @field
    * @public
    * @type Number
+   * @default 20
    */
-  limit: null,
+  limit: 20,
+
+  /**
+   * Initial number of facet values to display.
+   *
+   * @field
+   * @public
+   * @type Number
+   * @default 10
+   */
+  initialLimit: 10,
 
   /**
    * Facet operator.

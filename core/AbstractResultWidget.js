@@ -23,9 +23,9 @@ AjaxSolr.AbstractResultWidget = AjaxSolr.AbstractWidget.extend(
    *
    * @field
    * @public
-   * @default 0
+   * @default 10
    */
-  rows: 0,
+  rows: 10,
 
   alterQuery: function (queryObj) {
     queryObj.fl = queryObj.fl.concat(this.fields);
