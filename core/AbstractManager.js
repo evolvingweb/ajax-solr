@@ -274,15 +274,16 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       groups[queryObj.fq[i].widgetId].push(queryObj.fq[i].toSolr());
     }
 
-    // Collect the list of filter queries to be excluded in the facet count.
-    // All "OR" facets should be excluded in the facet count.
-    var ex = [];
-
     for (var widgetId in groups) {
-      if (this.widgets[widgetId].operator == 'OR') {
+      query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
+    }
+
+    // Collect the list of filter queries to be excluded in the facet count.
+    var ex = [];
+    for (var widgetId in this.widgets) {
+      if (this.widgets[widgetId].exclude) {
         ex.push(widgetId);
       }
-      query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
     }
 
     // Build tags. http://wiki.apache.org/solr/SimpleFacetParameters

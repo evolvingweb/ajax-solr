@@ -59,6 +59,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   operator: 'AND',
 
   /**
+   * Whether its filter queries should be excluded in the facet count.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   * @default false
+   */
+  exclude: false,
+
+  /**
    * Whether the facet values are publicly viewable.
    *
    * @field
