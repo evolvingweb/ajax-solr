@@ -32,14 +32,22 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   passthruUrl: null,
 
   /**
+   * Default facet.limit parameter.
+   *
+   * @field
+   * @public
+   * @type Number
+   */
+  facetLimit: 20,
+
+  /**
    * Filters to apply to all queries.
    *
    * @field
    * @public
-   * @default { q: "", fq: [], fl: [] }
+   * @default { fq: [], fl: [] }
    */
   filters: {
-    q: '',
     fq: [],
     fl: []
   },
@@ -216,7 +224,6 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       dates: []
     };
 
-    queryObj.q = this.filters.q;
     queryObj.fl = this.filters.fl.slice();
     queryObj.fq = this.filters.fq.slice();
     queryObj.start = start;
@@ -236,8 +243,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @returns {String} The query object as a string.
    */
   buildQueryString: function (queryObj) {
-    // Basic facet info. Return the top 40 items for each facet and ignore anything with 0 results
-    var query = 'facet=true&facet.limit=40&facet.sort=true&facet.mincount=1&hl=true';
+    // Basic facet info. Return facet data and ignore anything with 0 results.
+    var query = 'facet=true&facet.mincount=1&facet.sort=true&hl=true';
 
     for (var i = 0; i < queryObj.dates.length; i++) {
       var field = queryObj.dates[i].field;
@@ -291,6 +298,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     }
 
     query += '&hl.fl=' + this.hlFl;
+    query += '&facet.limit=' + this.facetLimit;
 
     return query;
   },
