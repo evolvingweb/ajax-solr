@@ -40,6 +40,14 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    */
   container: null,
 
+  /**
+   * A reference to the widget's manager. For internal use only.
+   *
+   * @field
+   * @private
+   */
+  manager: null,
+
   /** 
    * A flag that indicates whether we should animate the update of the target.
    * 
