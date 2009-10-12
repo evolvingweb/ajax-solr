@@ -29,7 +29,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     return this.changeSelection(function () {
       this.q = q;
     });
-  }
+  },
 
   /**
    * Sets the main Solr query to the empty string.
