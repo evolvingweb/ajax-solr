@@ -126,8 +126,8 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     }
 
     return this.changeSelection(function () {
-      for (var i = 0; i < items.length; i++) {
-        if (!AjaxSolr.contains(this.selectedItems, items[i])) {
+      for (var i = 0, length = items.length; i < length; i++) {
+        if (!AjaxSolr.inArray(items[i], this.selectedItems)) {
           this.selectedItems.push(items[i]);
         }
       }
@@ -142,7 +142,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   deselectItems: function (items) {
     return this.changeSelection(function () {
-      for (var i = 0; i < items.length; i++) {
+      for (var i = 0, length = items.length; i < length; i++) {
         for (var j = this.selectedItems.length - 1; j >= 0; j--) {
           if (this.selectedItems[j] == items[i]) {
             this.selectedItems.splice(j, 1);
@@ -215,7 +215,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   getItems: function () {
     var items = [];
-    for (var i = 0; i < this.selectedItems.length; i++) {
+    for (var i = 0, length = this.selectedItems.length; i < length; i++) {
       items.push(new AjaxSolr.FilterQueryItem({
         field: this.field,
         value: this.selectedItems[i],

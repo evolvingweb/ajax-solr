@@ -1,6 +1,6 @@
 (function ($) {
 
-AjaxSolr.ReutersPagerWidget = AjaxSolr.PagerWidget.extend({
+AjaxSolr.MyPagerWidget = AjaxSolr.PagerWidget.extend({
   prevLabel: '<',
   nextLabel: '>',
   innerWindow: 0,

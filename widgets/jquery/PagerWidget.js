@@ -92,7 +92,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
     var prev = null;
 
     visible = this.visiblePageNumbers();
-    for (var i = 0; i < visible.length; i++) {
+    for (var i = 0, length = visible.length; i < length; i++) {
       if (prev && visible[i] > prev + 1) links.push(this.gapMarker());
       links.push(this.pageLinkOrSpan(visible[i], [ 'pager-current' ]));
       prev = visible[i];

@@ -119,7 +119,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
         missing: this.missing,
         start:   parsed.start + '/' + gap,
         end:     parsed.end + '/' + gap,
-        gap:     '+1' + this.parts[this.indexOfPart(gap) + 1]
+        gap:     '+1' + this.parts[AjaxSolr.inArray(gap, this.parts) + 1]
       });
     }
     else {
@@ -146,7 +146,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     }
 
     // Deselecting a date selects the previous level of granularity
-    gap = this.parts[this.indexOfPart(gap) - 1];
+    gap = this.parts[AjaxSolr.inArray(gap, this.parts) - 1];
 
     return function () {
       if (gap) {
@@ -185,21 +185,5 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
     index = this.indices[granularity];
     date = date.substring(0, index) + '0000-01-01T00:00:00Z'.substring(index);
     return '[' + date + ' TO ' + date + '+1' + granularity + ']';
-  },
-
-  /**
-   * Array.indexOf() is undefined in IE, but rather than define it globally,
-   * I just write this one function for the one case in which I need it.
-   *
-   * @param {String} part The date part to search for.
-   * @returns {Number} If found, the index of the date part; -1, otherwise.
-   */
-  indexOfPart: function (part) {
-    for (var i = 0; i < this.parts.length; i++) {
-      if(this.parts[i] === part) {
-        return i;
-      }
-    }
-    return -1;
   }
 });

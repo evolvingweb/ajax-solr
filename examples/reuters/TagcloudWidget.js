@@ -1,7 +1,7 @@
 (function ($) {
 
 AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
-  handleResult: function (data) {
+  _handleResult: function () {
     if (this.facetFields.length == 0) {
       $(this.target).html(AjaxSolr.theme('no_items_found'));
       return;

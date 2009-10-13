@@ -178,7 +178,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     var hash = window.location.hash.substring(1);
     var vars = hash.split('&');
 
-    for (var i = 0; i < vars.length; i++) {
+    for (var i = 0, length = vars.length; i < length; i++) {
       if (vars[i].substring(0, 3) == 'fq=') {
         var item = new AjaxSolr.FilterQueryItem();
         item.parseHash(vars[i].substring(3));
@@ -205,7 +205,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   saveQueryToHash: function (queryObj) {
     var hash = '#';
-    for (var i = 0; i < queryObj.fq.length; i++) {
+    for (var i = 0, length = queryObj.fq.length; i < length; i++) {
       hash += 'fq=' + queryObj.fq[i].toHash() + '&';
     }
     hash += 'q=' + encodeURIComponent(queryObj.q) + '&';
@@ -255,7 +255,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     // Basic facet info. Return facet data and ignore anything with 0 results.
     var query = 'facet=true&facet.mincount=1&facet.sort=true&hl=true';
 
-    for (var i = 0; i < queryObj.dates.length; i++) {
+    for (var i = 0, length = queryObj.dates.length; i < length; i++) {
       var field = queryObj.dates[i].field;
       query += '&facet.date=' + encodeURIComponent(field);
       query += '&f.' + field + '.facet.date.start=' + encodeURIComponent(queryObj.dates[i].start);
@@ -267,7 +267,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     // for the same field may have different operators.
     var groups = {};
 
-    for (var i = 0; i < queryObj.fq.length; i++) {
+    for (var i = 0, length = queryObj.fq.length; i < length; i++) {
       if (groups[queryObj.fq[i].widgetId] == undefined) {
         groups[queryObj.fq[i].widgetId] = [];
       }
@@ -292,7 +292,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       tags += '{!ex=' + ex.join(',') + '}';
     }
 
-    for (var i = 0; i < queryObj.fields.length; i++) {
+    for (var i = 0, length = queryObj.fields.length; i < length; i++) {
       var field = queryObj.fields[i].field;
       query += '&facet.field=' + tags + encodeURIComponent(field);
       if (queryObj.fields[i].limit != this.facetLimit) {

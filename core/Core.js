@@ -31,28 +31,24 @@ AjaxSolr.Class.extend = function (properties) {
   return subClass;
 };
 
+// Taken from other JavaScript frameworks:
+
 /**
- * Returns whether an item is in the given array or not.
- * Don't add this to Array.prototype as it may break for loops.
+ * A copy of jQuery's inArray function.
  *
  * @static
- * @param {Array} items The array.
- * @param item An item that may or may not be in the array.
- * @returns {Boolean} Whether the item is in the given array.
- * @see http://www.prototypejs.org/api/array
+ * @see http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
  */
-AjaxSolr.contains = function (items, item) {
-  if (items) {
-    for (var i = 0; i < items.length; i++) {
-      if (items[i] == item) {
-        return true;
+AjaxSolr.inArray = function (elem, array) {
+  if (array) {
+    for (var i = 0, length = array.length; i < length; i++) {
+      if (array[i] === elem) {
+        return i;
       }
     }
   }
-  return false;
+  return -1;
 };
-
-// Taken from other JavaScript frameworks:
 
 /**
  * A copy of Drupal's Drupal.theme function.
