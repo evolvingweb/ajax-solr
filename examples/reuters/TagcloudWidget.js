@@ -9,15 +9,13 @@ AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
 
     var maxCount = 0;
     var objectedItems = [];
+
     for (var facet in this.facetFields) {
       var count = parseInt(this.facetFields[facet]);
       if (count > maxCount) {
         maxCount = count;
       }
-      objectedItems.push({
-        value: facet,
-        count: count
-      });
+      objectedItems.push({ value: facet, count: count });
     }
 
     objectedItems.sort(function (a, b) {
@@ -25,17 +23,13 @@ AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
     });
 
     var items = [];
+
+    var me = this;
     for (var i = 0; i < objectedItems.length; i++) {
-      var me = this;
-      items.push(AjaxSolr.theme('tag', {
-        value: objectedItems[i].value,
-        weight: parseInt(objectedItems[i].count / maxCount * 10),
-        handler: function () {
-          me.selectItems(objectedItems[i].value);
-          me.manager.doRequest(0);
-        }
-      }));
+      var facet = objectedItems[i].value;
+      items.push(AjaxSolr.theme('tag', me.clickText(facet), parseInt(objectedItems[i].count / maxCount * 10), me.clickHandler(facet)));
     }
+
     items.push('<div class="tagcloud_clearer"/>');
 
     AjaxSolr.theme('list_items', this.target, items);

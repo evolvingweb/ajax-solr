@@ -66,6 +66,15 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
   },
 
   /**
+   * Transforms this item into Solr syntax (not URL-encoded).
+   *
+   * @returns {String} Solr Filter Query syntax.
+   */
+  toString: function () {
+    return (this.exclude ? '-' : '') + this.field + ':' + this.getValue();
+  },
+
+  /**
    * Prepares this item for inclusion in the URL hash.
    *
    * @returns {String} A key-value pair for the URL hash.

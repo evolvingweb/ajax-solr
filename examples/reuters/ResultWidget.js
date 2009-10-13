@@ -14,6 +14,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
         me.manager.reset();
         me.manager.widgets[widgetId].selectItems([ values[i] ]);
         me.manager.doRequest(0);
+        return false;
       }));
     }
 
@@ -26,11 +27,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
     for (var i = 0; i < data.response.docs.length; i++) {
       var item = data.response.docs[i];
 
-      $(this.target).append(AjaxSolr.theme('result', {
-        id: item.id,
-        title: item.title,
-        snippet: AjaxSolr.theme('snippet', item)
-      }));
+      $(this.target).append(AjaxSolr.theme('result', item, AjaxSolr.theme('snippet', item)));
 
       var items = [];
       items.concat(this.facetLinks('topics', item.topics));

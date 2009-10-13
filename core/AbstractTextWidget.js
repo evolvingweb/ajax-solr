@@ -65,5 +65,36 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
 
   alterQuery: function (queryObj) {
     queryObj.q = this.q;
+  },
+
+  /**
+   * Returns a function to unset the main Solr query.
+   *
+   * @returns {Function}
+   */
+  unclickHandler: function () {
+    var me = this;
+    return function () {
+      if (me.clear()) {
+        me.manager.doRequest(0);
+      }
+      return false;
+    }
+  },
+
+  /**
+   * Returns a function to set the main Solr query.
+   *
+   * @param value The new Solr query.
+   * @returns {Function}
+   */
+  clickHandler: function (q) {
+    var me = this;
+    return function () {
+      if (me.set(q)) {
+        me.manager.doRequest(0);
+      }
+      return false;
+    }
   }
 });
