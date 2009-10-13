@@ -127,7 +127,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
 
     return this.changeSelection(function () {
       for (var i = 0, length = items.length; i < length; i++) {
-        if (!AjaxSolr.inArray(items[i], this.selectedItems)) {
+        if (AjaxSolr.inArray(items[i], this.selectedItems) == -1) {
           this.selectedItems.push(items[i]);
         }
       }

@@ -106,7 +106,7 @@ AjaxSolr.boolean_attributes = [ 'disabled', 'readonly', 'multiple', 'checked' ];
  */
 AjaxSolr.option_value_selected = function (value, selected) {
   if (AjaxSolr.isArray(selected)) {
-    return AjaxSolr.inArray(value, selected);
+    return AjaxSolr.inArray(value, selected) != -1;
   }
   else {
     return selected == value;
@@ -129,7 +129,7 @@ AjaxSolr.tag_options = function (options, escape) {
 
   if (escape) {
     for (var key in options) {
-      if (AjaxSolr.inArray(key, AjaxSolr.boolean_attributes)) {
+      if (AjaxSolr.inArray(key, AjaxSolr.boolean_attributes) != -1) {
         if (options[key]) {
           attrs.push(key + '="' + key + '"');
         }
