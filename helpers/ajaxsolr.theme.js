@@ -70,7 +70,7 @@ AjaxSolr.theme.prototype.select_tag = function (name, optionTags, options) {
   options = options || {};
   var htmlName = options.multiple && !name.endsWith('[]') ? name + '[]' : name;
   options.name = options.name || htmlName;
-  options.id = options.id || name.sanitizeToId;
+  options.id = options.id || name.sanitize_to_id();
   return AjaxSolr.theme('content_tag_string', 'select', optionTags, options);
 };
 
@@ -153,3 +153,13 @@ AjaxSolr.tag_options = function (options, escape) {
 
   return '';
 }
+
+/**
+ * <p>From Ruby on Rails.</p>
+ *
+ * @see http://www.w3.org/TR/html4/types.html#type-name
+ */
+String.prototype.sanitize_to_id = function () {
+  return this.replace(/\]/g, '').replace(/[^-a-zA-Z0-9:.]/g, '_');
+};
+
