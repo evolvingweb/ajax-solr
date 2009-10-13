@@ -27,7 +27,16 @@ String.prototype.htmlEscape = function () {
  */
 String.prototype.escapeOnce = function () {
   return this.replace(/"/g, '&quot;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/&(?!([a-zA-Z]+|#\d+);)/g, '&amp;');
-}
+};
+
+/**
+ * <p>From Ruby on Rails.</p>
+ *
+ * @see http://www.w3.org/TR/html4/types.html#type-name
+ */
+String.prototype.sanitizeToId = function () {
+  return this.replace(/\]/g, '').replace(/[^-a-zA-Z0-9:.]/g, '_');
+};
 
 /**
  * Does the string end with the specified <tt>suffix</tt>?
