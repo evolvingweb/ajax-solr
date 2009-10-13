@@ -181,7 +181,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     for (var i = 0, length = vars.length; i < length; i++) {
       if (vars[i].substring(0, 3) == 'fq=') {
         var item = new AjaxSolr.FilterQueryItem();
-        item.parseHash(vars[i].substring(3));
+        item.parseHash(decodeURIComponent(vars[i].substring(3)));
 
         if (this.widgets[item.widgetId] && this.widgets[item.widgetId].selectItems) {
           this.widgets[item.widgetId].selectItems([ item.value ]);

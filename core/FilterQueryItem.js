@@ -94,7 +94,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
     if (matches) {
       this.exclude = matches[1] == '-' ? true : false;
       this.widgetId = matches[2];
-      this.value = decodeURIComponent(matches[3]);
+      this.value = matches[3];
     }
   },
 
@@ -130,4 +130,4 @@ AjaxSolr.FilterQueryItem.parseValue = function (value) {
   else {
     return { value: value };
   }
-}
+};
