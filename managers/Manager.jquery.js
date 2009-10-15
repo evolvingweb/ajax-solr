@@ -9,12 +9,17 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend({
    * @see http://wiki.apache.org/solr/SolJSON#JSON_specific_parameters
    */
   executeRequest: function (queryObj) { 
+    var queryString = this.buildQueryString(queryObj);
+
+    // For debugging purposes
+    this.queryStringCache = queryString;
+
     var me = this;
     if (this.passthruUrl) {
-      jQuery.post(this.passthruUrl + '?callback=?', { query: this.buildQueryString(queryObj, true) }, this.jsonCallback(), 'json');
+      jQuery.post(this.passthruUrl + '?callback=?', { query: queryString }, this.jsonCallback(), 'json');
     }
     else {
-      jQuery.getJSON(this.solrUrl + '/select?' + this.buildQueryString(queryObj) + '&wt=json&json.nl=map&json.wrf=?&jsoncallback=?', {}, this.jsonCallback());
+      jQuery.getJSON(this.solrUrl + '/select?' + queryString + '&wt=json&json.nl=map&json.wrf=?&jsoncallback=?', {}, this.jsonCallback());
     }
   }
 });
