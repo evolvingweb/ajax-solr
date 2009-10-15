@@ -275,7 +275,13 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     }
 
     for (var widgetId in groups) {
-      query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
+      // http://stackoverflow.com/questions/1343794/searching-for-date-range-or-null-no-field-in-solr
+      if (this.widgets[widgetId].orNull) {
+        query += '&fq={!tag=' + widgetId + '}' + '-(-(' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ') + ') AND ' + this.widgets[widgetId].field + ':' + encodeURIComponent('[* TO *]') + ')';
+      }
+      else {
+        query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
+      }
     }
 
     // Collect the list of filter queries to be excluded in the facet count.

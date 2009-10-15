@@ -49,6 +49,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   missing: false,
 
   /**
+   * Whether to always return documents that do not have this field set.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   * @default false
+   */
+  orNull: false,
+
+  /**
    * Facet operator.
    *
    * @field
