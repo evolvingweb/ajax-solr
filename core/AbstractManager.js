@@ -51,7 +51,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
   /**
    * Items to append to the hash, e.g. "fq=type:cat". Items will be appended to
-   * the hash before initializing the manager.
+   * the hash before initializing the manager, if the hash is empty.
    *
    * @field
    * @public
