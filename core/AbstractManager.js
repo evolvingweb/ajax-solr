@@ -50,16 +50,25 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   facetMissing: false,
 
   /**
-   * Filters to apply to all queries.
+   * Filters to apply to fresh queries. Each filter should be a string. Filters
+   * will be appended to the hash before initializing the manager.
    *
    * @field
    * @public
-   * @default { fq: [], fl: [] }
+   * @type String[]
+   * @default []
    */
-  filters: {
-    fq: [],
-    fl: []
-  },
+  defaults: [],
+
+  /**
+   * Filters to apply to all queries. Each filter should be a FilterQueryItem.
+   * Filters will be appended to each request's list of filters.
+   *
+   * @field
+   * @public
+   * @default []
+   */
+  constraints: [],
 
   /**
    * The field to highlight when rendering results.
@@ -130,6 +139,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * listeners to submit requests if the hash changes, e.g. back button click.
    */
   init: function () {
+    window.location.hash += this.defaults.join('&');
+
     this.loadQueryFromHash();
     this.doInitialRequest();
 
@@ -204,7 +215,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    */
   saveQueryToHash: function (queryObj) {
-    var hash = '#';
+    var hash = '';
     for (var i = 0, length = queryObj.fq.length; i < length; i++) {
       hash += 'fq=' + queryObj.fq[i].toHash() + '&';
     }
@@ -229,14 +240,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   buildQuery: function (start) {
     var queryObj = {
+      q: '',
+      dates: [],
       fields: [],
-      dates: []
+      fl: [],
+      fq: this.constraints.slice(0),
+      rows: 0,
+      sort: '',
+      start: start
     };
-
-    queryObj.fl = this.filters.fl.slice();
-    queryObj.fq = this.filters.fq.slice();
-    queryObj.start = start;
-    queryObj.rows = 0;
 
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].alterQuery(queryObj);

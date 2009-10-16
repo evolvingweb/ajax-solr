@@ -92,7 +92,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
   parseHash: function (string) {
     matches = string.match(/(-?)([^:]+):([\[\{]\S+ TO \S+[\]\}])/) || string.match(/(-?)([^:]+):"([^"]*)"/) || string.match(/(-?)([^:]+):([^ ]*)/);
     if (matches) {
-      this.exclude = matches[1] == '-' ? true : false;
+      this.exclude = matches[1] == '-';
       this.widgetId = matches[2];
       this.value = matches[3];
     }
