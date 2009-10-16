@@ -90,7 +90,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @param {String} string A key-value pair from the URL hash.
    */
   parseHash: function (string) {
-    matches = string.match(/(-?)([^:]+):([\[\{]\S+ TO \S+[\]\}])/) || string.match(/(-?)([^:]+):"([^"]*)"/) || string.match(/(-?)([^:]+):([^ ]*)/);
+    var matches = string.match(/(-?)([^:]+):([\[\{]\S+ TO \S+[\]\}])/) || string.match(/(-?)([^:]+):"([^"]*)"/) || string.match(/(-?)([^:]+):([^ ]*)/);
     if (matches) {
       this.exclude = matches[1] == '-';
       this.widgetId = matches[2];

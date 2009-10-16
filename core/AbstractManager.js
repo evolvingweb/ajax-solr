@@ -139,7 +139,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * listeners to submit requests if the hash changes, e.g. back button click.
    */
   init: function () {
-    window.location.hash += this.defaults.join('&');
+    window.location.hash += '&fq=' + this.defaults.join('&');
 
     this.loadQueryFromHash();
     this.doInitialRequest();
