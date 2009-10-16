@@ -43,6 +43,9 @@ AjaxSolr.hash = function () {
   if (window.location.href.indexOf('#') != -1) {
     return window.location.href.substr(window.location.href.indexOf('#') + 1);
   }
+  else {
+    return '';
+  }
 };
 
 // Taken from other JavaScript frameworks:
