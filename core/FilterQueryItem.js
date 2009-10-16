@@ -62,7 +62,15 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @returns {String} Solr Filter Query syntax.
    */
   toSolr: function () {
-    return (this.exclude ? '-' : '') + this.field + ':' + encodeURIComponent(this.getValue());
+    // If the field value has a space or a colon in it, wrap it in quotes,
+    // unless it is a range query.
+    var value;
+    if (this.value.match(/[ :]/) && !this.value.match(/[\[\{]\S+ TO \S+[\]\}]/)) {
+      value = '"' + this.value + '"';
+    } else {
+      value = this.value;
+    }
+    return (this.exclude ? '-' : '') + this.field + ':' + encodeURIComponent(value);
   },
 
   /**
@@ -71,7 +79,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @returns {String} Solr Filter Query syntax.
    */
   toString: function () {
-    return (this.exclude ? '-' : '') + this.field + ':' + this.getValue();
+    return (this.exclude ? '-' : '') + this.field + ':' + this.value;
   },
 
   /**
@@ -80,7 +88,7 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @returns {String} A key-value pair for the URL hash.
    */
   toHash: function () {
-    return (this.exclude ? '-' : '') + this.widgetId + ':' + encodeURIComponent(this.getValue());
+    return (this.exclude ? '-' : '') + this.widgetId + ':' + encodeURIComponent(this.value);
   },
 
   /**
@@ -90,25 +98,11 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    * @param {String} string A key-value pair from the URL hash.
    */
   parseHash: function (string) {
-    var matches = string.match(/(-?)([^:]+):([\[\{]\S+ TO \S+[\]\}])/) || string.match(/(-?)([^:]+):"([^"]*)"/) || string.match(/(-?)([^:]+):([^ ]*)/);
+    var matches = string.match(/(-?)([^:]+):(.*)/);
     if (matches) {
       this.exclude = matches[1] == '-';
       this.widgetId = matches[2];
       this.value = matches[3];
-    }
-  },
-
-  /**
-   * If the field value has a space or a colon in it, wrap it in double quotes,
-   * unless it is a range query.
-   *
-   * @returns {String} A quoted string.
-   */
-  getValue: function () {
-    if (this.value.match(/[ :]/) && !this.value.match(/[\[\{]\S+ TO \S+[\]\}]/)) {
-      return '"' + this.value + '"';
-    } else {
-      return this.value;
     }
   }
 });
@@ -123,9 +117,6 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
 AjaxSolr.FilterQueryItem.parseValue = function (value) {
   if (matches = value.match(/[\[\{](\S+) TO (\S+)[\]\}]/)) {
     return { value: matches[0], start: matches[1], end: matches[2] };
-  }
-  else if (matches = value.match(/"([^"]*)"/)) {
-    return { value: matches[1] };
   }
   else {
     return { value: value };

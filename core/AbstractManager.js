@@ -145,8 +145,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     // Support the back button.
     var me = this;
     window.setInterval(function () {
-      if (AjaxSolr.hash.length) {
-        if (me.hash != AjaxSolr.hash) {
+      if (AjaxSolr.hash().length) {
+        if (me.hash != AjaxSolr.hash()) {
           me.loadQueryFromHash();
           me.doInitialRequest();
         }
@@ -176,7 +176,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   loadQueryFromHash: function (firstrun) {
     // If the hash is empty, the page must be loading for the first time,
     // so don't clobber properties set during afterAdditionToManager().
-    if (AjaxSolr.hash.length) {
+    if (AjaxSolr.hash().length) {
       for (var widgetId in this.widgets) {
         if (this.widgets[widgetId].clear) {
           this.widgets[widgetId].clear();
@@ -187,7 +187,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       window.location.hash = this.defaults.join('&');
     }
 
-    var hash = AjaxSolr.hash;
+    var hash = AjaxSolr.hash();
     var vars = hash.split('&');
 
     for (var i = 0, length = vars.length; i < length; i++) {
@@ -225,7 +225,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     window.location.hash = hash;
 
-    this.hash = AjaxSolr.hash;
+    this.hash = AjaxSolr.hash();
   },
 
   /**
