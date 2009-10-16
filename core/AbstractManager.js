@@ -50,8 +50,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   facetMissing: false,
 
   /**
-   * Filters to apply to fresh queries. Each filter should be a string. Filters
-   * will be appended to the hash before initializing the manager.
+   * Items to append to the hash, e.g. "fq=type:cat". Items will be appended to
+   * the hash before initializing the manager.
    *
    * @field
    * @public
@@ -61,8 +61,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   defaults: [],
 
   /**
-   * Filters to apply to all queries. Each filter should be a FilterQueryItem.
-   * Filters will be appended to each request's list of filters.
+   * Filters to add to all queries. Filters will be appended to the list of 
+   * filters before each request.
    *
    * @field
    * @public
@@ -139,7 +139,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * listeners to submit requests if the hash changes, e.g. back button click.
    */
   init: function () {
-    window.location.hash += '&fq=' + this.defaults.join('&');
+    if (window.location.hash.length == 0) {
+      window.location.hash = this.defaults.join('&');
+    }
 
     this.loadQueryFromHash();
     this.doInitialRequest();
