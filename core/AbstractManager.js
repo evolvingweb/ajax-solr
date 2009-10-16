@@ -139,11 +139,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * listeners to submit requests if the hash changes, e.g. back button click.
    */
   init: function () {
-    if (window.location.hash.length == 0) {
-      window.location.hash = this.defaults.join('&');
-    }
-
-    this.loadQueryFromHash();
+    this.loadQueryFromHash(true);
     this.doInitialRequest();
 
     // Support the back button.
@@ -177,7 +173,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /**
    * Loads the query from the URL hash.
    */
-  loadQueryFromHash: function () {
+  loadQueryFromHash: function (firstrun) {
     // If the hash is empty, the page must be loading for the first time,
     // so don't clobber properties set during afterAdditionToManager().
     if (window.location.hash.length) {
@@ -186,6 +182,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
           this.widgets[widgetId].clear();
         }
       }
+    }
+    else if (firstrun) {
+      window.location.hash = this.defaults.join('&');
     }
 
     var hash = window.location.hash.substring(1);
