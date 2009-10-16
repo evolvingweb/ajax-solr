@@ -51,7 +51,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
   /**
    * Items to append to the hash, e.g. "fq=type:cat". Items will be appended to
-   * the hash before initializing the manager, if the hash is empty.
+   * the hash while initializing the manager, if the hash is empty.
    *
    * @field
    * @public
@@ -145,8 +145,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     // Support the back button.
     var me = this;
     window.setInterval(function () {
-      if (window.location.hash.length) {
-        if (me.hash != window.location.hash) {
+      if (AjaxSolr.hash.length) {
+        if (me.hash != AjaxSolr.hash) {
           me.loadQueryFromHash();
           me.doInitialRequest();
         }
@@ -176,7 +176,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   loadQueryFromHash: function (firstrun) {
     // If the hash is empty, the page must be loading for the first time,
     // so don't clobber properties set during afterAdditionToManager().
-    if (window.location.hash.length) {
+    if (AjaxSolr.hash.length) {
       for (var widgetId in this.widgets) {
         if (this.widgets[widgetId].clear) {
           this.widgets[widgetId].clear();
@@ -187,7 +187,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       window.location.hash = this.defaults.join('&');
     }
 
-    var hash = window.location.hash.substring(1);
+    var hash = AjaxSolr.hash;
     var vars = hash.split('&');
 
     for (var i = 0, length = vars.length; i < length; i++) {
@@ -225,10 +225,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     window.location.hash = hash;
 
-    // Don't assign this.hash to hash as window.location.hash undergoes some
-    // internal processing after assignment. Assign it to window.location.hash
-    // after setting window.location.hash to ensure the two are equal.
-    this.hash = window.location.hash;
+    this.hash = AjaxSolr.hash;
   },
 
   /**

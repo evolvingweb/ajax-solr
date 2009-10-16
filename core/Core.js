@@ -31,6 +31,20 @@ AjaxSolr.Class.extend = function (properties) {
   return subClass;
 };
 
+
+/**
+ * Some browsers automatically unescape some characters in the hash, other's
+ * don't. Fortunately, all leave window.location.href alone. So, we use that.
+ *
+ * @static
+ * @return {String} The unescaped URL hash.
+ */
+AjaxSolr.hash = function () {
+  if (window.location.href.indexOf('#') != -1) {
+    return window.location.href.substr(window.location.href.indexOf('#') + 1);
+  }
+};
+
 // Taken from other JavaScript frameworks:
 
 /**
