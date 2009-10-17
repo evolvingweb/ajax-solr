@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -282,6 +280,16 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.FilterQueryItem.html#exclude">exclude</a></b>
+								</div>
+								<div class="description">Attach the prohibit operator.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
 								<b><a href="../symbols/AjaxSolr.FilterQueryItem.html#field">field</a></b>
 								</div>
 								<div class="description">The field name.</div>
@@ -344,7 +352,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.FilterQueryItem.html#getValue">getValue</a></b>()
 								</div>
-								<div class="description">Flattens the value into a quoted string.</div>
+								<div class="description">If the field value has a space or a colon in it, wrap it in double quotes,
+unless it is a range query.</div>
 							</td>
 						</tr>
 					
@@ -354,6 +363,15 @@ ul.inheritsList
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.FilterQueryItem.html#parseHash">parseHash</a></b>(string)
 								</div>
 								<div class="description">Parses a key-value pair from the URL hash.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.FilterQueryItem.<b><a href="../symbols/AjaxSolr.FilterQueryItem.html#.parseValue">parseValue</a></b>(The)
+								</div>
+								<div class="description">Parses a value, whether it is a quoted string, unquoted string, or range.</div>
 							</td>
 						</tr>
 					
@@ -369,9 +387,18 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.FilterQueryItem.html#toSolr">toSolr</a></b>(skip)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.FilterQueryItem.html#toSolr">toSolr</a></b>()
 								</div>
 								<div class="description">Transforms this item into Solr syntax.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.FilterQueryItem.html#toString">toString</a></b>()
+								</div>
+								<div class="description">Transforms this item into Solr syntax (not URL-encoded).</div>
 							</td>
 						</tr>
 					
@@ -431,6 +458,35 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
+					<a name="exclude"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>exclude</b>
+					
+					</div>
+					<div class="description">
+						Attach the prohibit operator.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
 					<a name="field"> </a>
 					<div class="fixedFont">
 					
@@ -471,6 +527,13 @@ ul.inheritsList
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
 						
 
 					<hr />
@@ -535,7 +598,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Flattens the value into a quoted string.
+						If the field value has a space or a colon in it, wrap it in double quotes,
+unless it is a range query.
 						
 						
 					</div>
@@ -567,7 +631,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Parses a key-value pair from the URL hash.
+						Parses a key-value pair from the URL hash. The value may be a quoted
+string, an unquoted string, or a range.
 						
 						
 					</div>
@@ -589,6 +654,49 @@ ul.inheritsList
 						
 						
 						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".parseValue"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.FilterQueryItem.</span><b>parseValue</b>(The)
+					
+					</div>
+					<div class="description">
+						Parses a value, whether it is a quoted string, unquoted string, or range.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>The</b>
+									
+								</dt>
+								<dd>value to parse.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>The parsed value object.</dd>
+							
+							</dl>
 						
 						
 						
@@ -631,7 +739,7 @@ ul.inheritsList
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>toSolr</b>(skip)
+					<b>toSolr</b>()
 					
 					</div>
 					<div class="description">
@@ -643,16 +751,37 @@ ul.inheritsList
 					
 					
 						
+						
+						
+						
+						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<span class="light fixedFont">{Boolean}</span> <b>skip</b>
-									
-								</dt>
-								<dd>Whether to skip encoding the value.</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> Solr Filter Query syntax.</dd>
 							
 							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="toString"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>toString</b>()
+					
+					</div>
+					<div class="description">
+						Transforms this item into Solr syntax (not URL-encoded).
+						
+						
+					</div>
+					
+					
+					
 						
 						
 						
@@ -682,7 +811,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:17 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:08 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

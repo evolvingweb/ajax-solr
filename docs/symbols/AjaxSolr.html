@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -282,9 +280,29 @@ ul.inheritsList
 							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
+								AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.boolean_attributes">boolean_attributes</a></b>
+								</div>
+								<div class="description"><p>From Ruby on Rails.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
 								AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.dateFormats">dateFormats</a></b>
 								</div>
 								<div class="description">Defines some date formats in strftime format.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.PagerWidget">PagerWidget</a></b>
+								</div>
+								<div class="description">Heavily inspired by the Ruby on Rails will_paginate gem.</div>
 							</td>
 						</tr>
 					
@@ -312,15 +330,6 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.contains">contains</a></b>(items, item)
-								</div>
-								<div class="description">Returns whether an item is in the given array or not.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.extend">extend</a></b>()
 								</div>
 								<div class="description">A simplified version of jQuery's extend function.</div>
@@ -330,9 +339,36 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.inArray">inArray</a></b>(elem, array)
+								</div>
+								<div class="description">A copy of jQuery's inArray function.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.isArray">isArray</a></b>(obj)
 								</div>
 								<div class="description">Can't use toString.call(obj) === "[object Array]", as it will may return"[xpconnect wrapped native prototype]", which is undesirable.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.option_value_selected">option_value_selected</a></b>(value, selected)
+								</div>
+								<div class="description"><p>From Ruby on Rails.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.tag_options">tag_options</a></b>(options, escape)
+								</div>
+								<div class="description"><p>From Ruby on Rails.</div>
 							</td>
 						</tr>
 					
@@ -390,6 +426,31 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
+					<a name=".boolean_attributes"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>boolean_attributes</b>
+					
+					</div>
+					<div class="description">
+						<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.theme.js&gt;.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".dateFormats"> </a>
 					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
 					
@@ -413,6 +474,31 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name=".PagerWidget"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>PagerWidget</b>
+					
+					</div>
+					<div class="description">
+						Heavily inspired by the Ruby on Rails will_paginate gem.
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/widgets/jquery/PagerWidget.js&gt;.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
 					
 				
 			
@@ -422,62 +508,6 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Method Detail
 				</div>
-				
-					<a name=".contains"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					<span class="light">{Boolean}</span>
-					<span class="light">AjaxSolr.</span><b>contains</b>(items, item)
-					
-					</div>
-					<div class="description">
-						Returns whether an item is in the given array or not.Don't add this to Array.prototype as it may break for loops.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{Array}</span> <b>items</b>
-									
-								</dt>
-								<dd>The array.</dd>
-							
-								<dt>
-									<b>item</b>
-									
-								</dt>
-								<dd>An item that may or may not be in the array.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Boolean}</span> Whether the item is in the given array.</dd>
-							
-							</dl>
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">See:</dt>
-							
-								<dd>http://www.prototypejs.org/api/array</dd>
-							
-							</dl>
-						
-
-					<hr />
 				
 					<a name=".extend"> </a>
 					<div class="fixedFont">&lt;static&gt; 
@@ -494,6 +524,55 @@ ul.inheritsList
 					
 					
 					
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js</dd>
+							
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".inArray"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>inArray</b>(elem, array)
+					
+					</div>
+					<div class="description">
+						A copy of jQuery's inArray function.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>elem</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>array</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
 						
 						
 						
@@ -556,6 +635,96 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name=".option_value_selected"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>option_value_selected</b>(value, selected)
+					
+					</div>
+					<div class="description">
+						<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.theme.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>value</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>selected</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".tag_options"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>tag_options</b>(options, escape)
+					
+					</div>
+					<div class="description">
+						<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.theme.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>options</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>escape</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".theme"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -611,7 +780,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:16 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:07 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

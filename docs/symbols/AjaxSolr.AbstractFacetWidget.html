@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -281,6 +279,16 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#exclude">exclude</a></b>
+								</div>
+								<div class="description">Whether its filter queries should be excluded in the facet count.</div>
+							</td>
+						</tr>
+					
+						<tr>
 							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
@@ -304,7 +312,7 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#fieldName">fieldName</a></b>
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#field">field</a></b>
 								</div>
 								<div class="description">The field to facet on.</div>
 							</td>
@@ -314,9 +322,19 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#humanFieldName">humanFieldName</a></b>
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#hidden">hidden</a></b>
 								</div>
-								<div class="description">This field contains the human-readable versions of the values stored inthe field fieldName.</div>
+								<div class="description">Whether the facet values are publicly viewable.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#initialLimit">initialLimit</a></b>
+								</div>
+								<div class="description">Initial number of facet values to display.</div>
 							</td>
 						</tr>
 					
@@ -326,7 +344,47 @@ ul.inheritsList
 								<div class="fixedFont">
 								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#limit">limit</a></b>
 								</div>
-								<div class="description">Maximum number of facet values to display.</div>
+								<div class="description">facet.limit parameter.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#missing">missing</a></b>
+								</div>
+								<div class="description">facet.missing parameter.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#operator">operator</a></b>
+								</div>
+								<div class="description">Facet operator.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#replace">replace</a></b>
+								</div>
+								<div class="description">A flag that indicates whether new selected items should replace old ones.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#selectedItems">selectedItems</a></b>
+								</div>
+								<div class="description">The list of selected items (filters).</div>
 							</td>
 						</tr>
 					
@@ -336,7 +394,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#replace">replace</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#selectedItems">selectedItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
 				</dl>
 				
 			
@@ -367,9 +425,36 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#afterChangeSelection">afterChangeSelection</a></b>()
+								</div>
+								<div class="description">An abstract hook for child implementations.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#alterQuery">alterQuery</a></b>(queryObj)
 								</div>
 								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#changeSelection">changeSelection</a></b>(Selection)
+								</div>
+								<div class="description">Helper for selection functions.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clear">clear</a></b>()
+								</div>
+								<div class="description">Removes all items from the current selection.</div>
 							</td>
 						</tr>
 					
@@ -394,6 +479,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#deselectItems">deselectItems</a></b>(items)
+								</div>
+								<div class="description">Removes the given items from the list of selected items.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getItems">getItems</a></b>()
 								</div>
 								<div class="description">Returns all the selected items as filter query items.</div>
@@ -406,6 +500,15 @@ ul.inheritsList
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#handleResult">handleResult</a></b>(data)
 								</div>
 								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#selectItems">selectItems</a></b>(items)
+								</div>
+								<div class="description">Add the given items to the list of selected items.</div>
 							</td>
 						</tr>
 					
@@ -433,7 +536,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#afterChangeSelection">afterChangeSelection</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#deselectAll">deselectAll</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#deselectItems">deselectItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#selectItems">selectItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
 				</dl>
 				
 			
@@ -475,6 +578,35 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Field Detail
 				</div>
+				
+					<a name="exclude"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>exclude</b>
+					
+					</div>
+					<div class="description">
+						Whether its filter queries should be excluded in the facet count.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
+						
+
+					<hr />
 				
 					<a name="facetDates"> </a>
 					<div class="fixedFont">&lt;private&gt; 
@@ -520,11 +652,11 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="fieldName"> </a>
+					<a name="field"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>fieldName</b>
+					<b>field</b>
 					
 					</div>
 					<div class="description">
@@ -542,15 +674,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="humanFieldName"> </a>
+					<a name="hidden"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>humanFieldName</b>
+					<span class="light">{Boolean}</span>
+					<b>hidden</b>
 					
 					</div>
 					<div class="description">
-						This field contains the human-readable versions of the values stored inthe field fieldName.
+						Whether the facet values are publicly viewable.
 						
 						
 					</div>
@@ -560,6 +692,42 @@ ul.inheritsList
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="initialLimit"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>initialLimit</b>
+					
+					</div>
+					<div class="description">
+						Initial number of facet values to display.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								10
+							</dd>
+							</dl>
 						
 
 					<hr />
@@ -572,7 +740,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Maximum number of facet values to display.
+						facet.limit parameter.
 						
 						
 					</div>
@@ -582,6 +750,129 @@ ul.inheritsList
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								20
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="missing"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>missing</b>
+					
+					</div>
+					<div class="description">
+						facet.missing parameter.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="operator"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>operator</b>
+					
+					</div>
+					<div class="description">
+						Facet operator.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								"AND"
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="replace"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<b>replace</b>
+					
+					</div>
+					<div class="description">
+						A flag that indicates whether new selected items should replace old ones.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								false
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="selectedItems"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Array}</span>
+					<b>selectedItems</b>
+					
+					</div>
+					<div class="description">
+						The list of selected items (filters).
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								[]
+							</dd>
+							</dl>
 						
 
 					
@@ -613,15 +904,30 @@ ul.inheritsList
 						
 						
 						
-							<dl class="detailList">
-							<dt class="heading">Throws:</dt>
-							
-								<dt>
-									 <b></b>
-								</dt>
-								<dd>If not defined in child implementation.</dd>
-							
-							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="afterChangeSelection"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>afterChangeSelection</b>()
+					
+					</div>
+					<div class="description">
+						An abstract hook for child implementations.This method is executed after items are selected or deselected.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
 						
 						
 						
@@ -659,6 +965,81 @@ ul.inheritsList
 						
 						
 						
+						
+						
+						
+
+					<hr />
+				
+					<a name="changeSelection"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>changeSelection</b>(Selection)
+					
+					</div>
+					<div class="description">
+						Helper for selection functions.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>Selection</b>
+									
+								</dt>
+								<dd>function to call.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="clear"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>clear</b>()
+					
+					</div>
+					<div class="description">
+						Removes all items from the current selection.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
 						
 						
 						
@@ -751,6 +1132,49 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name="deselectItems"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>deselectItems</b>(items)
+					
+					</div>
+					<div class="description">
+						Removes the given items from the list of selected items.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>items</b>
+									
+								</dt>
+								<dd>The items to remove.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="getItems"> </a>
 					<div class="fixedFont">
 					
@@ -813,6 +1237,49 @@ ul.inheritsList
 						
 						
 						
+						
+						
+						
+
+					<hr />
+				
+					<a name="selectItems"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>selectItems</b>(items)
+					
+					</div>
+					<div class="description">
+						Add the given items to the list of selected items.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>items</b>
+									
+								</dt>
+								<dd>The items to add.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
 						
 						
 						
@@ -917,7 +1384,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:16 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:08 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

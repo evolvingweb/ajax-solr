@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -277,6 +275,26 @@ ul.inheritsList
 						</tr>
 					</thead>
 					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractManager.html#facetLimit">facetLimit</a></b>
+								</div>
+								<div class="description">Default facet.limit parameter.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractManager.html#facetMissing">facetMissing</a></b>
+								</div>
+								<div class="description">Default facet.missing parameter.</div>
+							</td>
+						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
@@ -390,7 +408,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#buildQueryString">buildQueryString</a></b>(queryObj, skip)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#buildQueryString">buildQueryString</a></b>(queryObj)
 								</div>
 								<div class="description">Transforms a query object into a string for execution.</div>
 							</td>
@@ -408,33 +426,6 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#deselectAll">deselectAll</a></b>()
-								</div>
-								<div class="description">Removes all items from all widgets, and runs the request.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#deselectItems">deselectItems</a></b>(widgetId, items)
-								</div>
-								<div class="description">Removes the given items from the given widget, and runs the request.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#deselectWidget">deselectWidget</a></b>(widgetId)
-								</div>
-								<div class="description">Removes all items from the given widget, and runs the request.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#doInitialRequest">doInitialRequest</a></b>()
 								</div>
 								<div class="description">Calls doRequest() with the current start offset.</div>
@@ -446,7 +437,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#doRequest">doRequest</a></b>(start)
 								</div>
-								<div class="description">Creates a query out of the current selection, starts any widget loadinganimations, display the query, request the data from the Solr server, andsaves the query to the URL hash.</div>
+								<div class="description">Creates a Solr query, starts any widget loading animations, displays thequery, requests the data from the Solr server, and saves the query to theURL hash to support bookmarking and the back button.</div>
 							</td>
 						</tr>
 					
@@ -498,36 +489,18 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#reset">reset</a></b>()
+								</div>
+								<div class="description">Removes all filters from all facet widgets.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#saveQueryToHash">saveQueryToHash</a></b>(queryObj)
 								</div>
 								<div class="description">Stores the query in the URL hash.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#selectItems">selectItems</a></b>(widgetId, items)
-								</div>
-								<div class="description">Adds the given items to the given widget, and runs the request.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#selectOnlyItems">selectOnlyItems</a></b>(keepId, items)
-								</div>
-								<div class="description">Removes all items from all widgets except the given widget, adds the givenitems to the given widget, and runs the request.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#selectOnlyWidget">selectOnlyWidget</a></b>(keepId)
-								</div>
-								<div class="description">Removes all items from all widgets except the given widget, and runs therequest.</div>
 							</td>
 						</tr>
 					
@@ -552,7 +525,7 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					The Manager acts as a container for all widgets. It stores Solr configuration and selection and delegates calls to the widgets.All public calls should be performed on the manager object.
+					The Manager acts as a container for all widgets. It stores Solr configuration and delegates calls to the widgets.All public calls should be performed on the manager object.
 					
 				</div>
 				
@@ -586,6 +559,50 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Field Detail
 				</div>
+				
+					<a name="facetLimit"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>facetLimit</b>
+					
+					</div>
+					<div class="description">
+						Default facet.limit parameter.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="facetMissing"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>facetMissing</b>
+					
+					</div>
+					<div class="description">
+						Default facet.missing parameter.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
 				
 					<a name="filters"> </a>
 					<div class="fixedFont">
@@ -860,7 +877,7 @@ ul.inheritsList
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>buildQueryString</b>(queryObj, skip)
+					<b>buildQueryString</b>(queryObj)
 					
 					</div>
 					<div class="description">
@@ -880,12 +897,6 @@ ul.inheritsList
 									
 								</dt>
 								<dd>The query object built by buildQuery.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Boolean}</span> <b>skip</b>
-									
-								</dt>
-								<dd>Whether to skip URL encoding.</dd>
 							
 							</dl>
 						
@@ -948,109 +959,6 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="deselectAll"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>deselectAll</b>()
-					
-					</div>
-					<div class="description">
-						Removes all items from all widgets, and runs the request.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="deselectItems"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>deselectItems</b>(widgetId, items)
-					
-					</div>
-					<div class="description">
-						Removes the given items from the given widget, and runs the request.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>widgetId</b>
-									
-								</dt>
-								<dd>The id of the widget.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Array}</span> <b>items</b>
-									
-								</dt>
-								<dd>The items to deselect.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="deselectWidget"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>deselectWidget</b>(widgetId)
-					
-					</div>
-					<div class="description">
-						Removes all items from the given widget, and runs the request.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>widgetId</b>
-									
-								</dt>
-								<dd>The id of the widget.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="doInitialRequest"> </a>
 					<div class="fixedFont">
 					
@@ -1084,7 +992,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Creates a query out of the current selection, starts any widget loadinganimations, display the query, request the data from the Solr server, andsaves the query to the URL hash.
+						Creates a Solr query, starts any widget loading animations, displays thequery, requests the data from the Solr server, and saves the query to theURL hash to support bookmarking and the back button.
 						
 						
 					</div>
@@ -1276,6 +1184,31 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name="reset"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>reset</b>()
+					
+					</div>
+					<div class="description">
+						Removes all filters from all facet widgets.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="saveQueryToHash"> </a>
 					<div class="fixedFont">
 					
@@ -1310,126 +1243,6 @@ ul.inheritsList
 						
 						
 
-					<hr />
-				
-					<a name="selectItems"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>selectItems</b>(widgetId, items)
-					
-					</div>
-					<div class="description">
-						Adds the given items to the given widget, and runs the request.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>widgetId</b>
-									
-								</dt>
-								<dd>The id of the widget.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Array}</span> <b>items</b>
-									
-								</dt>
-								<dd>The items to select.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="selectOnlyItems"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>selectOnlyItems</b>(keepId, items)
-					
-					</div>
-					<div class="description">
-						Removes all items from all widgets except the given widget, adds the givenitems to the given widget, and runs the request.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>keepId</b>
-									
-								</dt>
-								<dd>The id of the widget.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Array}</span> <b>items</b>
-									
-								</dt>
-								<dd>The items to select.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="selectOnlyWidget"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>selectOnlyWidget</b>(keepId)
-					
-					</div>
-					<div class="description">
-						Removes all items from all widgets except the given widget, and runs therequest.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>keepId</b>
-									
-								</dt>
-								<dd>The id of the widget.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
 					
 				
 			
@@ -1444,7 +1257,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:16 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:08 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

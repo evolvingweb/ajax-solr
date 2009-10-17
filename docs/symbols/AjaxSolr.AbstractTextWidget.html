@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -270,10 +268,33 @@ ul.inheritsList
 			
 				
 				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractTextWidget.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#q">q</a></b>
+								</div>
+								<div class="description">The main Solr query.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#replace">replace</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#selectedItems">selectedItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
 				</dl>
 				
 			
@@ -295,6 +316,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#afterChangeSelection">afterChangeSelection</a></b>()
+								</div>
+								<div class="description">An abstract hook for child implementations.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#alterQuery">alterQuery</a></b>(queryObj)
 								</div>
 								<div class="description"></div>
@@ -304,9 +334,45 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#getItems">getItems</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#changeSelection">changeSelection</a></b>(Selection)
 								</div>
-								<div class="description">Returns all the selected items as query items.</div>
+								<div class="description">Helper for selection functions.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#clear">clear</a></b>()
+								</div>
+								<div class="description">Sets the main Solr query to the empty string.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#clickHandler">clickHandler</a></b>(value)
+								</div>
+								<div class="description">Returns a function to set the main Solr query.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#set">set</a></b>(q)
+								</div>
+								<div class="description">Sets the main Solr query to the given string.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#unclickHandler">unclickHandler</a></b>()
+								</div>
+								<div class="description">Returns a function to unset the main Solr query.</div>
 							</td>
 						</tr>
 					
@@ -316,7 +382,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#afterChangeSelection">afterChangeSelection</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#deselectAll">deselectAll</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#deselectItems">deselectItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#handleResult">handleResult</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#selectItems">selectItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#handleResult">handleResult</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
 				</dl>
 				
 			
@@ -355,12 +421,72 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name="q"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>q</b>
+					
+					</div>
+					<div class="description">
+						The main Solr query.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								""
+							</dd>
+							</dl>
+						
+
+					
+				
+			
 
 <!-- ============================== method details ========================= -->		
 			
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="afterChangeSelection"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>afterChangeSelection</b>()
+					
+					</div>
+					<div class="description">
+						An abstract hook for child implementations.
+This method is executed after the main Solr query changes.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
 				
 					<a name="alterQuery"> </a>
 					<div class="fixedFont">
@@ -398,15 +524,58 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="getItems"> </a>
+					<a name="changeSelection"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{QueryItem[]}</span>
-					<b>getItems</b>()
+					<span class="light">{Boolean}</span>
+					<b>changeSelection</b>(Selection)
 					
 					</div>
 					<div class="description">
-						Returns all the selected items as query items.
+						Helper for selection functions.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>Selection</b>
+									
+								</dt>
+								<dd>function to call.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="clear"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>clear</b>()
+					
+					</div>
+					<div class="description">
+						Sets the main Solr query to the empty string.
 						
 						
 					</div>
@@ -421,7 +590,125 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{QueryItem[]}</span> </dd>
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="clickHandler"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Function}</span>
+					<b>clickHandler</b>(value)
+					
+					</div>
+					<div class="description">
+						Returns a function to set the main Solr query.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>value</b>
+									
+								</dt>
+								<dd>The new Solr query.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Function}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="set"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>set</b>(q)
+					
+					</div>
+					<div class="description">
+						Sets the main Solr query to the given string.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>q</b>
+									
+								</dt>
+								<dd>The new Solr query.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="unclickHandler"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Function}</span>
+					<b>unclickHandler</b>()
+					
+					</div>
+					<div class="description">
+						Returns a function to unset the main Solr query.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Function}</span> </dd>
 							
 							</dl>
 						
@@ -442,7 +729,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:16 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:08 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

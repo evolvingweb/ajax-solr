@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -261,6 +259,53 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/String.html#endsWith">endsWith</a></b>(suffix)
+								</div>
+								<div class="description">Does the string end with the specified <tt>suffix</tt>?
+<p>From Ruby on Rails.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/String.html#escapeOnce">escapeOnce</a></b>()
+								</div>
+								<div class="description">Escapes the string without affecting existing escaped entities.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/String.html#htmlEscape">htmlEscape</a></b>()
+								</div>
+								<div class="description">A utility method for escaping HTML tag characters.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/String.html#sanitizeToId">sanitizeToId</a></b>()
+								</div>
+								<div class="description"><p>From Ruby on Rails.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/String.html#startsWith">startsWith</a></b>(prefix)
+								</div>
+								<div class="description">Does the string start with the specified <tt>prefix</tt>?
+<p>From Ruby on Rails.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/String.html#toDate">toDate</a></b>()
 								</div>
 								<div class="description">Returns a date in ISO8601 format.</div>
@@ -273,15 +318,6 @@ ul.inheritsList
 								<div class="fixedFont"><b><a href="../symbols/String.html#trim">trim</a></b>()
 								</div>
 								<div class="description">Strip whitespace from the beginning and end of a string.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/String.html#urlencode">urlencode</a></b>(skip)
-								</div>
-								<div class="description">Optionally URL-encodes a string.</div>
 							</td>
 						</tr>
 					
@@ -305,6 +341,207 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="endsWith"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>endsWith</b>(suffix)
+					
+					</div>
+					<div class="description">
+						Does the string end with the specified <tt>suffix</tt>?
+<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.support.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>suffix</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="escapeOnce"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>escapeOnce</b>()
+					
+					</div>
+					<div class="description">
+						Escapes the string without affecting existing escaped entities.
+<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.support.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The escaped string</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="htmlEscape"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>htmlEscape</b>()
+					
+					</div>
+					<div class="description">
+						A utility method for escaping HTML tag characters.
+<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.support.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The escaped string.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="sanitizeToId"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>sanitizeToId</b>()
+					
+					</div>
+					<div class="description">
+						<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.support.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>http://www.w3.org/TR/html4/types.html#type-name</dd>
+							
+							</dl>
+						
+
+					<hr />
+				
+					<a name="startsWith"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>startsWith</b>(prefix)
+					
+					</div>
+					<div class="description">
+						Does the string start with the specified <tt>prefix</tt>?
+<p>From Ruby on Rails.</p>
+						
+							<br />
+							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.support.js&gt;.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>prefix</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
 				
 					<a name="toDate"> </a>
 					<div class="fixedFont">
@@ -374,52 +611,6 @@ ul.inheritsList
 						
 						
 
-					<hr />
-				
-					<a name="urlencode"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>urlencode</b>(skip)
-					
-					</div>
-					<div class="description">
-						Optionally URL-encodes a string.
-						
-							<br />
-							<i>Defined in: </i> &lt;../ajaxsolr/helpers/ajaxsolr.support.js&gt;.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{Boolean}</span> <b>skip</b>
-									
-								</dt>
-								<dd>Whether to skip encoding.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The possibly-encoded string.</dd>
-							
-							</dl>
-						
-						
-						
-
 					
 				
 			
@@ -434,7 +625,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:17 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:09 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

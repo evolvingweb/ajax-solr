@@ -211,8 +211,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.QueryItem.html">AjaxSolr.QueryItem</a></li>
-	
 	<li><a href="../symbols/Date.html">Date</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
@@ -336,7 +334,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#facetDates">facetDates</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#facetFields">facetFields</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#fieldName">fieldName</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#humanFieldName">humanFieldName</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#limit">limit</a></dd><dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#replace">replace</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#selectedItems">selectedItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#exclude">exclude</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#facetDates">facetDates</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#facetFields">facetFields</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#field">field</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#hidden">hidden</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#initialLimit">initialLimit</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#limit">limit</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#missing">missing</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#operator">operator</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#replace">replace</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#selectedItems">selectedItems</a></dd><dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
 				</dl>
 				
 			
@@ -386,16 +384,6 @@ are in ISO8601 format truncated to the given level of granularity.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractDateFacetWidget.html#indexOfPart">indexOfPart</a></b>(part)
-								</div>
-								<div class="description">Array.indexOf() is undefined in IE, but rather than define it globally,
-I just write this one function for the one case in which I need it.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractDateFacetWidget.html#unclickHandler">unclickHandler</a></b>(value, gap)
 								</div>
 								<div class="description"></div>
@@ -417,7 +405,7 @@ I just write this one function for the one case in which I need it.</div>
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#_handleResult">_handleResult</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clickHandler">clickHandler</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getItems">getItems</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#handleResult">handleResult</a></dd><dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#afterChangeSelection">afterChangeSelection</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#deselectAll">deselectAll</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#deselectItems">deselectItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#selectItems">selectItems</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#_handleResult">_handleResult</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#afterChangeSelection">afterChangeSelection</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#changeSelection">changeSelection</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clear">clear</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clickHandler">clickHandler</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#deselectItems">deselectItems</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getItems">getItems</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#handleResult">handleResult</a>, <a href="../symbols/AjaxSolr.AbstractFacetWidget.html#selectItems">selectItems</a></dd><dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
 				</dl>
 				
 			
@@ -660,7 +648,7 @@ I just write this one function for the one case in which I need it.</div>
 					<a name="getValue"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>[]}</span>
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
 					<b>getValue</b>(date, granularity)
 					
 					</div>
@@ -698,51 +686,7 @@ are in ISO8601 format truncated to the given level of granularity.
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>[]}</span> The date range.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="indexOfPart"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Number}</span>
-					<b>indexOfPart</b>(part)
-					
-					</div>
-					<div class="description">
-						Array.indexOf() is undefined in IE, but rather than define it globally,
-I just write this one function for the one case in which I need it.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>part</b>
-									
-								</dt>
-								<dd>The date part to search for.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Number}</span> If found, the index of the date part; -1, otherwise.</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The date range.</dd>
 							
 							</dl>
 						
@@ -841,7 +785,7 @@ I just write this one function for the one case in which I need it.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Oct 07 2009 11:27:16 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:31:08 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>
