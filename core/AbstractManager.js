@@ -50,16 +50,25 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   facetMissing: false,
 
   /**
-   * Filters to apply to all queries.
+   * Items to append to the hash, e.g. "fq=type:cat". Items will be appended to
+   * the hash while initializing the manager, if the hash is empty.
    *
    * @field
    * @public
-   * @default { fq: [], fl: [] }
+   * @type String[]
+   * @default []
    */
-  filters: {
-    fq: [],
-    fl: []
-  },
+  defaults: [],
+
+  /**
+   * Filters to add to all queries. Filters will be appended to the list of 
+   * filters before each request.
+   *
+   * @field
+   * @public
+   * @default []
+   */
+  constraints: [],
 
   /**
    * The field to highlight when rendering results.
@@ -130,14 +139,14 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * listeners to submit requests if the hash changes, e.g. back button click.
    */
   init: function () {
-    this.loadQueryFromHash();
+    this.loadQueryFromHash(true);
     this.doInitialRequest();
 
     // Support the back button.
     var me = this;
     window.setInterval(function () {
-      if (window.location.hash.length) {
-        if (me.hash != window.location.hash) {
+      if (AjaxSolr.hash().length) {
+        if (me.hash != AjaxSolr.hash()) {
           me.loadQueryFromHash();
           me.doInitialRequest();
         }
@@ -164,24 +173,27 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /**
    * Loads the query from the URL hash.
    */
-  loadQueryFromHash: function () {
+  loadQueryFromHash: function (firstrun) {
     // If the hash is empty, the page must be loading for the first time,
     // so don't clobber properties set during afterAdditionToManager().
-    if (window.location.hash.length) {
+    if (AjaxSolr.hash().length) {
       for (var widgetId in this.widgets) {
         if (this.widgets[widgetId].clear) {
           this.widgets[widgetId].clear();
         }
       }
     }
+    else if (firstrun) {
+      window.location.hash = this.defaults.join('&');
+    }
 
-    var hash = window.location.hash.substring(1);
+    var hash = AjaxSolr.hash();
     var vars = hash.split('&');
 
     for (var i = 0, length = vars.length; i < length; i++) {
       if (vars[i].substring(0, 3) == 'fq=') {
         var item = new AjaxSolr.FilterQueryItem();
-        item.parseHash(vars[i].substring(3));
+        item.parseHash(decodeURIComponent(vars[i].substring(3)));
 
         if (this.widgets[item.widgetId] && this.widgets[item.widgetId].selectItems) {
           this.widgets[item.widgetId].selectItems([ item.value ]);
@@ -204,7 +216,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    */
   saveQueryToHash: function (queryObj) {
-    var hash = '#';
+    var hash = '';
     for (var i = 0, length = queryObj.fq.length; i < length; i++) {
       hash += 'fq=' + queryObj.fq[i].toHash() + '&';
     }
@@ -213,10 +225,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     window.location.hash = hash;
 
-    // Don't assign this.hash to hash as window.location.hash undergoes some
-    // internal processing after assignment. Assign it to window.location.hash
-    // after setting window.location.hash to ensure the two are equal.
-    this.hash = window.location.hash;
+    this.hash = AjaxSolr.hash();
   },
 
   /**
@@ -229,14 +238,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   buildQuery: function (start) {
     var queryObj = {
+      q: '',
+      dates: [],
       fields: [],
-      dates: []
+      fl: [],
+      fq: this.constraints.slice(0),
+      rows: 0,
+      sort: '',
+      start: start
     };
-
-    queryObj.fl = this.filters.fl.slice();
-    queryObj.fq = this.filters.fq.slice();
-    queryObj.start = start;
-    queryObj.rows = 0;
 
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].alterQuery(queryObj);
@@ -275,7 +285,13 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     }
 
     for (var widgetId in groups) {
-      query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
+      // http://stackoverflow.com/questions/1343794/searching-for-date-range-or-null-no-field-in-solr
+      if (this.widgets[widgetId].orNull) {
+        query += '&fq={!tag=' + widgetId + '}' + '-(-(' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ') + ') AND ' + this.widgets[widgetId].field + ':' + encodeURIComponent('[* TO *]') + ')';
+      }
+      else {
+        query += '&fq={!tag=' + widgetId + '}' + groups[widgetId].join(' ' + this.widgets[widgetId].operator + ' ');
+      }
     }
 
     // Collect the list of filter queries to be excluded in the facet count.
