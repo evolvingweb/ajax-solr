@@ -97,7 +97,7 @@ AjaxSolr.theme.prototype.content_tag_string = function (name, content, options, 
  * @field
  * @private
  */
-AjaxSolr.boolean_attributes = [ 'disabled', 'readonly', 'multiple', 'checked' ];
+AjaxSolr.booleanAttributes = [ 'disabled', 'readonly', 'multiple', 'checked' ];
 
 /**
  * <p>From Ruby on Rails.</p>
@@ -129,7 +129,7 @@ AjaxSolr.tag_options = function (options, escape) {
 
   if (escape) {
     for (var key in options) {
-      if (AjaxSolr.inArray(key, AjaxSolr.boolean_attributes)) {
+      if (AjaxSolr.inArray(key, AjaxSolr.booleanAttributes)) {
         if (options[key]) {
           attrs.push(key + '="' + key + '"');
         }
