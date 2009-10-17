@@ -56,7 +56,7 @@ AjaxSolr.theme.prototype.options_for_select = function (container, selected) {
       text = container[i], value = container[i];
     }
 
-    var selectedAttribute = AjaxSolr.option_value_selected(value, selected) ? ' selected="selected"' : '';
+    var selectedAttribute = AjaxSolr.optionValueSelected(value, selected) ? ' selected="selected"' : '';
     options.push('<option value="' + value.htmlEscape() +'"' + selectedAttribute + '>' + text.htmlEscape() + '</option>');
   }
 
@@ -85,7 +85,7 @@ AjaxSolr.theme.prototype.content_tag_string = function (name, content, options, 
   }
 
   if (options) {
-    tagOptions = AjaxSolr.tag_options(options, escape)
+    tagOptions = AjaxSolr.tagOptions(options, escape)
   }
 
   return '<' + name + tagOptions + '>' + content + '</' + name + '>';
@@ -104,7 +104,7 @@ AjaxSolr.booleanAttributes = [ 'disabled', 'readonly', 'multiple', 'checked' ];
  *
  * @static
  */
-AjaxSolr.option_value_selected = function (value, selected) {
+AjaxSolr.optionValueSelected = function (value, selected) {
   if (AjaxSolr.isArray(selected)) {
     return AjaxSolr.inArray(value, selected) != -1;
   }
@@ -118,7 +118,7 @@ AjaxSolr.option_value_selected = function (value, selected) {
  *
  * @static
  */
-AjaxSolr.tag_options = function (options, escape) {
+AjaxSolr.tagOptions = function (options, escape) {
   options = options || {};
 
   if (escape == undefined) {
