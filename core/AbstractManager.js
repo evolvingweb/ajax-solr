@@ -207,6 +207,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       else if (vars[i].substring(0, 6) == 'start=') {
         this.start = parseInt(vars[i].substring(6));
       }
+      else if (vars[i].substring(0, 5) == 'sort=') {
+        this.widgets.sort.sort = decodeURIComponent(vars[i].substring(5));
+      }
     }
   },
 
@@ -216,12 +219,17 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    */
   saveQueryToHash: function (queryObj) {
-    var hash = '';
+    var fq = [];
     for (var i = 0, length = queryObj.fq.length; i < length; i++) {
-      hash += 'fq=' + queryObj.fq[i].toHash() + '&';
+      fq.push('fq=' + queryObj.fq[i].toHash());
     }
-    hash += 'q=' + encodeURIComponent(queryObj.q) + '&';
-    hash += 'start=' + queryObj.start;
+
+    var hash = fq.join('&');
+    hash += '&q=' + encodeURIComponent(queryObj.q);
+    hash += '&start=' + queryObj.start;
+    if (queryObj.sort) {
+      hash += '&sort=' + encodeURIComponent(queryObj.sort);
+    }
 
     window.location.hash = hash;
 
