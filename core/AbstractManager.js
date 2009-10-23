@@ -109,6 +109,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   hash: '',
 
+  /**
+   * Reference to the setInterval() function.
+   *
+   * @field
+   * @private
+   * @type Function
+   */
+  intervalId: null,
+
   /** 
    * Adds a widget to the manager.
    *
@@ -144,16 +153,23 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     // Support the back button.
     var me = this;
-    window.setInterval(function () {
-      if (AjaxSolr.hash().length) {
-        if (me.hash != AjaxSolr.hash()) {
+    this.intervalId = window.setInterval(function () {
+      var hash = AjaxSolr.hash();
+      if (hash.length && hash != me.defaults.join('&')) {
+        if (me.hash != hash) {
           me.loadQueryFromHash();
           me.doInitialRequest();
         }
       }
       // Without this condition, the user is not able to back out of search.
       else {
-        history.back();
+        if (me.defaults.length) {
+          history.go(-2);
+        }
+        else {
+          history.go(-1);
+        }
+        clearInterval(me.intervalId);
       }
     }, 250);
   },
