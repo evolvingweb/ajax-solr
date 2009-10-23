@@ -219,7 +219,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     if (data.facet_counts) {
       this.facetFields = data.facet_counts.facet_fields[this.field];
       this.facetDates = data.facet_counts.facet_dates[this.field];
-      // Allow the child implementation to handle the result.
       this._handleResult();
     }
   },
