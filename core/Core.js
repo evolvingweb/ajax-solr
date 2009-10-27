@@ -48,6 +48,22 @@ AjaxSolr.hash = function () {
   }
 };
 
+/**
+ * @static
+ * @param {Object} obj Any object.
+ * @return {Number} the number of properties on an object.
+ * @see http://stackoverflow.com/questions/5223/length-of-javascript-associative-array
+ */
+AjaxSolr.size = function (obj) {
+  var size = 0;
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      size++;
+    }
+  }
+  return size;
+};
+
 // Taken from other JavaScript frameworks:
 
 /**
