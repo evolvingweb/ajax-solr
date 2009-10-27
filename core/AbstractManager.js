@@ -376,7 +376,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       return '{!' + params.join(' ') + '}';
     }
     return '';
-  }
+  },
 
   /** 
    * Creates a Solr query, starts any widget loading animations, displays the
