@@ -44,7 +44,7 @@ String.prototype.sanitizeToId = function () {
  *
  * @returns {Boolean}
  */
-String.prototype.endsWith = function(suffix) {
+String.prototype.endsWith = function (suffix) {
   return this.substring(this.length - suffix.length) == suffix;
 };
 
@@ -54,7 +54,7 @@ String.prototype.endsWith = function(suffix) {
  *
  * @returns {Boolean}
  */
-String.prototype.startsWith = function(prefix) {
+String.prototype.startsWith = function (prefix) {
   return this.substring(0, prefix.length) == prefix;
 };
 

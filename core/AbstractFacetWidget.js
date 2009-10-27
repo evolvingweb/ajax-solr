@@ -19,6 +19,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   field: null,
 
   /**
+   * Whether to collect facet values. Useful if you will be using filters but
+   * not be displaying facet values.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   */
+  facet: true,
+
+  /**
    * facet.limit parameter.
    *
    * @field
@@ -195,11 +205,13 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   afterChangeSelection: function () {},
 
   alterQuery: function (queryObj) {
-    queryObj.fields.push({
-      field: this.field,
-      limit: this.limit,
-      missing: this.missing
-    });
+    if (this.facet) {
+      queryObj.fields.push({
+        field: this.field,
+        limit: this.limit,
+        missing: this.missing
+      });
+    }
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
@@ -207,7 +219,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     if (data.facet_counts) {
       this.facetFields = data.facet_counts.facet_fields[this.field];
       this.facetDates = data.facet_counts.facet_dates[this.field];
-      // Allow the child implementation to handle the result.
       this._handleResult();
     }
   },

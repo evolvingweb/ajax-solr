@@ -109,6 +109,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   hash: '',
 
+  /**
+   * Reference to the setInterval() function.
+   *
+   * @field
+   * @private
+   * @type Function
+   */
+  intervalId: null,
+
   /** 
    * Adds a widget to the manager.
    *
@@ -144,16 +153,23 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     // Support the back button.
     var me = this;
-    window.setInterval(function () {
-      if (AjaxSolr.hash().length) {
-        if (me.hash != AjaxSolr.hash()) {
+    this.intervalId = window.setInterval(function () {
+      var hash = AjaxSolr.hash();
+      if (hash.length && hash != me.defaults.join('&')) {
+        if (me.hash != hash) {
           me.loadQueryFromHash();
           me.doInitialRequest();
         }
       }
       // Without this condition, the user is not able to back out of search.
       else {
-        history.back();
+        if (me.defaults.length) {
+          history.go(-2);
+        }
+        else {
+          history.go(-1);
+        }
+        clearInterval(me.intervalId);
       }
     }, 250);
   },
@@ -207,6 +223,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       else if (vars[i].substring(0, 6) == 'start=') {
         this.start = parseInt(vars[i].substring(6));
       }
+      else if (vars[i].substring(0, 5) == 'sort=') {
+        this.widgets.sort.sort = decodeURIComponent(vars[i].substring(5));
+      }
     }
   },
 
@@ -216,12 +235,17 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    */
   saveQueryToHash: function (queryObj) {
-    var hash = '';
+    var fq = [];
     for (var i = 0, length = queryObj.fq.length; i < length; i++) {
-      hash += 'fq=' + queryObj.fq[i].toHash() + '&';
+      fq.push('fq=' + queryObj.fq[i].toHash());
     }
-    hash += 'q=' + encodeURIComponent(queryObj.q) + '&';
-    hash += 'start=' + queryObj.start;
+
+    var hash = fq.join('&');
+    hash += '&q=' + encodeURIComponent(queryObj.q);
+    hash += '&start=' + queryObj.start;
+    if (queryObj.sort) {
+      hash += '&sort=' + encodeURIComponent(queryObj.sort);
+    }
 
     window.location.hash = hash;
 
