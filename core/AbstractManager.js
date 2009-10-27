@@ -363,7 +363,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   buildLocalParams: function(obj) {
     var params = [];
     for (var key in obj) {
-      if (isArray(obj[key])) {
+      if (AjaxSolr.isArray(obj[key])) {
         if (obj[key].length) {
           params.push(key + '=' + obj[key].join(','));
         }
