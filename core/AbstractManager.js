@@ -269,7 +269,13 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       fq: this.constraints.slice(0),
       rows: 0,
       sort: '',
-      start: start
+      start: start,
+      params: {
+        q: {},
+        'facet.field': {
+          ex: []
+        }
+      }
     };
 
     for (var widgetId in this.widgets) {
@@ -318,23 +324,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       }
     }
 
-    // Collect the list of filter queries to be excluded in the facet count.
-    var ex = [];
-    for (var widgetId in this.widgets) {
-      if (this.widgets[widgetId].exclude) {
-        ex.push(widgetId);
-      }
-    }
-
-    // Build tags. http://wiki.apache.org/solr/SimpleFacetParameters
-    var tags = '';
-    if (ex.length) {
-      tags += '{!ex=' + ex.join(',') + '}';
-    }
-
     for (var i = 0, length = queryObj.fields.length; i < length; i++) {
       var field = queryObj.fields[i].field;
-      query += '&facet.field=' + tags + encodeURIComponent(field);
+      query += '&facet.field=' + this.buildLocalParams(queryObj.params['facet.field']) + encodeURIComponent(field);
       if (queryObj.fields[i].limit != this.facetLimit) {
         query += '&f.' + field + '.facet.limit=' + encodeURIComponent(queryObj.fields[i].limit);
       }
@@ -343,7 +335,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       }
     }
 
-    query += '&q=' + encodeURIComponent(queryObj.q);
+    query += '&q=' + this.buildLocalParams(queryObj.params.q) + encodeURIComponent(queryObj.q);
 
     queryObj.fl.push('id');
 
@@ -360,6 +352,31 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     return query;
   },
+
+  /**
+   * Helper for buildQueryString.
+   *
+   * @see http://wiki.apache.org/solr/LocalParams
+   * @param {Object} An associative array of local parameters.
+   * @return {String} A local parameter prefix.
+   */
+  buildLocalParams: function(obj) {
+    var params = [];
+    for (var key in obj) {
+      if (isArray(obj[key])) {
+        if (obj[key].length) {
+          params.push(key + '=' + obj[key].join(','));
+        }
+      }
+      else if (obj[key]) {
+        params.push(key + '=' + obj[key]);
+      }
+    }
+    if (params.length) {
+      return '{!' + params.join(' ') + '}';
+    }
+    return '';
+  }
 
   /** 
    * Creates a Solr query, starts any widget loading animations, displays the

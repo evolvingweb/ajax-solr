@@ -81,6 +81,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   /**
    * Whether its filter queries should be excluded in the facet count.
    *
+   * @see http://wiki.apache.org/solr/SimpleFacetParameters
    * @field
    * @public
    * @type Boolean
@@ -211,6 +212,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
         limit: this.limit,
         missing: this.missing
       });
+    }
+    if (this.exclude) {
+      queryObj.params['facet.field'].ex.push(this.id);
     }
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
