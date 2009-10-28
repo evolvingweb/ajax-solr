@@ -224,7 +224,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
         this.start = parseInt(vars[i].substring(6));
       }
       else if (vars[i].substring(0, 5) == 'sort=') {
-        this.widgets.sort.sort = decodeURIComponent(vars[i].substring(5));
+        if (this.widgets.sort) {
+          this.widgets.sort.sort = decodeURIComponent(vars[i].substring(5));
+        }
       }
     }
   },
