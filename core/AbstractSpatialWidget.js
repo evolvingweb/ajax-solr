@@ -10,122 +10,121 @@
 AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractFacetWidget.prototype */
   {
-    /**
-     * Latitude of the centre of the search area.
-     *
-     * @field
-     * @public
-     * @type Number
-     */
-    lat: null,
+  /**
+   * Latitude of the centre of the search area.
+   *
+   * @field
+   * @public
+   * @type Number
+   */
+  lat: null,
 
-    /**
-     * Longitude of the centre of the search area.
-     *
-     * @field
-     * @public
-     * @type Number
-     */
-    lng: null,
+  /**
+   * Longitude of the centre of the search area.
+   *
+   * @field
+   * @public
+   * @type Number
+   */
+  lng: null,
 
-    /**
-     * Radius of the search area.
-     *
-     * @field
-     * @public
-     * @type Number
-     */
-    radius: null,
+  /**
+   * Radius of the search area.
+   *
+   * @field
+   * @public
+   * @type Number
+   */
+  radius: null,
 
-    /**
-     * Unit the distances should be calulcated in: "km" or "miles".
-     *
-     * @field
-     * @private
-     * @type String
-     * @default "unit"
-     */
-    unit: 'miles',
+  /**
+   * Unit the distances should be calulcated in: "km" or "miles".
+   *
+   * @field
+   * @private
+   * @type String
+   * @default "unit"
+   */
+  unit: 'miles',
 
-    /**
-     * <tt>GeoDistanceCalculator</tt> that will be used to calculate the distances:
-     * "arc" for <tt>ArchGeoDistanceCalculator</tt>;
-     * "plane" for <tt>PlaneGeoDistanceCalculator</tt>.
-     *
-     * @field
-     * @private
-     * @type String
-     * @default "arc"
-     */
-    calc: 'arc',
+  /**
+   * <tt>GeoDistanceCalculator</tt> that will be used to calculate the distances:
+   * "arc" for <tt>ArchGeoDistanceCalculator</tt>;
+   * "plane" for <tt>PlaneGeoDistanceCalculator</tt>.
+   *
+   * @field
+   * @private
+   * @type String
+   * @default "arc"
+   */
+  calc: 'arc',
 
-    /**
-     * Number of threads that will be used by the <tt>ThreadedDistanceFilter</tt>.
-     *
-     * @field
-     * @private
-     * @type Number
-     * @default 1
-     */
-    threadCount: 1,
+  /**
+   * Number of threads that will be used by the <tt>ThreadedDistanceFilter</tt>.
+   *
+   * @field
+   * @private
+   * @type Number
+   * @default 1
+   */
+  threadCount: 1,
 
-    /**
-     * Sets the spatial parameters to the given values.
-     *
-     * @param {String} q The new spatial parameter values.
-     * @returns {Boolean} Whether the selection changed.
-     */
-    set: function (lat, lng, radius) {
-      return this.changeSelection(function () {
-        this.lat = lat;
-        this.lng = lng;
-        this.radius = radius;
-      });
-    },
+  /**
+   * Sets the spatial parameters to the given values.
+   *
+   * @param {String} q The new spatial parameter values.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  set: function (lat, lng, radius) {
+    return this.changeSelection(function () {
+      this.lat = lat;
+      this.lng = lng;
+      this.radius = radius;
+    });
+  },
 
-    /**
-     * Sets the spatial parameters to null.
-     *
-     * @returns {Boolean} Whether the selection changed.
-     */
-    clear: function () {
-      return this.changeSelection(function () {
-        this.lat = null;
-        this.lng = null;
-        this.radius = null;
-      });
-    },
+  /**
+   * Sets the spatial parameters to null.
+   *
+   * @returns {Boolean} Whether the selection changed.
+   */
+  clear: function () {
+    return this.changeSelection(function () {
+      this.lat = null;
+      this.lng = null;
+      this.radius = null;
+    });
+  },
 
-    /**
-     * Helper for selection functions.
-     *
-     * @param {Function} Selection function to call.
-     * @returns {Boolean} Whether the selection changed.
-     */
-    changeSelection: function (func) {
-      var startLat = this.lat, startLng = this.lng, startRadius = this.radius;
-      func.apply(this);
-      if (this.lat !== startLat || this.lng != startLng || this.radius != startRadius) {
-        this.afterChangeSelection();
-      }
-      return this.lat !== startLat || this.lng != startLng || this.radius != startRadius;
-    },
+  /**
+   * Helper for selection functions.
+   *
+   * @param {Function} Selection function to call.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  changeSelection: function (func) {
+    var startLat = this.lat, startLng = this.lng, startRadius = this.radius;
+    func.apply(this);
+    if (this.lat !== startLat || this.lng != startLng || this.radius != startRadius) {
+      this.afterChangeSelection();
+    }
+    return this.lat !== startLat || this.lng != startLng || this.radius != startRadius;
+  },
 
-    /**
-     * An abstract hook for child implementations.
-     * This method is executed after the main Solr query changes.
-     */
-    afterChangeSelection: function () {},
+  /**
+   * An abstract hook for child implementations.
+   * This method is executed after the main Solr query changes.
+   */
+  afterChangeSelection: function () {},
 
-    alterQuery: function (queryObj) {
-      if (this.lat && this.lng && this.radius) {
-        queryObj.params.q.type        = 'spatial';
-        queryObj.params.q.lat         = this.lat;
-        queryObj.params.q.long        = this.lng;
-        queryObj.params.q.radius      = this.radius;
-        queryObj.params.q.calc        = this.calc;
-        queryObj.params.q.threadCount = this.threadCount;
-      }
+  alterQuery: function (queryObj) {
+    if (this.lat && this.lng && this.radius) {
+      queryObj.params.q.type        = 'spatial';
+      queryObj.params.q.lat         = this.lat;
+      queryObj.params.q.long        = this.lng;
+      queryObj.params.q.radius      = this.radius;
+      queryObj.params.q.calc        = this.calc;
+      queryObj.params.q.threadCount = this.threadCount;
     }
   }
 });
