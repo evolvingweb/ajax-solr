@@ -223,7 +223,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     if (data.facet_counts) {
       this.facetFields = data.facet_counts.facet_fields[this.field];
       this.facetDates = data.facet_counts.facet_dates[this.field];
-      this._handleResult();
+      this.handleFacets();
     }
   },
 
@@ -231,7 +231,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * An abstract hook for child implementations.
    * Allow the child to handle the result without parsing the response.
    */
-  _handleResult: function () {},
+  handleFacets: function () {},
 
   /**
    * Returns all the selected items as filter query items.
