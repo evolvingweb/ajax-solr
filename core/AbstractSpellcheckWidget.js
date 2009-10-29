@@ -139,7 +139,9 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
         }
       }
 
-      this.handleSuggestions(data);
+      if (AjaxSolr.size(this.suggestions)) {
+        this.handleSuggestions(data);
+      }
     }
   },
 
