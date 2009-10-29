@@ -63,7 +63,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    */
   afterChangeSelection: function () {},
 
-  alterQuery: function (queryObj) {
+  buildQuery: function (queryObj) {
     queryObj.q += this.q;
   },
 

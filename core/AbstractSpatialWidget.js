@@ -117,7 +117,7 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
    */
   afterChangeSelection: function () {},
 
-  alterQuery: function (queryObj) {
+  buildQuery: function (queryObj) {
     if (this.lat && this.lng && this.radius) {
       queryObj.localParams.q.type        = 'spatial';
       queryObj.localParams.q.lat         = this.lat;

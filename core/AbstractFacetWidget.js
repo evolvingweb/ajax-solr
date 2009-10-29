@@ -205,7 +205,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   afterChangeSelection: function () {},
 
-  alterQuery: function (queryObj) {
+  buildQuery: function (queryObj) {
     if (this.facet) {
       queryObj.fields.push({
         field: this.field,

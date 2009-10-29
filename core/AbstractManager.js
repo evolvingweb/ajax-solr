@@ -256,8 +256,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
   /**
    * Returns an object decorated with Solr parameters, e.g. q, fl, fq, start,
-   * rows, fields, dates, sort, etc. Used in alterQuery(), displayQuery(),
-   * executeRequest(), and saveQueryToHash().
+   * rows, fields, dates, sort, etc. Used in buildQuery(), alterQuery(), 
+   * displayQuery(), executeRequest(), and saveQueryToHash().
    *
    * @param {Number} start The Solr start offset parameter.
    * @returns The query object.
@@ -280,6 +280,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
         }
       }
     };
+
+    for (var widgetId in this.widgets) {
+      this.widgets[widgetId].buildQuery(queryObj);
+    }
 
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].alterQuery(queryObj);

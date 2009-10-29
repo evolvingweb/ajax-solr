@@ -60,7 +60,15 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
 
   /**
    * An abstract hook for child implementations.
-   * Alters the query before it is run.
+   * Adds properties to the query before it is run.
+   *
+   * @param queryObj The query object built by buildQuery.
+   */
+  buildQuery: function (queryObj) {},
+
+  /**
+   * An abstract hook for child implementations.
+   * Alter properties on the query before it is run.
    *
    * @param queryObj The query object built by buildQuery.
    */

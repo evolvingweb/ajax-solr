@@ -26,7 +26,7 @@ AjaxSolr.AbstractSortWidget = AjaxSolr.AbstractWidget.extend(
    */
   sort: null,
 
-  alterQuery: function (queryObj) {
+  buildQuery: function (queryObj) {
     queryObj.sort = this.sort;
   }
 });
