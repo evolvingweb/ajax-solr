@@ -73,7 +73,7 @@ String.prototype.strtr = function (replacePairs) {
     str = str.replace(new RegExp(from, 'g'), replacePairs[from]);
   }
   return str;
-}
+};
 
 /**
  * Returns a date in ISO8601 format.
