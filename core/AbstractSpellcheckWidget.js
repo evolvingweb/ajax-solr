@@ -139,7 +139,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
         }
       }
 
-      this.handleSuggestions();
+      this.handleSuggestions(data);
     }
   },
 
@@ -147,7 +147,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    * An abstract hook for child implementations.
    * Allow the child to handle the suggestions without parsing the response.
    */
-  handleSuggestions: function () {},
+  handleSuggestions: function (data) {},
 
   /**
    * Uses the top suggestion for each word to return a suggested query.
