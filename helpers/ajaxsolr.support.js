@@ -42,6 +42,7 @@ String.prototype.sanitizeToId = function () {
  * Does the string end with the specified <tt>suffix</tt>?
  * <p>From Ruby on Rails.</p>
  *
+ * @param {String} suffix The specified suffix.
  * @returns {Boolean}
  */
 String.prototype.endsWith = function (suffix) {
@@ -52,11 +53,27 @@ String.prototype.endsWith = function (suffix) {
  * Does the string start with the specified <tt>prefix</tt>?
  * <p>From Ruby on Rails.</p>
  *
+ * @param {String} prefix The speficied prefix.
  * @returns {Boolean}
  */
 String.prototype.startsWith = function (prefix) {
   return this.substring(0, prefix.length) == prefix;
 };
+
+/**
+ * Equivalent to PHP's two-argument version of strtr.
+ *
+ * @see http://php.net/manual/en/function.strtr.php
+ * @param {Object} replacePairs An associative array in the form: {'from': 'to'}
+ * @returns {String} A translated copy of the string.
+ */
+String.prototype.strtr = function (replacePairs) {
+  var str = this;
+  for (var from in replacePairs) {
+    str = str.replace(new RegExp(from, 'g'), replacePairs[from]);
+  }
+  return str;
+}
 
 /**
  * Returns a date in ISO8601 format.

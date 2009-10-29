@@ -229,7 +229,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
 
   /**
    * An abstract hook for child implementations.
-   * Allow the child to handle the result without parsing the response.
+   * Allow the child to handle the facets without parsing the response.
    */
   handleFacets: function () {},
 
