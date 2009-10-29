@@ -8,7 +8,7 @@
  * @augments AjaxSolr.AbstractWidget
  */
 AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
-  /** @lends AjaxSolr.AbstractFacetWidget.prototype */
+  /** @lends AjaxSolr.AbstractWidget.prototype */
   {
   /**
    * Latitude of the centre of the search area.
@@ -41,7 +41,7 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
    * Unit the distances should be calulcated in: "km" or "miles".
    *
    * @field
-   * @private
+   * @public
    * @type String
    * @default "unit"
    */
@@ -53,7 +53,7 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
    * "plane" for <tt>PlaneGeoDistanceCalculator</tt>.
    *
    * @field
-   * @private
+   * @public
    * @type String
    * @default "arc"
    */
@@ -63,7 +63,7 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
    * Number of threads that will be used by the <tt>ThreadedDistanceFilter</tt>.
    *
    * @field
-   * @private
+   * @public
    * @type Number
    * @default 1
    */
@@ -119,12 +119,12 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
 
   alterQuery: function (queryObj) {
     if (this.lat && this.lng && this.radius) {
-      queryObj.params.q.type        = 'spatial';
-      queryObj.params.q.lat         = this.lat;
-      queryObj.params.q.long        = this.lng;
-      queryObj.params.q.radius      = this.radius;
-      queryObj.params.q.calc        = this.calc;
-      queryObj.params.q.threadCount = this.threadCount;
+      queryObj.localParams.q.type        = 'spatial';
+      queryObj.localParams.q.lat         = this.lat;
+      queryObj.localParams.q.long        = this.lng;
+      queryObj.localParams.q.radius      = this.radius;
+      queryObj.localParams.q.calc        = this.calc;
+      queryObj.localParams.q.threadCount = this.threadCount;
     }
   }
 });

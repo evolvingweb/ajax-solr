@@ -214,7 +214,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
       });
     }
     if (this.exclude) {
-      queryObj.params['facet.field'].ex.push(this.id);
+      queryObj.localParams['facet.field'].ex.push(this.id);
     }
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },

@@ -269,10 +269,11 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       fields: [],
       fl: [],
       fq: this.constraints.slice(0),
+      params: {},
       rows: 0,
       sort: '',
       start: start,
-      params: {
+      localParams: {
         q: {},
         'facet.field': {
           ex: []
@@ -296,6 +297,14 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   buildQueryString: function (queryObj) {
     // Basic facet info. Return facet data and ignore anything with 0 results.
     var query = 'facet=true&facet.mincount=1&facet.sort=true&hl=true';
+
+    var params = [];
+    for (var param in queryObj.params) {
+      params.push(param + '=' + queryObj.params[param]);
+    }
+    if (params.length) {
+      query += '&' + params.join('&');
+    }
 
     for (var i = 0, length = queryObj.dates.length; i < length; i++) {
       var field = queryObj.dates[i].field;
@@ -328,7 +337,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
     for (var i = 0, length = queryObj.fields.length; i < length; i++) {
       var field = queryObj.fields[i].field;
-      query += '&facet.field=' + this.buildLocalParams(queryObj.params['facet.field']) + encodeURIComponent(field);
+      query += '&facet.field=' + this.buildLocalParams(queryObj.localParams['facet.field']) + encodeURIComponent(field);
       if (queryObj.fields[i].limit != this.facetLimit) {
         query += '&f.' + field + '.facet.limit=' + encodeURIComponent(queryObj.fields[i].limit);
       }
@@ -337,7 +346,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       }
     }
 
-    query += '&q=' + this.buildLocalParams(queryObj.params.q) + encodeURIComponent(queryObj.q);
+    query += '&q=' + this.buildLocalParams(queryObj.localParams.q) + encodeURIComponent(queryObj.q);
 
     queryObj.fl.push('id');
 

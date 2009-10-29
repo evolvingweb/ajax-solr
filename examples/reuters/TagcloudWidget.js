@@ -25,7 +25,7 @@ AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
     var items = [];
 
     var me = this;
-    for (var i = 0; i < objectedItems.length; i++) {
+    for (var i = 0, length = objectedItems.length; i < length; i++) {
       var facet = objectedItems[i].value;
       items.push(AjaxSolr.theme('tag', me.clickText(facet), parseInt(objectedItems[i].count / maxCount * 10), me.clickHandler(facet)));
     }

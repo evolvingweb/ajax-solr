@@ -9,7 +9,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
     var links = [];
 
     var me = this;
-    for (var i = 0; i < values.length; i++) {
+    for (var i = 0, length = values.length; i < length; i++) {
       links.push(AjaxSolr.theme('facet_link', values[i], function () {
         me.manager.reset();
         me.manager.widgets[widgetId].selectItems([ values[i] ]);
@@ -24,7 +24,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
   handleResult: function (data) {
     $(this.target).empty();
 
-    for (var i = 0; i < data.response.docs.length; i++) {
+    for (var i = 0, length = data.response.docs.length; i < length; i++) {
       var item = data.response.docs[i];
 
       $(this.target).append(AjaxSolr.theme('result', item, AjaxSolr.theme('snippet', item)));
