@@ -10,16 +10,16 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend({
    */
   executeRequest: function (queryObj) { 
     var queryString = this.buildQueryString(queryObj);
+    var jsonCallback = this.jsonCallback();
 
     // For debugging purposes
     this.queryStringCache = queryString;
 
-    var me = this;
     if (this.passthruUrl) {
-      jQuery.post(this.passthruUrl + '?callback=?', { query: queryString }, this.jsonCallback(), 'json');
+      jQuery.post(this.passthruUrl + '?callback=?', { query: queryString }, jsonCallback, 'json');
     }
     else {
-      jQuery.getJSON(this.solrUrl + '/select?' + queryString + '&wt=json&json.nl=map&json.wrf=?&jsoncallback=?', {}, this.jsonCallback());
+      jQuery.getJSON(this.solrUrl + '/select?' + queryString + '&wt=json&json.nl=map&json.wrf=?&jsoncallback=?', {}, jsonCallback);
     }
   }
 });
