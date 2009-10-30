@@ -22,6 +22,17 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   solrUrl: 'http://localhost:8983/solr/select/',
 
   /**
+   * The query to use if no query is set. A query must be set if there are any
+   * Spatial Solr local parameters, to avoid a HTTP 500 error.
+   *
+   * @field
+   * @public
+   * @type String
+   * @default "*:*"
+   */
+  queryAll: '*:*',
+
+  /**
    * If we want to proxy queries through a script, rather than send queries
    * to Solr directly, set the passthruUrl field to the fully-qualified URL.
    *
@@ -350,7 +361,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       }
     }
 
-    query += '&q=' + this.buildLocalParams(queryObj.localParams.q) + encodeURIComponent(queryObj.q);
+    query += '&q=' + this.buildLocalParams(queryObj.localParams.q) + encodeURIComponent(queryObj.q || this.queryAll);
 
     queryObj.fl.push('id');
 
