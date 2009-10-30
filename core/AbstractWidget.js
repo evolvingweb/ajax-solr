@@ -90,6 +90,28 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    */
   handleResult: function (data) {},
 
+  /**
+   * An abstract hook for child implementations.
+   * If the widget needs to do any processing based on the contents of the URL
+   * hash, implement this function.
+   *
+   * @param {Boolean} first Whether this is the first parsing of the hash.
+   * @param {Array} pairs The array of key-value pairs from the hash.
+   */
+  loadFromHash: function (first, pairs) {},
+
+  /**
+   * If the widget needs to add anything to the URL hash, implement this
+   * function. The URL hash is a list of key-value pairs separated by
+   * ampersands (<tt>&amp;</tt>).
+   *
+   * @param queryObj The query object built by buildQuery.
+   * @returns {String} The string to add to the URL hash.
+   */
+  addToHash: function (queryObj) {
+    return '';
+  },
+
   /** 
    * An abstract hook for child implementations.
    * This method need only be defined if animate=true.

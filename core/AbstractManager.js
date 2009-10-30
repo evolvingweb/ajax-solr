@@ -199,8 +199,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
   /**
    * Loads the query from the URL hash.
+   *
+   * @param {Boolean} first Whether this is the first parsing of the hash.
    */
-  loadQueryFromHash: function (firstrun) {
+  loadQueryFromHash: function (first) {
     // If the hash is empty, the page must be loading for the first time,
     // so don't clobber properties set during afterAdditionToManager().
     if (AjaxSolr.hash().length) {
@@ -210,35 +212,39 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
         }
       }
     }
-    else if (firstrun) {
+    else if (first) {
       window.location.hash = this.defaults.join('&');
     }
 
     var hash = AjaxSolr.hash();
-    var vars = hash.split('&');
+    var pairs = hash.split('&');
 
-    for (var i = 0, length = vars.length; i < length; i++) {
-      if (vars[i].substring(0, 3) == 'fq=') {
+    for (var i = 0, length = pairs.length; i < length; i++) {
+      if (pairs[i].substring(0, 3) == 'fq=') {
         var item = new AjaxSolr.FilterQueryItem();
-        item.parseHash(decodeURIComponent(vars[i].substring(3)));
+        item.parseHash(decodeURIComponent(pairs[i].substring(3)));
 
         if (this.widgets[item.widgetId] && this.widgets[item.widgetId].selectItems) {
           this.widgets[item.widgetId].selectItems([ item.value ]);
         }
       }
-      else if (vars[i].substring(0, 2) == 'q=') {
+      else if (pairs[i].substring(0, 2) == 'q=') {
         if (this.widgets.text && this.widgets.text.set) {
-          this.widgets.text.set(decodeURIComponent(vars[i].substring(2)));
+          this.widgets.text.set(decodeURIComponent(pairs[i].substring(2)));
         }
       }
-      else if (vars[i].substring(0, 6) == 'start=') {
-        this.start = parseInt(vars[i].substring(6));
+      else if (pairs[i].substring(0, 6) == 'start=') {
+        this.start = parseInt(pairs[i].substring(6));
       }
-      else if (vars[i].substring(0, 5) == 'sort=') {
+      else if (pairs[i].substring(0, 5) == 'sort=') {
         if (this.widgets.sort) {
-          this.widgets.sort.sort = decodeURIComponent(vars[i].substring(5));
+          this.widgets.sort.sort = decodeURIComponent(pairs[i].substring(5));
         }
       }
+    }
+
+    for (var widgetId in this.widgets) {
+      this.widgets[widgetId].loadFromHash(first, pairs);
     }
   },
 
@@ -258,6 +264,16 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     hash += '&start=' + queryObj.start;
     if (queryObj.sort) {
       hash += '&sort=' + encodeURIComponent(queryObj.sort);
+    }
+
+    for (var widgetId in this.widgets) {
+      var value = this.widgets[widgetId].addToHash(queryObj);
+      if (value) {
+        if (value.substring(0, 1) != '&') {
+          hash += '&';
+        }
+        hash += value;
+      }
     }
 
     window.location.hash = hash;
