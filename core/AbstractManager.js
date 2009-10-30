@@ -389,7 +389,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @see http://wiki.apache.org/solr/LocalParams
    * @param {Object} An associative array of local parameters.
-   * @return {String} A local parameter prefix.
+   * @returns {String} A local parameter prefix.
    */
   buildLocalParams: function(obj) {
     var params = [];

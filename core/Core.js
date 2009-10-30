@@ -37,7 +37,7 @@ AjaxSolr.Class.extend = function (properties) {
  * don't. Fortunately, all leave window.location.href alone. So, we use that.
  *
  * @static
- * @return {String} The unescaped URL hash.
+ * @returns {String} The unescaped URL hash.
  */
 AjaxSolr.hash = function () {
   if (window.location.href.indexOf('#') != -1) {
@@ -51,7 +51,7 @@ AjaxSolr.hash = function () {
 /**
  * @static
  * @param {Object} obj Any object.
- * @return {Number} the number of properties on an object.
+ * @returns {Number} the number of properties on an object.
  * @see http://stackoverflow.com/questions/5223/length-of-javascript-associative-array
  */
 AjaxSolr.size = function (obj) {

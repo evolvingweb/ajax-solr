@@ -169,7 +169,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
 
   /**
    * @param {Number} page A page number.
-   * @returns The click handler for the page link.
+   * @returns {Function} The click handler for the page link.
    */
   clickHandler: function (page) {
     var me = this;
