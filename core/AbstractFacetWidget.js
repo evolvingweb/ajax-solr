@@ -219,6 +219,24 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     queryObj.fq = queryObj.fq.concat(this.getItems());
   },
 
+  loadFromHash: function (first, pairs) {
+    for (var i = 0, length = pairs.length; i < length; i++) {
+      if (pairs[i].startsWith(this.id + '=')) {
+        this.selectItems([ decodeURIComponent(pairs[i].substring(this.id.length + 1)) ]);
+      }
+    }
+  },
+
+  addToHash: function (queryObj) {
+    var items = this.getItems();
+
+    var pairs = [];
+    for (var i = 0, length = items.length; i < length; i++) {
+      pairs.push(this.id + '=' + encodeURIComponent(items[i].value));
+    }
+    return pairs;
+  },
+
   handleResult: function (data) {
     if (data.facet_counts) {
       this.facetFields = data.facet_counts.facet_fields[this.field];

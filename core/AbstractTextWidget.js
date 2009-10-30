@@ -63,10 +63,6 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    */
   afterChangeSelection: function () {},
 
-  buildQuery: function (queryObj) {
-    queryObj.q += this.q;
-  },
-
   /**
    * Returns a function to unset the main Solr query.
    *
@@ -96,5 +92,24 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
       }
       return false;
     }
+  },
+
+
+  loadFromHash: function (first, pairs) {
+    for (var i = 0, length = pairs.length; i < length; i++) {
+      if (pairs[i].startsWith('q=')) {
+        this.set(decodeURIComponent(pairs[i].substring(2)));
+      }
+    }
+  },
+
+  addToHash: function (queryObj) {
+    if (queryObj.q) {
+      return 'q=' + encodeURIComponent(queryObj.q);
+    }
+  },
+
+  buildQuery: function (queryObj) {
+    queryObj.q += this.q;
   }
 });

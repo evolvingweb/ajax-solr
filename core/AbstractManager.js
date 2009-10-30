@@ -22,6 +22,16 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   solrUrl: 'http://localhost:8983/solr/select/',
 
   /**
+   * If we want to proxy queries through a script, rather than send queries
+   * to Solr directly, set the passthruUrl field to the fully-qualified URL.
+   *
+   * @field
+   * @public
+   * @type String
+   */
+  passthruUrl: null,
+
+  /**
    * The query to use if no query is set. A query must be set if there are any
    * Spatial Solr local parameters, to avoid a HTTP 500 error.
    *
@@ -33,14 +43,14 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   queryAll: '*:*',
 
   /**
-   * If we want to proxy queries through a script, rather than send queries
-   * to Solr directly, set the passthruUrl field to the fully-qualified URL.
+   * URL hash separator.
    *
    * @field
    * @public
    * @type String
+   * @default "&"
    */
-  passthruUrl: null,
+  separator: '&',
 
   /**
    * Default facet.limit parameter.
@@ -166,7 +176,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     var me = this;
     this.intervalId = window.setInterval(function () {
       var hash = AjaxSolr.hash();
-      if (hash.length && hash != me.defaults.join('&')) {
+      if (hash.length && hash != me.defaults.join(this.separator)) {
         if (me.hash != hash) {
           me.loadQueryFromHash();
           me.doInitialRequest();
@@ -203,43 +213,26 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {Boolean} first Whether this is the first parsing of the hash.
    */
   loadQueryFromHash: function (first) {
-    // If the hash is empty, the page must be loading for the first time,
-    // so don't clobber properties set during afterAdditionToManager().
-    if (AjaxSolr.hash().length) {
+    // if the page is loading for the first time, don't clobber properties set
+    // during afterAdditionToManager().
+    if (first) {
+      window.location.hash = this.defaults.join(this.separator);
+    }
+    else {
       for (var widgetId in this.widgets) {
         if (this.widgets[widgetId].clear) {
           this.widgets[widgetId].clear();
         }
       }
     }
-    else if (first) {
-      window.location.hash = this.defaults.join('&');
-    }
 
     var hash = AjaxSolr.hash();
-    var pairs = hash.split('&');
+    
+    var pairs = hash.split(this.separator);
 
     for (var i = 0, length = pairs.length; i < length; i++) {
-      if (pairs[i].substring(0, 3) == 'fq=') {
-        var item = new AjaxSolr.FilterQueryItem();
-        item.parseHash(decodeURIComponent(pairs[i].substring(3)));
-
-        if (this.widgets[item.widgetId] && this.widgets[item.widgetId].selectItems) {
-          this.widgets[item.widgetId].selectItems([ item.value ]);
-        }
-      }
-      else if (pairs[i].substring(0, 2) == 'q=') {
-        if (this.widgets.text && this.widgets.text.set) {
-          this.widgets.text.set(decodeURIComponent(pairs[i].substring(2)));
-        }
-      }
-      else if (pairs[i].substring(0, 6) == 'start=') {
+      if (pairs[i].startsWith('start=')) {
         this.start = parseInt(pairs[i].substring(6));
-      }
-      else if (pairs[i].substring(0, 5) == 'sort=') {
-        if (this.widgets.sort) {
-          this.widgets.sort.sort = decodeURIComponent(pairs[i].substring(5));
-        }
       }
     }
 
@@ -254,29 +247,21 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    */
   saveQueryToHash: function (queryObj) {
-    var fq = [];
-    for (var i = 0, length = queryObj.fq.length; i < length; i++) {
-      fq.push('fq=' + queryObj.fq[i].toHash());
-    }
-
-    var hash = fq.join('&');
-    hash += '&q=' + encodeURIComponent(queryObj.q);
-    hash += '&start=' + queryObj.start;
-    if (queryObj.sort) {
-      hash += '&sort=' + encodeURIComponent(queryObj.sort);
-    }
+    var pairs = [ 'start=' + queryObj.start ];
 
     for (var widgetId in this.widgets) {
       var value = this.widgets[widgetId].addToHash(queryObj);
       if (value) {
-        if (value.substring(0, 1) != '&') {
-          hash += '&';
+        if (AjaxSolr.isArray(value)) {
+          pairs = pairs.concat(value);
         }
-        hash += value;
+        else {
+          pairs.push(value);
+        }
       }
     }
 
-    window.location.hash = hash;
+    window.location.hash = pairs.join(this.separator);
 
     this.hash = AjaxSolr.hash();
   },

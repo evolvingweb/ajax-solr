@@ -80,30 +80,6 @@ AjaxSolr.FilterQueryItem = AjaxSolr.Class.extend(
    */
   toString: function () {
     return (this.exclude ? '-' : '') + this.field + ':' + this.value;
-  },
-
-  /**
-   * Prepares this item for inclusion in the URL hash.
-   *
-   * @returns {String} A key-value pair for the URL hash.
-   */
-  toHash: function () {
-    return (this.exclude ? '-' : '') + this.widgetId + ':' + encodeURIComponent(this.value);
-  },
-
-  /**
-   * Parses a key-value pair from the URL hash. The value may be a quoted
-   * string, an unquoted string, or a range.
-   *
-   * @param {String} string A key-value pair from the URL hash.
-   */
-  parseHash: function (string) {
-    var matches = string.match(/(-?)([^:]+):(.*)/);
-    if (matches) {
-      this.exclude = matches[1] == '-';
-      this.widgetId = matches[2];
-      this.value = matches[3];
-    }
   }
 });
 

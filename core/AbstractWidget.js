@@ -106,7 +106,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * ampersands (<tt>&amp;</tt>).
    *
    * @param queryObj The query object built by buildQuery.
-   * @returns {String} The string to add to the URL hash.
+   * @returns {String|Array} The string or array of strings to add to the hash.
    */
   addToHash: function (queryObj) {
     return '';

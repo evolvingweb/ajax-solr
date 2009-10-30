@@ -152,4 +152,4 @@ AjaxSolr.tagOptions = function (options, escape) {
   }
 
   return '';
-}
+};
