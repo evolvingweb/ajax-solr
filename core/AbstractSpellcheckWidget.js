@@ -108,7 +108,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
   },
 
   alterQuery: function (queryObj) {
-    if (this.spellcheck) {
+    if (this.spellcheck && queryObj.q) {
       queryObj.params['spellcheck.q'] = queryObj.q;
     }
   },
