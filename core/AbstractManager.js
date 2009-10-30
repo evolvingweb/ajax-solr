@@ -357,7 +357,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     query += '&fl=' + queryObj.fl.join(',');
     query += '&rows=' + queryObj.rows;
     query += '&start=' + queryObj.start;
-    if (queryObj.sort) {
+    if (queryObj.sort && queryObj.sort != 'score desc') {
       query += '&sort=' + queryObj.sort;
     }
 
