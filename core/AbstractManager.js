@@ -361,7 +361,12 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       }
     }
 
-    query += '&q=' + this.buildLocalParams(queryObj.localParams.q) + encodeURIComponent(queryObj.q || this.queryAll);
+    if (queryObj.q) {
+      query += '&q=' + this.buildLocalParams(queryObj.localParams.q) + encodeURIComponent(queryObj.q);
+    }
+    else {
+      query += '&q.alt=' + this.buildLocalParams(queryObj.localParams.q) + encodeURIComponent(this.queryAll);
+    }
 
     queryObj.fl.push('id');
 
