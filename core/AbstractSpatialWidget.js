@@ -119,12 +119,19 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
 
   buildQuery: function (queryObj) {
     if (this.lat && this.lng && this.radius) {
-      queryObj.localParams.q.type        = 'spatial';
-      queryObj.localParams.q.lat         = this.lat;
-      queryObj.localParams.q.long        = this.lng;
-      queryObj.localParams.q.radius      = this.radius;
-      queryObj.localParams.q.calc        = this.calc;
-      queryObj.localParams.q.threadCount = this.threadCount;
+      queryObj.localParams.q.type = 'spatial';
+      queryObj.localParams.q.lat = this.lat;
+      queryObj.localParams.q.long = this.lng;
+      queryObj.localParams.q.radius = this.radius;
+      if (this.unit !== 'miles') {
+        queryObj.localParams.q.unit = this.unit;
+      }
+      if (this.calc !== 'arc') {
+        queryObj.localParams.q.calc = this.calc;
+      }
+      if (this.threadCount !== 1) {
+        queryObj.localParams.q.threadCount = this.threadCount;
+      }
     }
   }
 });
