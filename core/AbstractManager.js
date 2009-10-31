@@ -215,19 +215,19 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   loadQueryFromHash: function (first) {
     // if the page is loading for the first time, don't clobber properties set
     // during afterAdditionToManager().
-    if (first) {
-      window.location.hash = this.defaults.join(this.separator);
-    }
-    else {
+    if (AjaxSolr.hash().length) {
       for (var widgetId in this.widgets) {
         if (this.widgets[widgetId].clear) {
           this.widgets[widgetId].clear();
         }
       }
     }
+    else if (first) {
+      window.location.hash = this.defaults.join(this.separator);
+    }
 
     var hash = AjaxSolr.hash();
-    
+
     var pairs = hash.split(this.separator);
 
     for (var i = 0, length = pairs.length; i < length; i++) {
