@@ -26,6 +26,12 @@ AjaxSolr.AbstractSortWidget = AjaxSolr.AbstractWidget.extend(
    */
   sort: null,
 
+  // Implementations/definitions of abstract methods.
+
+  buildQuery: function (queryObj) {
+    queryObj.sort = this.sort;
+  },
+
   loadFromHash: function (first, pairs) {
     for (var i = 0, length = pairs.length; i < length; i++) {
       if (pairs[i].startsWith('sort=')) {
@@ -38,9 +44,5 @@ AjaxSolr.AbstractSortWidget = AjaxSolr.AbstractWidget.extend(
     if (queryObj.sort) {
       return 'sort=' + encodeURIComponent(queryObj.sort);
     }
-  },
-
-  buildQuery: function (queryObj) {
-    queryObj.sort = this.sort;
   }
 });

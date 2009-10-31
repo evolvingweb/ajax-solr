@@ -97,6 +97,23 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    */
   query: '',
 
+  /**
+   * Uses the top suggestion for each word to return a suggested query.
+   *
+   * @returns {String} A suggested query.
+   */
+  suggestion: function () {
+    var replacePairs = {};
+
+    for (var word in this.suggestions) {
+      replacePairs[word] = this.suggestions[word][0];
+    }
+
+    return this.query.strtr(replacePairs);
+  },
+
+  // Implementations/definitions of abstract methods.
+
   buildQuery: function (queryObj) {
     if (this.spellcheck) {
       queryObj.params.spellcheck = 'true';
@@ -149,20 +166,5 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    * An abstract hook for child implementations.
    * Allow the child to handle the suggestions without parsing the response.
    */
-  handleSuggestions: function (data) {},
-
-  /**
-   * Uses the top suggestion for each word to return a suggested query.
-   *
-   * @returns {String} A suggested query.
-   */
-  suggestion: function () {
-    var replacePairs = {};
-
-    for (var word in this.suggestions) {
-      replacePairs[word] = this.suggestions[word][0];
-    }
-
-    return this.query.strtr(replacePairs);
-  }
+  handleSuggestions: function (data) {}
 });

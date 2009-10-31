@@ -27,6 +27,8 @@ AjaxSolr.AbstractResultWidget = AjaxSolr.AbstractWidget.extend(
    */
   rows: 10,
 
+  // Implementations/definitions of abstract methods.
+
   buildQuery: function (queryObj) {
     queryObj.fl = queryObj.fl.concat(this.fields);
     if (this.rows > queryObj.rows) {

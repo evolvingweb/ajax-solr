@@ -94,6 +94,11 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     }
   },
 
+  // Implementations/definitions of abstract methods.
+
+  buildQuery: function (queryObj) {
+    queryObj.q += this.q;
+  },
 
   loadFromHash: function (first, pairs) {
     for (var i = 0, length = pairs.length; i < length; i++) {
@@ -107,9 +112,5 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     if (queryObj.q) {
       return 'q=' + encodeURIComponent(queryObj.q);
     }
-  },
-
-  buildQuery: function (queryObj) {
-    queryObj.q += this.q;
   }
 });

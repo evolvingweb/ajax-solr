@@ -108,9 +108,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    * @returns {String|Array} The string or array of strings to add to the hash.
    */
-  addToHash: function (queryObj) {
-    return '';
-  },
+  addToHash: function (queryObj) {},
 
   /** 
    * An abstract hook for child implementations.

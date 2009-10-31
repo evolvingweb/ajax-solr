@@ -10,15 +10,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractFacetWidget.prototype */
   {
   /**
-   * The field to facet on.
-   *
-   * @field
-   * @public
-   * @type String
-   */
-  field: null,
-
-  /**
    * Whether to collect facet values. Useful if you will be using filters but
    * not be displaying facet values.
    *
@@ -27,6 +18,15 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @type Boolean
    */
   facet: true,
+
+  /**
+   * The field to facet on.
+   *
+   * @field
+   * @public
+   * @type String
+   */
+  field: null,
 
   /**
    * facet.limit parameter.
@@ -205,70 +205,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   afterChangeSelection: function () {},
 
-  buildQuery: function (queryObj) {
-    if (this.facet) {
-      queryObj.fields.push({
-        field: this.field,
-        limit: this.limit,
-        missing: this.missing
-      });
-    }
-    if (this.exclude) {
-      queryObj.localParams['facet.field'].ex.push(this.id);
-    }
-    queryObj.fq = queryObj.fq.concat(this.getItems());
-  },
-
-  loadFromHash: function (first, pairs) {
-    for (var i = 0, length = pairs.length; i < length; i++) {
-      if (pairs[i].startsWith(this.id + '=')) {
-        this.selectItems([ decodeURIComponent(pairs[i].substring(this.id.length + 1)) ]);
-      }
-    }
-  },
-
-  addToHash: function (queryObj) {
-    var items = this.getItems();
-
-    var pairs = [];
-    for (var i = 0, length = items.length; i < length; i++) {
-      pairs.push(this.id + '=' + encodeURIComponent(items[i].value));
-    }
-    return pairs;
-  },
-
-  handleResult: function (data) {
-    if (data.facet_counts) {
-      this.facetFields = data.facet_counts.facet_fields[this.field];
-      this.facetDates = data.facet_counts.facet_dates[this.field];
-      this.handleFacets();
-    }
-  },
-
-  /**
-   * An abstract hook for child implementations.
-   * Allow the child to handle the facets without parsing the response.
-   */
-  handleFacets: function () {},
-
-  /**
-   * Returns all the selected items as filter query items.
-   *
-   * @returns {FilterQueryItem[]}
-   */
-  getItems: function () {
-    var items = [];
-    for (var i = 0, length = this.selectedItems.length; i < length; i++) {
-      items.push(new AjaxSolr.FilterQueryItem({
-        field: this.field,
-        value: this.selectedItems[i],
-        hidden: this.hidden,
-        widgetId: this.id
-      }));
-    }
-    return items;
-  },
-
   /**
    * Returns a function to deselect the given value.
    *
@@ -319,5 +255,71 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   clickText: function (value) {
     return value;
-  }
+  },
+
+  /**
+   * Returns all the selected items as filter query items.
+   *
+   * @returns {FilterQueryItem[]}
+   */
+  getItems: function () {
+    var items = [];
+    for (var i = 0, length = this.selectedItems.length; i < length; i++) {
+      items.push(new AjaxSolr.FilterQueryItem({
+        field: this.field,
+        value: this.selectedItems[i],
+        hidden: this.hidden,
+        widgetId: this.id
+      }));
+    }
+    return items;
+  },
+
+  // Implementations/definitions of abstract methods.
+
+  buildQuery: function (queryObj) {
+    if (this.facet) {
+      queryObj.fields.push({
+        field: this.field,
+        limit: this.limit,
+        missing: this.missing
+      });
+    }
+    if (this.exclude) {
+      queryObj.localParams['facet.field'].ex.push(this.id);
+    }
+    queryObj.fq = queryObj.fq.concat(this.getItems());
+  },
+
+  loadFromHash: function (first, pairs) {
+    for (var i = 0, length = pairs.length; i < length; i++) {
+      if (pairs[i].startsWith(this.id + '=')) {
+        this.selectItems([ decodeURIComponent(pairs[i].substring(this.id.length + 1)) ]);
+      }
+    }
+  },
+
+  addToHash: function (queryObj) {
+    var items = this.getItems();
+
+    var pairs = [];
+    for (var i = 0, length = items.length; i < length; i++) {
+      pairs.push(this.id + '=' + encodeURIComponent(items[i].value));
+    }
+    return pairs;
+  },
+
+  handleResult: function (data) {
+    if (data.facet_counts) {
+      this.facetFields = data.facet_counts.facet_fields[this.field];
+      this.facetDates = data.facet_counts.facet_dates[this.field];
+      this.handleFacets();
+    }
+  },
+
+  /**
+   * An abstract hook for child implementations.
+   * Allow the child to handle the facets without parsing the response.
+   */
+  handleFacets: function () {}
 });

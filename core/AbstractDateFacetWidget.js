@@ -110,7 +110,7 @@ AjaxSolr.AbstractDateFacetWidget = AjaxSolr.AbstractFacetWidget.extend(
 
   buildQuery: function (queryObj) {
     if (this.selectedItems.length) {
-      var parsed = AjaxSolr.parseValue(this.selectedItems[0]);
+      var parsed = AjaxSolr.FilterQueryItem.parseValue(this.selectedItems[0]);
       var gap = parsed.end.split('+1')[1];
 
       queryObj.dates.push({
