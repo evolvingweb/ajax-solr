@@ -40,6 +40,16 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    */
   container: null,
 
+  /**
+   * A flag that indicates whether to store this widget's state in the hash.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   * @default true
+   */
+  store: true,
+
   /** 
    * A flag that indicates whether we should animate the update of the target.
    * 

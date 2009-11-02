@@ -58,6 +58,16 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
   separator: ' ',
 
   /**
+   * The Solr start offset parameter.
+   *
+   * @field
+   * @private
+   * @type Number
+   * @default 0
+   */
+  start: 0,
+
+  /**
    * The current page number.
    *
    * @field
@@ -126,7 +136,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
     for (var i = 2; i <= Math.min(1 + this.outerWindow, windowFrom - 1); i++) {
       visible.push(i);
     }
-    // if the gap is just one page, close the gap
+    // If the gap is just one page, close the gap
     if (1 + this.outerWindow == windowFrom - 2) {
       visible.push(windowFrom - 1);
     }
@@ -134,7 +144,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
     for (var i = Math.max(2, windowFrom); i <= Math.min(windowTo, this.totalPages - 1); i++) {
       visible.push(i);
     }
-    // if the gap is just one page, close the gap
+    // If the gap is just one page, close the gap
     if (this.totalPages - this.outerWindow == windowTo + 2) {
       visible.push(windowTo + 1);
     }
@@ -174,7 +184,8 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
   clickHandler: function (page) {
     var me = this;
     return function () {
-      me.manager.doRequest((page - 1) * me.perPage);
+      me.start = (page - 1) * me.perPage;
+      me.manager.doRequest();
       return false;
     }
   },
@@ -232,9 +243,11 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
     }
   },
 
+  // Implementations/definitions of abstract methods.
+
   handleResult: function (data) {
-    var perPage = parseInt(data.responseHeader.params.rows);
-    var offset = parseInt(data.responseHeader.params.start);
+    var perPage = this.perPage = parseInt(data.responseHeader.params.rows);
+    var offset = this.start = parseInt(data.responseHeader.params.start);
     var total = parseInt(data.response.numFound);
 
     // Normalize the offset to a multiple of perPage.
@@ -242,11 +255,32 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
 
     this.currentPage = Math.ceil((offset + 1) / perPage);
     this.totalPages = Math.ceil(total / perPage);
-    this.perPage = perPage;
 
     $(this.target).empty();
+
     this.renderLinks(this.windowedLinks());
     this.renderHeader(perPage, offset, total);
+  },
+
+  buildQuery: function (queryObj) {
+    queryObj.start = this.start;
+  },
+
+  loadFromHash: function (first, pairs) {
+    if (!first) {
+      this.start = 0;
+    }
+    for (var i = 0, length = pairs.length; i < length; i++) {
+      if (pairs[i].startsWith(this.id + '=')) {
+        this.start = parseInt(pairs[i].substring(this.id.length + 1));
+      }
+    }
+  },
+
+  addToHash: function (queryObj) {
+    if (queryObj.start) {
+      return this.id + '=' + queryObj.start;
+    }
   }
 });
 

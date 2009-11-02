@@ -11,7 +11,7 @@
 AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.AbstractManager.prototype */
   {
-  /** 
+  /**
    * The absolute URL to the Solr instance.
    *
    * @field
@@ -71,27 +71,6 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   facetMissing: false,
 
   /**
-   * Items to append to the hash, e.g. "fq=type:cat". Items will be appended to
-   * the hash while initializing the manager, if the hash is empty.
-   *
-   * @field
-   * @public
-   * @type String[]
-   * @default []
-   */
-  defaults: [],
-
-  /**
-   * Filters to add to all queries. Filters will be appended to the list of 
-   * filters before each request.
-   *
-   * @field
-   * @public
-   * @default []
-   */
-  constraints: [],
-
-  /**
    * The field to highlight when rendering results.
    *
    * @field
@@ -109,16 +88,6 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @default {}
    */
   widgets: {},
-
-  /** 
-   * The Solr start offset parameter.
-   *
-   * @field
-   * @private 
-   * @type Number
-   * @default 0
-   */
-  start: 0,
 
   /**
    * A copy of the URL hash, so we can detect any changes to it.
@@ -170,26 +139,21 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    */
   init: function () {
     this.loadQueryFromHash(true);
-    this.doInitialRequest();
+    this.doRequest();
 
     // Support the back button.
     var me = this;
     this.intervalId = window.setInterval(function () {
       var hash = AjaxSolr.hash();
-      if (hash.length && hash != me.defaults.join(this.separator)) {
+      if (hash.length) {
         if (me.hash != hash) {
           me.loadQueryFromHash();
-          me.doInitialRequest();
+          me.doRequest();
         }
       }
       // Without this condition, the user is not able to back out of search.
       else {
-        if (me.defaults.length) {
-          history.go(-2);
-        }
-        else {
-          history.go(-1);
-        }
+        history.back();
         clearInterval(me.intervalId);
       }
     }, 250);
@@ -210,34 +174,13 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /**
    * Loads the query from the URL hash.
    *
-   * @param {Boolean} first Whether this is the first parsing of the hash.
+   * @param {Boolean} first Whether the page is loading for the first time.
    */
   loadQueryFromHash: function (first) {
-    // if the page is loading for the first time, don't clobber properties set
-    // during afterAdditionToManager().
-    if (AjaxSolr.hash().length) {
-      for (var widgetId in this.widgets) {
-        if (this.widgets[widgetId].clear) {
-          this.widgets[widgetId].clear();
-        }
-      }
-    }
-    else if (first) {
-      window.location.hash = this.defaults.join(this.separator);
-    }
-
-    var hash = AjaxSolr.hash();
-
-    var pairs = hash.split(this.separator);
-
-    for (var i = 0, length = pairs.length; i < length; i++) {
-      if (pairs[i].startsWith('start=')) {
-        this.start = parseInt(pairs[i].substring(6));
-      }
-    }
-
     for (var widgetId in this.widgets) {
-      this.widgets[widgetId].loadFromHash(first, pairs);
+      if (this.widgets[widgetId].store) {
+        this.widgets[widgetId].loadFromHash(first, AjaxSolr.hash().split(this.separator));
+      }
     }
   },
 
@@ -247,16 +190,18 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param queryObj The query object built by buildQuery.
    */
   saveQueryToHash: function (queryObj) {
-    var pairs = [ 'start=' + queryObj.start ];
+    var pairs = [];
 
     for (var widgetId in this.widgets) {
-      var value = this.widgets[widgetId].addToHash(queryObj);
-      if (value) {
-        if (AjaxSolr.isArray(value)) {
-          pairs = pairs.concat(value);
-        }
-        else {
-          pairs.push(value);
+      if (this.widgets[widgetId].store) {
+        var value = this.widgets[widgetId].addToHash(queryObj);
+        if (value) {
+          if (AjaxSolr.isArray(value)) {
+            pairs = pairs.concat(value);
+          }
+          else {
+            pairs.push(value);
+          }
         }
       }
     }
@@ -271,20 +216,19 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * rows, fields, dates, sort, etc. Used in buildQuery(), alterQuery(), 
    * displayQuery(), executeRequest(), and saveQueryToHash().
    *
-   * @param {Number} start The Solr start offset parameter.
    * @returns The query object.
    */
-  buildQuery: function (start) {
+  buildQuery: function () {
     var queryObj = {
       q: '',
       dates: [],
       fields: [],
       fl: [],
-      fq: this.constraints.slice(0),
+      fq: [],
       params: {},
       rows: 0,
       sort: '',
-      start: start,
+      start: 0,
       localParams: {
         q: {},
         'facet.field': {
@@ -335,7 +279,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     var groups = {};
 
     for (var i = 0, length = queryObj.fq.length; i < length; i++) {
-      if (groups[queryObj.fq[i].widgetId] == undefined) {
+      if (groups[queryObj.fq[i].widgetId] === undefined) {
         groups[queryObj.fq[i].widgetId] = [];
       }
       groups[queryObj.fq[i].widgetId].push(queryObj.fq[i].toSolr());
@@ -415,10 +359,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * query, requests the data from the Solr server, and saves the query to the
    * URL hash to support bookmarking and the back button.
    *
-   * @param {Number} start The Solr start offset parameter.
+   * @param {Boolean} start The Solr start offset parameter.
    */
   doRequest: function (start) {
-    var queryObj = this.buildQuery(start);
+    var queryObj = this.buildQuery();
+
+    // Allow non-pagination widgets to reset offset parameter.
+    if (start !== undefined) {
+      queryObj.start = start;
+    }
 
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].startAnimation();
@@ -431,13 +380,6 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     this.executeRequest(queryObj);
 
     this.saveQueryToHash(queryObj);
-  },
-
-  /**
-   * Calls doRequest() with the current start offset.
-   */
-  doInitialRequest: function () {
-    this.doRequest(this.start);
   },
 
   /**

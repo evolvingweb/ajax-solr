@@ -101,6 +101,9 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
   },
 
   loadFromHash: function (first, pairs) {
+    if (!first) {
+      this.clear();
+    }
     for (var i = 0, length = pairs.length; i < length; i++) {
       if (pairs[i].startsWith(this.id + '=')) {
         this.set(decodeURIComponent(pairs[i].substring(this.id.length + 1)));

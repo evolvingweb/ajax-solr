@@ -80,7 +80,7 @@ AjaxSolr.theme.prototype.select_tag = function (name, optionTags, options) {
 AjaxSolr.theme.prototype.content_tag_string = function (name, content, options, escape) {
   var tagOptions = '';
 
-  if (escape == undefined) {
+  if (escape === undefined) {
     escape = true;
   }
 
@@ -121,7 +121,7 @@ AjaxSolr.optionValueSelected = function (value, selected) {
 AjaxSolr.tagOptions = function (options, escape) {
   options = options || {};
 
-  if (escape == undefined) {
+  if (escape === undefined) {
     escape = true;
   }
 
