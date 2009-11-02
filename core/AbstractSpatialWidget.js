@@ -11,33 +11,6 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractWidget.prototype */
   {
   /**
-   * Latitude of the centre of the search area.
-   *
-   * @field
-   * @public
-   * @type Number
-   */
-  lat: null,
-
-  /**
-   * Longitude of the centre of the search area.
-   *
-   * @field
-   * @public
-   * @type Number
-   */
-  lng: null,
-
-  /**
-   * Radius of the search area.
-   *
-   * @field
-   * @public
-   * @type Number
-   */
-  radius: null,
-
-  /**
    * Unit the distances should be calulcated in: "km" or "miles".
    *
    * @field
@@ -68,6 +41,33 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
    * @default 1
    */
   threadCount: 1,
+
+  /**
+   * Latitude of the centre of the search area.
+   *
+   * @field
+   * @private
+   * @type Number
+   */
+  lat: null,
+
+  /**
+   * Longitude of the centre of the search area.
+   *
+   * @field
+   * @private
+   * @type Number
+   */
+  lng: null,
+
+  /**
+   * Radius of the search area.
+   *
+   * @field
+   * @private
+   * @type Number
+   */
+  radius: null,
 
   /**
    * Sets the spatial parameters to the given values.

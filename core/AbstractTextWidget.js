@@ -102,15 +102,15 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
 
   loadFromHash: function (first, pairs) {
     for (var i = 0, length = pairs.length; i < length; i++) {
-      if (pairs[i].startsWith('q=')) {
-        this.set(decodeURIComponent(pairs[i].substring(2)));
+      if (pairs[i].startsWith(this.id + '=')) {
+        this.set(decodeURIComponent(pairs[i].substring(this.id.length + 1)));
       }
     }
   },
 
   addToHash: function (queryObj) {
     if (queryObj.q) {
-      return 'q=' + encodeURIComponent(queryObj.q);
+      return this.id + '=' + encodeURIComponent(queryObj.q);
     }
   }
 });
