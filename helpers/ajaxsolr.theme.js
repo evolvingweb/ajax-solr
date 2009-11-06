@@ -10,10 +10,10 @@
  */
 AjaxSolr.theme.prototype.list_items = function (list, items, separator) {
   jQuery(list).empty();
-  for (var i = 0, ilength = items.length; i < ilength; i++) {
+  for (var i = 0, lengthi = items.length; i < lengthi; i++) {
     var li = jQuery('<li/>');
     if (AjaxSolr.isArray(items[i])) {
-      for (var j = 0, jlength = items[i].length; j < jlength; j++) {
+      for (var j = 0, lengthj = items[i].length; j < lengthj; j++) {
         if (separator && j > 0) {
           li.append(separator);
         }
