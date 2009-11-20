@@ -21,24 +21,15 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
   id: null,
 
   /** 
-   * A CSS selector representing the "target div" inside the HTML page.
-   * All UI changes will usually be performed within this div.
+   * The CSS selector for this widget's target HTML element, e.g. a specific
+   * <tt>div</tt> or <tt>ul</tt>. A Widget is usually implemented to perform
+   * all its UI changes relative to its target HTML element.
    * 
    * @field 
    * @public
    * @type String
    */
   target: null,
-
-  /** 
-   * A CSS selector representing the "container div" inside the HTML page.
-   * A widget need not necessarily have a container div.
-   * 
-   * @field 
-   * @public
-   * @type String
-   */
-  container: null,
 
   /**
    * A reference to the widget's manager. For internal use only.
