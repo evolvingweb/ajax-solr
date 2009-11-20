@@ -65,6 +65,12 @@ AjaxSolr.equals = function (foo, bar) {
     }
     return true;
   }
+  else if (AjaxSolr.isRegExp(foo) && AjaxSolr.isString(bar)) {
+    return bar.match(foo));
+  }
+  else if (AjaxSolr.isRegExp(bar) && AjaxSolr.isString(foo)) {
+    return foo.match(bar));
+  }
   else {
     return foo === bar;
   }
@@ -86,6 +92,22 @@ AjaxSolr.inArray = function (value, array) {
   }
   return -1;
 };
+
+/**
+ * @param obj Any object.
+ * @returns {Boolean} Whether the object is a RegExp object.
+ */
+AjaxSolr.isRegExp = function (obj) {
+  return toString.call(obj) === '[object RegExp]';
+}
+
+/**
+ * @param obj Any object.
+ * @returns {Boolean} Whether the object is a String object.
+ */
+AjaxSolr.isString = function (obj) {
+  return toString.call(obj) === '[object String]';
+}
 
 // Taken from other JavaScript frameworks:
 
