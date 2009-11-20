@@ -48,8 +48,6 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
     return this.manager.response.responseHeader.params['spellcheck.q'].strtr(replacePairs);
   },
 
-  // Implementations/definitions of abstract methods.
-
   beforeRequest: function () {
     if (this.manager.store.get('spellcheck').val() && this.manager.store.get('q').val()) {
       this.manager.store.get('spellcheck.q').val(this.manager.store.get('q').val());
