@@ -9,7 +9,7 @@
  * @augments AjaxSolr.AbstractWidget
  */
 AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
-  /** @lends AjaxSolr.AbstractWidget.prototype */
+  /** @lends AjaxSolr.AbstracSpatialtWidget.prototype */
   {
   /**
    * Latitude of the center of the search area.

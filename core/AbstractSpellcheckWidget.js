@@ -11,7 +11,7 @@
  * @augments AjaxSolr.AbstractWidget
  */
 AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
-  /** @lends AjaxSolr.AbstractWidget.prototype */
+  /** @lends AjaxSolr.AbstractSpellcheckWidget.prototype */
   {
   /**
    * The collation.

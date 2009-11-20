@@ -11,7 +11,7 @@
  * @augments AjaxSolr.ParameterStore
  */
 AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
-  /** @lends AjaxSolr.ParameterStore.prototype */
+  /** @lends AjaxSolr.ParameterHashStore.prototype */
   {
   /**
    * The interval in milliseconds to use in <tt>setInterval()</tt>. Do not set
