@@ -177,7 +177,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    *
    * @param {String} name The name of the parameter.
    * @param {String|Number|String[]|Number[]|RegExp} match The value.
-   * @returns {Boolean} Whether a parameter with a matching value was found.
+   * @returns {Boolean} Whether a parameter with a matching value was removed.
    */
   deleteByValue: function (name, match) {
     if (name.match(this.multiple)) {
