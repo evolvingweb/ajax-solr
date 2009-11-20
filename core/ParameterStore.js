@@ -10,7 +10,7 @@
  * hash (see the <tt>ParameterHashStore</tt> class). However, you may implement
  * your own storage method by extending this class.
  *
- * <p>For a list of possible parameters, please consult the links below:</p>
+ * <p>For a list of possible parameters, please consult the links below.</p>
  *
  * @see http://wiki.apache.org/solr/CoreQueryParameters
  * @see http://wiki.apache.org/solr/CommonQueryParameters
@@ -70,6 +70,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    *
    * @field
    * @private
+   * @type AjaxSolr.AbstractManager
    */
   manager: null,
 
@@ -246,7 +247,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   },
 
   /**
-   * <p>Loads the values of exposed parameters from persistent storage. It is
+   * Loads the values of exposed parameters from persistent storage. It is
    * necessary, in most cases, to reset the values of exposed parameters before
    * setting the parameters to the values in storage. This is to ensure that a
    * parameter whose name is not present in storage is properly reset.

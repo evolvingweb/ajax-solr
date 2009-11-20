@@ -19,13 +19,58 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   field: null,
 
   /**
+   * Adds a filter query.
+   *
+   * @returns {Boolean} Whether a filter query was added.
+   */
+  add: function (value) {
+    return this.changeSelection(function () {
+      return this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(this.field, value) }));
+    });
+  },
+
+  /**
+   * Removes a filter query.
+   *
+   * @returns {Boolean} Whether a filter query was removed.
+   */
+  remove: function (value) {
+    return this.changeSelection(function () {
+      return this.manager.store.deleteByValue('fq', this.fq(this.field, value));
+    });
+  },
+
+  /**
    * Removes all filter queries using the widget's facet field.
    *
-   * @returns {Boolean} Whether any filter queries were removed.
+   * @returns {Boolean} Whether a filter query was removed.
    */
   clear: function () {
-    return this.manager.store.deleteByValue('fq', new RegExp('^-?' + this.field + ':'));
+    return this.changeSelection(function () {
+      return this.manager.store.deleteByValue('fq', new RegExp('^-?' + this.field + ':'));
+    });
   },
+
+  /**
+   * Helper for selection functions.
+   *
+   * @param {Function} Selection function to call.
+   * @returns {Boolean} Whether the selection changed.
+   */
+  changeSelection: function (func) {
+    changed = func.apply(this);
+    if (changed) {
+      this.afterChangeSelection();
+    }
+    return changed;
+  },
+
+  /**
+   * An abstract hook for child implementations.
+   *
+   * <p>This method is executed after the filter queries change.</p>
+   */
+  afterChangeSelection: function () {},
 
   /**
    * @param {String} value The value.
@@ -35,8 +80,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   clickHandler: function (value) {
     var me = this;
     return function () {
-      var param = new AjaxSolr.Parameter({ name: 'fq', value: me.fq(me.field, value) });
-      if (me.manager.store.add('fq', param) {
+      if (me.add(value)) {
         me.manager.doRequest(0);
       }
       return false;
@@ -51,7 +95,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   unclickHandler: function (value) {
     var me = this;
     return function () {
-      if (me.manager.store.deleteByValue('fq', me.fq(me.field, value))) {
+      if (me.remove(value)) {
         me.manager.doRequest(0);
       }
       return false;

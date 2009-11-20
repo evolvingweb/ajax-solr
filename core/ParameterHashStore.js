@@ -21,7 +21,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    * @public
    * @type Number
    * @default 250
-   * @see init()
+   * @see ParameterHashStore.init()
    */
   interval: 250,
 
@@ -52,7 +52,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     this.intervalId = window.setInterval(this.intervalFunction(), this.interval);
   }
 
-  /*
+  /**
    * Stores the values of the exposed parameters in both the local hash and the
    * URL hash. No other code should be made to change these two values.
    */
@@ -68,6 +68,9 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     }
   },
 
+  /**
+   * @see ParameterHash.storedString()
+   */
   storedString: function () {
     // Some browsers automatically unescape characters in the hash, others
     // don't. Fortunately, all leave window.location.href alone. So, use that.
@@ -80,6 +83,10 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     }
   },
 
+  /**
+   * Checks the hash for changes, and loads Solr parameters from the hash and
+   * sends a request to Solr if it observes a change or if the hash is empty
+   */
   intervalFunction: function () {
     // Support the back/forward buttons. If the hash changes, do a request.
     var hash = this.storedString();

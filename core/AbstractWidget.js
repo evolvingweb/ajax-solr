@@ -36,6 +36,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    *
    * @field
    * @private
+   * @type AjaxSolr.AbstractManager
    */
   manager: null,
 
