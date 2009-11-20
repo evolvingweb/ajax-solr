@@ -53,7 +53,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    *
    * <p>This method is executed after the main Solr query changes.</p>
    *
-   * @param value The current selection.
+   * @param {String} value The current main Solr query.
    */
   afterChangeSelection: function (value) {},
 
@@ -75,7 +75,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
   /**
    * Returns a function to set the main Solr query.
    *
-   * @param value The new Solr query.
+   * @param {String} value The new Solr query.
    * @returns {Function}
    */
   clickHandler: function (q) {

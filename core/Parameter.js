@@ -40,7 +40,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
   /**
    * Returns the value. If called with an argument, sets the value.
    *
-   * @param [value] The value to set.
+   * @param {String|Number|String[]|Number[]} [value] The value to set.
    * @returns The value.
    */
   val: function (value) {
@@ -57,7 +57,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * sets the value of a local parameter.
    *
    * @param {String} name The name of the local parameter.
-   * @param [value] The value to set.
+   * @param {String|Number|String[]|Number[]} [value] The value to set.
    * @returns The value.
    */
   local: function (name, value) {
@@ -132,7 +132,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * Returns the value as a URL-encoded string.
    *
    * @private
-   * @param value The value.
+   * @param {String|Number|String[]|Number[]} value The value.
    * @returns {String} The URL-encoded string.
    */
   valueToString: function (value) {

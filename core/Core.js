@@ -47,6 +47,29 @@ AjaxSolr.size = function (obj) {
   return size;
 };
 
+/**
+ * @static
+ * @param foo A value.
+ * @param bar A value.
+ * @returns {Boolean} Whether the two given values are equal.
+ */
+AjaxSolr.equals = function (foo, bar) {
+  if (AjaxSolr.isArray(foo) && AjaxSolr.isArray(bar)) {
+    if (foo.length != bar.length) {
+      return false;
+    }
+    for (var i = 0, length = foo.length; i < length; i++) {
+      if (foo[i] != bar[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  else {
+    return foo == bar;
+  }
+}
+
 // Taken from other JavaScript frameworks:
 
 /**
