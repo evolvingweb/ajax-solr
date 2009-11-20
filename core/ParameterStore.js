@@ -100,8 +100,32 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   },
 
   /**
-   * Adds a parameter that may be specified multiple times,
-   * or sets a parameter that may be specified only once.
+   * If the parameter may be specified multiple times, returns the values of
+   * all identically-named parameters. If the parameter may be specified only
+   * once, returns the value of that parameter.
+   *
+   * @param {String} name The name of the parameter.
+   * @returns {String[]|Number[]} The value(s) of the parameter.
+   */
+  values: function (name) {
+    if (this.params[name] !== undefined) {
+      if (name.match(this.multiple)) {
+        var values = [];
+        for (var i = 0, length = this.params[name].length; i < length; i++) {
+          values.push(this.params[name][i].val());
+        }
+        return values;
+      }
+      else {
+        return [ this.params[name].val() ];
+      }
+    }
+  },
+
+  /**
+   * If the parameter may be specified multiple times, adds the given parameter
+   * to the list of identically-named parameters, unless one already exists with
+   * the same value. If it may be specified only once, replaces the parameter.
    *
    * @param {String} name The name of the parameter.
    * @param {Parameter} [param] The parameter.
@@ -116,7 +140,9 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
         this.params[name] = [ param ];
       }
       else {
-        this.params[name].push(param);
+        if (AjaxSolr.inArray(param.val(), this.values(name)) == -1) {
+          this.params[name].push(param);
+        }
       }
     }
     else {
@@ -132,6 +158,30 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    */
   delete: function (name) {
     delete this.params[name];
+  },
+
+  /**
+   * Deletes any parameter with a matching value.
+   *
+   * @param {String} name The name of the parameter.
+   * @param {String|Number|String[]|Number[]|RegExp} match The value.
+   */
+  deleteByValue: function (name, match) {
+    if (name.match(this.multiple)) {
+      for (var i = this.params[name].length - 1; i >= 0; i--) {
+        if (AjaxSolr.equals(this.params[name][i].val(), match)) {
+          this.params[name].splice(i, 1);
+        }
+      }
+      if (this.params[name].length == 0) {
+        this.delete(name);
+      }
+    }
+    else {
+      if (AjaxSolr.equals(this.params[name].val(), match)) {
+        this.delete(name);
+      }
+    }
   },
 
   toString: function () {
