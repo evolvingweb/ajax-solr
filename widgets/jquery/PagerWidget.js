@@ -3,7 +3,10 @@
 (function ($) {
 
 /**
- * Heavily inspired by the Ruby on Rails will_paginate gem.
+ * A pager widget for jQuery.
+ *
+ * <p>Heavily inspired by the Ruby on Rails will_paginate gem.</p>
+ *
  * @expects this.target to be a list.
  */
 AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
@@ -56,16 +59,6 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
    * @default ""
    */
   separator: ' ',
-
-  /**
-   * The Solr start offset parameter.
-   *
-   * @field
-   * @private
-   * @type Number
-   * @default 0
-   */
-  start: 0,
 
   /**
    * The current page number.
@@ -184,7 +177,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
   clickHandler: function (page) {
     var me = this;
     return function () {
-      me.start = (page - 1) * me.perPage;
+      me.manager.store.get('start').val((page - 1) * me.manager.response.responseHeader.params.rows);
       me.manager.doRequest();
       return false;
     }
@@ -243,12 +236,10 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
     }
   },
 
-  // Implementations/definitions of abstract methods.
-
-  handleResult: function (data) {
-    var perPage = this.perPage = parseInt(data.responseHeader.params.rows);
-    var offset = this.start = parseInt(data.responseHeader.params.start);
-    var total = parseInt(data.response.numFound);
+  afterRequest: function () {
+    var perPage = parseInt(this.manager.response.responseHeader.params.rows);
+    var offset = parseInt(this.manager.response.responseHeader.params.start);
+    var total = parseInt(this.manager.response.response.numFound);
 
     // Normalize the offset to a multiple of perPage.
     offset = offset - offset % perPage;
@@ -260,27 +251,6 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
 
     this.renderLinks(this.windowedLinks());
     this.renderHeader(perPage, offset, total);
-  },
-
-  buildQuery: function (queryObj) {
-    queryObj.start = this.start;
-  },
-
-  loadFromHash: function (first, pairs) {
-    if (!first) {
-      this.start = 0;
-    }
-    for (var i = 0, length = pairs.length; i < length; i++) {
-      if (pairs[i].startsWith(this.id + '=')) {
-        this.start = parseInt(pairs[i].substring(this.id.length + 1));
-      }
-    }
-  },
-
-  addToHash: function (queryObj) {
-    if (queryObj.start) {
-      return this.id + '=' + queryObj.start;
-    }
   }
 });
 
