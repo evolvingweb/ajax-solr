@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - AjaxSolr.AbstractFacetWidget</title>
+		<title>JsDoc Reference - AjaxSolr.AbstractSpellcheckWidget</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -224,7 +224,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class AjaxSolr.AbstractFacetWidget
+				Class AjaxSolr.AbstractSpellcheckWidget
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -233,16 +233,16 @@ ul.inheritsList
 					<a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>.<br />
 				
 			
-				AbstractFacetWidget
+				AbstractSpellcheckWidget
 				
 				
-					<br /><i>Defined in: </i> &lt;../ajaxsolr/core/AbstractFacetWidget.js&gt;.
+					<br /><i>Defined in: </i> &lt;../ajaxsolr/core/AbstractSpellcheckWidget.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.AbstractFacetWidget.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.AbstractSpellcheckWidget.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -255,9 +255,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#constructor">AjaxSolr.AbstractFacetWidget</a></b>()
+								<b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#constructor">AjaxSolr.AbstractSpellcheckWidget</a></b>()
 							</div>
-							<div class="description">Baseclass for all facet widgets.</div>
+							<div class="description">Interacts with Solr's SpellCheckComponent.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -268,7 +268,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractFacetWidget.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractSpellcheckWidget.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -279,12 +279,22 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#field">field</a></b>
+								<b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#collation">collation</a></b>
 								</div>
-								<div class="description">The field to facet on.</div>
+								<div class="description">The collation.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#suggestions">suggestions</a></b>
+								</div>
+								<div class="description">The suggestions.</div>
 							</td>
 						</tr>
 					
@@ -303,7 +313,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.AbstractFacetWidget.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.AbstractSpellcheckWidget.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -316,16 +326,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clear">clear</a></b>()
-								</div>
-								<div class="description">Removes all filter queries using the widget's facet field.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clickHandler">clickHandler</a></b>(value)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#afterRequest">afterRequest</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -334,7 +335,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#fq">fq</a></b>(field, value, exclude)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#beforeRequest">beforeRequest</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -343,9 +344,18 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#unclickHandler">unclickHandler</a></b>(value)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#handleSuggestions">handleSuggestions</a></b>()
 								</div>
-								<div class="description"></div>
+								<div class="description">An abstract hook for child implementations.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#suggestion">suggestion</a></b>()
+								</div>
+								<div class="description">Uses the top suggestion for each word to return a suggested query.</div>
 							</td>
 						</tr>
 					
@@ -355,7 +365,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterRequest">afterRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></dd>
 				</dl>
 				
 			
@@ -370,11 +380,13 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>AjaxSolr.AbstractFacetWidget</b>()
+						<b>AjaxSolr.AbstractSpellcheckWidget</b>()
 				</div>
 				
 				<div class="description">
-					Baseclass for all facet widgets.
+					Interacts with Solr's SpellCheckComponent.
+
+<p>Requires <tt>String#strtr</tt> defined in <tt>ajaxsolr.support.js</tt>.
 					
 				</div>
 				
@@ -387,6 +399,13 @@ ul.inheritsList
 					
 					
 					
+					
+						<dl class="detailList">
+						<dt class="heading">See:</dt>
+						
+							<dd>http://wiki.apache.org/solr/SpellCheckComponent</dd>
+						
+						</dl>
 					
 
 			</div>
@@ -398,15 +417,44 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name="field"> </a>
-					<div class="fixedFont">
+					<a name="collation"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>field</b>
+					<b>collation</b>
 					
 					</div>
 					<div class="description">
-						The field to facet on.
+						The collation.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								""
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="suggestions"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Object}</span>
+					<b>suggestions</b>
+					
+					</div>
+					<div class="description">
+						The suggestions.
 						
 						
 					</div>
@@ -428,43 +476,11 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="clear"> </a>
+					<a name="afterRequest"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Boolean}</span>
-					<b>clear</b>()
 					
-					</div>
-					<div class="description">
-						Removes all filter queries using the widget's facet field.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Boolean}</span> Whether any filter queries were removed.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="clickHandler"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Function}</span>
-					<b>clickHandler</b>(value)
+					<b>afterRequest</b>()
 					
 					</div>
 					<div class="description">
@@ -476,71 +492,82 @@ ul.inheritsList
 					
 					
 						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value.</dd>
-							
-							</dl>
 						
 						
 						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Function}</span> Sends a request to Solr if it successfully adds a  filter query with the given value.</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name="fq"> </a>
+					<a name="beforeRequest"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>beforeRequest</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="handleSuggestions"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>handleSuggestions</b>()
+					
+					</div>
+					<div class="description">
+						An abstract hook for child implementations.
+
+<p>Allow the child to handle the suggestions without parsing the response.</p>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="suggestion"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>fq</b>(field, value, exclude)
+					<b>suggestion</b>()
 					
 					</div>
 					<div class="description">
-						
+						Uses the top suggestion for each word to return a suggested query.
 						
 						
 					</div>
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>field</b>
-									
-								</dt>
-								<dd>The facet field.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
-									
-								</dt>
-								<dd>The facet value.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Boolean}</span> <b>exclude</b>
-									
-								</dt>
-								<dd>Whether to exclude this fq parameter value.</dd>
-							
-							</dl>
 						
 						
 						
@@ -549,50 +576,7 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> An fq parameter value.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="unclickHandler"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Function}</span>
-					<b>unclickHandler</b>(value)
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Function}</span> Sends a request to Solr if it successfully removes a  filter query with the given value.</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> A suggested query.</dd>
 							
 							</dl>
 						

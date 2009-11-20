@@ -193,15 +193,13 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.html">AjaxSolr</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractDateFacetWidget.html">AjaxSolr.AbstractDateFacetWidget</a></li>
-	
 	<li><a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.AbstractManager.html">AjaxSolr.AbstractManager</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractResultWidget.html">AjaxSolr.AbstractResultWidget</a></li>
+	<li><a href="../symbols/AjaxSolr.AbstractSpatialWidget.html">AjaxSolr.AbstractSpatialWidget</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractSortWidget.html">AjaxSolr.AbstractSortWidget</a></li>
+	<li><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html">AjaxSolr.AbstractSpellcheckWidget</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.AbstractTextWidget.html">AjaxSolr.AbstractTextWidget</a></li>
 	
@@ -209,9 +207,11 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.Class.html">AjaxSolr.Class</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
+	<li><a href="../symbols/AjaxSolr.Parameter.html">AjaxSolr.Parameter</a></li>
 	
-	<li><a href="../symbols/Date.html">Date</a></li>
+	<li><a href="../symbols/AjaxSolr.ParameterHashStore.html">AjaxSolr.ParameterHashStore</a></li>
+	
+	<li><a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
 	
@@ -257,7 +257,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#constructor">AjaxSolr.AbstractTextWidget</a></b>()
 							</div>
-							<div class="description">Baseclass for all free text widgets.</div>
+							<div class="description">Baseclass for all free-text widgets.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -268,33 +268,10 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractTextWidget.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#q">q</a></b>
-								</div>
-								<div class="description">The main Solr query.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
 				</dl>
 				
 			
@@ -316,18 +293,9 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#afterChangeSelection">afterChangeSelection</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#afterChangeSelection">afterChangeSelection</a></b>(value)
 								</div>
 								<div class="description">An abstract hook for child implementations.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractTextWidget.html#alterQuery">alterQuery</a></b>(queryObj)
-								</div>
-								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -382,7 +350,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#handleResult">handleResult</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterRequest">afterRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></dd>
 				</dl>
 				
 			
@@ -401,7 +369,7 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Baseclass for all free text widgets.
+					Baseclass for all free-text widgets.
 					
 				</div>
 				
@@ -421,40 +389,6 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="q"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>q</b>
-					
-					</div>
-					<div class="description">
-						The main Solr query.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								""
-							</dd>
-							</dl>
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -466,37 +400,13 @@ ul.inheritsList
 					<div class="fixedFont">
 					
 					
-					<b>afterChangeSelection</b>()
+					<b>afterChangeSelection</b>(value)
 					
 					</div>
 					<div class="description">
 						An abstract hook for child implementations.
-This method is executed after the main Solr query changes.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
 
-					<hr />
-				
-					<a name="alterQuery"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>alterQuery</b>(queryObj)
-					
-					</div>
-					<div class="description">
-						
+<p>This method is executed after the main Solr query changes.</p>
 						
 						
 					</div>
@@ -508,10 +418,10 @@ This method is executed after the main Solr query changes.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>queryObj</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>The current main Solr query.</dd>
 							
 							</dl>
 						
@@ -619,7 +529,7 @@ This method is executed after the main Solr query changes.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>value</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
 									
 								</dt>
 								<dd>The new Solr query.</dd>
@@ -729,7 +639,7 @@ This method is executed after the main Solr query changes.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:41:06 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:53 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

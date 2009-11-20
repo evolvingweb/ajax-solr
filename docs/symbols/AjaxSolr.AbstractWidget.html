@@ -193,15 +193,13 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.html">AjaxSolr</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractDateFacetWidget.html">AjaxSolr.AbstractDateFacetWidget</a></li>
-	
 	<li><a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.AbstractManager.html">AjaxSolr.AbstractManager</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractResultWidget.html">AjaxSolr.AbstractResultWidget</a></li>
+	<li><a href="../symbols/AjaxSolr.AbstractSpatialWidget.html">AjaxSolr.AbstractSpatialWidget</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractSortWidget.html">AjaxSolr.AbstractSortWidget</a></li>
+	<li><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html">AjaxSolr.AbstractSpellcheckWidget</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.AbstractTextWidget.html">AjaxSolr.AbstractTextWidget</a></li>
 	
@@ -209,9 +207,11 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.Class.html">AjaxSolr.Class</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
+	<li><a href="../symbols/AjaxSolr.Parameter.html">AjaxSolr.Parameter</a></li>
 	
-	<li><a href="../symbols/Date.html">Date</a></li>
+	<li><a href="../symbols/AjaxSolr.ParameterHashStore.html">AjaxSolr.ParameterHashStore</a></li>
+	
+	<li><a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
 	
@@ -277,26 +277,6 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#animate">animate</a></b>
-								</div>
-								<div class="description">A flag that indicates whether we should animate the update of the target.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#container">container</a></b>
-								</div>
-								<div class="description">A CSS selector representing the "container div" inside the html page.</div>
-							</td>
-						</tr>
-					
-						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
@@ -322,7 +302,7 @@ ul.inheritsList
 								<div class="fixedFont">
 								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></b>
 								</div>
-								<div class="description">A CSS selector representing the "target div" inside the html page.</div>
+								<div class="description">The CSS selector for this widget's target HTML element, e.g.</div>
 							</td>
 						</tr>
 					
@@ -350,7 +330,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#afterAdditionToManager">afterAdditionToManager</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#afterRequest">afterRequest</a></b>()
 								</div>
 								<div class="description">An abstract hook for child implementations.</div>
 							</td>
@@ -359,7 +339,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#alterQuery">alterQuery</a></b>(queryObj)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a></b>()
 								</div>
 								<div class="description">An abstract hook for child implementations.</div>
 							</td>
@@ -368,34 +348,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#displayQuery">displayQuery</a></b>(queryObj)
-								</div>
-								<div class="description">An abstract hook for child implementations.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#endAnimation">endAnimation</a></b>()
-								</div>
-								<div class="description">An abstract hook for child implementations.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#handleResult">handleResult</a></b>(data)
-								</div>
-								<div class="description">An abstract hook for child implementations.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#startAnimation">startAnimation</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></b>()
 								</div>
 								<div class="description">An abstract hook for child implementations.</div>
 							</td>
@@ -457,57 +410,6 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name="animate"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Boolean}</span>
-					<b>animate</b>
-					
-					</div>
-					<div class="description">
-						A flag that indicates whether we should animate the update of the target.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								false
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="container"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>container</b>
-					
-					</div>
-					<div class="description">
-						A CSS selector representing the "container div" inside the html page.A widget need not necessarily have a container div.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="id"> </a>
 					<div class="fixedFont">
 					
@@ -560,7 +462,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						A CSS selector representing the "target div" inside the html page.All UI changes will be performed inside this empty div.
+						The CSS selector for this widget's target HTML element, e.g. a specific<tt>div</tt> or <tt>ul</tt>. A Widget is usually implemented to performall its UI changes relative to its target HTML element.
 						
 						
 					</div>
@@ -582,15 +484,15 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="afterAdditionToManager"> </a>
+					<a name="afterRequest"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>afterAdditionToManager</b>()
+					<b>afterRequest</b>()
 					
 					</div>
 					<div class="description">
-						An abstract hook for child implementations.This method should do any necessary one-time initializations.
+						An abstract hook for child implementations.<p>This method is executed after the Solr response is received.</p>
 						
 						
 					</div>
@@ -607,87 +509,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="alterQuery"> </a>
+					<a name="beforeRequest"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>alterQuery</b>(queryObj)
+					<b>beforeRequest</b>()
 					
 					</div>
 					<div class="description">
-						An abstract hook for child implementations.Alters the query before it is run.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>queryObj</b>
-									
-								</dt>
-								<dd>The query object built by buildQuery.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="displayQuery"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>displayQuery</b>(queryObj)
-					
-					</div>
-					<div class="description">
-						An abstract hook for child implementations.Displays the query before it is run.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>queryObj</b>
-									
-								</dt>
-								<dd>The query object built by buildQuery.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="endAnimation"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>endAnimation</b>()
-					
-					</div>
-					<div class="description">
-						An abstract hook for child implementations.This method need only be defined if animate=true.
+						An abstract hook for child implementations.<p>This method is executed before the Solr request is sent.</p>
 						
 						
 					</div>
@@ -704,51 +534,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="handleResult"> </a>
+					<a name="init"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>handleResult</b>(data)
+					<b>init</b>()
 					
 					</div>
 					<div class="description">
-						An abstract hook for child implementations.This method is executed after the Solr response data arrives.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>data</b>
-									
-								</dt>
-								<dd>The Solr response inside a JavaScript object.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="startAnimation"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>startAnimation</b>()
-					
-					</div>
-					<div class="description">
-						An abstract hook for child implementations.This method need only be defined if animate=true.
+						An abstract hook for child implementations.<p>This method should do any necessary one-time initializations.</p>
 						
 						
 					</div>
@@ -777,7 +571,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:41:06 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:53 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

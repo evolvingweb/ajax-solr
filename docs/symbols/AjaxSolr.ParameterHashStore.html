@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - AjaxSolr.AbstractFacetWidget</title>
+		<title>JsDoc Reference - AjaxSolr.ParameterHashStore</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -224,25 +224,25 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class AjaxSolr.AbstractFacetWidget
+				Class AjaxSolr.ParameterHashStore
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				<br />Extends
-					<a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>.<br />
+					<a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>.<br />
 				
 			
-				AbstractFacetWidget
+				ParameterHashStore
 				
 				
-					<br /><i>Defined in: </i> &lt;../ajaxsolr/core/AbstractFacetWidget.js&gt;.
+					<br /><i>Defined in: </i> &lt;../ajaxsolr/core/ParameterHashStore.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.AbstractFacetWidget.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.ParameterHashStore.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -255,9 +255,10 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#constructor">AjaxSolr.AbstractFacetWidget</a></b>()
+								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#constructor">AjaxSolr.ParameterHashStore</a></b>()
 							</div>
-							<div class="description">Baseclass for all facet widgets.</div>
+							<div class="description">A parameter store that stores the values of exposed parameters in the URL
+hash to maintain the application's state.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -268,7 +269,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractFacetWidget.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.ParameterHashStore.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -279,12 +280,32 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#hash">hash</a></b>
+								</div>
+								<div class="description">A local copy of the URL hash, so we can detect changes to it.</div>
+							</td>
+						</tr>
+					
+						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#field">field</a></b>
+								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#interval">interval</a></b>
 								</div>
-								<div class="description">The field to facet on.</div>
+								<div class="description">The interval in milliseconds to use in <tt>setInterval()</tt>.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalId">intervalId</a></b>
+								</div>
+								<div class="description">Reference to the setInterval() function.</div>
 							</td>
 						</tr>
 					
@@ -294,7 +315,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#exposed">exposed</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#manager">manager</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#multiple">multiple</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#params">params</a></dd>
 				</dl>
 				
 			
@@ -303,7 +324,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.AbstractFacetWidget.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.ParameterHashStore.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -316,25 +337,17 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clear">clear</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#init">init</a></b>()
 								</div>
-								<div class="description">Removes all filter queries using the widget's facet field.</div>
+								<div class="description">If loading and saving the hash take longer than <tt>interval</tt>, we'll
+hit a race condition.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clickHandler">clickHandler</a></b>(value)
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#fq">fq</a></b>(field, value, exclude)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalFunction">intervalFunction</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -343,7 +356,16 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#unclickHandler">unclickHandler</a></b>(value)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#save">save</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#storedString">storedString</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -355,7 +377,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterRequest">afterRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#add">add</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#deleteByValue">deleteByValue</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedReset">exposedReset</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedString">exposedString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#get">get</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#load">load</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#parseString">parseString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#toString">toString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#values">values</a></dd>
 				</dl>
 				
 			
@@ -370,11 +392,15 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>AjaxSolr.AbstractFacetWidget</b>()
+						<b>AjaxSolr.ParameterHashStore</b>()
 				</div>
 				
 				<div class="description">
-					Baseclass for all facet widgets.
+					A parameter store that stores the values of exposed parameters in the URL
+hash to maintain the application's state.
+
+<p>The ParameterHashStore observes the hash for changes and loads Solr
+parameters from the hash if it observes a change or if the hash is empty.</p>
 					
 				</div>
 				
@@ -398,15 +424,81 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name="field"> </a>
-					<div class="fixedFont">
+					<a name="hash"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>field</b>
+					<b>hash</b>
 					
 					</div>
 					<div class="description">
-						The field to facet on.
+						A local copy of the URL hash, so we can detect changes to it.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								""
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="interval"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>interval</b>
+					
+					</div>
+					<div class="description">
+						The interval in milliseconds to use in <tt>setInterval()</tt>. Do not set
+the interval too low as you may set up a race condition.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+							<dd>init()</dd>
+							
+							</dl>
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								250
+							</dd>
+							</dl>
+						
+
+					<hr />
+				
+					<a name="intervalId"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Function}</span>
+					<b>intervalId</b>
+					
+					</div>
+					<div class="description">
+						Reference to the setInterval() function.
 						
 						
 					</div>
@@ -428,15 +520,16 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="clear"> </a>
+					<a name="init"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Boolean}</span>
-					<b>clear</b>()
+					
+					<b>init</b>()
 					
 					</div>
 					<div class="description">
-						Removes all filter queries using the widget's facet field.
+						If loading and saving the hash take longer than <tt>interval</tt>, we'll
+hit a race condition. However, this should never happen.
 						
 						
 					</div>
@@ -447,24 +540,17 @@ ul.inheritsList
 						
 						
 						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Boolean}</span> Whether any filter queries were removed.</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name="clickHandler"> </a>
+					<a name="intervalFunction"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Function}</span>
-					<b>clickHandler</b>(value)
+					
+					<b>intervalFunction</b>()
 					
 					</div>
 					<div class="description">
@@ -476,38 +562,20 @@ ul.inheritsList
 					
 					
 						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value.</dd>
-							
-							</dl>
 						
 						
 						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Function}</span> Sends a request to Solr if it successfully adds a  filter query with the given value.</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name="fq"> </a>
+					<a name="save"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>fq</b>(field, value, exclude)
+					
+					<b>save</b>()
 					
 					</div>
 					<div class="description">
@@ -519,50 +587,20 @@ ul.inheritsList
 					
 					
 						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>field</b>
-									
-								</dt>
-								<dd>The facet field.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
-									
-								</dt>
-								<dd>The facet value.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{Boolean}</span> <b>exclude</b>
-									
-								</dt>
-								<dd>Whether to exclude this fq parameter value.</dd>
-							
-							</dl>
 						
 						
 						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> An fq parameter value.</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name="unclickHandler"> </a>
+					<a name="storedString"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Function}</span>
-					<b>unclickHandler</b>(value)
+					
+					<b>storedString</b>()
 					
 					</div>
 					<div class="description">
@@ -574,27 +612,9 @@ ul.inheritsList
 					
 					
 						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value.</dd>
-							
-							</dl>
 						
 						
 						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Function}</span> Sends a request to Solr if it successfully removes a  filter query with the given value.</dd>
-							
-							</dl>
 						
 						
 						
@@ -613,7 +633,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:53 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:54 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

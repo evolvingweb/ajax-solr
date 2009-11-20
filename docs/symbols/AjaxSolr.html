@@ -193,15 +193,13 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.html">AjaxSolr</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractDateFacetWidget.html">AjaxSolr.AbstractDateFacetWidget</a></li>
-	
 	<li><a href="../symbols/AjaxSolr.AbstractFacetWidget.html">AjaxSolr.AbstractFacetWidget</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.AbstractManager.html">AjaxSolr.AbstractManager</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractResultWidget.html">AjaxSolr.AbstractResultWidget</a></li>
+	<li><a href="../symbols/AjaxSolr.AbstractSpatialWidget.html">AjaxSolr.AbstractSpatialWidget</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.AbstractSortWidget.html">AjaxSolr.AbstractSortWidget</a></li>
+	<li><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html">AjaxSolr.AbstractSpellcheckWidget</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.AbstractTextWidget.html">AjaxSolr.AbstractTextWidget</a></li>
 	
@@ -209,9 +207,11 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.Class.html">AjaxSolr.Class</a></li>
 	
-	<li><a href="../symbols/AjaxSolr.FilterQueryItem.html">AjaxSolr.FilterQueryItem</a></li>
+	<li><a href="../symbols/AjaxSolr.Parameter.html">AjaxSolr.Parameter</a></li>
 	
-	<li><a href="../symbols/Date.html">Date</a></li>
+	<li><a href="../symbols/AjaxSolr.ParameterHashStore.html">AjaxSolr.ParameterHashStore</a></li>
+	
+	<li><a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a></li>
 	
 	<li><a href="../symbols/String.html">String</a></li>
 	
@@ -287,12 +287,12 @@ ul.inheritsList
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.dateFormats">dateFormats</a></b>
+								AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.Manager">Manager</a></b>
 								</div>
-								<div class="description">Defines some date formats in strftime format.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -302,7 +302,7 @@ ul.inheritsList
 								<div class="fixedFont">
 								AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.PagerWidget">PagerWidget</a></b>
 								</div>
-								<div class="description">Heavily inspired by the Ruby on Rails will_paginate gem.</div>
+								<div class="description">A pager widget for jQuery.</div>
 							</td>
 						</tr>
 					
@@ -330,6 +330,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.equals">equals</a></b>(foo, bar)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.extend">extend</a></b>()
 								</div>
 								<div class="description">A simplified version of jQuery's extend function.</div>
@@ -339,18 +348,9 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.hash">hash</a></b>()
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.inArray">inArray</a></b>(value, array)
 								</div>
-								<div class="description">Some browsers automatically unescape some characters in the hash, other'sdon't.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.inArray">inArray</a></b>(elem, array)
-								</div>
-								<div class="description">A copy of jQuery's inArray function.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -366,9 +366,36 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.isRegExp">isRegExp</a></b>(obj)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.isString">isString</a></b>(obj)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.optionValueSelected">optionValueSelected</a></b>(value, selected)
 								</div>
 								<div class="description"><p>From Ruby on Rails.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.size">size</a></b>(obj)
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -460,18 +487,18 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name=".dateFormats"> </a>
-					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					<a name=".Manager"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">AjaxSolr.</span><b>dateFormats</b>
+					<span class="light">AjaxSolr.</span><b>Manager</b>
 					
 					</div>
 					<div class="description">
-						Defines some date formats in strftime format.
+						
 						
 							<br />
-							<i>Defined in: </i> &lt;../ajaxsolr/core/AbstractDateFacetWidget.js&gt;.
+							<i>Defined in: </i> &lt;../ajaxsolr/managers/Manager.jquery.js&gt;.
 						
 						
 					</div>
@@ -480,6 +507,13 @@ ul.inheritsList
 
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+							<dd>http://wiki.apache.org/solr/SolJSON#JSON_specific_parameters</dd>
+							
+							</dl>
 						
 						
 
@@ -493,7 +527,9 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Heavily inspired by the Ruby on Rails will_paginate gem.
+						A pager widget for jQuery.
+
+<p>Heavily inspired by the Ruby on Rails will_paginate gem.</p>
 						
 							<br />
 							<i>Defined in: </i> &lt;../ajaxsolr/widgets/jquery/PagerWidget.js&gt;.
@@ -517,6 +553,55 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name=".equals"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">AjaxSolr.</span><b>equals</b>(foo, bar)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>foo</b>
+									
+								</dt>
+								<dd>A value.</dd>
+							
+								<dt>
+									<b>bar</b>
+									
+								</dt>
+								<dd>A value.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the two given values are equal.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
 				
 					<a name=".extend"> </a>
 					<div class="fixedFont">&lt;static&gt; 
@@ -550,47 +635,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name=".hash"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<span class="light">AjaxSolr.</span><b>hash</b>()
-					
-					</div>
-					<div class="description">
-						Some browsers automatically unescape some characters in the hash, other'sdon't. Fortunately, all leave window.location.href alone. So, we use that.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The unescaped URL hash.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
 					<a name=".inArray"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					
-					<span class="light">AjaxSolr.</span><b>inArray</b>(elem, array)
+					<span class="light">{Boolean}</span>
+					<span class="light">AjaxSolr.</span><b>inArray</b>(value, array)
 					
 					</div>
 					<div class="description">
-						A copy of jQuery's inArray function.
+						
 						
 						
 					</div>
@@ -602,31 +655,31 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>elem</b>
+									<b>value</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>A value.</dd>
 							
 								<dt>
 									<b>array</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>An array.</dd>
 							
 							</dl>
-						
-						
 						
 						
 						
 						
 						
 							<dl class="detailList">
-							<dt class="heading">See:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dd>http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js</dd>
+								<dd><span class="light fixedFont">{Boolean}</span> Whether value exists in the array.</dd>
 							
 							</dl>
+						
+						
 						
 
 					<hr />
@@ -676,6 +729,92 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name=".isRegExp"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">AjaxSolr.</span><b>isRegExp</b>(obj)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>obj</b>
+									
+								</dt>
+								<dd>Any object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the object is a RegExp object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".isString"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">AjaxSolr.</span><b>isString</b>(obj)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>obj</b>
+									
+								</dt>
+								<dd>Any object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the object is a String object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name=".optionValueSelected"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -717,6 +856,56 @@ ul.inheritsList
 						
 						
 						
+						
+
+					<hr />
+				
+					<a name=".size"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">AjaxSolr.</span><b>size</b>(obj)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>obj</b>
+									
+								</dt>
+								<dd>Any object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> the number of properties on an object.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>http://stackoverflow.com/questions/5223/length-of-javascript-associative-array</dd>
+							
+							</dl>
 						
 
 					<hr />
@@ -821,7 +1010,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Oct 17 2009 15:41:05 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:53 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

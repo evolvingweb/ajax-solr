@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - AjaxSolr.AbstractManager</title>
+		<title>JsDoc Reference - AjaxSolr.Parameter</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -224,23 +224,23 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class AjaxSolr.AbstractManager
+				Class AjaxSolr.Parameter
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
 			
-				AbstractManager
+				Parameter
 				
 				
-					<br /><i>Defined in: </i> &lt;../ajaxsolr/core/AbstractManager.js&gt;.
+					<br /><i>Defined in: </i> &lt;../ajaxsolr/core/Parameter.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.AbstractManager.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.Parameter.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -253,9 +253,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#constructor">AjaxSolr.AbstractManager</a></b>(properties)
+								<b><a href="../symbols/AjaxSolr.Parameter.html#constructor">AjaxSolr.Parameter</a></b>(properties)
 							</div>
-							<div class="description">The Manager acts as the controller in a Model-View-Controller framework.</div>
+							<div class="description">Represents a Solr parameter.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -266,7 +266,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractManager.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.Parameter.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -277,12 +277,12 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#proxyUrl">proxyUrl</a></b>
+								<b><a href="../symbols/AjaxSolr.Parameter.html#locals">locals</a></b>
 								</div>
-								<div class="description">If we want to proxy queries through a script, rather than send queriesto Solr directly, set the proxyUrl field to the fully-qualified URL.</div>
+								<div class="description">The parameter's local parameters.</div>
 							</td>
 						</tr>
 					
@@ -290,19 +290,9 @@ ul.inheritsList
 							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#response">response</a></b>
+								<b><a href="../symbols/AjaxSolr.Parameter.html#name">name</a></b>
 								</div>
-								<div class="description">The most recent response from Solr.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#solrUrl">solrUrl</a></b>
-								</div>
-								<div class="description">The absolute URL to the Solr select servlet.</div>
+								<div class="description">The parameter's name.</div>
 							</td>
 						</tr>
 					
@@ -310,19 +300,9 @@ ul.inheritsList
 							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#store">store</a></b>
+								<b><a href="../symbols/AjaxSolr.Parameter.html#value">value</a></b>
 								</div>
-								<div class="description">The parameter store for the manager and its widgets.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#widgets">widgets</a></b>
-								</div>
-								<div class="description">A collection of all registered widgets.</div>
+								<div class="description">The parameter's value.</div>
 							</td>
 						</tr>
 					
@@ -337,7 +317,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.AbstractManager.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.Parameter.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -350,63 +330,54 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#addWidget">addWidget</a></b>(widget)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#local">local</a></b>(name, value)
 								</div>
-								<div class="description">Adds a widget to the manager.</div>
+								<div class="description">Returns the value of a local parameter.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#canAddWidget">canAddWidget</a></b>(widget)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#parseString">parseString</a></b>(str)
 								</div>
-								<div class="description">An abstract hook for child implementations.</div>
+								<div class="description">Parses a string formed by calling toString().</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#doRequest">doRequest</a></b>(start)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#toString">toString</a></b>()
 								</div>
-								<div class="description">Stores the Solr parameters to be sent to Solr and sends a request to Solr.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#executeRequest">executeRequest</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#val">val</a></b>(value)
 								</div>
-								<div class="description">An abstract hook for child implementations.</div>
+								<div class="description">Returns the value.</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#handleResponse">handleResponse</a></b>(data)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#valueParseString">valueParseString</a></b>(str)
 								</div>
-								<div class="description">This method is executed after the Solr response data arrives.</div>
+								<div class="description">Parses a URL-encoded string to return the value.</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#init">init</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#valueToString">valueToString</a></b>(value)
 								</div>
-								<div class="description">An abstract hook for child implementations.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#setStore">setStore</a></b>(store)
-								</div>
-								<div class="description">Set the manager's parameter store.</div>
+								<div class="description">Returns the value as a URL-encoded string.</div>
 							</td>
 						</tr>
 					
@@ -427,11 +398,11 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>AjaxSolr.AbstractManager</b>(properties)
+						<b>AjaxSolr.Parameter</b>(properties)
 				</div>
 				
 				<div class="description">
-					The Manager acts as the controller in a Model-View-Controller framework. Allpublic calls should be performed on the manager object.
+					Represents a Solr parameter.
 					
 				</div>
 				
@@ -466,15 +437,37 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name="proxyUrl"> </a>
-					<div class="fixedFont">
+					<a name="locals"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Object}</span>
+					<b>locals</b>
+					
+					</div>
+					<div class="description">
+						The parameter's local parameters.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="name"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>proxyUrl</b>
+					<b>name</b>
 					
 					</div>
 					<div class="description">
-						If we want to proxy queries through a script, rather than send queriesto Solr directly, set the proxyUrl field to the fully-qualified URL.
+						The parameter's name.
 						
 						
 					</div>
@@ -488,88 +481,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="response"> </a>
+					<a name="value"> </a>
 					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>response</b>
-					
-					</div>
-					<div class="description">
-						The most recent response from Solr.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="solrUrl"> </a>
-					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>solrUrl</b>
+					<b>value</b>
 					
 					</div>
 					<div class="description">
-						The absolute URL to the Solr select servlet.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								"http://localhost:8983/solr/select"
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="store"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>store</b>
-					
-					</div>
-					<div class="description">
-						The parameter store for the manager and its widgets. For internal use only.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="widgets"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>widgets</b>
-					
-					</div>
-					<div class="description">
-						A collection of all registered widgets. For internal use only.
+						The parameter's value.
 						
 						
 					</div>
@@ -591,15 +511,16 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="addWidget"> </a>
+					<a name="local"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>addWidget</b>(widget)
+					<b>local</b>(name, value)
 					
 					</div>
 					<div class="description">
-						Adds a widget to the manager.
+						Returns the value of a local parameter. If called with a second argument,
+sets the value of a local parameter.
 						
 						
 					</div>
@@ -611,46 +532,16 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>}</span> <b>widget</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>name</b>
 									
 								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="canAddWidget"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Boolean}</span>
-					<b>canAddWidget</b>(widget)
-					
-					</div>
-					<div class="description">
-						An abstract hook for child implementations.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+								<dd>The name of the local parameter.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>}</span> <b>widget</b>
-									
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number|<a href="../symbols/String.html">String</a>[]|Number[]}</span> <b>value</b>
+									<i>Optional</i>
 								</dt>
-								<dd></dd>
+								<dd>The value to set.</dd>
 							
 							</dl>
 						
@@ -661,7 +552,7 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Boolean}</span> Whether the DOM is ready for the widget.</dd>
+								<dd>The value.</dd>
 							
 							</dl>
 						
@@ -670,15 +561,15 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="doRequest"> </a>
+					<a name="parseString"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>doRequest</b>(start)
+					<b>parseString</b>(str)
 					
 					</div>
 					<div class="description">
-						Stores the Solr parameters to be sent to Solr and sends a request to Solr.
+						Parses a string formed by calling toString().
 						
 						
 					</div>
@@ -690,66 +581,99 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Boolean}</span> <b>start</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>str</b>
+									
+								</dt>
+								<dd>The string to parse.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="toString"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>toString</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="val"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>val</b>(value)
+					
+					</div>
+					<div class="description">
+						Returns the value. If called with an argument, sets the value.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number|<a href="../symbols/String.html">String</a>[]|Number[]}</span> <b>value</b>
 									<i>Optional</i>
 								</dt>
-								<dd>The Solr start offset parameter.</dd>
+								<dd>The value to set.</dd>
 							
 							</dl>
 						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="executeRequest"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>executeRequest</b>()
-					
-					</div>
-					<div class="description">
-						An abstract hook for child implementations.<p>Sends the request to Solr, i.e. to <code>this.solrUrl</code> or <code>this.proxyUrl</code>, and receives Solr's response. It should send <code>this.store.toString()</code> as the Solr query, and it should pass Solr'sresponse to <code>handleResponse()</code> for handling.</p><p>See <tt>managers/Manager.jquery.js</tt> for a jQuery implementation.</p>
-						
-						
-					</div>
-					
-					
-					
 						
 						
 						
 						
 							<dl class="detailList">
-							<dt class="heading">Throws:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									 <b></b>
-								</dt>
-								<dd>If not defined in child implementation.</dd>
+								<dd>The value.</dd>
 							
 							</dl>
-						
 						
 						
 						
 
 					<hr />
 				
-					<a name="handleResponse"> </a>
-					<div class="fixedFont">
+					<a name="valueParseString"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
-					
-					<b>handleResponse</b>(data)
+					<span class="light">{Array}</span>
+					<b>valueParseString</b>(str)
 					
 					</div>
 					<div class="description">
-						This method is executed after the Solr response data arrives. Allows eachwidget to handle Solr's response separately.
+						Parses a URL-encoded string to return the value.
 						
 						
 					</div>
@@ -761,10 +685,10 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Object}</span> <b>data</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>str</b>
 									
 								</dt>
-								<dd>The Solr response.</dd>
+								<dd>The URL-encoded string.</dd>
 							
 							</dl>
 						
@@ -772,45 +696,27 @@ ul.inheritsList
 						
 						
 						
-						
-						
-
-					<hr />
-				
-					<a name="init"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>init</b>()
-					
-					</div>
-					<div class="description">
-						An abstract hook for child implementations.<p>This method should be called after the store and the widgets have beenadded. It should initialize the widgets and the store, and do any otherone-time initializations, e.g., perform the first request to Solr.</p>
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> The value.</dd>
+							
+							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name="setStore"> </a>
-					<div class="fixedFont">
+					<a name="valueToString"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
-					
-					<b>setStore</b>(store)
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>valueToString</b>(value)
 					
 					</div>
 					<div class="description">
-						Set the manager's parameter store.
+						Returns the value as a URL-encoded string.
 						
 						
 					</div>
@@ -822,16 +728,23 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>}</span> <b>store</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number|<a href="../symbols/String.html">String</a>[]|Number[]}</span> <b>value</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>The value.</dd>
 							
 							</dl>
 						
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The URL-encoded string.</dd>
+							
+							</dl>
 						
 						
 						
