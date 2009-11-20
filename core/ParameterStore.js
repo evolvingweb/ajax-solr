@@ -84,7 +84,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * Returns a parameter. If the parameter doesn't exist, creates it.
    *
    * @param {String} name The name of the parameter.
-   * @returns {Parameter|Parameter[]} The parameter.
+   * @returns {AjaxSolr.Parameter|AjaxSolr.Parameter[]} The parameter.
    */
   get: function (name) {
     if (this.params[name] === undefined) {
@@ -128,8 +128,8 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * the same value. If it may be specified only once, replaces the parameter.
    *
    * @param {String} name The name of the parameter.
-   * @param {Parameter} [param] The parameter.
-   * @returns {Parameter} The parameter.
+   * @param {AjaxSolr.Parameter} [param] The parameter.
+   * @returns {AjaxSolr.Parameter|Boolean} The parameter, or false.
    */
   add: function (name, param) {
     if (param === undefined) {
@@ -143,6 +143,9 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
         if (AjaxSolr.inArray(param.val(), this.values(name)) == -1) {
           this.params[name].push(param);
         }
+        else {
+          return false;
+        }
       }
     }
     else {
@@ -155,9 +158,18 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * Deletes a parameter.
    *
    * @param {String} name The name of the parameter.
+   * @param {Number} [index] The index of the parameter.
    */
-  delete: function (name) {
-    delete this.params[name];
+  delete: function (name, index) {
+    if (index === undefined) {
+      delete this.params[name];
+    }
+    else {
+      this.params[name].splice(index, 1);
+      if (this.params[name].length == 0) {
+        delete this.params[name];
+      }
+    }
   },
 
   /**
@@ -165,23 +177,26 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    *
    * @param {String} name The name of the parameter.
    * @param {String|Number|String[]|Number[]|RegExp} match The value.
+   * @returns {Boolean} Whether a parameter with a matching value was found.
    */
   deleteByValue: function (name, match) {
     if (name.match(this.multiple)) {
       for (var i = this.params[name].length - 1; i >= 0; i--) {
+        var found = false;
         if (AjaxSolr.equals(this.params[name][i].val(), match)) {
-          this.params[name].splice(i, 1);
+          this.delete(name, i);
+          found = true;
         }
-      }
-      if (this.params[name].length == 0) {
-        this.delete(name);
+        return found;
       }
     }
     else {
       if (AjaxSolr.equals(this.params[name].val(), match)) {
         this.delete(name);
+        return true;
       }
     }
+    return false;
   },
 
   toString: function () {
