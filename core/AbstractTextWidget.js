@@ -1,7 +1,7 @@
 // $Id$
 
 /**
- * Baseclass for all free text widgets.
+ * Baseclass for all free-text widgets.
  *
  * @class AbstractTextWidget
  * @augments AjaxSolr.AbstractWidget
@@ -10,16 +10,6 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractTextWidget.prototype */
   {
   /**
-   * The main Solr query.
-   *
-   * @field
-   * @private
-   * @type String
-   * @default ""
-   */
-  q: '',
-
-  /**
    * Sets the main Solr query to the given string.
    *
    * @param {String} q The new Solr query.
@@ -27,7 +17,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    */
   set: function (q) {
     return this.changeSelection(function () {
-      this.q = q;
+      this.manager.store.get('q').val(q);
     });
   },
 
@@ -38,7 +28,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    */
   clear: function () {
     return this.changeSelection(function () {
-      this.q = '';
+      this.manager.store.get('q').val('');
     });
   },
 
@@ -49,19 +39,23 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    * @returns {Boolean} Whether the selection changed.
    */
   changeSelection: function (func) {
-    var start = this.q;
+    var before = this.manager.store.get('q').val();
     func.apply(this);
-    if (this.q !== start) {
-      this.afterChangeSelection();
+    var after = this.manager.store.get('q').val();
+    if (after !== before) {
+      this.afterChangeSelection(after);
     }
-    return this.q !== start;
+    return after !== before;
   },
 
   /**
    * An abstract hook for child implementations.
-   * This method is executed after the main Solr query changes.
+   *
+   * <p>This method is executed after the main Solr query changes.</p>
+   *
+   * @param value The current selection.
    */
-  afterChangeSelection: function () {},
+  afterChangeSelection: function (value) {},
 
   /**
    * Returns a function to unset the main Solr query.
@@ -91,29 +85,6 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
         me.manager.doRequest(0);
       }
       return false;
-    }
-  },
-
-  // Implementations/definitions of abstract methods.
-
-  buildQuery: function (queryObj) {
-    queryObj.q += this.q;
-  },
-
-  loadFromHash: function (first, pairs) {
-    if (!first) {
-      this.clear();
-    }
-    for (var i = 0, length = pairs.length; i < length; i++) {
-      if (pairs[i].startsWith(this.id + '=')) {
-        this.set(decodeURIComponent(pairs[i].substring(this.id.length + 1)));
-      }
-    }
-  },
-
-  addToHash: function (queryObj) {
-    if (queryObj.q) {
-      return this.id + '=' + encodeURIComponent(queryObj.q);
     }
   }
 });

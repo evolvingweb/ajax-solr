@@ -1,7 +1,8 @@
 // $Id$
 
 /**
- * Implements Solr spellcheck.
+ * Interacts with Solr's SpellCheckComponent.
+ *
  * @see http://wiki.apache.org/solr/SpellCheckComponent
  *
  * @class AbstractSpellcheckWidget
@@ -10,65 +11,6 @@
 AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractWidget.prototype */
   {
-  /**
-   * The spellcheck parameter.
-   *
-   * @field
-   * @public
-   * @type Boolean
-   * @default false
-   */
-  spellcheck: false,
-
-  /**
-   * The spellcheck.count parameter.
-   *
-   * @field
-   * @public
-   * @type Number
-   * @default 1
-   */
-  count: 1,
-
-  /**
-   * The spellcheck.onlyMorePopular parameter.
-   *
-   * @field
-   * @public
-   * @type Boolean
-   * @default true
-   */
-  onlyMorePopular: true,
-
-  /**
-   * The spellcheck.extendedResults parameter.
-   *
-   * @field
-   * @public
-   * @type Boolean
-   * @default false
-   */
-  extendedResults: false,
-
-  /**
-   * The spellcheck.collate parameter.
-   *
-   * @field
-   * @public
-   * @type Boolean
-   * @default false
-   */
-  collate: false,
-
-  /**
-   * The spellcheck.q parameter.
-   *
-   * @field
-   * @private
-   * @type String
-   */
-  q: null,
-
   /**
    * The collation.
    *
@@ -84,18 +26,10 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    *
    * @field
    * @private
+   * @type Object
+   * @default {}
    */
   suggestions: {},
-
-  /**
-   * The original query.
-   *
-   * @field
-   * @private
-   * @type String
-   * @default ""
-   */
-  query: '',
 
   /**
    * Uses the top suggestion for each word to return a suggested query.
@@ -109,34 +43,26 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
       replacePairs[word] = this.suggestions[word][0];
     }
 
-    return this.query.strtr(replacePairs);
+    return this.manager.response.responseHeader.params['spellcheck.q'].strtr(replacePairs);
   },
 
   // Implementations/definitions of abstract methods.
 
-  buildQuery: function (queryObj) {
-    if (this.spellcheck) {
-      queryObj.params.spellcheck = 'true';
-      queryObj.params['spellcheck.count'] = this.count;
-      queryObj.params['spellcheck.onlyMorePopular'] = this.onlyMorePopular.toString();
-      queryObj.params['spellcheck.extendedResults'] = this.extendedResults.toString();
-      queryObj.params['spellcheck.collate'] = this.collate.toString();
+  beforeRequest: function () {
+    if (this.manager.store.get('spellcheck').val() && this.manager.store.get('q').val()) {
+      this.manager.store.get('spellcheck.q').val(this.manager.store.get('q').val());
+    }
+    else {
+      this.manager.store.delete('spellcheck.q');
     }
   },
 
-  alterQuery: function (queryObj) {
-    if (this.spellcheck && queryObj.q) {
-      queryObj.params['spellcheck.q'] = queryObj.q;
-    }
-  },
-
-  handleResult: function (data) {
+  afterRequest: function () {
     this.collation = '';
     this.suggestions = {};
-    this.query = data.responseHeader.params.q;
 
-    if (data.spellcheck && data.spellcheck.suggestions) {
-      var suggestions = data.spellcheck.suggestions;
+    if (this.manager.response.spellcheck && this.manager.response.spellcheck.suggestions) {
+      var suggestions = this.manager.response.spellcheck.suggestions;
 
       if (suggestions.collation) {
         this.collation = suggestions.collation;
@@ -147,7 +73,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
 
         this.suggestions[word] = [];
         for (var i = 0, length = suggestions[word].suggestion.length; i < length; i++) {
-          if (this.extendedResults) {
+          if (this.manager.response.responseHeader.params['spellcheck.extendedResults']) {
             this.suggestions[word].push(suggestions[word].suggestion[i].word);
           }
           else {
@@ -157,14 +83,15 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
       }
 
       if (AjaxSolr.size(this.suggestions)) {
-        this.handleSuggestions(data);
+        this.handleSuggestions(this.manager.response);
       }
     }
   },
 
   /**
    * An abstract hook for child implementations.
-   * Allow the child to handle the suggestions without parsing the response.
+   *
+   * <p>Allow the child to handle the suggestions without parsing the response.</p>
    */
-  handleSuggestions: function (data) {}
+  handleSuggestions: function () {}
 });
