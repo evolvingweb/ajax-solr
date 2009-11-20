@@ -3,6 +3,8 @@
 /**
  * Interacts with Solr's SpellCheckComponent.
  *
+ * <p>Requires <tt>String#strtr</tt> defined in <tt>ajaxsolr.support.js</tt>.
+ *
  * @see http://wiki.apache.org/solr/SpellCheckComponent
  *
  * @class AbstractSpellcheckWidget
