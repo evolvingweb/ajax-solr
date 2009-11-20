@@ -55,39 +55,39 @@ AjaxSolr.size = function (obj) {
  */
 AjaxSolr.equals = function (foo, bar) {
   if (AjaxSolr.isArray(foo) && AjaxSolr.isArray(bar)) {
-    if (foo.length != bar.length) {
+    if (foo.length !== bar.length) {
       return false;
     }
     for (var i = 0, length = foo.length; i < length; i++) {
-      if (foo[i] != bar[i]) {
+      if (foo[i] !== bar[i]) {
         return false;
       }
     }
     return true;
   }
   else {
-    return foo == bar;
+    return foo === bar;
   }
 }
 
-// Taken from other JavaScript frameworks:
-
 /**
- * A copy of jQuery's inArray function.
- *
  * @static
- * @see http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
+ * @param value A value.
+ * @param array An array.
+ * @returns {Boolean} Whether value exists in the array.
  */
-AjaxSolr.inArray = function (elem, array) {
+AjaxSolr.inArray = function (value, array) {
   if (array) {
     for (var i = 0, length = array.length; i < length; i++) {
-      if (array[i] === elem) {
+      if (AjaxSolr.equals(array[i], value)) {
         return i;
       }
     }
   }
   return -1;
 };
+
+// Taken from other JavaScript frameworks:
 
 /**
  * A copy of Drupal's Drupal.theme function.
