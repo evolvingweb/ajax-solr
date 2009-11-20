@@ -40,11 +40,9 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    */
   suggestion: function () {
     var replacePairs = {};
-
     for (var word in this.suggestions) {
       replacePairs[word] = this.suggestions[word][0];
     }
-
     return this.manager.response.responseHeader.params['spellcheck.q'].strtr(replacePairs);
   },
 

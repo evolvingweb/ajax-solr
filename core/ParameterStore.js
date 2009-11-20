@@ -174,30 +174,50 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   },
 
   /**
-   * Deletes any parameter with a matching value.
+   * Finds all parameters with matching values.
    *
    * @param {String} name The name of the parameter.
-   * @param {String|Number|String[]|Number[]|RegExp} match The value.
-   * @returns {Boolean} Whether a parameter with a matching value was removed.
+   * @param {String|Number|String[]|Number[]|RegExp} value The value.
+   * @returns {String|Number[]} The indices found.
    */
-  deleteByValue: function (name, match) {
+  find: function (name, value) {
     if (name.match(this.multiple)) {
-      for (var i = this.params[name].length - 1; i >= 0; i--) {
-        var found = false;
-        if (AjaxSolr.equals(this.params[name][i].val(), match)) {
-          this.delete(name, i);
-          found = true;
+      for (var i = 0, length = this.params[name].length; i < length; i++) {
+        var indices = [];
+        if (AjaxSolr.equals(this.params[name][i].val(), value)) {
+          indices.push(i);
         }
-        return found;
+        return indices;
       }
     }
     else {
-      if (AjaxSolr.equals(this.params[name].val(), match)) {
-        this.delete(name);
-        return true;
+      if (AjaxSolr.equals(this.params[name].val(), value)) {
+        return name;
       }
     }
     return false;
+  },
+
+  /**
+   * Deletes any parameter with a matching value.
+   *
+   * @param {String} name The name of the parameter.
+   * @param {String|Number|String[]|Number[]|RegExp} value The value.
+   * @returns {String|Number[]} The indices deleted.
+   */
+  deleteByValue: function (name, value) {
+    var indices = this.find(name, value);
+    if (indices) {
+      if (AjaxSolr.isArray(indices)) {
+        for (var i = indices.length - 1; i >= 0; i--) {
+          this.delete(name, indices[i]);
+        }
+      }
+      else {
+        this.delete(indices);
+      }
+    }
+    return indices;
   },
 
   toString: function () {
