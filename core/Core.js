@@ -66,15 +66,15 @@ AjaxSolr.equals = function (foo, bar) {
     return true;
   }
   else if (AjaxSolr.isRegExp(foo) && AjaxSolr.isString(bar)) {
-    return bar.match(foo));
+    return bar.match(foo);
   }
   else if (AjaxSolr.isRegExp(bar) && AjaxSolr.isString(foo)) {
-    return foo.match(bar));
+    return foo.match(bar);
   }
   else {
     return foo === bar;
   }
-}
+};
 
 /**
  * @static
@@ -99,7 +99,7 @@ AjaxSolr.inArray = function (value, array) {
  */
 AjaxSolr.isRegExp = function (obj) {
   return toString.call(obj) === '[object RegExp]';
-}
+};
 
 /**
  * @param obj Any object.
@@ -107,7 +107,7 @@ AjaxSolr.isRegExp = function (obj) {
  */
 AjaxSolr.isString = function (obj) {
   return toString.call(obj) === '[object String]';
-}
+};
 
 // Taken from other JavaScript frameworks:
 
