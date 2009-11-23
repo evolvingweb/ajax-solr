@@ -175,10 +175,10 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
    * @returns {Function} The click handler for the page link.
    */
   clickHandler: function (page) {
-    var me = this;
+    var self = this;
     return function () {
-      me.manager.store.get('start').val((page - 1) * me.manager.response.responseHeader.params.rows);
-      me.manager.doRequest();
+      self.manager.store.get('start').val((page - 1) * self.manager.response.responseHeader.params.rows);
+      self.manager.doRequest();
       return false;
     }
   },
