@@ -21,7 +21,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    * @public
    * @type Number
    * @default 250
-   * @see ParameterHashStore.init()
+   * @see ParameterHashStore#init()
    */
   interval: 250,
 
@@ -69,7 +69,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
   },
 
   /**
-   * @see ParameterHash.storedString()
+   * @see ParameterHash#storedString()
    */
   storedString: function () {
     // Some browsers automatically unescape characters in the hash, others
