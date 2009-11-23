@@ -50,10 +50,10 @@ AjaxSolr.theme.prototype.options_for_select = function (container, selected) {
     var text, value;
 
     if (AjaxSolr.isArray(container[i])) {
-      text = container[i][0], value = container[i][1];
+      text = container[i][0].toString(), value = container[i][1].toString();
     }
     else {
-      text = container[i], value = container[i];
+      text = container[i].toString(), value = container[i].toString();
     }
 
     var selectedAttribute = AjaxSolr.optionValueSelected(value, selected) ? ' selected="selected"' : '';
