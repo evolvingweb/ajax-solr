@@ -19,13 +19,21 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   field: null,
 
   /**
+   * @returns {Boolean} Whether any filter queries have been set using this
+   *   widget's facet field.
+   */
+  isEmpty: function () {
+    return !this.manager.store.find('fq', new RegExp('^-?' + this.field + ':'));
+  },
+
+  /**
    * Adds a filter query.
    *
    * @returns {Boolean} Whether a filter query was added.
    */
   add: function (value) {
     return this.changeSelection(function () {
-      return this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(this.field, value) }));
+      return this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(value) }));
     });
   },
 
@@ -36,7 +44,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   remove: function (value) {
     return this.changeSelection(function () {
-      return this.manager.store.deleteByValue('fq', this.fq(this.field, value));
+      return this.manager.store.deleteByValue('fq', this.fq(value));
     });
   },
 
@@ -103,17 +111,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   },
 
   /**
-   * @param {String} field The facet field.
    * @param {String} value The facet value.
    * @param {Boolean} exclude Whether to exclude this fq parameter value.
    * @returns {String} An fq parameter value.
    */
-  fq: function (field, value, exclude) {
+  fq: function (value, exclude) {
     // If the field value has a space or a colon in it, wrap it in quotes,
     // unless it is a range query.
     if (value.match(/[ :]/) && !value.match(/[\[\{]\S+ TO \S+[\]\}]/)) {
       value = '"' + value + '"';
     }
-    return (exclude ? '-' : '') + field + ':' + encodeURIComponent(value);
+    return (exclude ? '-' : '') + this.field + ':' + encodeURIComponent(value);
   }
 });

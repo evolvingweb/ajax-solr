@@ -178,7 +178,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    *
    * @param {String} name The name of the parameter.
    * @param {String|Number|String[]|Number[]|RegExp} value The value.
-   * @returns {String|Number[]} The indices found.
+   * @returns {String|Number[]} The indices of the parameters found.
    */
   find: function (name, value) {
     if (name.match(this.multiple)) {
