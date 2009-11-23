@@ -50,7 +50,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    */
   init: function () {
     this.intervalId = window.setInterval(this.intervalFunction(), this.interval);
-  }
+  },
 
   /**
    * Stores the values of the exposed parameters in both the local hash and the
