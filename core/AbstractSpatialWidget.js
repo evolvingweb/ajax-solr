@@ -12,33 +12,6 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractSpatialWidget.prototype */
   {
   /**
-   * Latitude of the center of the search area.
-   *
-   * @field
-   * @private
-   * @type Number
-   */
-  lat: null,
-
-  /**
-   * Longitude of the center of the search area.
-   *
-   * @field
-   * @private
-   * @type Number
-   */
-  lng: null,
-
-  /**
-   * Radius of the search area.
-   *
-   * @field
-   * @private
-   * @type Number
-   */
-  radius: null,
-
-  /**
    * Sets the spatial local parameters.
    *
    * @param {String} lat The new latitude.

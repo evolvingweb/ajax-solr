@@ -14,16 +14,6 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractSpellcheckWidget.prototype */
   {
   /**
-   * The collation.
-   *
-   * @field
-   * @private
-   * @type String
-   * @default ""
-   */
-  collation: '',
-
-  /**
    * The suggestions.
    *
    * @field
@@ -56,15 +46,10 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
   },
 
   afterRequest: function () {
-    this.collation = '';
     this.suggestions = {};
 
     if (this.manager.response.spellcheck && this.manager.response.spellcheck.suggestions) {
       var suggestions = this.manager.response.spellcheck.suggestions;
-
-      if (suggestions.collation) {
-        this.collation = suggestions.collation;
-      }
 
       for (var word in suggestions) {
         if (word == 'collation' || word == 'correctlySpelled') continue;

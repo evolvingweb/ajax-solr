@@ -89,20 +89,8 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {AjaxSolr.AbstractWidget} widget
    */
   addWidget: function (widget) { 
-    if (this.canAddWidget(widget)) {
-      widget.manager = this;
-      this.widgets[widget.id] = widget;
-    }
-  },
-
-  /**
-   * An abstract hook for child implementations.
-   *
-   * @param {AjaxSolr.AbstractWidget} widget
-   * @returns {Boolean} Whether the DOM is ready for the widget.
-   */
-  canAddWidget: function (widget) {
-    return true;
+    widget.manager = this;
+    this.widgets[widget.id] = widget;
   },
 
   /** 
