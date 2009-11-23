@@ -49,7 +49,9 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    * hit a race condition. However, this should never happen.
    */
   init: function () {
-    this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
+    if (this.exposed) {
+      this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
+    }
   },
 
   /**
