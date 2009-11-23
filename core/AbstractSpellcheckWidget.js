@@ -70,7 +70,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
         if (word == 'collation' || word == 'correctlySpelled') continue;
 
         this.suggestions[word] = [];
-        for (var i = 0, length = suggestions[word].suggestion.length; i < length; i++) {
+        for (var i = 0, l = suggestions[word].suggestion.length; i < l; i++) {
           if (this.manager.response.responseHeader.params['spellcheck.extendedResults']) {
             this.suggestions[word].push(suggestions[word].suggestion[i].word);
           }

@@ -10,10 +10,10 @@
  */
 AjaxSolr.theme.prototype.list_items = function (list, items, separator) {
   jQuery(list).empty();
-  for (var i = 0, lengthi = items.length; i < lengthi; i++) {
+  for (var i = 0, l = items.length; i < l; i++) {
     var li = jQuery('<li/>');
     if (AjaxSolr.isArray(items[i])) {
-      for (var j = 0, lengthj = items[i].length; j < lengthj; j++) {
+      for (var j = 0, m = items[i].length; j < m; j++) {
         if (separator && j > 0) {
           li.append(separator);
         }
@@ -46,7 +46,7 @@ AjaxSolr.theme.prototype.list_items = function (list, items, separator) {
 AjaxSolr.theme.prototype.options_for_select = function (container, selected) {
   var options = [];
 
-  for (var i = 0, length = container.length; i < length; i++) {
+  for (var i = 0, l = container.length; i < l; i++) {
     var text, value;
 
     if (AjaxSolr.isArray(container[i])) {

@@ -58,7 +58,7 @@ AjaxSolr.equals = function (foo, bar) {
     if (foo.length !== bar.length) {
       return false;
     }
-    for (var i = 0, length = foo.length; i < length; i++) {
+    for (var i = 0, l = foo.length; i < l; i++) {
       if (foo[i] !== bar[i]) {
         return false;
       }
@@ -84,13 +84,39 @@ AjaxSolr.equals = function (foo, bar) {
  */
 AjaxSolr.inArray = function (value, array) {
   if (array) {
-    for (var i = 0, length = array.length; i < length; i++) {
+    for (var i = 0, l = array.length; i < l; i++) {
       if (AjaxSolr.equals(array[i], value)) {
         return i;
       }
     }
   }
   return -1;
+};
+
+/**
+ * A copy of MooTools' Array.flatten function.
+ *
+ * @static
+ * @see http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools.js
+ */
+AjaxSolr.flatten = function(array) {
+  var flat = [];
+  for (var i = 0, l = array.length; i < l; i++) {
+    flat = flat.concat(AjaxSolr.isArray(array[i]) ? AjaxSolr.flatten(array[i]) : array[i]);
+  }
+  return flat;
+};
+
+/**
+ * Can't use toString.call(obj) === "[object Array]", as it will may return
+ * "[xpconnect wrapped native prototype]", which is undesirable.
+ *
+ * @static
+ * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
+ * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
+ */
+AjaxSolr.isArray = function (obj) {
+  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
 };
 
 /**
@@ -109,8 +135,6 @@ AjaxSolr.isString = function (obj) {
   return toString.call(obj) === '[object String]';
 };
 
-// Taken from other JavaScript frameworks:
-
 /**
  * A copy of Drupal's Drupal.theme function.
  *
@@ -123,18 +147,6 @@ AjaxSolr.theme = function (func) {
   }
 
   return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
-};
-
-/**
- * Can't use toString.call(obj) === "[object Array]", as it will may return
- * "[xpconnect wrapped native prototype]", which is undesirable.
- *
- * @static
- * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
- * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
- */
-AjaxSolr.isArray = function (obj) {
-  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
 };
 
 /**
