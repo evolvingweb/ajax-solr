@@ -63,7 +63,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @type RegExp
    * @default /^(?:bf|bq|facet.date|facet.date.other|facet.field|facet.query|fq|pf|qf)$/
    */
-  multiple: /^(?:bf|bq|facet.date|facet.date.other|facet.field|facet.query|fq|pf|qf)$/,
+  multiple: /^(?:bf|bq|facet\.date|facet\.date\.other|facet\.field|facet\.query|fq|pf|qf)$/,
 
   /**
    * A reference to the parameter store's manager. For internal use only.
