@@ -51,21 +51,6 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   params: {},
 
   /**
-   * Some Solr parameters may be specified multiple times. It is easiest to
-   * hard-code a list of such parameters. You may change the list by passing
-   * <code>{ multiple: /pattern/ }</code> as an argument to the constructor of
-   * this class or one of its children, e.g.:
-   *
-   * <p><code>new ParameterStore({ multiple: /pattern/ })</code>
-   *
-   * @field
-   * @private
-   * @type RegExp
-   * @default /^(?:bf|bq|facet.date|facet.date.other|facet.field|facet.query|fq|pf|qf)$/
-   */
-  multiple: /^(?:bf|bq|facet\.date|facet\.date\.other|facet\.field|facet\.query|fq|pf|qf)$/,
-
-  /**
    * A reference to the parameter store's manager. For internal use only.
    *
    * @field
@@ -82,6 +67,21 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   init: function () {},
 
   /**
+   * Some Solr parameters may be specified multiple times. It is easiest to
+   * hard-code a list of such parameters. You may change the list by passing
+   * <code>{ multiple: /pattern/ }</code> as an argument to the constructor of
+   * this class or one of its children, e.g.:
+   *
+   * <p><code>new ParameterStore({ multiple: /pattern/ })</code>
+   *
+   * @param {String} name The name of the parameter.
+   * @returns {Boolean} Whether the parameter may be specified multiple times.
+   */
+  isMultiple: function (name) {
+    return name.match(/^(?:bf|bq|facet\.date|facet\.date\.other|facet\.field|facet\.query|fq|pf|qf)$/);
+  },
+
+  /**
    * Returns a parameter. If the parameter doesn't exist, creates it.
    *
    * @param {String} name The name of the parameter.
@@ -90,7 +90,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   get: function (name) {
     if (this.params[name] === undefined) {
       var param = new AjaxSolr.Parameter({ name: name });
-      if (name.match(this.multiple)) {
+      if (this.isMultiple(name)) {
         this.params[name] = [ param ];
       }
       else {
@@ -110,7 +110,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    */
   values: function (name) {
     if (this.params[name] !== undefined) {
-      if (name.match(this.multiple)) {
+      if (this.isMultiple(name)) {
         var values = [];
         for (var i = 0, length = this.params[name].length; i < length; i++) {
           values.push(this.params[name][i].val());
@@ -136,7 +136,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     if (param === undefined) {
       param = new AjaxSolr.Parameter({ name: name });
     }
-    if (name.match(this.multiple)) {
+    if (this.isMultiple(name)) {
       if (this.params[name] === undefined) {
         this.params[name] = [ param ];
       }
@@ -181,7 +181,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @returns {String|Number[]} The indices of the parameters found.
    */
   find: function (name, value) {
-    if (name.match(this.multiple)) {
+    if (this.isMultiple(name)) {
       for (var i = 0, length = this.params[name].length; i < length; i++) {
         var indices = [];
         if (AjaxSolr.equals(this.params[name][i].val(), value)) {
