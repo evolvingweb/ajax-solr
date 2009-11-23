@@ -49,7 +49,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    * hit a race condition. However, this should never happen.
    */
   init: function () {
-    this.intervalId = window.setInterval(this.intervalFunction(), this.interval);
+    this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
   },
 
   /**
@@ -87,18 +87,20 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    * Checks the hash for changes, and loads Solr parameters from the hash and
    * sends a request to Solr if it observes a change or if the hash is empty
    */
-  intervalFunction: function () {
-    // Support the back/forward buttons. If the hash changes, do a request.
-    var hash = this.storedString();
-    if (hash.length) {
-      if (this.hash != hash) {
-        this.load();
-        this.manager.doRequest();
+  intervalFunction: function (self) {
+    return function () {
+      // Support the back/forward buttons. If the hash changes, do a request.
+      var hash = self.storedString();
+      if (hash.length) {
+        if (self.hash != hash) {
+          self.load();
+          self.manager.doRequest();
+        }
       }
-    }
-    else {
-      // AJAX Solr is loading for the first time, or the user deleted the hash.
-      this.manager.doRequest();
+      else {
+        // AJAX Solr is loading for the first time, or the user deleted the hash.
+        self.manager.doRequest();
+      }
     }
   }
 });

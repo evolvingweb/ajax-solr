@@ -63,10 +63,10 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    * @returns {Function}
    */
   unclickHandler: function () {
-    var me = this;
+    var self = this;
     return function () {
-      if (me.clear()) {
-        me.manager.doRequest(0);
+      if (self.clear()) {
+        self.manager.doRequest(0);
       }
       return false;
     }
@@ -79,10 +79,10 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    * @returns {Function}
    */
   clickHandler: function (q) {
-    var me = this;
+    var self = this;
     return function () {
-      if (me.set(q)) {
-        me.manager.doRequest(0);
+      if (self.set(q)) {
+        self.manager.doRequest(0);
       }
       return false;
     }

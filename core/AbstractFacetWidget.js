@@ -86,10 +86,10 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *   filter query with the given value.
    */
   clickHandler: function (value) {
-    var me = this;
+    var self = this;
     return function () {
-      if (me.add(value)) {
-        me.manager.doRequest(0);
+      if (self.add(value)) {
+        self.manager.doRequest(0);
       }
       return false;
     }
@@ -101,10 +101,10 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *   filter query with the given value.
    */
   unclickHandler: function (value) {
-    var me = this;
+    var self = this;
     return function () {
-      if (me.remove(value)) {
-        me.manager.doRequest(0);
+      if (self.remove(value)) {
+        self.manager.doRequest(0);
       }
       return false;
     }
