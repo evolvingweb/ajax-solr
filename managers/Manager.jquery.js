@@ -5,6 +5,7 @@
  */
 AjaxSolr.Manager = AjaxSolr.AbstractManager.extend({
   executeRequest: function () {
+    var self = this;
     if (this.proxyUrl) {
       jQuery.post(this.proxyUrl + '?callback=?', { query: this.store.toString() }, function (data) { self.handleResponse(data); }, 'json');
     }
