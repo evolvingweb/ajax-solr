@@ -161,7 +161,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @param {String} name The name of the parameter.
    * @param {Number} [index] The index of the parameter.
    */
-  delete: function (name, index) {
+  remove: function (name, index) {
     if (index === undefined) {
       delete this.params[name];
     }
@@ -210,11 +210,11 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     if (indices) {
       if (AjaxSolr.isArray(indices)) {
         for (var i = indices.length - 1; i >= 0; i--) {
-          this.delete(name, indices[i]);
+          this.remove(name, indices[i]);
         }
       }
       else {
-        this.delete(indices);
+        this.remove(indices);
       }
     }
     return indices;
@@ -272,7 +272,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    */
   exposedReset: function () {
     for (var i = 0, l = this.exposed.length; i < l; i++) {
-      this.delete(this.exposed[i]);
+      this.remove(this.exposed[i]);
     }
   },
 

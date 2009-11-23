@@ -29,9 +29,9 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
    * Removes the spatial local parameters.
    */
   clear: function () {
-    this.manager.store.get('q').delete('type');
-    this.manager.store.get('q').delete('lat');
-    this.manager.store.get('q').delete('long');
-    this.manager.store.get('q').delete('radius');
+    this.manager.store.get('q').remove('type');
+    this.manager.store.get('q').remove('lat');
+    this.manager.store.get('q').remove('long');
+    this.manager.store.get('q').remove('radius');
   }
 });

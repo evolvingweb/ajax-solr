@@ -41,7 +41,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
       this.manager.store.get('spellcheck.q').val(this.manager.store.get('q').val());
     }
     else {
-      this.manager.store.delete('spellcheck.q');
+      this.manager.store.remove('spellcheck.q');
     }
   },
 

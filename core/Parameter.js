@@ -74,7 +74,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    *
    * @param {String} name The name of the local parameter.
    */
-  delete: function (name) {
+  remove: function (name) {
     delete this.locals[name];
   },
 
