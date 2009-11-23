@@ -223,7 +223,12 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   toString: function () {
     var params = [];
     for (var name in this.params) {
-      params.push(this.params[name]);
+      if (this.isMultiple(name)) {
+        params = params.concat(this.params[name]);
+      }
+      else {
+        params.push(this.params[name]);
+      }
     }
     return params.join('&');
   },
