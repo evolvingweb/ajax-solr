@@ -256,7 +256,12 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     var params = [];
     for (var i = 0, l = this.exposed.length; i < l; i++) {
       if (this.params[this.exposed[i]]) {
-        params.push(this.params[this.exposed[i]]);
+        if (this.isMultiple(this.exposed[i])) {
+          params = params.concat(this.params[this.exposed[i]]);
+        }
+        else {
+          params.push(this.params[this.exposed[i]]);
+        }
       }
     }
     return params.join('&');
