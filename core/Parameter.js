@@ -111,10 +111,11 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
   parseString: function (str) {
     var param = str.match(/^([^=]+)=(?:\{!([^\}]*)\})?(.*)$/);
     if (param) {
-      var local;
+      var matches;
 
-      while (local = /([^\s=]+)=(\S*)/g.exec(param[2])) {
-        this.locals[local[1]] = decodeURIComponent(local[2]);
+      while (matches = /([^\s=]+)=(\S*)/g.exec(param[2])) {
+        this.locals[matches[1]] = decodeURIComponent(matches[2]);
+        param[2] = param[2].replace(matches[0], ''); // Safari's exec seems not to do this on its own
       }
 
       if (param[1] == 'q.alt') {
