@@ -181,18 +181,20 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @returns {String|Number[]} The indices of the parameters found.
    */
   find: function (name, value) {
-    if (this.isMultiple(name)) {
-      for (var i = 0, l = this.params[name].length; i < l; i++) {
-        var indices = [];
-        if (AjaxSolr.equals(this.params[name][i].val(), value)) {
-          indices.push(i);
+    if (this.params[name] !== undefined) {
+      if (this.isMultiple(name)) {
+        for (var i = 0, l = this.params[name].length; i < l; i++) {
+          var indices = [];
+          if (AjaxSolr.equals(this.params[name][i].val(), value)) {
+            indices.push(i);
+          }
+          return indices;
         }
-        return indices;
       }
-    }
-    else {
-      if (AjaxSolr.equals(this.params[name].val(), value)) {
-        return name;
+      else {
+        if (AjaxSolr.equals(this.params[name].val(), value)) {
+          return name;
+        }
       }
     }
     return false;
@@ -230,7 +232,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
         params.push(this.params[name]);
       }
     }
-    return params.join('&');
+    return AjaxSolr.compact(params).join('&');
   },
 
   /**
@@ -241,9 +243,11 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   parseString: function (str) {
     var pairs = str.split('&');
     for (var i = 0, l = pairs.length; i < l; i++) {
-      var param = new AjaxSolr.Parameter();
-      param.parseString(pairs[i]);
-      this.add(param.name, param);
+      if (pairs[i]) { // ignore leading, trailing, and consecutive &'s
+        var param = new AjaxSolr.Parameter();
+        param.parseString(pairs[i]);
+        this.add(param.name, param);
+      }
     }
   },
 
@@ -255,7 +259,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   exposedString: function () {
     var params = [];
     for (var i = 0, l = this.exposed.length; i < l; i++) {
-      if (this.params[this.exposed[i]]) {
+      if (this.params[this.exposed[i]] !== undefined) {
         if (this.isMultiple(this.exposed[i])) {
           params = params.concat(this.params[this.exposed[i]]);
         }
@@ -264,7 +268,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
         }
       }
     }
-    return params.join('&');
+    return AjaxSolr.compact(params).join('&');
   },
 
   /**

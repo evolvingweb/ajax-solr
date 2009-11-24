@@ -100,12 +100,37 @@ AjaxSolr.inArray = function (value, array) {
  * @see http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools.js
  */
 AjaxSolr.flatten = function(array) {
-  var flat = [];
+  var ret = [];
   for (var i = 0, l = array.length; i < l; i++) {
-    flat = flat.concat(AjaxSolr.isArray(array[i]) ? AjaxSolr.flatten(array[i]) : array[i]);
+    ret = ret.concat(AjaxSolr.isArray(array[i]) ? AjaxSolr.flatten(array[i]) : array[i]);
   }
-  return flat;
+  return ret;
 };
+
+/**
+ * A copy of jQuery's jQuery.grep function.
+ *
+ * @static
+ * @see http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js
+ */
+AjaxSolr.grep = function(array, callback) {
+  var ret = [];
+  for (var i = 0, l = array.length; i < l; i++) {
+    if (callback(array[i], i) !== false) {
+      ret.push(array[i]);
+    }
+  }
+  return ret;
+}
+
+/**
+ * Equivalent to Ruby's Array#compact.
+ */
+AjaxSolr.compact = function(array) {
+  return AjaxSolr.grep(array, function (item) {
+    return !!item;
+  });
+}
 
 /**
  * Can't use toString.call(obj) === "[object Array]", as it will may return
