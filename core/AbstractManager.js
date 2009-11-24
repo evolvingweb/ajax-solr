@@ -67,7 +67,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * one-time initializations, e.g., perform the first request to Solr.</p>
    */
   init: function () {
-    this.store.load();
+    this.store.load(false);
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].init();
     }
