@@ -147,6 +147,6 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * @returns {Array} The value.
    */
   valueParseString: function (str) {
-    return decodeURIComponent(str).split(',');
+    return str.indexOf(',') == -1 ? str : decodeURIComponent(str).split(',');
   }
 });

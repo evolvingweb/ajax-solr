@@ -121,6 +121,6 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     if (value.match(/[ :]/) && !value.match(/[\[\{]\S+ TO \S+[\]\}]/)) {
       value = '"' + value + '"';
     }
-    return (exclude ? '-' : '') + this.field + ':' + encodeURIComponent(value);
+    return (exclude ? '-' : '') + this.field + ':' + value;
   }
 });
