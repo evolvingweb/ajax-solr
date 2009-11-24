@@ -188,7 +188,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
           if (AjaxSolr.equals(this.params[name][i].val(), value)) {
             indices.push(i);
           }
-          return indices;
+          return indices.length ? indices : false;
         }
       }
       else {
