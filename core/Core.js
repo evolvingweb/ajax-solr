@@ -133,7 +133,7 @@ AjaxSolr.compact = function(array) {
 }
 
 /**
- * Can't use toString.call(obj) === "[object Array]", as it will may return
+ * Can't use toString.call(obj) === "[object Array]", as it may return
  * "[xpconnect wrapped native prototype]", which is undesirable.
  *
  * @static
@@ -149,7 +149,7 @@ AjaxSolr.isArray = function (obj) {
  * @returns {Boolean} Whether the object is a RegExp object.
  */
 AjaxSolr.isRegExp = function (obj) {
-  return toString.call(obj) === '[object RegExp]';
+  return obj != null && typeof obj == 'object' && 'ignoreCase' in obj;
 };
 
 /**
@@ -157,7 +157,7 @@ AjaxSolr.isRegExp = function (obj) {
  * @returns {Boolean} Whether the object is a String object.
  */
 AjaxSolr.isString = function (obj) {
-  return toString.call(obj) === '[object String]';
+  return obj != null && typeof obj == 'object' && 'toLowerCase' in obj;
 };
 
 /**

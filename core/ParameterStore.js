@@ -183,13 +183,13 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   find: function (name, value) {
     if (this.params[name] !== undefined) {
       if (this.isMultiple(name)) {
+        var indices = [];
         for (var i = 0, l = this.params[name].length; i < l; i++) {
-          var indices = [];
           if (AjaxSolr.equals(this.params[name][i].val(), value)) {
             indices.push(i);
           }
-          return indices.length ? indices : false;
         }
+        return indices.length ? indices : false;
       }
       else {
         if (AjaxSolr.equals(this.params[name].val(), value)) {
