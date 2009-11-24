@@ -136,7 +136,8 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * @returns {String} The URL-encoded string.
    */
   valueToString: function (value) {
-    return encodeURIComponent(AjaxSolr.isArray(value) ? value.join(',') : value);
+    value = AjaxSolr.isArray(value) ? value.join(',') : value;
+    return encodeURIComponent(value);
   },
 
   /**
@@ -147,6 +148,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * @returns {Array} The value.
    */
   valueParseString: function (str) {
-    return str.indexOf(',') == -1 ? str : decodeURIComponent(str).split(',');
+    str = decodeURIComponent(str);
+    return str.indexOf(',') == -1 ? str : str.split(',');
   }
 });
