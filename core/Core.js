@@ -149,7 +149,7 @@ AjaxSolr.isArray = function (obj) {
  * @returns {Boolean} Whether the object is a RegExp object.
  */
 AjaxSolr.isRegExp = function (obj) {
-  return obj != null && typeof obj == 'object' && 'ignoreCase' in obj;
+  return obj != null && (typeof obj == 'object' || typeof obj == 'function') && 'ignoreCase' in obj;
 };
 
 /**
