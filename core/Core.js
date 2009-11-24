@@ -157,7 +157,7 @@ AjaxSolr.isRegExp = function (obj) {
  * @returns {Boolean} Whether the object is a String object.
  */
 AjaxSolr.isString = function (obj) {
-  return obj != null && typeof obj == 'object' && 'toLowerCase' in obj;
+  return obj != null && typeof obj == 'string';
 };
 
 /**
