@@ -116,7 +116,7 @@ AjaxSolr.flatten = function(array) {
 AjaxSolr.grep = function(array, callback) {
   var ret = [];
   for (var i = 0, l = array.length; i < l; i++) {
-    if (callback(array[i], i) !== false) {
+    if (!callback(array[i], i) === false) {
       ret.push(array[i]);
     }
   }
@@ -128,7 +128,7 @@ AjaxSolr.grep = function(array, callback) {
  */
 AjaxSolr.compact = function(array) {
   return AjaxSolr.grep(array, function (item) {
-    return !!item;
+    return item.toString();
   });
 }
 
