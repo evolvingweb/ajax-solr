@@ -207,7 +207,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @param {String|Number|String[]|Number[]|RegExp} value The value.
    * @returns {String|Number[]} The indices deleted.
    */
-  deleteByValue: function (name, value) {
+  removeByValue: function (name, value) {
     var indices = this.find(name, value);
     if (indices) {
       if (AjaxSolr.isArray(indices)) {

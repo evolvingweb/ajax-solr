@@ -44,7 +44,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   remove: function (value) {
     return this.changeSelection(function () {
-      return this.manager.store.deleteByValue('fq', this.fq(value));
+      return this.manager.store.removeByValue('fq', this.fq(value));
     });
   },
 
@@ -55,7 +55,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   clear: function () {
     return this.changeSelection(function () {
-      return this.manager.store.deleteByValue('fq', new RegExp('^-?' + this.field + ':'));
+      return this.manager.store.removeByValue('fq', new RegExp('^-?' + this.field + ':'));
     });
   },
 
