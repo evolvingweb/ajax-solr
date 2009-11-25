@@ -315,7 +315,7 @@ hash to maintain the application's state.</div>
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#exposed">exposed</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#manager">manager</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#multiple">multiple</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#params">params</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#exposed">exposed</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#manager">manager</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#params">params</a></dd>
 				</dl>
 				
 			
@@ -347,9 +347,10 @@ hit a race condition.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalFunction">intervalFunction</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalFunction">intervalFunction</a></b>(self)
 								</div>
-								<div class="description"></div>
+								<div class="description">Checks the hash for changes, and loads Solr parameters from the hash and
+sends a request to Solr if it observes a change or if the hash is empty</div>
 							</td>
 						</tr>
 					
@@ -358,7 +359,8 @@ hit a race condition.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#save">save</a></b>()
 								</div>
-								<div class="description"></div>
+								<div class="description">Stores the values of the exposed parameters in both the local hash and the
+URL hash.</div>
 							</td>
 						</tr>
 					
@@ -377,7 +379,7 @@ hit a race condition.</div>
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#add">add</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#deleteByValue">deleteByValue</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedReset">exposedReset</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedString">exposedString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#get">get</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#load">load</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#parseString">parseString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#toString">toString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#values">values</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#add">add</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#deleteByValue">deleteByValue</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedReset">exposedReset</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedString">exposedString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#find">find</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#get">get</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#isMultiple">isMultiple</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#load">load</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#parseString">parseString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#remove">remove</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#toString">toString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#values">values</a></dd>
 				</dl>
 				
 			
@@ -475,7 +477,7 @@ the interval too low as you may set up a race condition.
 							<dl class="detailList">
 							<dt class="heading">See:</dt>
 							
-							<dd>init()</dd>
+							<dd>ParameterHashStore#init()</dd>
 							
 							</dl>
 						
@@ -550,17 +552,29 @@ hit a race condition. However, this should never happen.
 					<div class="fixedFont">
 					
 					
-					<b>intervalFunction</b>()
+					<b>intervalFunction</b>(self)
 					
 					</div>
 					<div class="description">
-						
+						Checks the hash for changes, and loads Solr parameters from the hash and
+sends a request to Solr if it observes a change or if the hash is empty
 						
 						
 					</div>
 					
 					
 					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>self</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
 						
 						
 						
@@ -579,7 +593,8 @@ hit a race condition. However, this should never happen.
 					
 					</div>
 					<div class="description">
-						
+						Stores the values of the exposed parameters in both the local hash and the
+URL hash. No other code should be made to change these two values.
 						
 						
 					</div>
@@ -618,6 +633,13 @@ hit a race condition. However, this should never happen.
 						
 						
 						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>ParameterHash#storedString()</dd>
+							
+							</dl>
+						
 
 					
 				
@@ -633,7 +655,7 @@ hit a race condition. However, this should never happen.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:54 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Nov 25 2009 11:23:13 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

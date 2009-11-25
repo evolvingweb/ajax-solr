@@ -330,6 +330,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.compact">compact</a></b>(array)
+								</div>
+								<div class="description">Equivalent to Ruby's Array#compact.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.equals">equals</a></b>(foo, bar)
 								</div>
 								<div class="description"></div>
@@ -348,6 +357,24 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.flatten">flatten</a></b>(array)
+								</div>
+								<div class="description">A copy of MooTools' Array.flatten function.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.grep">grep</a></b>(array, callback)
+								</div>
+								<div class="description">A copy of jQuery's jQuery.grep function.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.inArray">inArray</a></b>(value, array)
 								</div>
 								<div class="description"></div>
@@ -359,7 +386,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">AjaxSolr.<b><a href="../symbols/AjaxSolr.html#.isArray">isArray</a></b>(obj)
 								</div>
-								<div class="description">Can't use toString.call(obj) === "[object Array]", as it will may return"[xpconnect wrapped native prototype]", which is undesirable.</div>
+								<div class="description">Can't use toString.call(obj) === "[object Array]", as it may return"[xpconnect wrapped native prototype]", which is undesirable.</div>
 							</td>
 						</tr>
 					
@@ -554,6 +581,42 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
+					<a name=".compact"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>compact</b>(array)
+					
+					</div>
+					<div class="description">
+						Equivalent to Ruby's Array#compact.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>array</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".equals"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -635,6 +698,98 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name=".flatten"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>flatten</b>(array)
+					
+					</div>
+					<div class="description">
+						A copy of MooTools' Array.flatten function.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>array</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools.js</dd>
+							
+							</dl>
+						
+
+					<hr />
+				
+					<a name=".grep"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AjaxSolr.</span><b>grep</b>(array, callback)
+					
+					</div>
+					<div class="description">
+						A copy of jQuery's jQuery.grep function.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>array</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>callback</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js</dd>
+							
+							</dl>
+						
+
+					<hr />
+				
 					<a name=".inArray"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -692,7 +847,7 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Can't use toString.call(obj) === "[object Array]", as it will may return"[xpconnect wrapped native prototype]", which is undesirable.
+						Can't use toString.call(obj) === "[object Array]", as it may return"[xpconnect wrapped native prototype]", which is undesirable.
 						
 						
 					</div>
@@ -1010,7 +1165,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:53 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Nov 25 2009 11:23:12 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

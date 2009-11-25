@@ -316,6 +316,33 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#add">add</a></b>(value)
+								</div>
+								<div class="description">Adds a filter query.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#afterChangeSelection">afterChangeSelection</a></b>()
+								</div>
+								<div class="description">An abstract hook for child implementations.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#changeSelection">changeSelection</a></b>(Selection)
+								</div>
+								<div class="description">Helper for selection functions.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clear">clear</a></b>()
 								</div>
 								<div class="description">Removes all filter queries using the widget's facet field.</div>
@@ -334,9 +361,27 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#fq">fq</a></b>(field, value, exclude)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#fq">fq</a></b>(value, exclude)
 								</div>
 								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#isEmpty">isEmpty</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#remove">remove</a></b>(value)
+								</div>
+								<div class="description">Removes a filter query.</div>
 							</td>
 						</tr>
 					
@@ -428,6 +473,117 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
+					<a name="add"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>add</b>(value)
+					
+					</div>
+					<div class="description">
+						Adds a filter query.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>value</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether a filter query was added.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="afterChangeSelection"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>afterChangeSelection</b>()
+					
+					</div>
+					<div class="description">
+						An abstract hook for child implementations.<p>This method is executed after the filter queries change.</p>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="changeSelection"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>changeSelection</b>(Selection)
+					
+					</div>
+					<div class="description">
+						Helper for selection functions.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>Selection</b>
+									
+								</dt>
+								<dd>function to call.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="clear"> </a>
 					<div class="fixedFont">
 					
@@ -451,7 +607,7 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Boolean}</span> Whether any filter queries were removed.</dd>
+								<dd><span class="light fixedFont">{Boolean}</span> Whether a filter query was removed.</dd>
 							
 							</dl>
 						
@@ -507,7 +663,7 @@ ul.inheritsList
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>fq</b>(field, value, exclude)
+					<b>fq</b>(value, exclude)
 					
 					</div>
 					<div class="description">
@@ -521,12 +677,6 @@ ul.inheritsList
 						
 							<dl class="detailList">
 							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>field</b>
-									
-								</dt>
-								<dd>The facet field.</dd>
 							
 								<dt>
 									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>value</b>
@@ -550,6 +700,81 @@ ul.inheritsList
 							<dt class="heading">Returns:</dt>
 							
 								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> An fq parameter value.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="isEmpty"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>isEmpty</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether any filter queries have been set using this  widget's facet field.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="remove"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>remove</b>(value)
+					
+					</div>
+					<div class="description">
+						Removes a filter query.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>value</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether a filter query was removed.</dd>
 							
 							</dl>
 						
@@ -613,7 +838,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:53 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Nov 25 2009 11:23:12 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

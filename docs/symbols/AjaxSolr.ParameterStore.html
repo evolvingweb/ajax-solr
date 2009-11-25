@@ -300,16 +300,6 @@ ul.inheritsList
 							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterStore.html#multiple">multiple</a></b>
-								</div>
-								<div class="description">Some Solr parameters may be specified multiple times.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
 								<b><a href="../symbols/AjaxSolr.ParameterStore.html#params">params</a></b>
 								</div>
 								<div class="description">The Solr parameters.</div>
@@ -351,7 +341,7 @@ the same value.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#deleteByValue">deleteByValue</a></b>(name, match)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#deleteByValue">deleteByValue</a></b>(name, value)
 								</div>
 								<div class="description">Deletes any parameter with a matching value.</div>
 							</td>
@@ -378,6 +368,15 @@ the same value.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#find">find</a></b>(name, value)
+								</div>
+								<div class="description">Finds all parameters with matching values.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#get">get</a></b>(name)
 								</div>
 								<div class="description">Returns a parameter.</div>
@@ -396,9 +395,18 @@ the same value.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#isMultiple">isMultiple</a></b>(name)
+								</div>
+								<div class="description">Some Solr parameters may be specified multiple times.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#load">load</a></b>(reset)
 								</div>
-								<div class="description"><p>Loads the values of exposed parameters from persistent storage.</div>
+								<div class="description">Loads the values of exposed parameters from persistent storage.</div>
 							</td>
 						</tr>
 					
@@ -408,6 +416,15 @@ the same value.</div>
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#parseString">parseString</a></b>(str)
 								</div>
 								<div class="description">Parses a string into parameters.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterStore.html#remove">remove</a></b>(name, index)
+								</div>
+								<div class="description">Deletes a parameter.</div>
 							</td>
 						</tr>
 					
@@ -478,7 +495,7 @@ be stored. The easiest method is to store the exposed parameters in the URL
 hash (see the <tt>ParameterHashStore</tt> class). However, you may implement
 your own storage method by extending this class.
 
-<p>For a list of possible parameters, please consult the links below:</p>
+<p>For a list of possible parameters, please consult the links below.</p>
 					
 				</div>
 				
@@ -571,7 +588,7 @@ expose to the user, directly or indirectly, should be listed here.
 					<a name="manager"> </a>
 					<div class="fixedFont">&lt;private&gt; 
 					
-					
+					<span class="light">{<a href="../symbols/AjaxSolr.AbstractManager.html">AjaxSolr.AbstractManager</a>}</span>
 					<b>manager</b>
 					
 					</div>
@@ -586,40 +603,6 @@ expose to the user, directly or indirectly, should be listed here.
 						
 						
 						
-						
-
-					<hr />
-				
-					<a name="multiple"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{RegExp}</span>
-					<b>multiple</b>
-					
-					</div>
-					<div class="description">
-						Some Solr parameters may be specified multiple times. It is easiest to
-hard-code a list of such parameters. You may change the list by passing
-<code>{ multiple: /pattern/ }</code> as an argument to the constructor of
-this class or one of its children, e.g.:
-
-<p><code>new ParameterStore({ multiple: /pattern/ })</code>
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								/^(?:bf|bq|facet.date|facet.date.other|facet.field|facet.query|fq|pf|qf)$/
-							</dd>
-							</dl>
 						
 
 					<hr />
@@ -708,8 +691,8 @@ the same value. If it may be specified only once, replaces the parameter.
 					<a name="deleteByValue"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Boolean}</span>
-					<b>deleteByValue</b>(name, match)
+					<span class="light">{<a href="../symbols/String.html">String</a>|Number[]}</span>
+					<b>deleteByValue</b>(name, value)
 					
 					</div>
 					<div class="description">
@@ -731,7 +714,7 @@ the same value. If it may be specified only once, replaces the parameter.
 								<dd>The name of the parameter.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number|<a href="../symbols/String.html">String</a>[]|Number[]|RegExp}</span> <b>match</b>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number|<a href="../symbols/String.html">String</a>[]|Number[]|RegExp}</span> <b>value</b>
 									
 								</dt>
 								<dd>The value.</dd>
@@ -745,7 +728,7 @@ the same value. If it may be specified only once, replaces the parameter.
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Boolean}</span> Whether a parameter with a matching value was removed.</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number[]}</span> The indices deleted.</dd>
 							
 							</dl>
 						
@@ -803,6 +786,55 @@ the same value. If it may be specified only once, replaces the parameter.
 							<dt class="heading">Returns:</dt>
 							
 								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> A string representation of the exposed parameters.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="find"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/String.html">String</a>|Number[]}</span>
+					<b>find</b>(name, value)
+					
+					</div>
+					<div class="description">
+						Finds all parameters with matching values.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>name</b>
+									
+								</dt>
+								<dd>The name of the parameter.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number|<a href="../symbols/String.html">String</a>[]|Number[]|RegExp}</span> <b>value</b>
+									
+								</dt>
+								<dd>The value.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>|Number[]}</span> The indices of the parameters found.</dd>
 							
 							</dl>
 						
@@ -881,6 +913,54 @@ the same value. If it may be specified only once, replaces the parameter.
 
 					<hr />
 				
+					<a name="isMultiple"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>isMultiple</b>(name)
+					
+					</div>
+					<div class="description">
+						Some Solr parameters may be specified multiple times. It is easiest to
+hard-code a list of such parameters. You may change the list by passing
+<code>{ multiple: /pattern/ }</code> as an argument to the constructor of
+this class or one of its children, e.g.:
+
+<p><code>new ParameterStore({ multiple: /pattern/ })</code>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>name</b>
+									
+								</dt>
+								<dd>The name of the parameter.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the parameter may be specified multiple times.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="load"> </a>
 					<div class="fixedFont">
 					
@@ -889,7 +969,7 @@ the same value. If it may be specified only once, replaces the parameter.
 					
 					</div>
 					<div class="description">
-						<p>Loads the values of exposed parameters from persistent storage. It is
+						Loads the values of exposed parameters from persistent storage. It is
 necessary, in most cases, to reset the values of exposed parameters before
 setting the parameters to the values in storage. This is to ensure that a
 parameter whose name is not present in storage is properly reset.
@@ -945,6 +1025,48 @@ parameter whose name is not present in storage is properly reset.
 									
 								</dt>
 								<dd>The string to parse.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="remove"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>remove</b>(name, index)
+					
+					</div>
+					<div class="description">
+						Deletes a parameter.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>name</b>
+									
+								</dt>
+								<dd>The name of the parameter.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>index</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The index of the parameter.</dd>
 							
 							</dl>
 						
@@ -1101,7 +1223,7 @@ once, returns the value of that parameter.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Nov 20 2009 16:27:54 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Nov 25 2009 11:23:13 GMT-0500 (EST)
 		</div>
 	</body>
 </html>
