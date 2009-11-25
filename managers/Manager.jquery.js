@@ -10,7 +10,7 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend({
       jQuery.post(this.proxyUrl + '?callback=?', { query: this.store.toString() }, function (data) { self.handleResponse(data); }, 'json');
     }
     else {
-      jQuery.getJSON(this.solrUrl + '?' + this.store.toString() + '&wt=json&json.wrf=?&jsoncallback=?', {}, function (data) { self.handleResponse(data); });
+      jQuery.getJSON(this.solrUrl + '?' + this.store.toString() + '&wt=json&json.wrf=?', {}, function (data) { self.handleResponse(data); });
     }
   }
 });
