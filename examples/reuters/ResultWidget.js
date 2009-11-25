@@ -1,7 +1,7 @@
 (function ($) {
 
-AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
-  startAnimation: function () {
+AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
+  beforeRequest: function () { // animation
     $(this.target).html($('<img/>').attr('src', 'ajax-loader.gif'));
   },
 
@@ -9,10 +9,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
     var links = [];
 
     var me = this;
-    for (var i = 0, length = values.length; i < length; i++) {
+    for (var i = 0, l = values.length; i < l; i++) {
       links.push(AjaxSolr.theme('facet_link', values[i], function () {
-        me.manager.reset();
-        me.manager.widgets[widgetId].selectItems([ values[i] ]);
+        me.manager.store.remove('fq');
+        me.manager.widgets[widgetId].selectItem(values[i]);
         me.manager.doRequest(0);
         return false;
       }));
@@ -21,11 +21,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
     return links;
   },
 
-  handleResult: function (data) {
+  afterRequest: function () {
     $(this.target).empty();
 
-    for (var i = 0, length = data.response.docs.length; i < length; i++) {
-      var item = data.response.docs[i];
+    for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
+      var item = this.manager.response.response.docs[i];
 
       $(this.target).append(AjaxSolr.theme('result', item, AjaxSolr.theme('snippet', item)));
 
@@ -37,7 +37,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractResultWidget.extend({
     }
   },
 
-  afterAdditionToManager: function () {
+  init: function () {
     $('a.more').livequery('toggle', function () {
       $(this).parent().find('span').show();
       $(this).text('less');

@@ -7,6 +7,8 @@ var Manager;
       solrUrl: 'http://localhost:8983/solr/select',
     });
 
+    Manager.setStore(new AjaxSolr.ParameterHashStore());
+
     Manager.addWidget(new AjaxSolr.MyPagerWidget({
       id: 'pager',
       target: '#pager'
