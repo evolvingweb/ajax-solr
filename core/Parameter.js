@@ -87,7 +87,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
       }
     }
 
-    var prefix = pairs.length ? '{!' + pairs.join(' ') + '}' : '';
+    var prefix = pairs.length ? '{!' + pairs.join('%20') + '}' : '';
 
     if (this.value) {
       return this.name + '=' + prefix + this.valueToString(this.value);
@@ -113,7 +113,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
     if (param) {
       var matches;
 
-      while (matches = /([^\s=]+)=(\S*)/g.exec(param[2])) {
+      while (matches = /([^\s=]+)=(\S*)/g.exec(decodeURIComponent(param[2]))) {
         this.locals[matches[1]] = decodeURIComponent(matches[2]);
         param[2] = param[2].replace(matches[0], ''); // Safari's exec seems not to do this on its own
       }
