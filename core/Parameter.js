@@ -80,7 +80,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
 
   // For whatever reason, IE6 calls the default toString() if you write <tt>
   // param.toString(). So, we need to choose another name for toString().
-  createString: function () {
+  string: function () {
     var pairs = [];
 
     for (var name in this.locals) {
@@ -92,7 +92,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
     var prefix = pairs.length ? '{!' + pairs.join('%20') + '}' : '';
 
     if (this.value) {
-      return this.name + '=' + prefix + this.valueToString(this.value);
+      return this.name + '=' + prefix + this.valueString(this.value);
     }
     // For dismax request handlers, if the q parameter has local params, the
     // q parameter must be set to a non-empty value. In case the q parameter
@@ -106,7 +106,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
   },
 
   /**
-   * Parses a string formed by calling createString().
+   * Parses a string formed by calling string().
    *
    * @param {String} str The string to parse.
    */
@@ -126,7 +126,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
       }
       else {
         this.name = param[1];
-        this.value = this.valueParseString(param[3]);
+        this.value = this.parseValueString(param[3]);
       }
     }
   },
@@ -138,7 +138,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * @param {String|Number|String[]|Number[]} value The value.
    * @returns {String} The URL-encoded string.
    */
-  valueToString: function (value) {
+  valueString: function (value) {
     value = AjaxSolr.isArray(value) ? value.join(',') : value;
     return encodeURIComponent(value);
   },
@@ -150,7 +150,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
    * @param {String} str The URL-encoded string.
    * @returns {Array} The value.
    */
-  valueParseString: function (str) {
+  parseValueString: function (str) {
     str = decodeURIComponent(str);
     return str.indexOf(',') == -1 ? str : str.split(',');
   }

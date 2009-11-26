@@ -119,7 +119,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * <p>Sends the request to Solr, i.e. to <code>this.solrUrl</code> or <code>
    * this.proxyUrl</code>, and receives Solr's response. It should send <code>
-   * this.store.toString()</code> as the Solr query, and it should pass Solr's
+   * this.store.string()</code> as the Solr query, and it should pass Solr's
    * response to <code>handleResponse()</code> for handling.</p>
    *
    * <p>See <tt>managers/Manager.jquery.js</tt> for a jQuery implementation.</p>

@@ -222,16 +222,18 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     return indices;
   },
 
-  toString: function () {
+  // For whatever reason, IE6 calls the default toString() if you write <tt>
+  // store.toString(). So, we need to choose another name for toString().
+  string: function () {
     var params = [];
     for (var name in this.params) {
       if (this.isMultiple(name)) {
         for (var i = 0, l = this.params[name].length; i < l; i++) {
-          params.push(this.params[name][i].createString());
+          params.push(this.params[name][i].string());
         }
       }
       else {
-        params.push(this.params[name].createString());
+        params.push(this.params[name].string());
       }
     }
     return AjaxSolr.compact(params).join('&');
@@ -264,11 +266,11 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
       if (this.params[this.exposed[i]] !== undefined) {
         if (this.isMultiple(this.exposed[i])) {
           for (var j = 0, m = this.params[this.exposed[i]].length; j < m; j++) {
-            params.push(this.params[this.exposed[i]][j].createString());
+            params.push(this.params[this.exposed[i]][j].string());
           }
         }
         else {
-          params.push(this.params[this.exposed[i]].createString());
+          params.push(this.params[this.exposed[i]].string());
         }
       }
     }
