@@ -78,7 +78,9 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
     delete this.locals[name];
   },
 
-  toString: function () {
+  // For whatever reason, IE6 calls the default toString() if you write <tt>
+  // param.toString(). So, we need to choose another name for toString().
+  createString: function () {
     var pairs = [];
 
     for (var name in this.locals) {
@@ -104,7 +106,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
   },
 
   /**
-   * Parses a string formed by calling toString().
+   * Parses a string formed by calling createString().
    *
    * @param {String} str The string to parse.
    */

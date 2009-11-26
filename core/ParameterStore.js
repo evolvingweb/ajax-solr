@@ -226,10 +226,12 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     var params = [];
     for (var name in this.params) {
       if (this.isMultiple(name)) {
-        params = params.concat(this.params[name]);
+        for (var i = 0, l = this.params[name].length; i < l; i++) {
+          params.push(this.params[name][i].createString());
+        }
       }
       else {
-        params.push(this.params[name]);
+        params.push(this.params[name].createString());
       }
     }
     return AjaxSolr.compact(params).join('&');
@@ -261,10 +263,12 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     for (var i = 0, l = this.exposed.length; i < l; i++) {
       if (this.params[this.exposed[i]] !== undefined) {
         if (this.isMultiple(this.exposed[i])) {
-          params = params.concat(this.params[this.exposed[i]]);
+          for (var j = 0, m = this.params[this.exposed[i]].length; j < m; j++) {
+            params.push(this.params[this.exposed[i]][j].createString());
+          }
         }
         else {
-          params.push(this.params[this.exposed[i]]);
+          params.push(this.params[this.exposed[i]].createString());
         }
       }
     }
