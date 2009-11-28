@@ -201,6 +201,20 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   },
 
   /**
+   * If the parameter may be specified multiple times, creates a parameter using
+   * the given name and value, and adds it to the list of identically-named
+   * parameters, unless one already exists with the same value. If it may be
+   * specified only once, replaces the parameter.
+   *
+   * @param {String} name The name of the parameter.
+   * @param {String|Number|String[]|Number[]} value The value.
+   * @returns {AjaxSolr.Parameter|Boolean} The parameter, or false.
+   */
+  addByValue: function (name, value) {
+    return this.add(name, new AjaxSolr.Parameter({ name: name, value: value }));
+  },
+
+  /**
    * Deletes any parameter with a matching value.
    *
    * @param {String} name The name of the parameter.
