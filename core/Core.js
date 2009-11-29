@@ -164,14 +164,22 @@ AjaxSolr.isString = function (obj) {
  * A copy of Drupal's Drupal.theme function.
  *
  * @static
+ * @throws Exception if the theme function is not defined.
  * @see http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js?revision=1.58
  */
 AjaxSolr.theme = function (func) {
   for (var i = 1, args = []; i < arguments.length; i++) {
     args.push(arguments[i]);
   }
-
-  return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
+  try {
+    return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
+  }
+  catch (e) {
+    if (console && console.log) {
+      console.log('Theme function "' + func + '" is not defined.');
+    }
+    throw e;
+  }
 };
 
 /**
