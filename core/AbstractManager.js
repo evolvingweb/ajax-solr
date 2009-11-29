@@ -60,13 +60,30 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   store: null,
 
   /**
+   * Whether <tt>init()</tt> has been called yet. For internal use only.
+   *
+   * @field
+   * @private
+   * @type Boolean
+   * @default false
+   */
+  initialized: false,
+
+  /**
    * An abstract hook for child implementations.
    *
    * <p>This method should be called after the store and the widgets have been
    * added. It should initialize the widgets and the store, and do any other
    * one-time initializations, e.g., perform the first request to Solr.</p>
+   *
+   * <p>If no store has been set, it sets the store to the basic <tt>
+   * AjaxSolr.ParameterStore</tt>.</p>
    */
   init: function () {
+    this.initialized = true;
+    if (this.store === null) {
+      this.setStore(new AjaxSolr.ParameterStore());
+    }
     this.store.load(false);
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].init();
@@ -100,6 +117,9 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * @param {Boolean} [start] The Solr start offset parameter.
    */
   doRequest: function (start) {
+    if (this.initialized === false) {
+      this.init();
+    }
     // Allow non-pagination widgets to reset the offset parameter.
     if (start !== undefined) {
       this.store.get('start').val(start);
