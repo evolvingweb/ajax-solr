@@ -177,7 +177,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
   clickHandler: function (page) {
     var self = this;
     return function () {
-      self.manager.store.get('start').val((page - 1) * self.manager.response.responseHeader.params.rows);
+      self.manager.store.get('start').val((page - 1) * (self.manager.response.responseHeader.params.rows || 10));
       self.manager.doRequest();
       return false;
     }
@@ -237,7 +237,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   afterRequest: function () {
-    var perPage = parseInt(this.manager.response.responseHeader.params.rows);
+    var perPage = parseInt(this.manager.response.responseHeader.params.rows || 10);
     var offset = parseInt(this.manager.response.responseHeader.params.start || 0);
     var total = parseInt(this.manager.response.response.numFound);
 
