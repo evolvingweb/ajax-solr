@@ -1,38 +1,31 @@
 (function ($) {
 
 AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
-  handleFacets: function () {
-    if (this.facetFields.length == 0) {
+  afterRequest: function () {
+    if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
       $(this.target).html(AjaxSolr.theme('no_items_found'));
       return;
     }
 
     var maxCount = 0;
     var objectedItems = [];
-
-    for (var facet in this.facetFields) {
-      var count = parseInt(this.facetFields[facet]);
+    for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
+      var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
       if (count > maxCount) {
         maxCount = count;
       }
       objectedItems.push({ value: facet, count: count });
     }
-
     objectedItems.sort(function (a, b) {
       return a.value < b.value ? -1 : 1;
     });
 
-    var items = [];
-
-    var me = this;
+    var self = this;
+    $(this.target).empty();
     for (var i = 0, l = objectedItems.length; i < l; i++) {
       var facet = objectedItems[i].value;
-      items.push(AjaxSolr.theme('tag', facet, parseInt(objectedItems[i].count / maxCount * 10), me.clickHandler(facet)));
+      $(this.target).append(AjaxSolr.theme('tag', facet, parseInt(objectedItems[i].count / maxCount * 10), self.clickHandler(facet)));
     }
-
-    items.push('<div class="tagcloud_clearer"/>');
-
-    AjaxSolr.theme('list_items', this.target, items);
   }
 });
 
