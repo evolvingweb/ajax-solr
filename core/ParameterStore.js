@@ -211,7 +211,16 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @returns {AjaxSolr.Parameter|Boolean} The parameter, or false.
    */
   addByValue: function (name, value) {
-    return this.add(name, new AjaxSolr.Parameter({ name: name, value: value }));
+    if (this.isMultiple(name) && AjaxSolr.isArray(value)) {
+      var ret = [];
+      for (var i = 0, l = value.length; i < l; i++) {
+        ret.push(this.add(name, new AjaxSolr.Parameter({ name: name, value: value[i] })));
+      }
+      return ret;
+    }
+    else {
+      return this.add(name, new AjaxSolr.Parameter({ name: name, value: value }))
+    }
   },
 
   /**

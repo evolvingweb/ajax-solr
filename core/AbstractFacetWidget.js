@@ -33,7 +33,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   add: function (value) {
     return this.changeSelection(function () {
-      return this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(value) }));
+      return this.manager.store.addByValue('fq', this.fq(value));
     });
   },
 
