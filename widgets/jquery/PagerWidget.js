@@ -8,8 +8,12 @@
  * <p>Heavily inspired by the Ruby on Rails will_paginate gem.</p>
  *
  * @expects this.target to be a list.
+ * @class PagerWidget
+ * @augments AjaxSolr.AbstractWidget
  */
-AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend({
+AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
+  /** @lends AjaxSolr.PagerWidget.prototype */
+  {
   /**
    * How many links are shown around the current page.
    *
