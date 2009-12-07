@@ -207,6 +207,8 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.Class.html">AjaxSolr.Class</a></li>
 	
+	<li><a href="../symbols/AjaxSolr.PagerWidget.html">AjaxSolr.PagerWidget</a></li>
+	
 	<li><a href="../symbols/AjaxSolr.Parameter.html">AjaxSolr.Parameter</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.ParameterHashStore.html">AjaxSolr.ParameterHashStore</a></li>
@@ -341,7 +343,16 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#parseString">parseString</a></b>(str)
 								</div>
-								<div class="description">Parses a string formed by calling toString().</div>
+								<div class="description">Parses a string formed by calling string().</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#parseValueString">parseValueString</a></b>(str)
+								</div>
+								<div class="description">Parses a URL-encoded string to return the value.</div>
 							</td>
 						</tr>
 					
@@ -357,7 +368,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#toString">toString</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#string">string</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -375,16 +386,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#valueParseString">valueParseString</a></b>(str)
-								</div>
-								<div class="description">Parses a URL-encoded string to return the value.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#valueToString">valueToString</a></b>(value)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.Parameter.html#valueString">valueString</a></b>(value)
 								</div>
 								<div class="description">Returns the value as a URL-encoded string.</div>
 							</td>
@@ -578,7 +580,7 @@ sets the value of a local parameter.
 					
 					</div>
 					<div class="description">
-						Parses a string formed by calling toString().
+						Parses a string formed by calling string().
 						
 						
 					</div>
@@ -600,6 +602,49 @@ sets the value of a local parameter.
 						
 						
 						
+						
+						
+						
+
+					<hr />
+				
+					<a name="parseValueString"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Array}</span>
+					<b>parseValueString</b>(str)
+					
+					</div>
+					<div class="description">
+						Parses a URL-encoded string to return the value.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>str</b>
+									
+								</dt>
+								<dd>The URL-encoded string.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> The value.</dd>
+							
+							</dl>
 						
 						
 						
@@ -642,11 +687,11 @@ sets the value of a local parameter.
 
 					<hr />
 				
-					<a name="toString"> </a>
+					<a name="string"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>toString</b>()
+					<b>string</b>()
 					
 					</div>
 					<div class="description">
@@ -710,54 +755,11 @@ sets the value of a local parameter.
 
 					<hr />
 				
-					<a name="valueParseString"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Array}</span>
-					<b>valueParseString</b>(str)
-					
-					</div>
-					<div class="description">
-						Parses a URL-encoded string to return the value.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>str</b>
-									
-								</dt>
-								<dd>The URL-encoded string.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Array}</span> The value.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="valueToString"> </a>
+					<a name="valueString"> </a>
 					<div class="fixedFont">&lt;private&gt; 
 					
 					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>valueToString</b>(value)
+					<b>valueString</b>(value)
 					
 					</div>
 					<div class="description">
@@ -808,7 +810,7 @@ sets the value of a local parameter.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Nov 25 2009 11:23:13 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Mon Dec 07 2009 17:39:06 GMT-0500 (EST)
 		</div>
 	</body>
 </html>
