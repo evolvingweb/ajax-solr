@@ -28,7 +28,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    */
   clear: function () {
     return this.changeSelection(function () {
-      this.manager.store.get('q').val('');
+      this.manager.store.remove('q');
     });
   },
 
