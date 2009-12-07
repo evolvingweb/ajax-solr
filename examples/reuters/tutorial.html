@@ -1,0 +1,248 @@
+h2. Step 1: Talk to Solr
+
+In this first iteration, we make sure we can talk to the Solr instance. AJAX Solr is JavaScript framework-agnostic; it only requires an AJAX implementation to send requests to Solr. In this example, we will use <a href="#">jQuery</a>'s implementation.
+
+In AJAX Solr, the Manager sends these requests to Solr, and passes the responses to each widget for handling. [sidebar|The Manager behaves as the controller in a <abbr title="Model-view-controller">MVC</abbr> framework. All public calls should be performed on the manager object.] 
+
+In the <tt>head</tt> tag, we add the JavaScript files for AJAX Solr and the Manager:
+
+<script type="text/javascript" src="../../core/Core.js"></script>
+
+<script type="text/javascript" src="../../core/AbstractManager.js"></script>
+<script type="text/javascript" src="../../managers/Manager.jquery.js"></script>
+
+In the <tt>reuters.js</tt> file, once the DOM is ready, we'll initialize a instance of the Manager[sidebar|We wrap the code in [code] to permit local usage of the <tt>$</tt> variable while preventing conflicts over the <tt>$</tt> variable]:
+
+var Manager;
+(function ($) {
+  $(function () {
+    Manager = new AjaxSolr.Manager({
+      solrUrl: 'http://example.solrstuff.org/solrjs/select',
+    });
+    Manager.init();
+  });
+})(jQuery);
+
+The manager takes as a parameter either <tt>solrUrl</tt>, if talking to Solr directly, or <tt>proxyUrl</tt>, if talking to Solr through a proxy. [sidebar|Usually, you want to talk to the instance through a proxy, for security. We will go over writing proxies for AJAX Solr in another tutorial. Here, we communicate with the instance directly.]
+
+AJAX Solr stores Solr parameters in a ParameterStore. In your web application, some parameters won't change, e.g. <tt>facet</tt> and <tt>facet.field</tt> parameters, while others will, e.g. the <tt>q</tt> and <tt>fq</tt> parameters. We add the JS files for the ParameterStore: [sidebar|To use another ParameterStore, see the <a href="#">AbstractManager#setStore</a> method and the <a href="#">ParameterStore</a> class.]
+
+<script type="text/javascript" src="../../core/Parameter.js"></script>
+<script type="text/javascript" src="../../core/ParameterStore.js"></script>
+
+Let's use the ParameterStore right now to build a basic query.
+
+Manager.store.addByValue('q', 'oil');
+
+To finish this iteration, check if we can talk to the Solr instance.
+
+Manager.doRequest();
+
+If you're running <a href="#">Firefox</a> with <a href="#">Firebug</a> or Safari, you can open the JavaScript console and type <tt>manager.response</tt> to view the Solr response.
+
+[view iteration 1]
+[download iteration 1]
+
+h2. Step 2: Add a results widget
+
+Let's display the documents in the Solr response by creating a results widget. We can create a new widget, <tt>ResultWidget.js</tt>, by inheriting from <tt>AbstractWidget</tt>, from which every AJAX Solr widget inherits.
+
+(function ($) {
+AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
+});
+})(jQuery);
+
+And add the JavaScript files for the widget:
+
+<script type="text/javascript" src="../../core/AbstractWidget.js"></script>
+<script type="text/javascript" src="widgets/ResultWidget.js"></script>
+
+Before we define any methods on the widget, let's add the widget to the Manager in <tt>reuters.js</tt>:
+
+Manager.addWidget(new AjaxSolr.ResultWidget({
+  id: 'result',
+  target: '#result'
+}));
+
+Every widget takes a required <tt>id</tt>, to identify the widget, and an optional <tt>target</tt>. The <tt>target</tt> is usually the CSS selector for the HTML element that the widget updates after each Solr request.
+
+Now, we implement the abstract method <tt>afterRequest</tt>, which each widget runs after the Manager receives the Solr response. The Manager stores the response in <tt>Manager.response</tt> (which the widgets may access through <tt>this.manager.response</tt>) for widgets to use.
+
+afterRequest: function () {
+  $(this.target).empty();
+  for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
+    var doc = this.manager.response.response.docs[i];
+    $(this.target).append(AjaxSolr.theme('result', doc, AjaxSolr.theme('snippet', doc)));
+  }
+}
+
+The above empties the target HTML element and appends HTML content for each document in the Solr response. AJAX Solr provides a <tt>AjaxSolr.theme</tt> utility to separate the HTML from the JavaScript. Here is the <tt>result</tt> theme, for example:
+
+AjaxSolr.theme.prototype.result = function (item, snippet) {
+  var output = '<div><h2>' + item.title + '</h2>';
+  output += '<p id="links_' + item.id + '"></p>';
+  output += '<p>' + snippet + '</p></div>';
+  return output;
+};
+
+Add the JavaScript file for the <tt>result</tt> and <tt>snippet</tt> theme functions:
+
+<script type="text/javascript" src="js/reuters.theme.js"></script>
+
+Let's see what we have so far:
+
+[view iteration 2.0]
+
+We're now displaying the first ten results for the search term &#8220;oil&#8221; &ndash; nice! Let's display each document's tags and implement the &#8220;more&#8221; link. Add the following code inside the for-loop in <tt>afterRequest</tt>:
+
+var items = [];
+items.concat(this.facetLinks(doc.topics));
+items.concat(this.facetLinks(doc.organisations));
+items.concat(this.facetLinks(doc.exchanges));
+AjaxSolr.theme('list_items', 'links_' + doc.id, items);
+
+To get that code to run, we'll need to include the jQuery theme file distributed with AJAX Solr:
+
+<script type="text/javascript" src="../../helpers/jquery/ajaxsolr.theme.js"></script>
+
+And we'll need to define the method <tt>facetLinks</tt> and its helper <tt>facetHandler</tt>:
+
+facetLinks: function (facet_field, facet_values) {
+  var links = [];
+  if (facet_values) {
+    for (var i = 0, l = facet_values.length; i < l; i++) {
+      links.push(AjaxSolr.theme('facet_link', facet_values[i], this.facetHandler(facet_field, facet_values[i])));
+    }
+  }
+  return links;
+},
+
+facetHandler: function (facet_field, facet_value) {
+  var self = this;
+  return function () {
+    self.manager.store.remove('q');
+    self.manager.store.remove('fq');
+    self.manager.store.addByValue('fq', facet_field + ':' + facet_value);
+    self.manager.doRequest(0);
+    return false;
+  };
+},
+
+The above creates links for browsing by topic, organization, or exchange. Clicking a link will: reset the query and filter queries; add a filter query; and send a Solr request, setting the Solr <tt>start</tt> parameter to <tt>0</tt>. [sidebar|links to API reference]
+
+To implement the &#8200;more&#8221; link, we implement another abstract method: <tt>init</tt>. A widget's <tt>init</tt> method is called once when the Manager's <tt>init</tt> method is called. 
+
+init: function () {
+  $('a.more').livequery(function () {
+    $(this).toggle(function () {
+      $(this).parent().find('span').show();
+      $(this).text('less');
+      return false;
+    }, function () {
+      $(this).parent().find('span').hide();
+      $(this).text('more');
+      return false;
+    });
+  });
+}
+
+Add the JavaScript file for jQuery's livequery plugin:
+
+<script type="text/javascript" src="js/jquery.livequery.js"></script>
+
+We implement a final abstract method, <tt>beforeRequest</tt>, to display a loading spinner while waiting for Solr to return a response. Here is the code:
+
+beforeRequest: function () {
+  $(this.target).html($('<img/>').attr('src', 'ajax-loader.gif'));
+}
+
+[view iteration 2.1]
+[download iteration 2.1]
+
+In this iteration, we wrote a results widget. We described how to define a widget and add it to the manager; introduced two widget properties &ndash; <tt>id</tt> and <tt>target</tt> &ndash; and three abstract methods &ndash; <tt>init</tt>, <tt>beforeRequest</tt>, and <tt>afterRequest</tt> &ndash; all inherited from <tt>AbstractWidget</tt>; used the ParameterStore <a href="#">remove</a> and <a href="#">addByValue</a> API methods; and used the <tt>AjaxSolr.theme</tt> utility.
+
+h2. Step 3: Add a pager widget
+
+AJAX Solr comes with a good jQuery pager widget, based on the <a href="#">will_paginate</a> plugin for <a href="#">Ruby on Rails</a>, so we need only override some of its properties and methods to get the functionality we want. First, add the JavaScript file for the distributed widget:
+
+<script type="text/javascript" src="../../widgets/jquery/PagerWidget.js"></script>
+
+Now, add the widget to the Manager in <tt>reuters.js</tt>:
+
+Manager.addWidget(new AjaxSolr.PagerWidget({
+  id: 'pager',
+  target: '#pager',
+  prevLabel: '&lt;',
+  nextLabel: '&gt;',
+  innerWindow: 1,
+  renderHeader: function (perPage, offset, total) {
+    $('#pager-header').html($('<span/>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
+  }
+}));
+
+In addition to the basic <tt>id</tt> and <tt>target</tt> properties, the pager widget exposes some of its own <a href="#">properties</a>. We implement the abstract method <tt>renderHeader</tt> to display the number of results found.
+
+In this iteration, we showed how to implement a widget by overriding an existing widget's properties. If we were adding a significant amount of functionality, we should have created a new widget, as we did with the results widget. However, in this case, we had little code to write, so overriding the pager widget's properties during instantiation makes sense.
+
+[view iteration 3]
+[download iteration 3]
+
+h2. Step 4: Add a tagcloud widget
+
+Let's add some tag clouds for each of these facet fields. First, add the Solr parameters for faceting:
+
+var params = {
+  facet: true,
+  'facet.field': [ 'topics', 'organisations', 'exchanges' ],
+  'facet.limit': 20,
+  'facet.mincount': 1,
+  'f.topics.facet.limit': 50,
+  'json.nl': 'map',
+};
+for (var name in params) {
+  Manager.store.addByValue(name, params[name]);
+}
+
+Create a new widget, <tt>TagcloudWidget.js</tt>, inheriting from <tt>AbstractFacetWidget</tt>, and add the JavaScript files:
+
+(function ($) {
+AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
+});
+})(jQuery);
+
+<script type="text/javascript" src="../../core/AbstractFacetWidget.js"></script>
+<script type="text/javascript" src="widgets/TagcloudWidget.js"></script>
+
+And add three widgets to the Manager in <tt>reuters.js</tt>:
+
+var fields = [ 'topics', 'organisations', 'exchanges' ];
+for (var i = 0, l = fields.length; i < l; i++) {
+  Manager.addWidget(new AjaxSolr.TagcloudWidget({
+    id: fields[i],
+    target: '#' + fields[i],
+    field: fields[i]
+  }));
+}
+
+Any widget inheriting from <tt>AbstractFacetWidget</tt> takes a required <tt>field</tt> property, identifying the facet field the widget will handle.
+
+[scrollable textarea with HTML code]
+
+There's a lot going on here, but only two snippets have to do with AJAX Solr.
+
+this.manager.response.facet_counts.facet_fields[this.field]
+self.clickHandler(facet)
+
+h2. Step 5: Display the current filters
+
+h2. Step 6: Add a free-text widget
+
+h2. Step 7: Add an autocomplete widget
+
+h2. Step 8: Add a map widget
+
+h2. Step 9: Add a calendar widget
+
+h2. Step 10: Support the back button
+
+That's a lot of JavaScript files in the <tt>head</tt> tag. In production, you should probably use a JavaScript packager and compressor.
