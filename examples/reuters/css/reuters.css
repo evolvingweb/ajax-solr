@@ -78,6 +78,12 @@ a:hover {
   list-style-type: none;
   display: inline;
 }
+#selection {
+  padding: 10px 15px 0;
+}
+#selection li {
+  list-style-type: none;
+}
 #docs {
   padding-top: 1px;
 }
@@ -87,7 +93,7 @@ a:hover {
 .left {
   float: left;
   width: 390px;
-  padding: 10px 0 10px 10px;
+  padding: 0 0 10px 10px;
 }
 .left h2 {
   clear: left;

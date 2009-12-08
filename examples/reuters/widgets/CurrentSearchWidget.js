@@ -6,28 +6,22 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     var links = [];
 
     var q = this.manager.store.get('q').val();
-    if (q) {
+    if (q != '*:*') {
       links.push($('<a href="#"/>').text('(x) ' + q).click(function () {
-        if (self.manager.store.remove('q')) {
-          self.manager.doRequest(0);
-        }
+        self.manager.store.get('q').val('*:*');
+        self.manager.doRequest(0);
         return false;
       }));
     }
 
-    var fq = this.manager.values('fq');
+    var fq = this.manager.store.values('fq');
     for (var i = 0, l = fq.length; i < l; i++) {
-      links.push($('<a href="#"/>').text('(x) ' + fq[i]).click(function () {
-        if (self.manager.store.removeByValue('fq', fq[i])) {
-          self.manager.doRequest(0);
-        }
-        return false;
-      }));
+      links.push($('<a href="#"/>').text('(x) ' + fq[i]).click(self.removeFacet(fq[i])));
     }
 
     if (links.length > 1) {
       links.unshift($('<a href="#"/>').text('remove all').click(function () {
-        self.manager.store.remove('q');
+        self.manager.store.get('q').val('*:*');
         self.manager.store.remove('fq');
         self.manager.doRequest(0);
         return false;
@@ -40,6 +34,16 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     else {
       $(this.target).html('<div>Viewing all documents!</div>');
     }
+  },
+
+  removeFacet: function (facet) {
+    var self = this;
+    return function () {
+      if (self.manager.store.removeByValue('fq', facet)) {
+        self.manager.doRequest(0);
+      }
+      return false;
+    };
   }
 });
 
