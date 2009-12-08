@@ -14,16 +14,16 @@ AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
       if (count > maxCount) {
         maxCount = count;
       }
-      objectedItems.push({ value: facet, count: count });
+      objectedItems.push({ facet: facet, count: count });
     }
     objectedItems.sort(function (a, b) {
-      return a.value < b.value ? -1 : 1;
+      return a.facet < b.facet ? -1 : 1;
     });
 
     var self = this;
     $(this.target).empty();
     for (var i = 0, l = objectedItems.length; i < l; i++) {
-      var facet = objectedItems[i].value;
+      var facet = objectedItems[i].facet;
       $(this.target).append(AjaxSolr.theme('tag', facet, parseInt(objectedItems[i].count / maxCount * 10), self.clickHandler(facet)));
     }
   }
