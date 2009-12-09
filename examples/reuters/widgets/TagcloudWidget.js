@@ -20,11 +20,10 @@ AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
       return a.facet < b.facet ? -1 : 1;
     });
 
-    var self = this;
     $(this.target).empty();
     for (var i = 0, l = objectedItems.length; i < l; i++) {
       var facet = objectedItems[i].facet;
-      $(this.target).append(AjaxSolr.theme('tag', facet, parseInt(objectedItems[i].count / maxCount * 10), self.clickHandler(facet)));
+      $(this.target).append(AjaxSolr.theme('tag', facet, parseInt(objectedItems[i].count / maxCount * 10), this.clickHandler(facet)));
     }
   }
 });

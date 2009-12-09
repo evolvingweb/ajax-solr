@@ -39,7 +39,7 @@ var Manager;
     }));
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
       id: 'currentsearch',
-      target: '#selection',
+      target: '#selection'
     }));
 
     /* TODO implement widget

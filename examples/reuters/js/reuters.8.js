@@ -32,14 +32,20 @@ var Manager;
       id: 'currentsearch',
       target: '#selection'
     }));
+    Manager.addWidget(new AjaxSolr.CountryCodeWidget({
+      id: 'countries',
+      target: '#countries',
+      field: 'countryCodes'
+    }));
     Manager.init();
     Manager.store.addByValue('q', 'oil');
     var params = {
       facet: true,
-      'facet.field': [ 'topics', 'organisations', 'exchanges' ],
+      'facet.field': [ 'topics', 'organisations', 'exchanges', 'countryCodes' ],
       'facet.limit': 20,
       'facet.mincount': 1,
       'f.topics.facet.limit': 50,
+      'f.countryCodes.facet.limit': -1,
       'json.nl': 'map'
     };
     for (var name in params) {
@@ -47,5 +53,14 @@ var Manager;
     }
     Manager.doRequest();
   });
+
+  $.fn.showIf = function (condition) {
+    if (condition) {
+      return this.show();
+    }
+    else {
+      return this.hide();
+    }
+  }
 
 })(jQuery);
