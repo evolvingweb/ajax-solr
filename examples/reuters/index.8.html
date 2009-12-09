@@ -19,6 +19,7 @@
   <script type="text/javascript" src="../../lib/core/AbstractFacetWidget.js"></script>
   <script type="text/javascript" src="widgets/TagcloudWidget.js"></script>
   <script type="text/javascript" src="widgets/CurrentSearchWidget.js"></script>
+  <script type="text/javascript" src="widgets/TextWidget.js"></script>
   <script type="text/javascript" src="../../lib/helpers/ajaxsolr.support.js"></script>
   <script type="text/javascript" src="../../lib/helpers/ajaxsolr.theme.js"></script>
   <script type="text/javascript" src="widgets/CountryCodeWidget.js"></script>
@@ -46,7 +47,9 @@
 
       <h2>Search</h2>
       <span id="search_help">(press ESC to close suggestions)</span>
-      <ul id="search"></ul>
+      <ul id="search">
+        <input type="text" id="query" name="query"/>
+      </ul>
 
       <h2>Top Topics</h2>
       <div class="tagcloud" id="topics"></div>
