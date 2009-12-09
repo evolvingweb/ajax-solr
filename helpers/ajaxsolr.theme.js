@@ -1,36 +1,57 @@
 // $Id$
 
 /**
- * Accepts a container (array) and returns a string of option tags. Given a
- * container where the elements are two-element arrays, the first elements
- * serve as option text and the second elements serve as option values. If
- * <tt>selected</tt> is specified, the matching option value or element will
- * get the selected option-tag. <tt>selected</tt> may also be an array of
- * values to be selected when using a multiple select.
+ * Requires ajaxsolr.support.js.
+ */
+
+/**
+ * Accepts a container and returns a string of option tags.
+ *
+ * <p>If the container is an object, the object's properties serve as option
+ * values and the values of the object's properties serve as option text.</p>
+ *
+ * <p>If the container is an array: Given a container where the elements are
+ * two-element arrays, the first elements serve as option text and the second
+ * elements serve as option values.</p>
+ *
+ * <p>If <tt>selected</tt> is specified, the matching option value or element
+ * will get the selected option-tag. <tt>selected</tt> may also be an array of
+ * values to be selected when using a multiple select.</p>
+ *
  * <p>From Ruby on Rails.</p>
  *
- * @param {Array} container
+ * @param {Array|Object} container
  * @param {Array|String} selected
  * @returns {String} The option tags.
  */
 AjaxSolr.theme.prototype.options_for_select = function (container, selected) {
-  var options = [];
+  var tags = [];
 
-  for (var i = 0, l = container.length; i < l; i++) {
+  var options = [];
+  if (AjaxSolr.isArray(container)) {
+    options = container;
+  }
+  else {
+    for (var value in container) {
+      options.push([ container[value], value ]);
+    }
+  }
+
+  for (var i = 0, l = options.length; i < l; i++) {
     var text, value;
 
-    if (AjaxSolr.isArray(container[i])) {
-      text = container[i][0].toString(), value = container[i][1].toString();
+    if (AjaxSolr.isArray(options[i])) {
+      text = options[i][0].toString(), value = options[i][1].toString();
     }
     else {
-      text = container[i].toString(), value = container[i].toString();
+      text = options[i].toString(), value = options[i].toString();
     }
 
     var selectedAttribute = AjaxSolr.optionValueSelected(value, selected) ? ' selected="selected"' : '';
-    options.push('<option value="' + value.htmlEscape() +'"' + selectedAttribute + '>' + text.htmlEscape() + '</option>');
+    tags.push('<option value="' + value.htmlEscape() +'"' + selectedAttribute + '>' + text.htmlEscape() + '</option>');
   }
 
-  return options.join('\n');
+  return tags.join('\n');
 };
 
 /**
