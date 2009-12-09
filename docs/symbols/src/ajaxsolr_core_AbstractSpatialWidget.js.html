@@ -1,0 +1,66 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">// $Id$</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="COMM">/**
+<span class='line'>  4</span>  * Offers an interface to the local parameters used by the Spatial Solr plugin.
+<span class='line'>  5</span>  *
+<span class='line'>  6</span>  * @see http://www.jteam.nl/news/spatialsolr
+<span class='line'>  7</span>  *
+<span class='line'>  8</span>  * @class AbstractSpatialWidget
+<span class='line'>  9</span>  * @augments AjaxSolr.AbstractWidget
+<span class='line'> 10</span>  */</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="NAME">AjaxSolr.AbstractSpatialWidget</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AjaxSolr.AbstractWidget.extend</span><span class="PUNC">(</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="WHIT">  </span><span class="COMM">/** @lends AjaxSolr.AbstractSpatialWidget.prototype */</span><span class="WHIT">
+<span class='line'> 13</span> </span><span class="WHIT">  </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 15</span>    * Sets the Spatial Solr local parameters.
+<span class='line'> 16</span>    *
+<span class='line'> 17</span>    * @param {Object} params The local parameters to set.
+<span class='line'> 18</span>    * @param {Number} params.lat Latitude of the center of the search area.
+<span class='line'> 19</span>    * @param {Number} params.lng Longitude of the center of the search area.
+<span class='line'> 20</span>    * @param {Number} params.radius Radius of the search area.
+<span class='line'> 21</span>    * @param {String} [params.unit] Unit the distances should be calculated in:
+<span class='line'> 22</span>    *   "km" or "miles".
+<span class='line'> 23</span>    * @param {String} [params.calc] &lt;tt>GeoDistanceCalculator&lt;/tt> that will be
+<span class='line'> 24</span>    *   used to calculate the distances. "arc" for
+<span class='line'> 25</span>    *   &lt;tt>ArchGeoDistanceCalculator&lt;/tt> and "plane" for
+<span class='line'> 26</span>    *   &lt;tt>PlaneGeoDistanceCalculator&lt;/tt>.
+<span class='line'> 27</span>    * @param {Number} [params.threadCount] Number of threads that will be used
+<span class='line'> 28</span>    *   by the &lt;tt>ThreadedDistanceFilter&lt;/tt>.
+<span class='line'> 29</span>    */</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">  </span><span class="NAME">set</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">params</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'type'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'spatial'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'lat'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">params.lat</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'long'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">params.lng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'radius'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">params.radius</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">params.unit</span><span class="WHIT"> </span><span class="PUNC">!==</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">      </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'unit'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">params.unit</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">params.calc</span><span class="WHIT"> </span><span class="PUNC">!==</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">      </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'calc'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">params.calc</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">params.threadCount</span><span class="WHIT"> </span><span class="PUNC">!==</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">      </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">local</span><span class="PUNC">(</span><span class="STRN">'threadCount'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">params.threadCount</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 45</span> 
+<span class='line'> 46</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 47</span>    * Removes the Spatial Solr local parameters.
+<span class='line'> 48</span>    */</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">  </span><span class="NAME">clear</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'type'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'lat'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'long'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'radius'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'unit'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'calc'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.store.get</span><span class="PUNC">(</span><span class="STRN">'q'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">remove</span><span class="PUNC">(</span><span class="STRN">'threadCount'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> </span></pre></body></html>
