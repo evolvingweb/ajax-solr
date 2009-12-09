@@ -11,7 +11,7 @@ AJAX Solr is a JavaScript library for creating user interfaces to
 * Read the [documentation][2]
 * Explore the [code][6]
 
-## Documentation and examples
+To get an offline copy of the documentation, examples, and tutorial files:
 
     git clone git://github.com/evolvingweb/ajax-solr.git
     cd ajax-solr
