@@ -33,7 +33,7 @@ var Manager;
       target: '#selection'
     }));
     Manager.init();
-    Manager.store.addByValue('q', 'oil');
+    Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
       'facet.field': [ 'topics', 'organisations', 'exchanges' ],

@@ -7,7 +7,7 @@ var Manager;
       solrUrl: 'http://example.solrstuff.org/solrjs/select'
     });
     Manager.init();
-    Manager.store.addByValue('q', 'oil');
+    Manager.store.addByValue('q', '*:*');
     Manager.doRequest();
   });
 

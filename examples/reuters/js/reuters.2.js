@@ -11,7 +11,7 @@ var Manager;
       target: '#docs'
     }));
     Manager.init();
-    Manager.store.addByValue('q', 'oil');
+    Manager.store.addByValue('q', '*:*');
     Manager.doRequest();
   });
 
