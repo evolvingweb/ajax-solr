@@ -11,7 +11,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.AbstractManager.prototype */
   {
   /**
-   * The absolute URL to the Solr select servlet.
+   * The fully-qualified URL of the Solr select servlet.
    *
    * @field
    * @public
@@ -22,7 +22,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
 
   /**
    * If we want to proxy queries through a script, rather than send queries
-   * to Solr directly, set the proxyUrl field to the fully-qualified URL.
+   * to Solr directly, set this field to the fully-qualified URL of the script.
    *
    * @field
    * @public
