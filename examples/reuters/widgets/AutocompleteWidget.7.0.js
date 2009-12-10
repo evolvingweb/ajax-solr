@@ -30,7 +30,8 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
       }
     }).bind('keydown', function(e) {
       if (self.requestSent === false && e.which == 13) {
-        if (self.add($(this).val())) {
+        var value = $(this).val();
+        if (value && self.add(value)) {
           self.manager.doRequest(0);
         }
       }

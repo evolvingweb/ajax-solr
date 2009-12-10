@@ -20,10 +20,8 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
     var self = this;
     $(this.target).find('#country').change(function () {
       var value = $(this).val();
-      if (value !== '') {
-        if (self.add(value)) {
-          self.manager.doRequest(0);
-        }
+      if (value && self.add(value)) {
+        self.manager.doRequest(0);
       }
     });
   }

@@ -7,7 +7,8 @@ AjaxSolr.TextWidget = AjaxSolr.AbstractFacetWidget.extend({
     var self = this;
     $(this.target).find('input').bind('keydown', function(e) {
       if (e.which == 13) {
-        if (self.add($(this).val())) {
+        var value = $(this).val();
+        if (value && self.add(value)) {
           self.manager.doRequest(0);
         }
       }
