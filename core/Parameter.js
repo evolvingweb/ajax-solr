@@ -78,8 +78,12 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
     delete this.locals[name];
   },
 
-  // For whatever reason, IE6 calls the default toString() if you write <tt>
-  // param.toString(). So, we need to choose another name for toString().
+  /**
+   * Returns the Solr parameter as a query string key-value pair.
+   *
+   * <p>IE6 calls the default toString() if you write <tt>store.toString()
+   * </tt>. So, we need to choose another name for toString().</p>
+   */
   string: function () {
     var pairs = [];
 
