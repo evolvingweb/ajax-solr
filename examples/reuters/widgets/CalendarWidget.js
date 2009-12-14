@@ -11,7 +11,9 @@ AjaxSolr.CalendarWidget = AjaxSolr.AbstractFacetWidget.extend({
       nextText: '&gt;',
       prevText: '&lt;',
       beforeShowDay: function (date) {
-        return [ true, '', self.manager.response.facet_counts.facet_dates[self.field][$.datepicker.formatDate('yy-mm-dd', date) + 'T00:00:00Z'] + ' documents found!' ];
+        var value = $.datepicker.formatDate('yy-mm-dd', date) + 'T00:00:00Z';
+        var count = self.manager.response.facet_counts.facet_dates[self.field][value];
+        return [ parseInt(count) > 0, '', count + ' documents found!' ];
       },
       onSelect: function (dateText, inst) {
         if (self.add('[' + dateText + 'T00:00:00Z TO ' + dateText + 'T23:59:59Z]')) {
