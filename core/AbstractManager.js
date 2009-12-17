@@ -32,6 +32,16 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   proxyUrl: null,
 
   /**
+   * The default Solr servlet.
+   *
+   * @field
+   * @public
+   * @type String
+   * @default "select"
+   */
+  servlet: 'select',
+
+  /**
    * The most recent response from Solr.
    *
    * @field
@@ -116,7 +126,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * Stores the Solr parameters to be sent to Solr and sends a request to Solr.
    *
    * @param {Boolean} [start] The Solr start offset parameter.
-   * @param {String} [servlet="select"] The Solr servlet to send the request to.
+   * @param {String} [servlet] The Solr servlet to send the request to.
    */
   doRequest: function (start, servlet) {
     if (this.initialized === false) {
@@ -127,7 +137,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       this.store.get('start').val(start);
     }
     if (servlet === undefined) {
-      servlet = 'select';
+      servlet = this.servlet;
     }
 
     this.store.save();
