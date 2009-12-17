@@ -11,14 +11,15 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.AbstractManager.prototype */
   {
   /**
-   * The fully-qualified URL of the Solr select servlet.
+   * The fully-qualified URL of the Solr application. You must include the
+   * trailing slash. Do not include the path to any Solr servlet.
    *
    * @field
    * @public
    * @type String
-   * @default "http://localhost:8983/solr/select"
+   * @default "http://localhost:8983/solr/"
    */
-  solrUrl: 'http://localhost:8983/solr/select',
+  solrUrl: 'http://localhost:8983/solr/',
 
   /**
    * If we want to proxy queries through a script, rather than send queries
@@ -115,14 +116,18 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * Stores the Solr parameters to be sent to Solr and sends a request to Solr.
    *
    * @param {Boolean} [start] The Solr start offset parameter.
+   * @param {String} [servlet="select"] The Solr servlet to send the request to.
    */
-  doRequest: function (start) {
+  doRequest: function (start, servlet) {
     if (this.initialized === false) {
       this.init();
     }
     // Allow non-pagination widgets to reset the offset parameter.
     if (start !== undefined) {
       this.store.get('start').val(start);
+    }
+    if (servlet === undefined) {
+      servlet = 'select';
     }
 
     this.store.save();
@@ -131,7 +136,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
       this.widgets[widgetId].beforeRequest();
     }
 
-    this.executeRequest();
+    this.executeRequest(servlet);
   },
 
   /**
@@ -144,9 +149,10 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * <p>See <tt>managers/Manager.jquery.js</tt> for a jQuery implementation.</p>
    *
+   * @param {String} servlet The Solr servlet to send the request to.
    * @throws If not defined in child implementation.
    */
-  executeRequest: function () {
+  executeRequest: function (servlet) {
     throw 'Abstract method executeRequest must be overridden in a subclass.';
   },
 
