@@ -43,7 +43,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     for (var i = 0; i < this.fields.length; i++) {
       params.push('facet.field=' + this.fields[i]);
     }
-    jQuery.getJSON(this.manager.solrUrl + '?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
+    jQuery.getJSON(this.manager.solrUrl + 'select?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
   }
 });
 
