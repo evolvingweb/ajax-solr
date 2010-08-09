@@ -1,8 +1,9 @@
 require 'rake'
 require 'yui/compressor'
 
-desc 'Compress all JavaScript files'
-task :compress do
+desc 'Aggregate all javascript files'
+task :aggregate, :compress do |t, args|
+  args.with_defaults(:compress => false)
   output_file = ENV.include?('output') ? ENV['output'] : 'ajax-solr.min.js'
 
   core = [
@@ -20,16 +21,26 @@ task :compress do
     'widgets'
   ]
 
+  compressor = YUI::JavaScriptCompressor.new(:munge => true) if args[:compress]
+
+  files = core.map{ |name| "core/#{name}.js" } + dirs.map{ |dir| Dir["#{dir}/**/*.js"] }.flatten
+  files.uniq!
+
   File.open(output_file, 'w') do |output|
-    compressor = YUI::JavaScriptCompressor.new(:munge => true)
-
-    files = core.map{ |name| "core/#{name}.js" } + dirs.map{ |dir| Dir["#{dir}/**/*.js"] }.flatten
-    files.uniq!
-
     files.each do |file_name|
-      puts "Compressing #{file_name}"
+      puts "Aggregating #{file_name}"
       input = File.open(file_name, 'r') { |f| f.read }
-      output.write(compressor.compress(input))
+
+      if args[:compress]
+        output.write compressor.compress(input)
+      else
+        output.write input
+      end
     end
   end
+end
+
+desc 'Compress all javascript files'
+task :compress do
+  Rake::Task[:aggregate].invoke(true)
 end
