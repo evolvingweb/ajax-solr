@@ -205,16 +205,34 @@ AjaxSolr.theme = function (func) {
  * @see http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
  */
 AjaxSolr.extend = function () {
-  var target = arguments[0] || {}, i = 1, length = arguments.length, options;
+  var target = arguments[0] || {},
+      i = 1,
+      length = arguments.length,
+      options;
+
   for (; i < length; i++) {
     if ((options = arguments[i]) != null) {
       for (var name in options) {
-        var src = target[name], copy = options[name];
+        var src = target[name],
+            copy = options[name];
+
         if (target === copy) {
           continue;
         }
+
         if (copy && typeof copy == 'object' && !copy.nodeType) {
           target[name] = AjaxSolr.extend(src || (copy.length != null ? [] : {}), copy);
+        }
+        else if (copy && src && typeof copy == 'function' && typeof src == 'function') {
+          target[name] = (function(superfn, basefn) {
+            return function () {
+              var tmp = this._super;
+              this._super = superfn;
+              var ret = basefn.apply(this, arguments);
+              this._super = tmp;
+              return ret;
+            };
+          })(src, copy);
         }
         else if (copy !== undefined) {
           target[name] = copy;
