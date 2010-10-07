@@ -1,6 +1,19 @@
 (function ($) {
 
 AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
+  init: function () {
+    var self = this;
+
+    $(this.target).find('input').bind('keydown', function(e) {
+      if (self.requestSent === false && e.which == 13) {
+        var value = $(this).val();
+        if (value && self.add(value)) {
+          self.manager.doRequest(0);
+        }
+      }
+    });
+  },
+
   afterRequest: function () {
     $(this.target).find('input').val('');
 
@@ -28,13 +41,6 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
         self.requestSent = true;
         if (self.manager.store.addByValue('fq', facet.field + ':' + facet.value)) {
           self.manager.doRequest(0);
-        }
-      }).bind('keydown', function(e) {
-        if (self.requestSent === false && e.which == 13) {
-          var value = $(this).val();
-          if (value && self.add(value)) {
-            self.manager.doRequest(0);
-          }
         }
       });
     } // end callback
