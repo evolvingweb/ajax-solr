@@ -4,7 +4,7 @@ require 'yui/compressor'
 desc 'Aggregate all javascript files'
 task :aggregate, :compress do |t, args|
   args.with_defaults(:compress => false)
-  output_file = ENV.include?('output') ? ENV['output'] : 'ajax-solr.min.js'
+  output_file = ENV['output'] || 'ajax-solr.min.js'
 
   core = [
     'Core',
@@ -29,13 +29,8 @@ task :aggregate, :compress do |t, args|
   File.open(output_file, 'w') do |output|
     files.each do |file_name|
       puts "Aggregating #{file_name}"
-      input = File.open(file_name, 'r') { |f| f.read }
-
-      if args[:compress]
-        output.write compressor.compress(input)
-      else
-        output.write input
-      end
+      input = File.read(file_name)
+      output.write(args[:compress] ? compressor.compress(input) : input)
     end
   end
 end
