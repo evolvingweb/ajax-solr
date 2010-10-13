@@ -26,9 +26,11 @@ task :aggregate, :compress do |t, args|
   files = core.map{ |name| "core/#{name}.js" } + dirs.map{ |dir| Dir["#{dir}/**/*.js"] }.flatten
   files.uniq!
 
+  action = args[:compress] ? "Compressing" : "Aggregating"
+
   File.open(output_file, 'w') do |output|
     files.each do |file_name|
-      puts "Aggregating #{file_name}"
+      puts "#{action} #{file_name}"
       input = File.read(file_name)
       output.write(args[:compress] ? compressor.compress(input) : input)
     end
