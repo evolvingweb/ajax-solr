@@ -102,7 +102,7 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
     // q parameter must be set to a non-empty value. In case the q parameter
     // is empty, use the q.alt parameter, which accepts wildcards.
     else if (this.name == 'q') {
-      return 'q.alt=' + prefix + encodeURIComponent('*.*');
+      return 'q.alt=' + prefix + encodeURIComponent('*:*');
     }
     else {
       return '';
