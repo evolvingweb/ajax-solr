@@ -76,6 +76,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    *
    * @param {String} name The name of the parameter.
    * @returns {Boolean} Whether the parameter may be specified multiple times.
+   * @see http://lucene.apache.org/solr/api/org/apache/solr/handler/DisMaxRequestHandler.html
    */
   isMultiple: function (name) {
     return name.match(/^(?:bf|bq|facet\.date|facet\.date\.other|facet\.field|facet\.query|fq|pf|qf)$/);
