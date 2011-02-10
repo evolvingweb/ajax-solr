@@ -10,6 +10,8 @@
  * @expects this.target to be a list.
  * @class PagerWidget
  * @augments AjaxSolr.AbstractWidget
+ * @todo Don't use the manager to send the request. Request only the results,
+ * not the facets. Update only itself and the results widget.
  */
 AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.PagerWidget.prototype */
