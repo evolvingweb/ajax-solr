@@ -158,6 +158,91 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   afterChangeSelection: function () {},
 
   /**
+   * One of "facet.field", "facet.date" or "facet.range" must be set on the
+   * widget in order to determine where the facet counts are stored.
+   *
+   * @returns {Array} An array of objects with the properties <tt>facet</tt> and
+   * <tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.
+   */
+  getFacetCounts: function () {
+    var property;
+    if (this['facet.field'] !== undefined) {
+      property = 'facet_fields';
+    }
+    else if (this['facet.date'] !== undefined) {
+      property = 'facet_dates';
+    }
+    else if (this['facet.range'] !== undefined) {
+      property = 'facet_ranges';
+    }
+    if (property !== undefined) {
+      switch (this.manager.store.get('json.nl').val()) {
+        case 'map':
+          return this.getFacetCountsMap(property);
+        case 'arrarr':
+          return this.getFacetCountsArrarr(property);
+        default:
+          return this.getFacetCountsFlat(property);
+      }
+    }
+    throw 'Cannot get facet counts unless one of the following properties is set to "true" on widget "' + this.id + '": "facet.field", "facet.date", or "facet.range".';
+  },
+
+  /**
+   * Used if the facet counts are represented as a JSON object.
+   *
+   * @param {String} property "facet_fields", "facet_dates", or "facet_ranges".
+   * @returns {Array} An array of objects with the properties <tt>facet</tt> and
+   * <tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.
+   */
+  getFacetCountsMap: function (property) {
+    var counts = [];
+    for (var facet in this.manager.response.facet_counts[property][this.field]) {
+      counts.push({
+        facet: facet,
+        count: parseInt(this.manager.response.facet_counts[property][this.field][facet])
+      });
+    }
+    return counts;
+  },
+
+  /**
+   * Used if the facet counts are represented as an array of two-element arrays.
+   *
+   * @param {String} property "facet_fields", "facet_dates", or "facet_ranges".
+   * @returns {Array} An array of objects with the properties <tt>facet</tt> and
+   * <tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.
+   */
+  getFacetCountsArrarr: function (property) {
+    var counts = [];
+    for (var i = 0, l = this.manager.response.facet_counts[property][this.field].length; i < l; i++) {
+      counts.push({
+        facet: this.manager.response.facet_counts[property][this.field][i][0],
+        count: parseInt(this.manager.response.facet_counts[property][this.field][i][1])
+      });
+    }
+    return counts;
+  },
+
+  /**
+   * Used if the facet counts are represented as a flat array.
+   *
+   * @param {String} property "facet_fields", "facet_dates", or "facet_ranges".
+   * @returns {Array} An array of objects with the properties <tt>facet</tt> and
+   * <tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.
+   */
+  getFacetCountsFlat: function (property) {
+    var counts = [];
+    for (var i = 0, l = this.manager.response.facet_counts[property][this.field].length; i < l; i += 2) {
+      counts.push({
+        facet: this.manager.response.facet_counts[property][this.field][i],
+        count: parseInt(this.manager.response.facet_counts[property][this.field][i+1])
+      });
+    }
+    return counts;
+  },
+
+  /**
    * @param {String} value The value.
    * @returns {Function} Sends a request to Solr if it successfully adds a
    *   filter query with the given value.
