@@ -18,6 +18,15 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   field: null,
 
+  /**
+   * Set to <tt>false</tt> to force a single "fq" parameter for this widget.
+   *
+   * @field
+   * @public
+   * @type Boolean
+   */
+  multivalue: true,
+
   init: function () {
     this.initStore();
   },
@@ -82,6 +91,19 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   },
 
   /**
+   * Sets the filter query.
+   *
+   * @returns {Boolean} Whether the selection changed.
+   */
+  set: function (param) {
+    return this.changeSelection(function () {
+      var a = this.manager.store.removeByValue('fq', new RegExp('^-?' + this.field + ':')),
+          b = this.manager.store.addByValue('fq', this.fq(value));
+      return a || b;
+    });
+  },
+
+  /**
    * Adds a filter query.
    *
    * @returns {Boolean} Whether a filter query was added.
@@ -141,9 +163,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *   filter query with the given value.
    */
   clickHandler: function (value) {
-    var self = this;
+    var self = this, meth = this.multivalue ? 'add' : 'set';
     return function () {
-      if (self.add(value)) {
+      if (self[meth].call(self, value)) {
         self.manager.doRequest(0);
       }
       return false;
