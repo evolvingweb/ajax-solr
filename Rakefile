@@ -10,6 +10,7 @@ task :aggregate, :compress do |t, args|
     'Core',
     'AbstractManager',
     'ParameterStore',
+    'Parameter',
     'AbstractWidget',
     'AbstractFacetWidget'
   ]

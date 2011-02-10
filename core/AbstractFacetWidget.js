@@ -18,6 +18,61 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   field: null,
 
+  init: function () {
+    this.initStore();
+  },
+
+  /**
+   * Add facet parameters to the parameter store.
+   */
+  initStore: function () {
+    /* http://wiki.apache.org/solr/SimpleFacetParameters */
+    var parameters = [
+      'facet.prefix',
+      'facet.sort',
+      'facet.limit',
+      'facet.offset',
+      'facet.mincount',
+      'facet.missing',
+      'facet.method',
+      'facet.enum.cache.minDf'
+    ];
+
+    this.manager.store.addByValue('facet', true);
+
+    if (this['facet.field'] !== undefined) {
+      this.manager.store.addByValue('facet.field', this.field);
+    }
+    else if (this['facet.date'] !== undefined) {
+      this.manager.store.addByValue('facet.date', this.field);
+      parameters = parameters.concat([
+        'facet.date.start',
+        'facet.date.end',
+        'facet.date.gap',
+        'facet.date.hardend',
+        'facet.date.other',
+        'facet.date.include'
+      ]);
+    }
+    else if (this['facet.range'] !== undefined) {
+      this.manager.store.addByValue('facet.range', this.field);
+      parameters = parameters.concat([
+        'facet.range.start',
+        'facet.range.end',
+        'facet.range.gap',
+        'facet.range.hardend',
+        'facet.range.other',
+        'facet.range.include'
+      ]);
+    }
+
+    for (var i = 0, l = parameters.length; i < l; i++) {
+      if (this[parameters[i]] !== undefined) {
+        this.manager.store.addByValue('f.' + this.field + '.' + parameters[i], this[parameters[i]]);
+      }
+    }
+  },
+
   /**
    * @returns {Boolean} Whether any filter queries have been set using this
    *   widget's facet field.
