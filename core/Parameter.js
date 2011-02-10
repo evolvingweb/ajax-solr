@@ -100,8 +100,9 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
     }
     // For dismax request handlers, if the q parameter has local params, the
     // q parameter must be set to a non-empty value. In case the q parameter
-    // is empty, use the q.alt parameter, which accepts wildcards.
-    else if (this.name == 'q') {
+    // has local params but is empty, use the q.alt parameter, which accepts
+    // wildcards.
+    else if (this.name == 'q' && prefix) {
       return 'q.alt=' + prefix + encodeURIComponent('*:*');
     }
     else {
