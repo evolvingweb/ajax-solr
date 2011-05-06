@@ -1,5 +1,7 @@
 (function ($) {
 
+// For an AutocompleteWidget that uses the q parameter, see:
+// https://github.com/evolvingweb/ajax-solr/blob/gh-pages/examples/reuters/widgets/AutocompleteWidget.q.js
 AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
   init: function () {
     var self = this;
