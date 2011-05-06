@@ -1,7 +1,5 @@
 (function ($) {
 
-// For a TextWidget that uses the q parameter, see:
-// https://github.com/evolvingweb/ajax-solr/blob/gh-pages/examples/reuters/widgets/TextWidget.q.js
 AjaxSolr.TextWidget = AjaxSolr.AbstractTextWidget.extend({
   init: function () {
     var self = this;
