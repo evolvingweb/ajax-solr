@@ -79,7 +79,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
    * @see http://lucene.apache.org/solr/api/org/apache/solr/handler/DisMaxRequestHandler.html
    */
   isMultiple: function (name) {
-    return name.match(/^(?:bf|bq|facet\.date|facet\.date\.other|facet\.date\.include|facet\.field|facet\.pivot|facet\.range|facet\.range\.other|facet\.range\.include|facet\.query|fq|pf|qf)$/);
+    return name.match(/^(?:bf|bq|facet\.date|facet\.date\.other|facet\.date\.include|facet\.field|facet\.pivot|facet\.range|facet\.range\.other|facet\.range\.include|facet\.query|fq|group\.field|group\.func|group\.query|pf|qf)$/);
   },
 
   /**
