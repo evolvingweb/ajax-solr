@@ -184,17 +184,14 @@ AjaxSolr.isString = function (obj) {
  * @see http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js?revision=1.58
  */
 AjaxSolr.theme = function (func) {
-  for (var i = 1, args = []; i < arguments.length; i++) {
-    args.push(arguments[i]);
+  if (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func] == undefined) {
+    console.log('Theme function "' + func + '" is not defined.');
   }
-  try {
-    return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
-  }
-  catch (e) {
-    if (console && console.log) {
-      console.log('Theme function "' + func + '" is not defined.');
+  else {
+    for (var i = 1, args = []; i < arguments.length; i++) {
+      args.push(arguments[i]);
     }
-    throw e;
+    return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
   }
 };
 
