@@ -19,7 +19,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     var self = this;
     return function () {
       self.manager.store.remove('fq');
-      self.manager.store.addByValue('fq', facet_field + ':' + facet_value);
+      self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
       self.manager.doRequest(0);
       return false;
     };
