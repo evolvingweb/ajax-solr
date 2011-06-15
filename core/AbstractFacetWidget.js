@@ -95,7 +95,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *
    * @returns {Boolean} Whether the selection changed.
    */
-  set: function (param) {
+  set: function (value) {
     return this.changeSelection(function () {
       var a = this.manager.store.removeByValue('fq', new RegExp('^-?' + this.field + ':')),
           b = this.manager.store.addByValue('fq', this.fq(value));
