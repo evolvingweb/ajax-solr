@@ -93,7 +93,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     return function () {
       // Support the back/forward buttons. If the hash changes, do a request.
       var hash = self.storedString();
-      if (self.hash != hash) {
+      if (self.hash != hash && decodeURIComponent(self.hash) != decodeURIComponent(hash)) {
         self.load();
         self.manager.doRequest();
       }
