@@ -49,6 +49,8 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
 
     this.manager.store.addByValue('facet', true);
 
+    // Set facet.field, facet.date or facet.range to truthy values to add
+    // related per-field parameters to the parameter store.
     if (this['facet.field'] !== undefined) {
       this.manager.store.addByValue('facet.field', this.field);
     }
