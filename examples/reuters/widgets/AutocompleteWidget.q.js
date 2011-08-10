@@ -1,5 +1,7 @@
 (function ($) {
 
+// For an AutocompleteWidget that uses the fq parameter, see:
+// https://github.com/evolvingweb/ajax-solr/blob/gh-pages/examples/reuters/widgets/AutocompleteWidget.js
 AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
   init: function () {
     var self = this;
@@ -33,7 +35,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       }
 
       self.requestSent = false;
-      $(self.target).find('input').autocomplete(list, {
+      $(self.target).find('input').unautocomplete().autocomplete(list, {
         formatItem: function(facet) {
           return facet.text;
         }
@@ -45,7 +47,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       });
     } // end callback
 
-    var params = [ 'q=*:*&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
+    var params = [ 'q=*:*&rows=0&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
     for (var i = 0; i < this.fields.length; i++) {
       params.push('facet.field=' + this.fields[i]);
     }

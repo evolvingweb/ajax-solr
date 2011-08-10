@@ -35,7 +35,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
       }
 
       self.requestSent = false;
-      $(self.target).find('input').autocomplete(list, {
+      $(self.target).find('input').unautocomplete().autocomplete(list, {
         formatItem: function(facet) {
           return facet.text;
         }
