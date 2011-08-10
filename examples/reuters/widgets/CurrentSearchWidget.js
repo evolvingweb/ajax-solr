@@ -1,5 +1,7 @@
 (function ($) {
 
+// For a CurrentSearchWidget that supports the q parameter, see:
+// https://github.com/evolvingweb/ajax-solr/blob/gh-pages/examples/reuters/widgets/CurrentSearchWidget.q.js
 AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
   afterRequest: function () {
     var self = this;
