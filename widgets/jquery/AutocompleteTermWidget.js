@@ -1,26 +1,24 @@
-/*
-   Copyright 2011 David Smiley -- david.w.smiley at gmail.com
+// $Id$
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
 (function ($) {
+  
 /**
- * A <i>term</i> autocomplete search box, using jQueryUI.autocomplete. This implementation uses Solr's facet.prefix
- * technique.  Remember to put a facet warming query into Solr's "firstSearcher" in
- * solrconfig.xml, for the target field. And remember to use appropriate text analysis,
- * like *not* stemming. For large indexes, another implementation approach like the
- * Suggester feature or TermsComponent can be used. 
- * FYI: Other types of autocomplete are search-results, query-log, and facet-value.
+ * A <i>term</i> autocomplete search box, using jQueryUI.autocomplete. This
+ * implementation uses Solr's facet.prefix technique. This technique benefits
+ * from honoring the filter query state and by being able to put words prior to
+ * the last one the user is typing into a filter query as well to get even more
+ * relevant completion suggestions. Remember to put a facet warming query into 
+ * Solr's "firstSearcher" in solrconfig.xml, for the target field.  Remember to
+ * use appropriate text analysis to include a tokenizer (not keyword) and do 
+ * <i>not</i> do stemming or else you will see stems suggested. A 'light' 
+ * stemmer may produce acceptable stems.
+ *
+ * For large indexes, another implementation approach like 
+ * the Suggester feature or TermsComponent might be better than a faceting
+ * approach. 
+ *
+ * FYI: Other types of autocomplete are search-results, query-log, and 
+ * facet-value. Again, this one is term-completion.
  *
  * @author David Smiley -- david.w.smiley at gmail.com
  */
@@ -33,9 +31,32 @@ TODO:
   */
   
   /**
-   * The URL path that follows the solr webapp, for use in auto-complete queries.
+   * The Solr field to auto-complete indexed terms from.
+   *
+   * @field
+   * @public
+   * @type String
+   * @default null
+   */
+  field: null,
+  
+  /**
+   * The maximum number of results to show.
+   *
+   * @field
+   * @public
+   * @type Number
+   * @default 10
+   */
+  limit: 10,
+  
+  /**
+   * The URL path that follows the solr webapp, for use in auto-complete
+   * queries. 
    * If not specified, the manager's servlet property will be used.
    * You may prepend the servlet with a core if using multiple cores.
+   * It is a good idea to use a non-default one to differentiate these requests
+   * in server logs and Solr statistics.
    *
    * @field
    * @public
@@ -46,6 +67,10 @@ TODO:
   
   init: function () {
     var self = this;
+    
+    if (! self.field)
+      throw '"field" must be set on AutocompleteTermWidget.';
+    self.servlet = (self.servlet || self.manager.servlet);
 
     $(this.target).find('input').bind('keydown', function(e) {
       if (e.which == 13) {
@@ -58,11 +83,10 @@ TODO:
     
     $(this.target).find('input').autocomplete({
       source: function( request, response ) {
-        var field = self.field;
         
-        //**Note: The /termsSuggest2 request handler already has most of the parameters we want.**
         var params = {};
-        //-- take the query string and split out the last word from the words before it.
+        //-- take the query string and split out the last word from the words
+        // before it.
         var qInput = $(self.target).find('input').val().trim();
         var qFilter = "";//before the last word
         var qPrefix = qInput;//the last word
@@ -83,16 +107,16 @@ TODO:
           }
         }
         
-        params['facet.field'] = field;
+        params['facet.field'] = self.field;
         params['facet.prefix'] = qPrefix;
-                
+        var defParamsUrl = 'wt=json&json.nl=arrarr&json.wrf=?&q=*:*&rows=0&facet=true&facet.mincount=1&facet.limit='+self.limit;
         //TODO find way to use manager.doRequest
         $.ajax({
-          url: self.manager.solrUrl + (self.servlet || self.manager.servlet) + '?wt=json&json.nl=arrarr&json.wrf=?'+fqsUrl,
+          url: self.manager.solrUrl + self.servlet + '?'+defParamsUrl+fqsUrl,
           dataType: "jsonp",
           data: params,
           success: function( data ) {
-            response( $.map( data.facet_counts.facet_fields[field], function( term ) {
+            response( $.map( data.facet_counts.facet_fields[self.field], function( term ) {
               var q = (qFilter ? qFilter + " " : "") + term[0];
               return {
                 label: q + " (" + term[1] + ")",
