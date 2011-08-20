@@ -29,13 +29,7 @@
  * @author David Smiley -- david.w.smiley at gmail.com
  */
 AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend({
-  /*
-TODO: 
-# Use the manager for executing the query, so that things like the proxyUrl are considered. However the "store" should be different
- for this request. Maybe we extend a manager and have a kind of manager proxy with a different store, using javascript tricks? Or suggest
- changes to Ajax-Solr's manager to have a per-request store override.
-  */
-  
+
   /**
    * The Solr field to auto-complete indexed terms from.
    *
@@ -121,55 +115,66 @@ TODO:
       }
     });
     
-    $(this.target).find('input').autocomplete({
-      source: function( request, response ) {
-        
-        var params = {};
-
-        var qInput = $(self.target).find('input').val().trim();
-        var qPrefix = qInput;//facet.prefix value
-        var qFilter = "";//before the last word (if we tokenize)
-        if (self.tokenized) {
-          //-- take the query string and split out the last word from the words
-          // before it.
-          var lastSpace = qInput.lastIndexOf(' ');
-          if (lastSpace > -1) {
-            qFilter = qInput.substring(0,lastSpace);
-            qPrefix = qInput.substring(lastSpace+1);
-            params['fq'] = '{!dismax qf='+self.field+'}'+qFilter;
-          }
+    //as suggested by jpmckinney
+    function executeRequest_jquery_enhanced (servlet, string, handler) {
+      var self = this;      
+      string = string || self.store.string();
+      handler = handler || function (data) { self.handleResponse(data); };
+      if (self.proxyUrl) {
+        jQuery.post(this.proxyUrl, { query: string }, handler, 'json');
+      }
+      else {
+        jQuery.getJSON(this.solrUrl + servlet + '?' + string + '&wt=json&json.wrf=?', {}, handler);
+      }
+    };
+    
+    function autocomplete_source ( request, response ) {
+      //Note: must always call response()
+      var qInput = request.term;
+      if (qInput.charAt(qInput.length-1).trim() == '') {//ends with a space
+        response();
+        return;
+      }
+      var qPrefix = qInput;//facet.prefix value
+      var qFilter = "";//before the last word (if we tokenize)
+      var store = new AjaxSolr.ParameterStore();
+      store.addByValue('fq',self.manager.store.values('fq'));
+      
+      if (self.tokenized) {
+        //-- take the query string and split out the last word from the words
+        // before it.
+        var lastSpace = qInput.lastIndexOf(' ');
+        if (lastSpace > -1) {
+          qFilter = qInput.substring(0,lastSpace);
+          qPrefix = qInput.substring(lastSpace+1);
+          store.addByValue('fq','{!dismax qf='+self.field+'}'+qFilter);
         }
-        if (self.lowercase)
-          qPrefix = qPrefix.toLowerCase();
-        
-        //get filter queries in effect now
-        var fqsUrl = '';
-        var storeParamsFq = self.manager.store.params['fq'];
-        if (storeParamsFq !== undefined) {
-          for (var i = 0, l = storeParamsFq.length; i < l; i++) {
-            fqsUrl += '&'+storeParamsFq[i].string();
-          }
-        }
-        
-        params['facet.field'] = self.field;
-        params['facet.prefix'] = qPrefix;
-        var defParamsUrl = 'wt=json&json.nl=arrarr&json.wrf=?&q=*:*&rows=0&facet=true&facet.mincount=1&facet.limit='+self.limit;
-        //TODO find way to use manager.doRequest
-        $.ajax({
-          url: self.manager.solrUrl + self.servlet + '?'+defParamsUrl+fqsUrl,
-          dataType: "jsonp",
-          data: params,
-          success: function( data ) {
-            response( $.map( data.facet_counts.facet_fields[self.field], function( term ) {
-              var q = (qFilter ? qFilter + " " : "") + term[0];
-              return {
-                label: q + " (" + term[1] + ")",
-                value: q,
-              }
-            }));
+      }
+      if (self.lowercase)
+        qPrefix = qPrefix.toLowerCase();
+      
+      store.addByValue('facet.field',self.field);
+      store.addByValue('facet.prefix',qPrefix);
+      store.addByValue('facet.limit',self.limit);
+      var urlParams = 'json.nl=arrarr&q=*:*&rows=0&facet=true&facet.mincount=1&' + store.string();
+      
+      function ajaxhandler ( data ) {
+        var rspData = $.map( data.facet_counts.facet_fields[self.field], function( term ) {
+          var q = (qFilter + " " + term[0]).trim();
+          return {
+            label: q + " (" + term[1] + ")",
+            value: q,
           }
         });
-      },
+        response( rspData );
+      };
+
+      executeRequest_jquery_enhanced.apply(self.manager,
+        [self.servlet, urlParams, ajaxhandler ]);
+    };//autocomplete_source
+    
+    $(this.target).find('input').autocomplete({
+      source: autocomplete_source,
       minLength: self.minLength,
       select: function( event, ui ) {
         if (self.set(ui.item.value)) {
@@ -178,7 +183,7 @@ TODO:
       },
     });
 
-  },
+  },//init()
 
 });
 
