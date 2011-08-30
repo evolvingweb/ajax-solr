@@ -3,10 +3,13 @@
 // For an AutocompleteWidget that uses the q parameter, see:
 // https://github.com/evolvingweb/ajax-solr/blob/gh-pages/examples/reuters/widgets/AutocompleteWidget.q.js
 AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
-  init: function () {
+  afterRequest: function () {
+    $(this.target).find('input').val('');
+
     var self = this;
 
-    $(this.target).find('input').bind('keydown', function(e) {
+    // unautocomplete() below will unbind the keydown handler.
+    $(this.target).find('input').unbind().bind('keydown', function(e) {
       if (self.requestSent === false && e.which == 13) {
         var value = $(this).val();
         if (value && self.add(value)) {
@@ -14,12 +17,6 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractFacetWidget.extend({
         }
       }
     });
-  },
-
-  afterRequest: function () {
-    $(this.target).find('input').val('');
-
-    var self = this;
 
     var callback = function (response) {
       var list = [];
