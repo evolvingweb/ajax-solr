@@ -28,8 +28,8 @@ var Manager;
         field: fields[i]
       }));
     }
-    Manager.store.addByValue('q', '*:*');
     Manager.init();
+    Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
       'facet.field': [ 'topics', 'organisations', 'exchanges' ],

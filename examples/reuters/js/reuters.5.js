@@ -32,8 +32,8 @@ var Manager;
       id: 'currentsearch',
       target: '#selection'
     }));
-    Manager.store.addByValue('q', '*:*');
     Manager.init();
+    Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
       'facet.field': [ 'topics', 'organisations', 'exchanges' ],

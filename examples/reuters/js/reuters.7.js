@@ -38,8 +38,8 @@ var Manager;
       field: 'allText',
       fields: [ 'topics', 'organisations', 'exchanges' ]
     }));
-    Manager.store.addByValue('q', '*:*');
     Manager.init();
+    Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
       'facet.field': [ 'topics', 'organisations', 'exchanges' ],

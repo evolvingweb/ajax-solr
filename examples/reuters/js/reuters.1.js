@@ -6,8 +6,8 @@ var Manager;
     Manager = new AjaxSolr.Manager({
       solrUrl: 'http://evolvingweb.ca/solr/reuters/'
     });
-    Manager.store.addByValue('q', '*:*');
     Manager.init();
+    Manager.store.addByValue('q', '*:*');
     Manager.doRequest();
   });
 

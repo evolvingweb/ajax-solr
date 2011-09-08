@@ -43,8 +43,8 @@ var Manager;
       target: '#countries',
       field: 'countryCodes'
     }));
-    Manager.store.addByValue('q', '*:*');
     Manager.init();
+    Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
       'facet.field': [ 'topics', 'organisations', 'exchanges', 'countryCodes' ],

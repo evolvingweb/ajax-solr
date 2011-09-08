@@ -48,8 +48,8 @@ var Manager;
       target: '#calendar',
       field: 'date'
     }));
-    Manager.store.addByValue('q', '*:*');
     Manager.init();
+    Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
       'facet.field': [ 'topics', 'organisations', 'exchanges', 'countryCodes' ],
