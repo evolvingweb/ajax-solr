@@ -24,6 +24,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @field
    * @public
    * @type Boolean
+   * @default true
    */
   multivalue: true,
 
