@@ -20,8 +20,8 @@ var Manager;
         $('#pager-header').html($('<span/>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
     }));
-    Manager.init();
     Manager.store.addByValue('q', '*:*');
+    Manager.init();
     Manager.doRequest();
   });
 

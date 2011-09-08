@@ -10,8 +10,8 @@ var Manager;
       id: 'result',
       target: '#docs'
     }));
-    Manager.init();
     Manager.store.addByValue('q', '*:*');
+    Manager.init();
     Manager.doRequest();
   });
 
