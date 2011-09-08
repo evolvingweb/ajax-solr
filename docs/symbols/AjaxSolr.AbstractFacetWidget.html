@@ -217,6 +217,8 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a></li>
 	
+	<li><a href="../symbols/AjaxSolr.ParameterYUIStore.html">AjaxSolr.ParameterYUIStore</a></li>
+	
 	<li><a href="../symbols/String.html">String</a></li>
 	
 </ul>
@@ -289,6 +291,16 @@ ul.inheritsList
 								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#field">field</a></b>
 								</div>
 								<div class="description">The field to facet on.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#multivalue">multivalue</a></b>
+								</div>
+								<div class="description">Set to <tt>false</tt> to force a single "fq" parameter for this widget.</div>
 							</td>
 						</tr>
 					
@@ -374,6 +386,60 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getFacetCounts">getFacetCounts</a></b>()
+								</div>
+								<div class="description">One of "facet.field", "facet.date" or "facet.range" must be set on thewidget in order to determine where the facet counts are stored.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getFacetCountsArrarr">getFacetCountsArrarr</a></b>(property)
+								</div>
+								<div class="description">Used if the facet counts are represented as an array of two-element arrays.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getFacetCountsFlat">getFacetCountsFlat</a></b>(property)
+								</div>
+								<div class="description">Used if the facet counts are represented as a flat array.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#getFacetCountsMap">getFacetCountsMap</a></b>(property)
+								</div>
+								<div class="description">Used if the facet counts are represented as a JSON object.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#init">init</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#initStore">initStore</a></b>()
+								</div>
+								<div class="description">Add facet parameters to the parameter store.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#isEmpty">isEmpty</a></b>()
 								</div>
 								<div class="description"></div>
@@ -392,6 +458,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#set">set</a></b>(value)
+								</div>
+								<div class="description">Sets the filter query.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#unclickHandler">unclickHandler</a></b>(value)
 								</div>
 								<div class="description"></div>
@@ -404,7 +479,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterRequest">afterRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#afterRequest">afterRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a></dd>
 				</dl>
 				
 			
@@ -465,6 +540,35 @@ ul.inheritsList
 						
 						
 						
+						
+
+					<hr />
+				
+					<a name="multivalue"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>multivalue</b>
+					
+					</div>
+					<div class="description">
+						Set to <tt>false</tt> to force a single "fq" parameter for this widget.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Default Value:</dt>
+							<dd>
+								true
+							</dd>
+							</dl>
 						
 
 					
@@ -712,6 +816,217 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name="getFacetCounts"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Array}</span>
+					<b>getFacetCounts</b>()
+					
+					</div>
+					<div class="description">
+						One of "facet.field", "facet.date" or "facet.range" must be set on thewidget in order to determine where the facet counts are stored.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> An array of objects with the properties <tt>facet</tt> and<tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getFacetCountsArrarr"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Array}</span>
+					<b>getFacetCountsArrarr</b>(property)
+					
+					</div>
+					<div class="description">
+						Used if the facet counts are represented as an array of two-element arrays.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>property</b>
+									
+								</dt>
+								<dd>"facet_fields", "facet_dates", or "facet_ranges".</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> An array of objects with the properties <tt>facet</tt> and<tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getFacetCountsFlat"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Array}</span>
+					<b>getFacetCountsFlat</b>(property)
+					
+					</div>
+					<div class="description">
+						Used if the facet counts are represented as a flat array.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>property</b>
+									
+								</dt>
+								<dd>"facet_fields", "facet_dates", or "facet_ranges".</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> An array of objects with the properties <tt>facet</tt> and<tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getFacetCountsMap"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Array}</span>
+					<b>getFacetCountsMap</b>(property)
+					
+					</div>
+					<div class="description">
+						Used if the facet counts are represented as a JSON object.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>property</b>
+									
+								</dt>
+								<dd>"facet_fields", "facet_dates", or "facet_ranges".</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> An array of objects with the properties <tt>facet</tt> and<tt>count</tt>, e.g <tt>{ facet: 'facet', count: 1 }</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="init"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>init</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="initStore"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>initStore</b>()
+					
+					</div>
+					<div class="description">
+						Add facet parameters to the parameter store.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="isEmpty"> </a>
 					<div class="fixedFont">
 					
@@ -787,6 +1102,49 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name="set"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>set</b>(value)
+					
+					</div>
+					<div class="description">
+						Sets the filter query.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>value</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> Whether the selection changed.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="unclickHandler"> </a>
 					<div class="fixedFont">
 					
@@ -842,7 +1200,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Thu Dec 17 2009 18:55:05 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Wed Sep 07 2011 22:31:36 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

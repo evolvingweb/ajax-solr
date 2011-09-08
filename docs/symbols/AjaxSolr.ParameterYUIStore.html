@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - AjaxSolr.ParameterHashStore</title>
+		<title>JsDoc Reference - AjaxSolr.ParameterYUIStore</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class AjaxSolr.ParameterHashStore
+				Class AjaxSolr.ParameterYUIStore
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -239,16 +239,16 @@ ul.inheritsList
 					<a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>.<br />
 				
 			
-				ParameterHashStore
+				ParameterYUIStore
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/ajaxsolr_core_ParameterHashStore.js.html">ParameterHashStore.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/ajaxsolr_widgets_yui_ParameterYUIStore.js.html">ParameterYUIStore.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.ParameterHashStore.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.ParameterYUIStore.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -261,10 +261,10 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#constructor">AjaxSolr.ParameterHashStore</a></b>()
+								<b><a href="../symbols/AjaxSolr.ParameterYUIStore.html#constructor">AjaxSolr.ParameterYUIStore</a></b>()
 							</div>
-							<div class="description">A parameter store that stores the values of exposed parameters in the URL
-hash to maintain the application's state.</div>
+							<div class="description">A parameter store that stores the values of exposed parameters using the YUI
+History Manager to maintain the application's state.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -275,7 +275,7 @@ hash to maintain the application's state.</div>
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.ParameterHashStore.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.ParameterYUIStore.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -289,9 +289,9 @@ hash to maintain the application's state.</div>
 							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#hash">hash</a></b>
+								<b><a href="../symbols/AjaxSolr.ParameterYUIStore.html#initialized">initialized</a></b>
 								</div>
-								<div class="description">A local copy of the URL hash, so we can detect changes to it.</div>
+								<div class="description">Whether the YUI History Manager is initialized.</div>
 							</td>
 						</tr>
 					
@@ -299,19 +299,9 @@ hash to maintain the application's state.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#interval">interval</a></b>
+								<b><a href="../symbols/AjaxSolr.ParameterYUIStore.html#module">module</a></b>
 								</div>
-								<div class="description">The interval in milliseconds to use in <tt>setInterval()</tt>.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalId">intervalId</a></b>
-								</div>
-								<div class="description">Reference to the setInterval() function.</div>
+								<div class="description">The name of the YUI History Manager module to use for the parameter store.</div>
 							</td>
 						</tr>
 					
@@ -330,7 +320,7 @@ hash to maintain the application's state.</div>
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.ParameterHashStore.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.ParameterYUIStore.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -343,37 +333,25 @@ hash to maintain the application's state.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#init">init</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterYUIStore.html#init">init</a></b>()
 								</div>
-								<div class="description">If loading and saving the hash take longer than <tt>interval</tt>, we'll
-hit a race condition.</div>
+								<div class="description">Initializes the YUI History Manager.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalFunction">intervalFunction</a></b>(self)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterYUIStore.html#save">save</a></b>()
 								</div>
-								<div class="description">Checks the hash for changes, and loads Solr parameters from the hash and
-sends a request to Solr if it observes a change or if the hash is empty</div>
+								<div class="description">Stores the values of the exposed parameters in the YUI History Manager.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#save">save</a></b>()
-								</div>
-								<div class="description">Stores the values of the exposed parameters in both the local hash and the
-URL hash.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#storedString">storedString</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterYUIStore.html#storedString">storedString</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -400,15 +378,26 @@ URL hash.</div>
 				</div>
 				
 				<div class="fixedFont">
-						<b>AjaxSolr.ParameterHashStore</b>()
+						<b>AjaxSolr.ParameterYUIStore</b>()
 				</div>
 				
 				<div class="description">
-					A parameter store that stores the values of exposed parameters in the URL
-hash to maintain the application's state.
+					A parameter store that stores the values of exposed parameters using the YUI
+History Manager to maintain the application's state. Don't forget to add the
+following inside your <tt>head</tt> tag:
 
-<p>The ParameterHashStore observes the hash for changes and loads Solr
-parameters from the hash if it observes a change or if the hash is empty.</p>
+<pre>
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/event/event-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/history/history-min.js"></script>
+</pre>
+
+And the following inside your <tt>body</tt> tag:
+
+<pre>
+<iframe id="yui-history-iframe" src="path-to-existing-asset" style="position:absolute;top:0;left:0;width:1px;height:1px;visibility:hidden"></iframe>
+<input id="yui-history-field" type="hidden">
+</pre>
 					
 				</div>
 				
@@ -421,6 +410,13 @@ parameters from the hash if it observes a change or if the hash is empty.</p>
 					
 					
 					
+					
+						<dl class="detailList">
+						<dt class="heading">See:</dt>
+						
+							<dd>http://developer.yahoo.com/yui/history/</dd>
+						
+						</dl>
 					
 
 			</div>
@@ -432,15 +428,15 @@ parameters from the hash if it observes a change or if the hash is empty.</p>
 					Field Detail
 				</div>
 				
-					<a name="hash"> </a>
+					<a name="initialized"> </a>
 					<div class="fixedFont">&lt;private&gt; 
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
-					<b>hash</b>
+					<span class="light">{Boolean}</span>
+					<b>initialized</b>
 					
 					</div>
 					<div class="description">
-						A local copy of the URL hash, so we can detect changes to it.
+						Whether the YUI History Manager is initialized.
 						
 						
 					</div>
@@ -454,23 +450,22 @@ parameters from the hash if it observes a change or if the hash is empty.</p>
 							<dl class="detailList">
 							<dt class="heading">Default Value:</dt>
 							<dd>
-								""
+								false
 							</dd>
 							</dl>
 						
 
 					<hr />
 				
-					<a name="interval"> </a>
+					<a name="module"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Number}</span>
-					<b>interval</b>
+					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<b>module</b>
 					
 					</div>
 					<div class="description">
-						The interval in milliseconds to use in <tt>setInterval()</tt>. Do not set
-the interval too low as you may set up a race condition.
+						The name of the YUI History Manager module to use for the parameter store.
 						
 						
 					</div>
@@ -479,43 +474,14 @@ the interval too low as you may set up a race condition.
 
 						
 						
-						
-							<dl class="detailList">
-							<dt class="heading">See:</dt>
-							
-							<dd>ParameterHashStore#init()</dd>
-							
-							</dl>
 						
 						
 							<dl class="detailList">
 							<dt class="heading">Default Value:</dt>
 							<dd>
-								250
+								'q'
 							</dd>
 							</dl>
-						
-
-					<hr />
-				
-					<a name="intervalId"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Function}</span>
-					<b>intervalId</b>
-					
-					</div>
-					<div class="description">
-						Reference to the setInterval() function.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
 						
 
 					
@@ -536,51 +502,13 @@ the interval too low as you may set up a race condition.
 					
 					</div>
 					<div class="description">
-						If loading and saving the hash take longer than <tt>interval</tt>, we'll
-hit a race condition. However, this should never happen.
+						Initializes the YUI History Manager.
 						
 						
 					</div>
 					
 					
 					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="intervalFunction"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>intervalFunction</b>(self)
-					
-					</div>
-					<div class="description">
-						Checks the hash for changes, and loads Solr parameters from the hash and
-sends a request to Solr if it observes a change or if the hash is empty
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>self</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
 						
 						
 						
@@ -599,8 +527,7 @@ sends a request to Solr if it observes a change or if the hash is empty
 					
 					</div>
 					<div class="description">
-						Stores the values of the exposed parameters in both the local hash and the
-URL hash. No other code should be made to change these two values.
+						Stores the values of the exposed parameters in the YUI History Manager.
 						
 						
 					</div>
