@@ -63,7 +63,7 @@ AjaxSolr.ParameterYUIStore = AjaxSolr.ParameterStore.extend(
     if (this.exposed.length) {
       var self = this;
       YAHOO.util.History.register(this.module, YAHOO.util.History.getBookmarkedState(this.module) || this.exposedString(), function () {
-        if (!this.saving) {
+        if (!self.saving) {
           self.load();
           self.manager.doRequest();
         }
