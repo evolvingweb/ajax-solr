@@ -4,19 +4,9 @@
 // https://github.com/evolvingweb/ajax-solr/blob/gh-pages/examples/reuters/widgets/AutocompleteWidget.js
 AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
   afterRequest: function () {
-    $(this.target).find('input').val('');
+    $(this.target).find('input').unbind().removeData('events').val('');
 
     var self = this;
-
-    // unautocomplete() below will unbind the keydown handler.
-    $(this.target).find('input').unbind().removeData('events').bind('keydown', function(e) {
-      if (self.requestSent === false && e.which == 13) {
-        var value = $(this).val();
-        if (value && self.set(value)) {
-          self.manager.doRequest(0);
-        }
-      }
-    });
 
     var callback = function (response) {
       var list = [];
@@ -40,6 +30,16 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
         self.requestSent = true;
         if (self.manager.store.addByValue('fq', facet.field + ':' + AjaxSolr.Parameter.escapeValue(facet.value))) {
           self.manager.doRequest(0);
+        }
+      });
+
+      // This has lower priority so that requestSent is set.
+      $(self.target).find('input').bind('keydown', function(e) {
+        if (self.requestSent === false && e.which == 13) {
+          var value = $(this).val();
+          if (value && self.set(value)) {
+            self.manager.doRequest(0);
+          }
         }
       });
     } // end callback
