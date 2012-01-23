@@ -9,7 +9,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     var self = this;
 
     // unautocomplete() below will unbind the keydown handler.
-    $(this.target).find('input').unbind().bind('keydown', function(e) {
+    $(this.target).find('input').unbind().removeData('events').bind('keydown', function(e) {
       if (self.requestSent === false && e.which == 13) {
         var value = $(this).val();
         if (value && self.set(value)) {
