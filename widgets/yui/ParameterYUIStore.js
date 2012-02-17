@@ -47,6 +47,16 @@ AjaxSolr.ParameterYUIStore = AjaxSolr.ParameterStore.extend(
   initialized: false,
 
   /**
+   * Whether the parameter store is curring loading state.
+   *
+   * @field
+   * @private
+   * @type Boolean
+   * @default false
+   */
+  loading: false,
+
+  /**
    * Whether the parameter store is curring saving state.
    *
    * @field
@@ -64,8 +74,10 @@ AjaxSolr.ParameterYUIStore = AjaxSolr.ParameterStore.extend(
       var self = this;
       YAHOO.util.History.register(this.module, YAHOO.util.History.getBookmarkedState(this.module) || this.exposedString(), function () {
         if (!self.saving) {
+          self.loading = true;
           self.load();
           self.manager.doRequest();
+          self.loading = false;
         }
       });
       YAHOO.util.History.onReady(function () {
@@ -81,9 +93,11 @@ AjaxSolr.ParameterYUIStore = AjaxSolr.ParameterStore.extend(
    * Stores the values of the exposed parameters in the YUI History Manager.
    */
   save: function () {
-    this.saving = true;
-    YAHOO.util.History.navigate(this.module, this.exposedString());
-    this.saving = false;
+    if (!self.loading) {
+      this.saving = true;
+      YAHOO.util.History.navigate(this.module, this.exposedString());
+      this.saving = false;
+    }
   },
 
   /**
