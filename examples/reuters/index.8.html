@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>AJAX Solr</title>
+  <link rel="stylesheet" type="text/css" href="css/reuters.css" media="screen" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/reuters.8.js"></script>
+  <script type="text/javascript" src="../../core/Core.js"></script>
+  <script type="text/javascript" src="../../core/AbstractManager.js"></script>
+  <script type="text/javascript" src="../../managers/Manager.jquery.js"></script>
+  <script type="text/javascript" src="../../core/Parameter.js"></script>
+  <script type="text/javascript" src="../../core/ParameterStore.js"></script>
+  <script type="text/javascript" src="../../core/AbstractWidget.js"></script>
+  <script type="text/javascript" src="widgets/ResultWidget.js"></script>
+  <script type="text/javascript" src="../../helpers/jquery/ajaxsolr.theme.js"></script>
+  <script type="text/javascript" src="js/reuters.theme.js"></script>
+  <script type="text/javascript" src="js/jquery.livequery.js"></script>
+  <script type="text/javascript" src="../../widgets/jquery/PagerWidget.js"></script>
+  <script type="text/javascript" src="../../core/AbstractFacetWidget.js"></script>
+  <script type="text/javascript" src="widgets/TagcloudWidget.js"></script>
+  <script type="text/javascript" src="widgets/CurrentSearchWidget.js"></script>
+  <link rel="stylesheet" type="text/css" href="ext/jquery.autocomplete.css" media="screen" />
+  <script type="text/javascript" src="ext/jquery.autocomplete.js"></script>
+  <script type="text/javascript" src="widgets/AutocompleteWidget.js"></script>
+  <script type="text/javascript" src="../../helpers/ajaxsolr.support.js"></script>
+  <script type="text/javascript" src="../../helpers/ajaxsolr.theme.js"></script>
+  <script type="text/javascript" src="widgets/CountryCodeWidget.js"></script>
+</head>
+<body>
+  <div id="wrap"> 
+    <div id="header">
+      <h1>AJAX Solr Demonstration</h1>
+      <h2>Browse Reuters business news from 1987</h2>
+    </div>
+
+    <div class="right">
+      <div id="result">
+        <div id="navigation">
+          <ul id="pager"></ul>
+          <div id="pager-header"></div>
+        </div>
+        <div id="docs"></div>
+      </div>
+    </div>
+
+    <div class="left">
+      <h2>Current Selection</h2>
+      <ul id="selection"></ul>
+
+      <h2>Search</h2>
+      <span id="search_help">(press ESC to close suggestions)</span>
+      <ul id="search">
+        <input type="text" id="query" name="query"/>
+      </ul>
+
+      <h2>Top Topics</h2>
+      <div class="tagcloud" id="topics"></div>
+
+      <h2>Top Organisations</h2>
+      <div class="tagcloud" id="organisations"></div>
+
+      <h2>Top Exchanges</h2>
+      <div class="tagcloud" id="exchanges"></div>
+
+      <h2>By Country</h2>
+      <div id="countries"></div>
+      <div id="preview"></div>
+
+      <h2>By Date</h2>
+      <div id="calendar"></div>
+
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+  </div>  
+</body>
+</html>
