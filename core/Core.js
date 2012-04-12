@@ -210,7 +210,8 @@ AjaxSolr.extend = function () {
         if (target === copy) {
           continue;
         }
-        if (copy && typeof copy == 'object' && !copy.nodeType) {
+        var copy_is_array = toString.call(copy) === '[object Array]';
+        if (copy && typeof copy == 'object' && !copy.nodeType && !copy_is_array) {
           target[name] = AjaxSolr.extend(src || (copy.length != null ? [] : {}), copy);
         }
         else if (copy && src && typeof copy == 'function' && typeof src == 'function') {
