@@ -9,7 +9,12 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     var links = [];
     if (facet_values) {
       for (var i = 0, l = facet_values.length; i < l; i++) {
-        links.push(AjaxSolr.theme('facet_link', facet_values[i], this.facetHandler(facet_field, facet_values[i])));
+        if (facet_values[i] !== undefined) {
+          links.push(AjaxSolr.theme('facet_link', facet_values[i], this.facetHandler(facet_field, facet_values[i])));
+        }
+        else {
+          links.push(AjaxSolr.theme('no_items_found'));
+        }
       }
     }
     return links;
