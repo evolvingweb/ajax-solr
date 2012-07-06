@@ -1,0 +1,180 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">// $Id$</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  4</span> </span><span class="WHIT">  
+<span class='line'>  5</span> </span><span class="COMM">/**
+<span class='line'>  6</span>  * A &lt;i>term&lt;/i> autocomplete search box, using jQueryUI.autocomplete. This
+<span class='line'>  7</span>  * implementation uses Solr's facet.prefix technique. This technique benefits
+<span class='line'>  8</span>  * from honoring the filter query state and by being able to put words prior to
+<span class='line'>  9</span>  * the last one the user is typing into a filter query as well to get even more
+<span class='line'> 10</span>  * relevant completion suggestions.
+<span class='line'> 11</span>  *
+<span class='line'> 12</span>  * Index instructions: 
+<span class='line'> 13</span>  * 1. Put a facet warming query into Solr's "firstSearcher" in solrconfig.xml,
+<span class='line'> 14</span>  * for the target field.
+<span class='line'> 15</span>  * 2. Use appropriate text analysis to include a tokenizer (not keyword) and do
+<span class='line'> 16</span>  * &lt;i>not&lt;/i> do stemming or else you will see stems suggested. A 'light'
+<span class='line'> 17</span>  * stemmer may produce acceptable stems.
+<span class='line'> 18</span>  * 3. If you are auto-completing in a search box that would normally be using
+<span class='line'> 19</span>  * the dismax query parser AND your qf parameter references more than one field,
+<span class='line'> 20</span>  * then you might want to use a catch-all search field to autocomplete on.
+<span class='line'> 21</span>  *
+<span class='line'> 22</span>  * For large indexes, another implementation approach like the Suggester feature
+<span class='line'> 23</span>  * or TermsComponent might be better than a faceting approach. 
+<span class='line'> 24</span>  *
+<span class='line'> 25</span>  * Other types of autocomplete (a.k.a. suggest) are "search-results",
+<span class='line'> 26</span>  * "query-log", and "facet-value". This widget does term autocompletion.
+<span class='line'> 27</span>  *
+<span class='line'> 28</span>  * @author David Smiley &lt;david.w.smiley at gmail.com>
+<span class='line'> 29</span>  */</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="NAME">AjaxSolr.AutocompleteTermWidget</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AjaxSolr.AbstractTextWidget.extend</span><span class="PUNC">(</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">  </span><span class="COMM">/** @lends AjaxSolr.AutocompleteTermWidget.prototype */</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">  </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 34</span>    * The Solr field to autocomplete indexed terms from.
+<span class='line'> 35</span>    *
+<span class='line'> 36</span>    * @field
+<span class='line'> 37</span>    * @public
+<span class='line'> 38</span>    * @type String
+<span class='line'> 39</span>    * @default null
+<span class='line'> 40</span>    */</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">  </span><span class="NAME">field</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">  
+<span class='line'> 43</span>   </span><span class="COMM">/**
+<span class='line'> 44</span>    * Wether the underlying field is tokenized. This component will take words
+<span class='line'> 45</span>    * before the last word (whitespace separated) and generate a filter query
+<span class='line'> 46</span>    * for those words, while only the last word will be used for facet.prefix.
+<span class='line'> 47</span>    * For field-value completion (on just one field) or query log completion, 
+<span class='line'> 48</span>    * you would have a non-tokenized field to complete against.
+<span class='line'> 49</span>    * 
+<span class='line'> 50</span>    * @field
+<span class='line'> 51</span>    * @public
+<span class='line'> 52</span>    * @type Boolean
+<span class='line'> 53</span>    * @default true
+<span class='line'> 54</span>    */</span><span class="WHIT"> 
+<span class='line'> 55</span>   </span><span class="NAME">tokenized</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="WHIT">  
+<span class='line'> 57</span>   </span><span class="COMM">/**
+<span class='line'> 58</span>    * Indicates wether to lowercase the facet.prefix value.
+<span class='line'> 59</span>    *
+<span class='line'> 60</span>    * @field
+<span class='line'> 61</span>    * @public
+<span class='line'> 62</span>    * @type Boolean
+<span class='line'> 63</span>    * @default true
+<span class='line'> 64</span>    */</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="WHIT">  </span><span class="NAME">lowercase</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="WHIT">  
+<span class='line'> 67</span>   </span><span class="COMM">/**
+<span class='line'> 68</span>    * The maximum number of results to show.
+<span class='line'> 69</span>    *
+<span class='line'> 70</span>    * @field
+<span class='line'> 71</span>    * @public
+<span class='line'> 72</span>    * @type Number
+<span class='line'> 73</span>    * @default 10
+<span class='line'> 74</span>    */</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">  </span><span class="NAME">limit</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">10</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">  
+<span class='line'> 77</span>   </span><span class="COMM">/**
+<span class='line'> 78</span>    * The minimum number of characters required to show suggestions.
+<span class='line'> 79</span>    *
+<span class='line'> 80</span>    * @field
+<span class='line'> 81</span>    * @public
+<span class='line'> 82</span>    * @type Number
+<span class='line'> 83</span>    * @default 2
+<span class='line'> 84</span>    */</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="WHIT">  </span><span class="NAME">minLength</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">2</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="WHIT">  
+<span class='line'> 87</span>   </span><span class="COMM">/**
+<span class='line'> 88</span>    * The URL path that follows the solr webapp, for use in auto-complete
+<span class='line'> 89</span>    * queries.
+<span class='line'> 90</span>    *
+<span class='line'> 91</span>    * If not specified, the manager's servlet property will be used. You may
+<span class='line'> 92</span>    * prepend the servlet with a core if using multiple cores. It is a good idea
+<span class='line'> 93</span>    * to use a non-default one to differentiate these requests in server logs and
+<span class='line'> 94</span>    * Solr statistics.
+<span class='line'> 95</span>    *
+<span class='line'> 96</span>    * @field
+<span class='line'> 97</span>    * @public
+<span class='line'> 98</span>    * @type String
+<span class='line'> 99</span>    * @default null
+<span class='line'>100</span>    */</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="WHIT">  </span><span class="NAME">servlet</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>102</span> </span><span class="WHIT">  
+<span class='line'>103</span>   </span><span class="NAME">init</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">self</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>105</span> 
+<span class='line'>106</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">this.field</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="WHIT">      </span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="STRN">'"field" must be set on AutocompleteTermWidget.'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>108</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>109</span> </span><span class="WHIT">    </span><span class="NAME">this.servlet</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.servlet</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.manager.servlet</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>110</span> 
+<span class='line'>111</span> </span><span class="WHIT">    </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">this.target</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">find</span><span class="PUNC">(</span><span class="STRN">'input'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">bind</span><span class="PUNC">(</span><span class="STRN">'keydown'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>112</span> </span><span class="WHIT">      </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e.which</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">13</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>113</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">q</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">val</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>114</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">self.set</span><span class="PUNC">(</span><span class="NAME">q</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">          </span><span class="NAME">self.manager.doRequest</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>118</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>119</span> 
+<span class='line'>120</span> </span><span class="WHIT">    </span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">this.target</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">find</span><span class="PUNC">(</span><span class="STRN">'input'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">autocomplete</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>121</span> </span><span class="WHIT">      </span><span class="NAME">source</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">request</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">response</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">// note: must always call response()</span><span class="WHIT">
+<span class='line'>122</span> </span><span class="WHIT">        </span><span class="COMM">// If term ends with a space:</span><span class="WHIT">
+<span class='line'>123</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">request.term.charAt</span><span class="PUNC">(</span><span class="NAME">request.term.length</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="WHIT"> </span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">trim</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="STRN">''</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>124</span> </span><span class="WHIT">          </span><span class="NAME">response</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>125</span> </span><span class="WHIT">          </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>126</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>127</span> 
+<span class='line'>128</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">term</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">request.term</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>129</span> </span><span class="WHIT">            </span><span class="NAME">facetPrefix</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">term</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// before the last word (if we tokenize)</span><span class="WHIT">
+<span class='line'>130</span> </span><span class="WHIT">            </span><span class="NAME">fq</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">''</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>131</span> </span><span class="WHIT">            </span><span class="NAME">store</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">AjaxSolr.ParameterStore</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>132</span> 
+<span class='line'>133</span> </span><span class="WHIT">        </span><span class="NAME">store.addByValue</span><span class="PUNC">(</span><span class="STRN">'fq'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">self.manager.store.values</span><span class="PUNC">(</span><span class="STRN">'fq'</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>134</span> 
+<span class='line'>135</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">self.tokenized</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">          </span><span class="COMM">// Split out the last word of the term from the words before it.</span><span class="WHIT">
+<span class='line'>137</span> </span><span class="WHIT">          </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">lastSpace</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">term.lastIndexOf</span><span class="PUNC">(</span><span class="STRN">' '</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">          </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">lastSpace</span><span class="WHIT"> </span><span class="PUNC">></span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>139</span> </span><span class="WHIT">            </span><span class="NAME">fq</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">term.substring</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">lastSpace</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>140</span> </span><span class="WHIT">            </span><span class="NAME">facetPrefix</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">term.substring</span><span class="PUNC">(</span><span class="NAME">lastSpace</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>141</span> </span><span class="WHIT">            </span><span class="NAME">store.addByValue</span><span class="PUNC">(</span><span class="STRN">'fq'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'{!dismax qf='</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">self.field</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'}'</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">fq</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>142</span> </span><span class="WHIT">          </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>143</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">self.lowercase</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>145</span> </span><span class="WHIT">          </span><span class="NAME">facetPrefix</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">facetPrefix.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>147</span> 
+<span class='line'>148</span> </span><span class="WHIT">        </span><span class="NAME">store.addByValue</span><span class="PUNC">(</span><span class="STRN">'facet.field'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">self.field</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="WHIT">        </span><span class="NAME">store.addByValue</span><span class="PUNC">(</span><span class="STRN">'facet.limit'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">self.limit</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>150</span> </span><span class="WHIT">        </span><span class="NAME">store.addByValue</span><span class="PUNC">(</span><span class="STRN">'facet.prefix'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">facetPrefix</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>151</span> 
+<span class='line'>152</span> </span><span class="WHIT">        </span><span class="NAME">self.manager.executeRequest</span><span class="PUNC">(</span><span class="NAME">self.servlet</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'json.nl=arrarr&q=*:*&rows=0&facet=true&facet.mincount=1&'</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">store.string</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>153</span> </span><span class="WHIT">          </span><span class="NAME">response</span><span class="PUNC">(</span><span class="NAME">$.map</span><span class="PUNC">(</span><span class="NAME">data.facet_counts.facet_fields</span><span class="PUNC">[</span><span class="NAME">self.field</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">term</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>154</span> </span><span class="WHIT">            </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">q</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">fq</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' '</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">term</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">trim</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>155</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>156</span> </span><span class="WHIT">              </span><span class="NAME">label</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">q</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">' ('</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">term</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">')'</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>157</span> </span><span class="WHIT">              </span><span class="NAME">value</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">q</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">          </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>162</span> </span><span class="WHIT">      </span><span class="NAME">minLength</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">this.minLength</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>163</span> </span><span class="WHIT">      </span><span class="NAME">select</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">event</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">ui</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>164</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">self.set</span><span class="PUNC">(</span><span class="NAME">ui.item.value</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>165</span> </span><span class="WHIT">          </span><span class="NAME">self.manager.doRequest</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>166</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">      
+<span class='line'>167</span>       </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>171</span> 
+<span class='line'>172</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">jQuery</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>173</span> </span></pre></body></html>
