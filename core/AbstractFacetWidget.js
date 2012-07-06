@@ -10,6 +10,11 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractFacetWidget.prototype */
   {
   /**
+   * This widget will by default set the offset parameter to 0 on each request.
+   */
+  start: 0,
+
+  /**
    * The field to facet on.
    *
    * @field
@@ -254,7 +259,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     var self = this, meth = this.multivalue ? 'add' : 'set';
     return function () {
       if (self[meth].call(self, value)) {
-        self.manager.doRequest(0);
+        self.doRequest();
       }
       return false;
     }
@@ -269,7 +274,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     var self = this;
     return function () {
       if (self.remove(value)) {
-        self.manager.doRequest(0);
+        self.doRequest();
       }
       return false;
     }

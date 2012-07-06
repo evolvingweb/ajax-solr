@@ -10,6 +10,11 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractTextWidget.prototype */
   {
   /**
+   * This widget will by default set the offset parameter to 0 on each request.
+   */
+  start: 0,
+
+  /**
    * Sets the main Solr query to the given string.
    *
    * @param {String} q The new Solr query.
@@ -66,7 +71,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     var self = this;
     return function () {
       if (self.clear()) {
-        self.manager.doRequest(0);
+        self.doRequest();
       }
       return false;
     }
@@ -82,7 +87,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     var self = this;
     return function () {
       if (self.set(q)) {
-        self.manager.doRequest(0);
+        self.doRequest();
       }
       return false;
     }
