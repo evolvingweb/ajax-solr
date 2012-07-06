@@ -1,6 +1,8 @@
 (function ($) {
 
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
+  start: 0,
+
   beforeRequest: function () {
     $(this.target).html($('<img/>').attr('src', 'images/ajax-loader.gif'));
   },
@@ -25,7 +27,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     return function () {
       self.manager.store.remove('fq');
       self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
-      self.manager.doRequest(0);
+      self.doRequest();
       return false;
     };
   },
