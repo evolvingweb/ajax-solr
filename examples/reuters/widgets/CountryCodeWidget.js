@@ -37,7 +37,7 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
     $(this.target).find('#country').change(function () {
       var value = $(this).val();
       if (value && self.add(value)) {
-        self.manager.doRequest(0);
+        self.doRequest();
       }
     });
 

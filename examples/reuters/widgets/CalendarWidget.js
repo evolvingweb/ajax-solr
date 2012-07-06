@@ -17,7 +17,7 @@ AjaxSolr.CalendarWidget = AjaxSolr.AbstractFacetWidget.extend({
       },
       onSelect: function (dateText, inst) {
         if (self.add('[' + dateText + 'T00:00:00Z TO ' + dateText + 'T23:59:59Z]')) {
-          self.manager.doRequest(0);
+          self.doRequest();
         }
       }
     });

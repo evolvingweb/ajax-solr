@@ -34,8 +34,7 @@ var Manager;
     }));
     Manager.addWidget(new AjaxSolr.TextWidget({
       id: 'text',
-      target: '#search',
-      field: 'allText'
+      target: '#search'
     }));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
