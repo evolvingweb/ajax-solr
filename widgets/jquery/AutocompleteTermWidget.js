@@ -112,7 +112,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
       if (e.which == 13) {
         var q = $(this).val();
         if (self.set(q)) {
-          self.manager.doRequest(0);
+          self.doRequest();
         }
       }
     });
@@ -162,7 +162,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
       minLength: this.minLength,
       select: function(event, ui) {
         if (self.set(ui.item.value)) {
-          self.manager.doRequest(0);
+          self.doRequest();
         }      
       }
     });
