@@ -35,7 +35,6 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'text',
       target: '#search',
-      field: 'allText',
       fields: [ 'topics', 'organisations', 'exchanges' ]
     }));
     Manager.addWidget(new AjaxSolr.CountryCodeWidget({
