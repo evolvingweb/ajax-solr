@@ -5,10 +5,12 @@
  * hash to maintain the application's state.
  *
  * <p>The ParameterHashStore observes the hash for changes and loads Solr
- * parameters from the hash if it observes a change or if the hash is empty.</p>
+ * parameters from the hash if it observes a change or if the hash is empty.
+ * The onhashchange event is used if the browser supports it.</p>
  *
  * @class ParameterHashStore
  * @augments AjaxSolr.ParameterStore
+ * @see https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange
  */
 AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
   /** @lends AjaxSolr.ParameterHashStore.prototype */
@@ -50,7 +52,25 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    */
   init: function () {
     if (this.exposed.length) {
-      this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
+      // Check if the browser supports the onhashchange event
+      // IE 8 and 9 in compatibility mode report that they support onhashchange when they 
+      // really don't - Check document.documentMode to ensure it's undefined or greater 
+      // than 7.
+      if ('onhashchange' in window && (!document.documentMode || document.documentMode > 7)) {
+        if (window.addEventListener) {
+          window.addEventListener('hashchange', this.intervalFunction(this), false);
+        }
+        else if (window.attachEvent) {
+          window.attachEvent('onhashchange', this.intervalFunction(this));
+        }
+        else {
+          window.onhashchange = this.intervalFunction(this);
+        }
+      }
+      else {
+        // No onhashchange event so fall back to timer
+        this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
+      }
     }
   },
 
