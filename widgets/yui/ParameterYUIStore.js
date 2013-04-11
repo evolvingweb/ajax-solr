@@ -18,6 +18,12 @@
  * <input id="yui-history-field" type="hidden">
  * </pre>
  *
+ * Configure the manager with:
+ *
+ * <pre>
+ * Manager.setStore(new AjaxSolr.ParameterYUIStore());
+ * </pre>
+ *
  * @see http://developer.yahoo.com/yui/history/
  * @class ParameterYUIStore
  * @augments AjaxSolr.ParameterStore

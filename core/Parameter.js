@@ -170,10 +170,11 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
  * @returns {String} The escaped value.
  */
 AjaxSolr.Parameter.escapeValue = function (value) {
-  // If the field value has a space or a colon in it, wrap it in quotes,
-  // unless it is a range query or it is already wrapped in quotes.
-  if (value.match(/[ :]/) && !value.match(/[\[\{]\S+ TO \S+[\]\}]/) && !value.match(/^["\(].*["\)]$/)) {
-    return '"' + value + '"';
+  // If the field value has a space, colon, quotation mark or forward slash
+  // in it, wrap it in quotes, unless it is a range query or it is already 
+  // wrapped in quotes.
+  if (value.match(/[ :\/"]/) && !value.match(/[\[\{]\S+ TO \S+[\]\}]/) && !value.match(/^["\(].*["\)]$/)) {
+    return '"' + value.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
   }
   return value;
 }

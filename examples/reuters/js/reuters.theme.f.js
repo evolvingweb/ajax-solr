@@ -21,11 +21,11 @@ AjaxSolr.theme.prototype.snippet = function (doc) {
 };
 
 AjaxSolr.theme.prototype.tag = function (value, weight, handler) {
-  return $('<a href="#" class="tagcloud_item"/>').text(value).addClass('tagcloud_size_' + weight).click(handler);
+  return $('<a href="#" class="tagcloud_item"></a>').text(value).addClass('tagcloud_size_' + weight).click(handler);
 };
 
 AjaxSolr.theme.prototype.facet_link = function (field, value, handler) {
-  return [ field + ':', $('<a href="#"/>').text(value).click(handler) ];
+  return [ field + ':', $('<a href="#"></a>').text(value).click(handler) ];
 };
 
 AjaxSolr.theme.prototype.no_items_found = function () {

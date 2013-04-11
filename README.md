@@ -1,7 +1,6 @@
 # AJAX Solr
 
-AJAX Solr is a JavaScript library for creating user interfaces to
-[Apache Solr][1].
+AJAX Solr is a JavaScript library for creating user interfaces to [Apache Solr][1].
 
 * Play with the [demo site][5]
 * Follow the [tutorial][7]

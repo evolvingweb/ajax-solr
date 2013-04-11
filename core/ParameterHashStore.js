@@ -5,10 +5,19 @@
  * hash to maintain the application's state.
  *
  * <p>The ParameterHashStore observes the hash for changes and loads Solr
- * parameters from the hash if it observes a change or if the hash is empty.</p>
+ * parameters from the hash if it observes a change or if the hash is empty.
+ * The onhashchange event is used if the browser supports it.</p>
  *
+ *
+ * <p>Configure the manager with:</p>
+ *
+ * <pre>
+ * Manager.setStore(new AjaxSolr.ParameterHashStore());
+ * </pre>
+
  * @class ParameterHashStore
  * @augments AjaxSolr.ParameterStore
+ * @see https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange
  */
 AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
   /** @lends AjaxSolr.ParameterHashStore.prototype */
@@ -50,7 +59,22 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    */
   init: function () {
     if (this.exposed.length) {
-      this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
+      // Check if the browser supports the onhashchange event. IE 8 and 9 in compatibility mode
+      // incorrectly report support for onhashchange.
+      if ('onhashchange' in window && (!document.documentMode || document.documentMode > 7)) {
+        if (window.addEventListener) {
+          window.addEventListener('hashchange', this.intervalFunction(this), false);
+        }
+        else if (window.attachEvent) {
+          window.attachEvent('onhashchange', this.intervalFunction(this));
+        }
+        else {
+          window.onhashchange = this.intervalFunction(this);
+        }
+      }
+      else {
+        this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
+      }
     }
   },
 
@@ -61,11 +85,11 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
   save: function () {
     this.hash = this.exposedString();
     if (this.storedString()) {
-      // make a new history entry
+      // Make a new history entry.
       window.location.hash = this.hash;
     }
     else {
-      // replace the old history entry
+      // Replace the old history entry.
       window.location.replace(window.location.href.replace('#', '') + '#' + this.hash);
     }
   },
