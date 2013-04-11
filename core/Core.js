@@ -185,7 +185,7 @@ AjaxSolr.isString = function (obj) {
  */
 AjaxSolr.theme = function (func) {
   if (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func] == undefined) {
-    console.log('Theme function "' + func + '" is not defined.');
+    window.console && console.log && console.log('Theme function "' + func + '" is not defined.');
   }
   else {
     for (var i = 1, args = []; i < arguments.length; i++) {
