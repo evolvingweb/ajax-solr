@@ -47,16 +47,20 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   init: function () {
-    $('a.more').livequery(function () {
-      $(this).toggle(function () {
-        $(this).parent().find('span').show();
-        $(this).text('less');
-        return false;
-      }, function () {
-        $(this).parent().find('span').hide();
-        $(this).text('more');
-        return false;
-      });
+    $(document).on('click', 'a.more', function (event) {
+      event.preventDefault();
+
+      var $this = $(this),
+          span = $this.parent().find('span');
+
+      if (span.is(':visible')) {
+        span.hide();
+        $this.text('more');
+      }
+      else {
+        span.show();
+        $this.text('less');
+      }
     });
   }
 });
