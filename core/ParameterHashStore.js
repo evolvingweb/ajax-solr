@@ -59,10 +59,8 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    */
   init: function () {
     if (this.exposed.length) {
-      // Check if the browser supports the onhashchange event
-      // IE 8 and 9 in compatibility mode report that they support onhashchange when they 
-      // really don't - Check document.documentMode to ensure it's undefined or greater 
-      // than 7.
+      // Check if the browser supports the onhashchange event. IE 8 and 9 in compatibility mode
+      // incorrectly report support for onhashchange.
       if ('onhashchange' in window && (!document.documentMode || document.documentMode > 7)) {
         if (window.addEventListener) {
           window.addEventListener('hashchange', this.intervalFunction(this), false);
@@ -75,7 +73,6 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
         }
       }
       else {
-        // No onhashchange event so fall back to timer
         this.intervalId = window.setInterval(this.intervalFunction(this), this.interval);
       }
     }
@@ -88,11 +85,11 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
   save: function () {
     this.hash = this.exposedString();
     if (this.storedString()) {
-      // make a new history entry
+      // Make a new history entry.
       window.location.hash = this.hash;
     }
     else {
-      // replace the old history entry
+      // Replace the old history entry.
       window.location.replace(window.location.href.replace('#', '') + '#' + this.hash);
     }
   },

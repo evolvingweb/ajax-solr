@@ -25,15 +25,14 @@
     {
     init: function () {
       if (this.exposed.length) {
-  	  // Ensure History.js is loaded
         if (!history) {
-          throw new Error('ParameterHistoryStore requires History.js to be loaded');
+          throw 'ParameterHistoryStore requires History.js';
         }
-        
+
         history.Adapter.bind(window, 'statechange', this.stateChangeFunction(this));
       }
     },
-  
+
     /**
      * Stores the values of the exposed parameters in both the local hash and History.js
      * No other code should be made to change these two values.
@@ -42,19 +41,19 @@
       this.hash = this.exposedString();
       history.pushState({ params: this.hash }, null, '?' + this.hash);
     },
-  
+
     /**
      * @see ParameterStore#storedString()
      */
     storedString: function () {
       var state = history.getState();
-    
-      // Check for state in the history object
+
+      // Load the state from the History object.
       if (state.data && state.data.params) {
         return state.data.params;
       }
-      
-      // No state (eg. initial load), get state from URL  
+
+      // If initial load, load the state from the URL.
       var url = state.cleanUrl, index = url.indexOf('?');
       if (index == -1) {
         return '';
@@ -63,7 +62,7 @@
         return url.substr(index + 1);
       }
     },
-  
+
     /**
      * Called when History.js detects a state change. Checks if state is different to previous state, 
      * and if so, sends a request to Solr. This needs to check if the state has changed since it also
@@ -72,8 +71,7 @@
     stateChangeFunction: function (self) {
       return function () {
         var hash = self.storedString();
-  	  
-  	  // Check if URL has changed since last request (ie. using back/forward navigation)
+
         if (self.hash != hash) {
           self.load();
           self.manager.doRequest();
