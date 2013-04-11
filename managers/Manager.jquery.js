@@ -20,7 +20,7 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend(
     };
     if (this.proxyUrl) {
       options.url = this.proxyUrl;
-      options.data: {query: string};
+      options.data = {query: string};
       options.type = 'POST';
     }
     else {
