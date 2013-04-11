@@ -154,16 +154,17 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    * An abstract hook for child implementations.
    *
    * <p>Sends the request to Solr, i.e. to <code>this.solrUrl</code> or <code>
-   * this.proxyUrl</code>, and receives Solr's response. It should send <code>
-   * this.store.string()</code> as the Solr query, and it should pass Solr's
+   * this.proxyUrl</code>, and receives Solr's response. It should pass Solr's
    * response to <code>handleResponse()</code> for handling.</p>
    *
    * <p>See <tt>managers/Manager.jquery.js</tt> for a jQuery implementation.</p>
    *
    * @param {String} servlet The Solr servlet to send the request to.
+   * @param {String} string The query string of the request. If not set, it
+   *   should default to <code>this.store.string()</code>
    * @throws If not defined in child implementation.
    */
-  executeRequest: function (servlet) {
+  executeRequest: function (servlet, string) {
     throw 'Abstract method executeRequest must be overridden in a subclass.';
   },
 
@@ -179,5 +180,14 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     for (var widgetId in this.widgets) {
       this.widgets[widgetId].afterRequest();
     }
+  },
+
+  /**
+   * This method is executed if Solr encounters an error.
+   *
+   * @param {String} message An error message.
+   */
+  handleError: function (message) {
+    window.console && console.log && console.log(message);
   }
 });
