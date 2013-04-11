@@ -13,20 +13,21 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
         list.push({
           field: field,
           value: facet,
-          text: facet + ' (' + this.manager.response.facet_counts.facet_fields[field][facet] + ') - ' + field
+          label: facet + ' (' + this.manager.response.facet_counts.facet_fields[field][facet] + ') - ' + field
         });
       }
     }
 
     this.requestSent = false;
-    $(this.target).find('input').unautocomplete().autocomplete(list, {
-      formatItem: function(facet) {
-        return facet.text;
-      }
-    }).result(function(e, facet) {
-      self.requestSent = true;
-      if (self.manager.store.addByValue('fq', facet.field + ':' + AjaxSolr.Parameter.escapeValue(facet.value))) {
-        self.doRequest();
+    $(this.target).find('input').autocomplete('destroy').autocomplete({
+      source: list,
+      select: function(event, ui) {
+        if (ui.item) {
+          self.requestSent = true;
+          if (self.manager.store.addByValue('fq', ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value))) {
+            self.doRequest();
+          }
+        }
       }
     });
 
