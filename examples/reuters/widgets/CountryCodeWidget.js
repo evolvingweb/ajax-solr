@@ -51,7 +51,7 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
     }
     for (var value in maps) {
       var src = 'http://chart.apis.google.com/chart?chco=f5f5f5,edf0d4,6c9642,365e24,13390a&chd=t:' + chd.join(',') + '&chf=bg,s,eaf7fe&chtm=' + value + '&chld=' + chld + '&chs=350x180&cht=t';
-      $('<img/>').attr('id', this.id + value).showIf(value == 'world').attr('src', src).appendTo(this.target);
+      $('<img>').attr('id', this.id + value).showIf(value == 'world').attr('src', src).appendTo(this.target);
     }
   }
 });

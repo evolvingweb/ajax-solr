@@ -9,7 +9,7 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
 
     var q = this.manager.store.get('q').val();
     if (q != '*:*') {
-      links.push($('<a href="#"/>').text('(x) ' + q).click(function () {
+      links.push($('<a href="#"></a>').text('(x) ' + q).click(function () {
         self.manager.store.get('q').val('*:*');
         self.doRequest();
         return false;
@@ -21,15 +21,15 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
       if (fq[i].match(/[\[\{]\S+ TO \S+[\]\}]/)) {
         var field = fq[i].match(/^\w+:/)[0];
         var value = fq[i].substr(field.length + 1, 10);
-        links.push($('<a href="#"/>').text('(x) ' + field + value).click(self.removeFacet(fq[i])));
+        links.push($('<a href="#"></a>').text('(x) ' + field + value).click(self.removeFacet(fq[i])));
       }
       else {
-        links.push($('<a href="#"/>').text('(x) ' + fq[i]).click(self.removeFacet(fq[i])));
+        links.push($('<a href="#"></a>').text('(x) ' + fq[i]).click(self.removeFacet(fq[i])));
       }
     }
 
     if (links.length > 1) {
-      links.unshift($('<a href="#"/>').text('remove all').click(function () {
+      links.unshift($('<a href="#"></a>').text('remove all').click(function () {
         self.manager.store.get('q').val('*:*');
         self.manager.store.remove('fq');
         self.doRequest();

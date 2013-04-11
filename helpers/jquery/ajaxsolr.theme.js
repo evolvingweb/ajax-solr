@@ -12,7 +12,7 @@
 AjaxSolr.theme.prototype.list_items = function (list, items, separator) {
   jQuery(list).empty();
   for (var i = 0, l = items.length; i < l; i++) {
-    var li = jQuery('<li/>');
+    var li = jQuery('<li></li>');
     if (AjaxSolr.isArray(items[i])) {
       for (var j = 0, m = items[i].length; j < m; j++) {
         if (separator && j > 0) {
