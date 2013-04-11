@@ -8,6 +8,13 @@
  * parameters from the hash if it observes a change or if the hash is empty.
  * The onhashchange event is used if the browser supports it.</p>
  *
+ *
+ * <p>Configure the manager with:</p>
+ *
+ * <pre>
+ * Manager.setStore(new AjaxSolr.ParameterHashStore());
+ * </pre>
+
  * @class ParameterHashStore
  * @augments AjaxSolr.ParameterStore
  * @see https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange
