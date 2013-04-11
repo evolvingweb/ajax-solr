@@ -47,9 +47,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   init: function () {
-    $(document).on('click', 'a.more', function (event) {
-      event.preventDefault();
-
+    $(document).on('click', 'a.more', function () {
       var $this = $(this),
           span = $this.parent().find('span');
 
@@ -61,6 +59,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         span.show();
         $this.text('less');
       }
+
+      return false;
     });
   }
 });
