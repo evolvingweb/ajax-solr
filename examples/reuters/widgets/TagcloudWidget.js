@@ -3,7 +3,7 @@
 AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
   afterRequest: function () {
     if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
-      $(this.target).html(AjaxSolr.theme('no_items_found'));
+      $(this.target).html('no items found in current selection');
       return;
     }
 
@@ -23,7 +23,12 @@ AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
     $(this.target).empty();
     for (var i = 0, l = objectedItems.length; i < l; i++) {
       var facet = objectedItems[i].facet;
-      $(this.target).append(AjaxSolr.theme('tag', facet, parseInt(objectedItems[i].count / maxCount * 10), this.clickHandler(facet)));
+      $(this.target).append(
+        $('<a href="#" class="tagcloud_item"></a>')
+        .text(facet)
+        .addClass('tagcloud_size_' + parseInt(objectedItems[i].count / maxCount * 10))
+        .click(this.clickHandler(facet))
+      );
     }
   }
 });
