@@ -3,8 +3,6 @@
 /**
  * Interacts with Solr's SpellCheckComponent.
  *
- * <p>Requires <tt>String#strtr</tt> defined in <tt>ajaxsolr.support.js</tt>.
- *
  * @see http://wiki.apache.org/solr/SpellCheckComponent
  *
  * @class AbstractSpellcheckWidget
@@ -29,11 +27,11 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    * @returns {String} A suggested query.
    */
   suggestion: function () {
-    var replacePairs = {};
+    var suggestion = this.manager.response.responseHeader.params['spellcheck.q'];
     for (var word in this.suggestions) {
-      replacePairs[word] = this.suggestions[word][0];
+      suggestion = suggestion.replace(new RegExp(word, 'g'), this.suggestions[word][0]);
     }
-    return this.manager.response.responseHeader.params['spellcheck.q'].strtr(replacePairs);
+    return suggestion;
   },
 
   beforeRequest: function () {
