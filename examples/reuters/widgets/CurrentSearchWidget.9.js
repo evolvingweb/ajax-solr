@@ -38,10 +38,18 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     }
 
     if (links.length) {
-      AjaxSolr.theme('list_items', this.target, links);
+      var $target = $(this.target);
+      $target.empty();
+      for (var i = 0, l = links.length; i < l; i++) {
+        var $li = jQuery('<li></li>');
+        if (this.separator && i > 0) {
+          $li.append(this.separator);
+        }
+        $target.append($li.append(links[i]));
+      }
     }
     else {
-      $(this.target).html('<div>Viewing all documents!</div>');
+      $(this.target).html('<li>Viewing all documents!</li>');
     }
   },
 
