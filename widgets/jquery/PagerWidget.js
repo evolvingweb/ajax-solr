@@ -238,7 +238,16 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
     if (this.totalPages) {
       links.unshift(this.pageLinkOrSpan(this.previousPage(), [ 'pager-disabled', 'pager-prev' ], this.prevLabel));
       links.push(this.pageLinkOrSpan(this.nextPage(), [ 'pager-disabled', 'pager-next' ], this.nextLabel));
-      AjaxSolr.theme('list_items', this.target, links, this.separator);
+
+      var $target = $(this.target);
+      $target.empty();
+      for (var i = 0, l = links.length; i < l; i++) {
+        var $li = jQuery('<li></li>');
+        if (this.separator && i > 0) {
+          $li.append(this.separator);
+        }
+        $target.append($li.append(links[i]));
+      }
     }
   },
 
