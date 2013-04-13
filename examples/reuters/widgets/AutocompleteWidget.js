@@ -52,7 +52,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       params.push('fq=' + encodeURIComponent(values[i]));
     }
     params.push('q=' + this.manager.store.get('q').val());
-    jQuery.getJSON(this.manager.solrUrl + 'select?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
+    $.getJSON(this.manager.solrUrl + 'select?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
   }
 });
 

@@ -12,10 +12,15 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     if (facet_values) {
       for (var i = 0, l = facet_values.length; i < l; i++) {
         if (facet_values[i] !== undefined) {
-          links.push(AjaxSolr.theme('facet_link', facet_field, facet_values[i], this.facetHandler(facet_field, facet_values[i])));
+          links = links.concat([
+            facet_field + ':',
+            $('<a href="#"></a>')
+            .text(facet_values[i])
+            .click(this.facetHandler(facet_field, facet_values[i]))
+          ]);
         }
         else {
-          links.push(AjaxSolr.theme('no_items_found'));
+          links.push('no items found in current selection');
         }
       }
     }
@@ -36,14 +41,36 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     $(this.target).empty();
     for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
       var doc = this.manager.response.response.docs[i];
-      $(this.target).append(AjaxSolr.theme('result', doc, AjaxSolr.theme('snippet', doc)));
+      $(this.target).append(this.template(doc));
 
       var items = [];
       items = items.concat(this.facetLinks('topics', doc.topics));
       items = items.concat(this.facetLinks('organisations', doc.organisations));
       items = items.concat(this.facetLinks('exchanges', doc.exchanges));
-      AjaxSolr.theme('list_items', '#links_' + doc.id, items);
+
+      var $links = $('#links_' + doc.id);
+      $links.empty();
+      for (var j = 0, m = items.length; j < m; j++) {
+        $links.append($('<li></li>').append(items[j]));
+      }
     }
+  },
+
+  template: function (doc) {
+    var snippet = '';
+    if (doc.text.length > 300) {
+      snippet += doc.dateline + ' ' + doc.text.substring(0, 300);
+      snippet += '<span style="display:none;">' + doc.text.substring(300);
+      snippet += '</span> <a href="#" class="more">more</a>';
+    }
+    else {
+      snippet += doc.dateline + ' ' + doc.text;
+    }
+
+    var output = '<div><h2>' + doc.title + '</h2>';
+    output += '<p id="links_' + doc.id + '" class="links"></p>';
+    output += '<p>' + snippet + '</p></div>';
+    return output;
   },
 
   init: function () {

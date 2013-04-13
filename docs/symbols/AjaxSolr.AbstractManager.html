@@ -215,11 +215,11 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AjaxSolr.ParameterHashStore.html">AjaxSolr.ParameterHashStore</a></li>
 	
+	<li><a href="../symbols/AjaxSolr.ParameterHistoryStore.html">AjaxSolr.ParameterHistoryStore</a></li>
+	
 	<li><a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a></li>
 	
 	<li><a href="../symbols/AjaxSolr.ParameterYUIStore.html">AjaxSolr.ParameterYUIStore</a></li>
-	
-	<li><a href="../symbols/String.html">String</a></li>
 	
 </ul>
 <hr />
@@ -394,9 +394,18 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#executeRequest">executeRequest</a></b>(servlet)
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#executeRequest">executeRequest</a></b>(servlet, string)
 								</div>
 								<div class="description">An abstract hook for child implementations.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#handleError">handleError</a></b>(message)
+								</div>
+								<div class="description">This method is executed if Solr encounters an error.</div>
 							</td>
 						</tr>
 					
@@ -515,7 +524,7 @@ ul.inheritsList
 					<a name="proxyUrl"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<span class="light">{String}</span>
 					<b>proxyUrl</b>
 					
 					</div>
@@ -559,7 +568,7 @@ ul.inheritsList
 					<a name="servlet"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<span class="light">{String}</span>
 					<b>servlet</b>
 					
 					</div>
@@ -588,7 +597,7 @@ ul.inheritsList
 					<a name="solrUrl"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/String.html">String</a>}</span>
+					<span class="light">{String}</span>
 					<b>solrUrl</b>
 					
 					</div>
@@ -728,7 +737,7 @@ ul.inheritsList
 								<dd>The Solr start offset parameter.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>servlet</b>
+									<span class="light fixedFont">{String}</span> <b>servlet</b>
 									<i>Optional</i>
 								</dt>
 								<dd>The Solr servlet to send the request to.</dd>
@@ -748,11 +757,11 @@ ul.inheritsList
 					<div class="fixedFont">
 					
 					
-					<b>executeRequest</b>(servlet)
+					<b>executeRequest</b>(servlet, string)
 					
 					</div>
 					<div class="description">
-						An abstract hook for child implementations.<p>Sends the request to Solr, i.e. to <code>this.solrUrl</code> or <code>this.proxyUrl</code>, and receives Solr's response. It should send <code>this.store.string()</code> as the Solr query, and it should pass Solr'sresponse to <code>handleResponse()</code> for handling.</p><p>See <tt>managers/Manager.jquery.js</tt> for a jQuery implementation.</p>
+						An abstract hook for child implementations.<p>Sends the request to Solr, i.e. to <code>this.solrUrl</code> or <code>this.proxyUrl</code>, and receives Solr's response. It should pass Solr'sresponse to <code>handleResponse()</code> for handling.</p><p>See <tt>managers/Manager.jquery.js</tt> for a jQuery implementation.</p>
 						
 						
 					</div>
@@ -764,10 +773,16 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>servlet</b>
+									<span class="light fixedFont">{String}</span> <b>servlet</b>
 									
 								</dt>
 								<dd>The Solr servlet to send the request to.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>string</b>
+									
+								</dt>
+								<dd>The query string of the request. If not set, it  should default to <code>this.store.string()</code></dd>
 							
 							</dl>
 						
@@ -783,6 +798,42 @@ ul.inheritsList
 								<dd>If not defined in child implementation.</dd>
 							
 							</dl>
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="handleError"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>handleError</b>(message)
+					
+					</div>
+					<div class="description">
+						This method is executed if Solr encounters an error.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>message</b>
+									
+								</dt>
+								<dd>An error message.</dd>
+							
+							</dl>
+						
+						
+						
 						
 						
 						
@@ -899,7 +950,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Fri Jul 06 2012 11:11:47 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Apr 13 2013 18:24:20 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

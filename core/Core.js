@@ -32,170 +32,6 @@ AjaxSolr.Class.extend = function (properties) {
 };
 
 /**
- * @static
- * @param {Object} obj Any object.
- * @returns {Number} the number of properties on an object.
- * @see http://stackoverflow.com/questions/5223/length-of-javascript-associative-array
- */
-AjaxSolr.size = function (obj) {
-  var size = 0;
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      size++;
-    }
-  }
-  return size;
-};
-
-/**
- * @static
- * @param foo A value.
- * @param bar A value.
- * @returns {Boolean} Whether the two given values are equal.
- */
-AjaxSolr.equals = function (foo, bar) {
-  if (AjaxSolr.isArray(foo) && AjaxSolr.isArray(bar)) {
-    if (foo.length !== bar.length) {
-      return false;
-    }
-    for (var i = 0, l = foo.length; i < l; i++) {
-      if (foo[i] !== bar[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  else if (AjaxSolr.isRegExp(foo) && AjaxSolr.isString(bar)) {
-    return bar.match(foo);
-  }
-  else if (AjaxSolr.isRegExp(bar) && AjaxSolr.isString(foo)) {
-    return foo.match(bar);
-  }
-  else {
-    return foo === bar;
-  }
-};
-
-/**
- * @static
- * @param value A value.
- * @param array An array.
- * @returns {Boolean} Whether value exists in the array.
- */
-AjaxSolr.inArray = function (value, array) {
-  if (array) {
-    for (var i = 0, l = array.length; i < l; i++) {
-      if (AjaxSolr.equals(array[i], value)) {
-        return i;
-      }
-    }
-  }
-  return -1;
-};
-
-/**
- * A copy of MooTools' Array.flatten function.
- *
- * @static
- * @see http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools.js
- */
-AjaxSolr.flatten = function(array) {
-  var ret = [];
-  for (var i = 0, l = array.length; i < l; i++) {
-    ret = ret.concat(AjaxSolr.isArray(array[i]) ? AjaxSolr.flatten(array[i]) : array[i]);
-  }
-  return ret;
-};
-
-/**
- * A copy of jQuery's jQuery.grep function.
- *
- * @static
- * @see http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js
- */
-AjaxSolr.grep = function(array, callback) {
-  var ret = [];
-  for (var i = 0, l = array.length; i < l; i++) {
-    if (!callback(array[i], i) === false) {
-      ret.push(array[i]);
-    }
-  }
-  return ret;
-}
-
-/**
- * Equivalent to Ruby's Array#compact.
- */
-AjaxSolr.compact = function(array) {
-  return AjaxSolr.grep(array, function (item) {
-    return item.toString();
-  });
-}
-
-/**
- * Can't use toString.call(obj) === "[object Array]", as it may return
- * "[xpconnect wrapped native prototype]", which is undesirable.
- *
- * @static
- * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
- * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
- */
-AjaxSolr.isArray = function (obj) {
-  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
-};
-
-/**
- * @param obj Any object.
- * @returns {Boolean} Whether the object is a RegExp object.
- */
-AjaxSolr.isRegExp = function (obj) {
-  return obj != null && (typeof obj == 'object' || typeof obj == 'function') && 'ignoreCase' in obj;
-};
-
-/**
- * @param obj Any object.
- * @returns {Boolean} Whether the object is a String object.
- */
-AjaxSolr.isString = function (obj) {
-  return obj != null && typeof obj == 'string';
-};
-
-/**
- * Define theme functions to separate, as much as possible, your HTML from your
- * JavaScript. Theme functions provided by AJAX Solr are defined in the
- * AjaxSolr.theme.prototype namespace, e.g. AjaxSolr.theme.prototype.select_tag.
- *
- * To override a theme function provided by AJAX Solr, define a function of the
- * same name in the AjaxSolr.theme namespace, e.g. AjaxSolr.theme.select_tag.
- *
- * To retrieve the HTML output by AjaxSolr.theme.prototype.select_tag(...), call
- * AjaxSolr.theme('select_tag', ...).
- *
- * @param {String} func
- *   The name of the theme function to call.
- * @param ...
- *   Additional arguments to pass along to the theme function.
- * @returns
- *   Any data the theme function returns. This could be a plain HTML string,
- *   but also a complex object.
- *
- * @static
- * @throws Exception if the theme function is not defined.
- * @see http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js?revision=1.58
- */
-AjaxSolr.theme = function (func) {
-  if (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func] == undefined) {
-    window.console && console.log && console.log('Theme function "' + func + '" is not defined.');
-  }
-  else {
-    for (var i = 1, args = []; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-    return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
-  }
-};
-
-/**
  * A simplified version of jQuery's extend function.
  *
  * @static
@@ -231,4 +67,78 @@ AjaxSolr.extend = function () {
     }
   }
   return target;
+};
+
+/**
+ * @static
+ * @param value A value.
+ * @param array An array.
+ * @returns {Boolean} Whether value exists in the array.
+ */
+AjaxSolr.inArray = function (value, array) {
+  if (array) {
+    for (var i = 0, l = array.length; i < l; i++) {
+      if (AjaxSolr.equals(array[i], value)) {
+        return i;
+      }
+    }
+  }
+  return -1;
+};
+
+/**
+ * @static
+ * @param foo A value.
+ * @param bar A value.
+ * @returns {Boolean} Whether the two given values are equal.
+ */
+AjaxSolr.equals = function (foo, bar) {
+  if (AjaxSolr.isArray(foo) && AjaxSolr.isArray(bar)) {
+    if (foo.length !== bar.length) {
+      return false;
+    }
+    for (var i = 0, l = foo.length; i < l; i++) {
+      if (foo[i] !== bar[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  else if (AjaxSolr.isRegExp(foo) && AjaxSolr.isString(bar)) {
+    return bar.match(foo);
+  }
+  else if (AjaxSolr.isRegExp(bar) && AjaxSolr.isString(foo)) {
+    return foo.match(bar);
+  }
+  else {
+    return foo === bar;
+  }
+};
+
+/**
+ * Can't use toString.call(obj) === "[object Array]", as it may return
+ * "[xpconnect wrapped native prototype]", which is undesirable.
+ *
+ * @static
+ * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
+ * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
+ */
+AjaxSolr.isArray = function (obj) {
+  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
+};
+
+/**
+ * @param obj Any object.
+ * @returns {Boolean} Whether the object is a RegExp object.
+ */
+AjaxSolr.isRegExp = function (obj) {
+  return obj != null && (typeof obj == 'object' || typeof obj == 'function') && 'ignoreCase' in obj;
+};
+
+/**
+ * @param obj Any object.
+ * @returns {Boolean} Whether the object is a String object.
+ */
+AjaxSolr.isString = function (obj) {
+  return obj != null && typeof obj == 'string';
 };

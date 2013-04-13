@@ -2,6 +2,8 @@
 
 AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
   afterRequest: function () {
+    var self = this;
+
     $(this.target).empty();
 
     var maps = {
@@ -13,10 +15,10 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
       south_america: 'view South America',
       usa: 'view North America'
     };
-    $(this.target).append(AjaxSolr.theme('select_tag', 'region', AjaxSolr.theme('options_for_select', maps)));
+    $(this.target).append(this.template('region', maps));
 
     $(this.target).find('#region').change(function () {
-      $(this.target).find('img').hide();
+      $(self.target).find('img').hide();
       $('#' + self.id + $(this).val()).show();
     });
 
@@ -31,9 +33,8 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
         options[facet] = facet + ' (' + count + ')';
       }
     }
-    $(this.target).append(AjaxSolr.theme('select_tag', 'country', AjaxSolr.theme('options_for_select', options)));
+    $(this.target).append(this.template('country', options));
 
-    var self = this;
     $(this.target).find('#country').change(function () {
       var value = $(this).val();
       if (value && self.add(value)) {
@@ -53,6 +54,14 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
       var src = 'http://chart.apis.google.com/chart?chco=f5f5f5,edf0d4,6c9642,365e24,13390a&chd=t:' + chd.join(',') + '&chf=bg,s,eaf7fe&chtm=' + value + '&chld=' + chld + '&chs=350x180&cht=t';
       $('<img>').attr('id', this.id + value).showIf(value == 'world').attr('src', src).appendTo(this.target);
     }
+  },
+
+  template: function (name, container) {
+    var options = [];
+    for (var value in container) {
+      options.push('<option value="' + value +'">' + container[value] + '</option>');
+    }
+    return '<select id="' + name + '" name="' + name + '">' + options.join('\n') + '</select>';
   }
 });
 

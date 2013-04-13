@@ -120,7 +120,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
     $(this.target).find('input').autocomplete({
       source: function (request, response) { // note: must always call response()
         // If term ends with a space:
-        if (request.term.charAt(request.term.length - 1).trim() == '') {
+        if (request.term.charAt(request.term.length - 1).replace(/^ +/, '').replace(/ +$/, '') == '') {
           response();
           return;
         }
@@ -151,7 +151,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
 
         self.manager.executeRequest(self.servlet, 'json.nl=arrarr&q=*:*&rows=0&facet=true&facet.mincount=1&' + store.string(), function (data) {
           response($.map(data.facet_counts.facet_fields[self.field], function (term) {
-            var q = (fq + ' ' + term[0]).trim();
+            var q = (fq + ' ' + term[0]).replace(/^ +/, '').replace(/ +$/, '');
             return {
               label: q + ' (' + term[1] + ')',
               value: q

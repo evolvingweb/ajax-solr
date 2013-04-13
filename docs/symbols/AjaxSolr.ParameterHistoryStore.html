@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - AjaxSolr.AbstractSpellcheckWidget</title>
+		<title>JsDoc Reference - AjaxSolr.ParameterHistoryStore</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,25 +230,25 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class AjaxSolr.AbstractSpellcheckWidget
+				Class AjaxSolr.ParameterHistoryStore
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				<br />Extends
-					<a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>.<br />
+					<a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>.<br />
 				
 			
-				AbstractSpellcheckWidget
+				ParameterHistoryStore
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/ajaxsolr_core_AbstractSpellcheckWidget.js.html">AbstractSpellcheckWidget.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/ajaxsolr_widgets_ParameterHistoryStore.js.html">ParameterHistoryStore.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.AbstractSpellcheckWidget.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AjaxSolr.ParameterHistoryStore.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -261,9 +261,10 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#constructor">AjaxSolr.AbstractSpellcheckWidget</a></b>()
+								<b><a href="../symbols/AjaxSolr.ParameterHistoryStore.html#constructor">AjaxSolr.ParameterHistoryStore</a></b>()
 							</div>
-							<div class="description">Interacts with Solr's SpellCheckComponent.</div>
+							<div class="description">A parameter store that stores the values of exposed parameters in the URL via History.js
+to maintain the application's state.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -274,33 +275,10 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractSpellcheckWidget.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#suggestions">suggestions</a></b>
-								</div>
-								<div class="description">The suggestions.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#servlet">servlet</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#start">start</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#exposed">exposed</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#manager">manager</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#params">params</a></dd>
 				</dl>
 				
 			
@@ -309,7 +287,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.AbstractSpellcheckWidget.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AjaxSolr.ParameterHistoryStore.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -322,7 +300,7 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#afterRequest">afterRequest</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHistoryStore.html#init">init</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -331,27 +309,28 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#beforeRequest">beforeRequest</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHistoryStore.html#save">save</a></b>()
+								</div>
+								<div class="description">Stores the values of the exposed parameters in both the local hash and History.js
+No other code should be made to change these two values.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHistoryStore.html#stateChangeFunction">stateChangeFunction</a></b>(self)
+								</div>
+								<div class="description">Called when History.js detects a state change.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHistoryStore.html#storedString">storedString</a></b>()
 								</div>
 								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#handleSuggestions">handleSuggestions</a></b>()
-								</div>
-								<div class="description">An abstract hook for child implementations.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractSpellcheckWidget.html#suggestion">suggestion</a></b>()
-								</div>
-								<div class="description">Uses the top suggestion for each word to return a suggested query.</div>
 							</td>
 						</tr>
 					
@@ -361,7 +340,7 @@ ul.inheritsList
 				
 				
 				<dl class="inheritsList">
-				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#doRequest">doRequest</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#init">init</a></dd>
+				<dt>Methods borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#add">add</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#addByValue">addByValue</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedReset">exposedReset</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#exposedString">exposedString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#find">find</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#get">get</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#isMultiple">isMultiple</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#load">load</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#parseString">parseString</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#remove">remove</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#removeByValue">removeByValue</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#string">string</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#values">values</a></dd>
 				</dl>
 				
 			
@@ -376,11 +355,24 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>AjaxSolr.AbstractSpellcheckWidget</b>()
+						<b>AjaxSolr.ParameterHistoryStore</b>()
 				</div>
 				
 				<div class="description">
-					Interacts with Solr's SpellCheckComponent.
+					A parameter store that stores the values of exposed parameters in the URL via History.js
+to maintain the application's state. This uses the HTML5 History API for newer browsers, and 
+falls back to using the hash in older browsers. Don't forget to add the following (or similar)
+inside your <tt>head</tt> tag:
+
+<pre>
+<script src="history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
+</pre>
+
+Configure the manager with:
+
+<pre>
+Manager.setStore(new AjaxSolr.ParameterHistoryStore());
+</pre>
 					
 				</div>
 				
@@ -397,7 +389,9 @@ ul.inheritsList
 						<dl class="detailList">
 						<dt class="heading">See:</dt>
 						
-							<dd>http://wiki.apache.org/solr/SpellCheckComponent</dd>
+							<dd>https://github.com/browserstate/history.js</dd>
+						
+							<dd>http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html</dd>
 						
 						</dl>
 					
@@ -407,33 +401,6 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="suggestions"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>suggestions</b>
-					
-					</div>
-					<div class="description">
-						The suggestions.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -441,11 +408,11 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="afterRequest"> </a>
+					<a name="init"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>afterRequest</b>()
+					<b>init</b>()
 					
 					</div>
 					<div class="description">
@@ -466,15 +433,16 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="beforeRequest"> </a>
+					<a name="save"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>beforeRequest</b>()
+					<b>save</b>()
 					
 					</div>
 					<div class="description">
-						
+						Stores the values of the exposed parameters in both the local hash and History.js
+No other code should be made to change these two values.
 						
 						
 					</div>
@@ -491,23 +459,34 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="handleSuggestions"> </a>
+					<a name="stateChangeFunction"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>handleSuggestions</b>()
+					<b>stateChangeFunction</b>(self)
 					
 					</div>
 					<div class="description">
-						An abstract hook for child implementations.
-
-<p>Allow the child to handle the suggestions without parsing the response.</p>
+						Called when History.js detects a state change. Checks if state is different to previous state, 
+and if so, sends a request to Solr. This needs to check if the state has changed since it also
+gets called when we call pushState above.
 						
 						
 					</div>
 					
 					
 					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>self</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
 						
 						
 						
@@ -518,34 +497,34 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name="suggestion"> </a>
+					<a name="storedString"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{String}</span>
-					<b>suggestion</b>()
+					
+					<b>storedString</b>()
 					
 					</div>
 					<div class="description">
-						Uses the top suggestion for each word to return a suggested query.
+						
 						
 						
 					</div>
 					
 					
 					
+						
+						
 						
 						
 						
 						
 						
 							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
+							<dt class="heading">See:</dt>
 							
-								<dd><span class="light fixedFont">{String}</span> A suggested query.</dd>
+								<dd>ParameterStore#storedString()</dd>
 							
 							</dl>
-						
-						
 						
 
 					
@@ -562,7 +541,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Apr 13 2013 18:24:20 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Apr 13 2013 18:24:21 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

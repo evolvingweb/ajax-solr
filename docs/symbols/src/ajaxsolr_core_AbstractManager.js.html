@@ -161,31 +161,41 @@
 <span class='line'>154</span>    * An abstract hook for child implementations.
 <span class='line'>155</span>    *
 <span class='line'>156</span>    * &lt;p>Sends the request to Solr, i.e. to &lt;code>this.solrUrl&lt;/code> or &lt;code>
-<span class='line'>157</span>    * this.proxyUrl&lt;/code>, and receives Solr's response. It should send &lt;code>
-<span class='line'>158</span>    * this.store.string()&lt;/code> as the Solr query, and it should pass Solr's
-<span class='line'>159</span>    * response to &lt;code>handleResponse()&lt;/code> for handling.&lt;/p>
-<span class='line'>160</span>    *
-<span class='line'>161</span>    * &lt;p>See &lt;tt>managers/Manager.jquery.js&lt;/tt> for a jQuery implementation.&lt;/p>
-<span class='line'>162</span>    *
-<span class='line'>163</span>    * @param {String} servlet The Solr servlet to send the request to.
-<span class='line'>164</span>    * @throws If not defined in child implementation.
-<span class='line'>165</span>    */</span><span class="WHIT">
-<span class='line'>166</span> </span><span class="WHIT">  </span><span class="NAME">executeRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">servlet</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>167</span> </span><span class="WHIT">    </span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="STRN">'Abstract method executeRequest must be overridden in a subclass.'</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>168</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>169</span> 
-<span class='line'>170</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>171</span>    * This method is executed after the Solr response data arrives. Allows each
-<span class='line'>172</span>    * widget to handle Solr's response separately.
-<span class='line'>173</span>    *
-<span class='line'>174</span>    * @param {Object} data The Solr response.
-<span class='line'>175</span>    */</span><span class="WHIT">
-<span class='line'>176</span> </span><span class="WHIT">  </span><span class="NAME">handleResponse</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>177</span> </span><span class="WHIT">    </span><span class="NAME">this.response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">data</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>178</span> 
-<span class='line'>179</span> </span><span class="WHIT">    </span><span class="KEYW">for</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">widgetId</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">this.widgets</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>180</span> </span><span class="WHIT">      </span><span class="NAME">this.widgets</span><span class="PUNC">[</span><span class="NAME">widgetId</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">afterRequest</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>181</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>182</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>183</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>184</span> </span></pre></body></html>
+<span class='line'>157</span>    * this.proxyUrl&lt;/code>, and receives Solr's response. It should pass Solr's
+<span class='line'>158</span>    * response to &lt;code>handleResponse()&lt;/code> for handling.&lt;/p>
+<span class='line'>159</span>    *
+<span class='line'>160</span>    * &lt;p>See &lt;tt>managers/Manager.jquery.js&lt;/tt> for a jQuery implementation.&lt;/p>
+<span class='line'>161</span>    *
+<span class='line'>162</span>    * @param {String} servlet The Solr servlet to send the request to.
+<span class='line'>163</span>    * @param {String} string The query string of the request. If not set, it
+<span class='line'>164</span>    *   should default to &lt;code>this.store.string()&lt;/code>
+<span class='line'>165</span>    * @throws If not defined in child implementation.
+<span class='line'>166</span>    */</span><span class="WHIT">
+<span class='line'>167</span> </span><span class="WHIT">  </span><span class="NAME">executeRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">servlet</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">string</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="WHIT">    </span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="STRN">'Abstract method executeRequest must be overridden in a subclass.'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>170</span> 
+<span class='line'>171</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>172</span>    * This method is executed after the Solr response data arrives. Allows each
+<span class='line'>173</span>    * widget to handle Solr's response separately.
+<span class='line'>174</span>    *
+<span class='line'>175</span>    * @param {Object} data The Solr response.
+<span class='line'>176</span>    */</span><span class="WHIT">
+<span class='line'>177</span> </span><span class="WHIT">  </span><span class="NAME">handleResponse</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>178</span> </span><span class="WHIT">    </span><span class="NAME">this.response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">data</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>179</span> 
+<span class='line'>180</span> </span><span class="WHIT">    </span><span class="KEYW">for</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">widgetId</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">this.widgets</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>181</span> </span><span class="WHIT">      </span><span class="NAME">this.widgets</span><span class="PUNC">[</span><span class="NAME">widgetId</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">afterRequest</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>182</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>183</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>184</span> 
+<span class='line'>185</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>186</span>    * This method is executed if Solr encounters an error.
+<span class='line'>187</span>    *
+<span class='line'>188</span>    * @param {String} message An error message.
+<span class='line'>189</span>    */</span><span class="WHIT">
+<span class='line'>190</span> </span><span class="WHIT">  </span><span class="NAME">handleError</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">message</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>191</span> </span><span class="WHIT">    </span><span class="NAME">window.console</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">console.log</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">console.log</span><span class="PUNC">(</span><span class="NAME">message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>192</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>193</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>194</span> </span></pre></body></html>
