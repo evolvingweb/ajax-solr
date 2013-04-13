@@ -2,6 +2,8 @@
 
 AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
   afterRequest: function () {
+    var self = this;
+
     $(this.target).empty();
 
     var maxCount = 0;
@@ -15,15 +17,22 @@ AjaxSolr.CountryCodeWidget = AjaxSolr.AbstractFacetWidget.extend({
         options[facet] = facet + ' (' + count + ')';
       }
     }
-    $(this.target).append(AjaxSolr.theme('select_tag', 'country', AjaxSolr.theme('options_for_select', options)));
+    $(this.target).append(this.template('country', options));
 
-    var self = this;
     $(this.target).find('#country').change(function () {
       var value = $(this).val();
       if (value && self.add(value)) {
         self.doRequest();
       }
     });
+  },
+
+  template: function (name, container) {
+    var options = [];
+    for (var value in container) {
+      options.push('<option value="' + value +'">' + container[value] + '</option>');
+    }
+    return '<select id="' + name + '" name="' + name + '">' + options.join('\n') + '</select>';
   }
 });
 
