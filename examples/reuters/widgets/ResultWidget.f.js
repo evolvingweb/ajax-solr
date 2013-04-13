@@ -51,11 +51,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       var $links = $('#links_' + doc.id);
       $links.empty();
       for (var j = 0, m = items.length; j < m; j++) {
-        var $li = jQuery('<li></li>');
-        if (this.separator && j > 0) {
-          $li.append(this.separator);
-        }
-        $links.append($li.append(items[j]));
+        $links.append($('<li></li>').append(items[j]));
       }
     }
   },
