@@ -33,22 +33,6 @@ AjaxSolr.Class.extend = function (properties) {
 
 /**
  * @static
- * @param {Object} obj Any object.
- * @returns {Number} the number of properties on an object.
- * @see http://stackoverflow.com/questions/5223/length-of-javascript-associative-array
- */
-AjaxSolr.size = function (obj) {
-  var size = 0;
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      size++;
-    }
-  }
-  return size;
-};
-
-/**
- * @static
  * @param foo A value.
  * @param bar A value.
  * @returns {Boolean} Whether the two given values are equal.
@@ -94,45 +78,6 @@ AjaxSolr.inArray = function (value, array) {
 };
 
 /**
- * A copy of MooTools' Array.flatten function.
- *
- * @static
- * @see http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools.js
- */
-AjaxSolr.flatten = function(array) {
-  var ret = [];
-  for (var i = 0, l = array.length; i < l; i++) {
-    ret = ret.concat(AjaxSolr.isArray(array[i]) ? AjaxSolr.flatten(array[i]) : array[i]);
-  }
-  return ret;
-};
-
-/**
- * A copy of jQuery's jQuery.grep function.
- *
- * @static
- * @see http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js
- */
-AjaxSolr.grep = function(array, callback) {
-  var ret = [];
-  for (var i = 0, l = array.length; i < l; i++) {
-    if (!callback(array[i], i) === false) {
-      ret.push(array[i]);
-    }
-  }
-  return ret;
-}
-
-/**
- * Equivalent to Ruby's Array#compact.
- */
-AjaxSolr.compact = function(array) {
-  return AjaxSolr.grep(array, function (item) {
-    return item.toString();
-  });
-}
-
-/**
  * Can't use toString.call(obj) === "[object Array]", as it may return
  * "[xpconnect wrapped native prototype]", which is undesirable.
  *
@@ -158,41 +103,6 @@ AjaxSolr.isRegExp = function (obj) {
  */
 AjaxSolr.isString = function (obj) {
   return obj != null && typeof obj == 'string';
-};
-
-/**
- * Define theme functions to separate, as much as possible, your HTML from your
- * JavaScript. Theme functions provided by AJAX Solr are defined in the
- * AjaxSolr.theme.prototype namespace, e.g. AjaxSolr.theme.prototype.select_tag.
- *
- * To override a theme function provided by AJAX Solr, define a function of the
- * same name in the AjaxSolr.theme namespace, e.g. AjaxSolr.theme.select_tag.
- *
- * To retrieve the HTML output by AjaxSolr.theme.prototype.select_tag(...), call
- * AjaxSolr.theme('select_tag', ...).
- *
- * @param {String} func
- *   The name of the theme function to call.
- * @param ...
- *   Additional arguments to pass along to the theme function.
- * @returns
- *   Any data the theme function returns. This could be a plain HTML string,
- *   but also a complex object.
- *
- * @static
- * @throws Exception if the theme function is not defined.
- * @see http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js?revision=1.58
- */
-AjaxSolr.theme = function (func) {
-  if (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func] == undefined) {
-    window.console && console.log && console.log('Theme function "' + func + '" is not defined.');
-  }
-  else {
-    for (var i = 1, args = []; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-    return (AjaxSolr.theme[func] || AjaxSolr.theme.prototype[func]).apply(this, args);
-  }
 };
 
 /**
