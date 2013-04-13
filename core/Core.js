@@ -32,80 +32,6 @@ AjaxSolr.Class.extend = function (properties) {
 };
 
 /**
- * @static
- * @param foo A value.
- * @param bar A value.
- * @returns {Boolean} Whether the two given values are equal.
- */
-AjaxSolr.equals = function (foo, bar) {
-  if (AjaxSolr.isArray(foo) && AjaxSolr.isArray(bar)) {
-    if (foo.length !== bar.length) {
-      return false;
-    }
-    for (var i = 0, l = foo.length; i < l; i++) {
-      if (foo[i] !== bar[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  else if (AjaxSolr.isRegExp(foo) && AjaxSolr.isString(bar)) {
-    return bar.match(foo);
-  }
-  else if (AjaxSolr.isRegExp(bar) && AjaxSolr.isString(foo)) {
-    return foo.match(bar);
-  }
-  else {
-    return foo === bar;
-  }
-};
-
-/**
- * @static
- * @param value A value.
- * @param array An array.
- * @returns {Boolean} Whether value exists in the array.
- */
-AjaxSolr.inArray = function (value, array) {
-  if (array) {
-    for (var i = 0, l = array.length; i < l; i++) {
-      if (AjaxSolr.equals(array[i], value)) {
-        return i;
-      }
-    }
-  }
-  return -1;
-};
-
-/**
- * Can't use toString.call(obj) === "[object Array]", as it may return
- * "[xpconnect wrapped native prototype]", which is undesirable.
- *
- * @static
- * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
- * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
- */
-AjaxSolr.isArray = function (obj) {
-  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
-};
-
-/**
- * @param obj Any object.
- * @returns {Boolean} Whether the object is a RegExp object.
- */
-AjaxSolr.isRegExp = function (obj) {
-  return obj != null && (typeof obj == 'object' || typeof obj == 'function') && 'ignoreCase' in obj;
-};
-
-/**
- * @param obj Any object.
- * @returns {Boolean} Whether the object is a String object.
- */
-AjaxSolr.isString = function (obj) {
-  return obj != null && typeof obj == 'string';
-};
-
-/**
  * A simplified version of jQuery's extend function.
  *
  * @static
@@ -141,4 +67,78 @@ AjaxSolr.extend = function () {
     }
   }
   return target;
+};
+
+/**
+ * @static
+ * @param value A value.
+ * @param array An array.
+ * @returns {Boolean} Whether value exists in the array.
+ */
+AjaxSolr.inArray = function (value, array) {
+  if (array) {
+    for (var i = 0, l = array.length; i < l; i++) {
+      if (AjaxSolr.equals(array[i], value)) {
+        return i;
+      }
+    }
+  }
+  return -1;
+};
+
+/**
+ * @static
+ * @param foo A value.
+ * @param bar A value.
+ * @returns {Boolean} Whether the two given values are equal.
+ */
+AjaxSolr.equals = function (foo, bar) {
+  if (AjaxSolr.isArray(foo) && AjaxSolr.isArray(bar)) {
+    if (foo.length !== bar.length) {
+      return false;
+    }
+    for (var i = 0, l = foo.length; i < l; i++) {
+      if (foo[i] !== bar[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  else if (AjaxSolr.isRegExp(foo) && AjaxSolr.isString(bar)) {
+    return bar.match(foo);
+  }
+  else if (AjaxSolr.isRegExp(bar) && AjaxSolr.isString(foo)) {
+    return foo.match(bar);
+  }
+  else {
+    return foo === bar;
+  }
+};
+
+/**
+ * Can't use toString.call(obj) === "[object Array]", as it may return
+ * "[xpconnect wrapped native prototype]", which is undesirable.
+ *
+ * @static
+ * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
+ * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
+ */
+AjaxSolr.isArray = function (obj) {
+  return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;
+};
+
+/**
+ * @param obj Any object.
+ * @returns {Boolean} Whether the object is a RegExp object.
+ */
+AjaxSolr.isRegExp = function (obj) {
+  return obj != null && (typeof obj == 'object' || typeof obj == 'function') && 'ignoreCase' in obj;
+};
+
+/**
+ * @param obj Any object.
+ * @returns {Boolean} Whether the object is a String object.
+ */
+AjaxSolr.isString = function (obj) {
+  return obj != null && typeof obj == 'string';
 };
