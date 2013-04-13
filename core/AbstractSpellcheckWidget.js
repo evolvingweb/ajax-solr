@@ -47,7 +47,8 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
     this.suggestions = {};
 
     if (this.manager.response.spellcheck && this.manager.response.spellcheck.suggestions) {
-      var suggestions = this.manager.response.spellcheck.suggestions;
+      var suggestions = this.manager.response.spellcheck.suggestions,
+          empty = true;
 
       for (var word in suggestions) {
         if (word == 'collation' || word == 'correctlySpelled') continue;
@@ -61,9 +62,10 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
             this.suggestions[word].push(suggestions[word].suggestion[i]);
           }
         }
+        empty = false;
       }
 
-      if (AjaxSolr.size(this.suggestions)) {
+      if (!empty) {
         this.handleSuggestions(this.manager.response);
       }
     }
