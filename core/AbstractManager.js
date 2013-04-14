@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * The Manager acts as the controller in a Model-View-Controller framework. All
  * public calls should be performed on the manager object.

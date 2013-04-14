@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * Interacts with Solr's SpellCheckComponent.
  *

@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * Represents a Solr parameter.
  *

@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * Baseclass for all free-text widgets.
  *

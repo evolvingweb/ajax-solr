@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * Offers an interface to the local parameters used by the Spatial Solr plugin.
  *
