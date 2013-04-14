@@ -7,66 +7,87 @@ AjaxSolr = function () {};
 
 /**
  * @namespace Baseclass for all classes
+ * @see https://github.com/documentcloud/backbone/blob/51eed189bf4d25877be4acdf51e0a4c6039583c5/backbone.js#L243
  */
-AjaxSolr.Class = function () {};
+AjaxSolr.Class = function(attributes) {
+  AjaxSolr.extend(this, attributes);
+};
 
 /**
  * A class 'extends' itself into a subclass.
  *
  * @static
- * @param properties The properties of the subclass.
+ * @param protoProps The properties of the subclass.
  * @returns A function that represents the subclass.
+ * @see https://github.com/documentcloud/backbone/blob/51eed189bf4d25877be4acdf51e0a4c6039583c5/backbone.js#L1516
  */
-AjaxSolr.Class.extend = function (properties) {
-  var klass = this; // Safari dislikes 'class'
-  // The subclass is just a function that when called, instantiates itself.
-  // Nothing is _actually_ shared between _instances_ of the same class.
-  var subClass = function (options) {
-    // 'this' refers to the subclass, which starts life as an empty object.
-    // Add its parent's properties, its own properties, and any passed options.
-    AjaxSolr.extend(this, new klass(options), properties, options);
+AjaxSolr.Class.extend = function (protoProps, staticProps) {
+  var parent = this;
+  var child;
+
+  // The constructor function for the new subclass is either defined by you
+  // (the "constructor" property in your `extend` definition), or defaulted
+  // by us to simply call the parent's constructor.
+  if (protoProps && Object.prototype.hasOwnProperty.call(protoProps, 'constructor')) {
+    child = protoProps.constructor;
+  } else {
+    child = function(){ return parent.apply(this, arguments); };
   }
-  // Allow the subclass to extend itself into further subclasses.
-  subClass.extend = this.extend;
-  return subClass;
+
+  // Add static properties to the constructor function, if supplied.
+  AjaxSolr.extend(child, parent, staticProps);
+
+  // Set the prototype chain to inherit from `parent`, without calling
+  // `parent`'s constructor function.
+  var Surrogate = function(){ this.constructor = child; };
+  Surrogate.prototype = parent.prototype;
+  child.prototype = new Surrogate;
+
+  // Add prototype properties (instance properties) to the subclass,
+  // if supplied.
+  if (protoProps) AjaxSolr.extend(child.prototype, protoProps);
+
+  // Set a convenience property in case the parent's prototype is needed
+  // later.
+  child.__super__ = parent.prototype;
+
+  return child;
 };
 
 /**
- * A simplified version of jQuery's extend function.
- *
  * @static
- * @see http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
- */
-AjaxSolr.extend = function () {
-  var target = arguments[0] || {}, i = 1, length = arguments.length, options;
-  for (; i < length; i++) {
-    if ((options = arguments[i]) != null) {
-      for (var name in options) {
-        var src = target[name], copy = options[name];
-        if (target === copy) {
-          continue;
-        }
-        if (copy && typeof copy == 'object' && !copy.nodeType) {
-          target[name] = AjaxSolr.extend(src || (copy.length != null ? [] : {}), copy);
-        }
-        else if (copy && src && typeof copy == 'function' && typeof src == 'function') {
-          target[name] = (function(superfn, fn) {
-            return function () {
-              var tmp = this._super, ret;
-              this._super = superfn;
-              ret = fn.apply(this, arguments);
-              this._super = tmp;
-              return ret;
-            };
-          })(src, copy);
-        }
-        else if (copy !== undefined) {
-          target[name] = copy;
-        }
+ * @see https://github.com/documentcloud/underscore/blob/7342e289aa9d91c5aacfb3662ea56e7a6d081200/underscore.js#L789
+*/
+AjaxSolr.extend = function (child) {
+  // From _.extend
+  var obj = Array.prototype.slice.call(arguments, 1);
+
+  // From _.extend
+  var iterator = function(source) {
+    if (source) {
+      for (var prop in source) {
+        child[prop] = source[prop];
+      }
+    }
+  };
+
+  // From _.each
+  if (obj == null) return;
+  if (Array.prototype.forEach && obj.forEach === Array.prototype.forEach) {
+    obj.forEach(iterator);
+  } else if (obj.length === +obj.length) {
+    for (var i = 0, l = obj.length; i < l; i++) {
+      iterator.call(undefined, obj[i], i, obj);
+    }
+  } else {
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        iterator.call(undefined, obj[key], key, obj);
       }
     }
   }
-  return target;
+
+  return child;
 };
 
 /**
