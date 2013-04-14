@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/Core'], factory);
+    require(['core/Core'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * The Manager acts as the controller in a Model-View-Controller framework. All
@@ -200,7 +200,5 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     window.console && console.log && console.log(message);
   }
 });
-
-return AjaxSolr;
 
 }));

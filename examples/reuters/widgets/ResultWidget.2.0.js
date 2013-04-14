@@ -1,11 +1,11 @@
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/AbstractWidget'], factory);
+    require(['core/AbstractWidget'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   afterRequest: function () {
@@ -33,7 +33,5 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     return output;
   }
 });
-
-return AjaxSolr;
 
 }));

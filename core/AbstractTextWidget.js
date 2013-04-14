@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/AbstractWidget'], factory);
+    require(['core/AbstractWidget'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * Baseclass for all free-text widgets.
@@ -102,7 +102,5 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     }
   }
 });
-
-return AjaxSolr;
 
 }));

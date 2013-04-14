@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/Core', 'core/Parameter'], factory);
+    require(['core/Core', 'core/Parameter'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets
@@ -378,7 +378,5 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     return '';
   }
 });
-
-return AjaxSolr;
 
 }));

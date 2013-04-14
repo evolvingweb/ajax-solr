@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/AbstractWidget'], factory);
+    require(['core/AbstractWidget'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * Offers an interface to the local parameters used by the Spatial Solr plugin.
@@ -67,11 +67,9 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
 });
 
 if (typeof define === 'function' && define.amd) {
-  define(['core/AbstractWidget'], function () {
+  require(['core/AbstractWidget'], function () {
     return AjaxSolr.AbstractSpatialWidget;
   });
 }
-
-return AjaxSolr;
 
 }));

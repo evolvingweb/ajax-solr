@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/AbstractWidget'], factory);
+    require(['core/AbstractWidget'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * A pager widget for jQuery.
@@ -290,7 +290,5 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
     this.renderHeader(perPage, offset, total);
   }
 });
-
-return AjaxSolr;
 
 }));

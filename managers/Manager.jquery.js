@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/AbstractManager'], factory);
+    require(['core/AbstractManager'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * @see http://wiki.apache.org/solr/SolJSON#JSON_specific_parameters
@@ -38,7 +38,5 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend(
     jQuery.ajax(options).done(handler).fail(errorHandler);
   }
 });
-
-return AjaxSolr;
 
 }));

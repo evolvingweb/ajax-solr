@@ -1,13 +1,13 @@
 // $Id$
 
-(function (root, factory) {
+(function (callback) {
   if (typeof define === 'function' && define.amd) {
-    define(['core/Core'], factory);
+    require(['core/Core'], callback);
   }
   else {
-    factory(root.AjaxSolr);
+    callback();
   }
-}(this, function (AjaxSolr) {
+}(function () {
 
 /**
  * Baseclass for all widgets. 
@@ -101,7 +101,5 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
     this.manager.doRequest(start || this.start, servlet || this.servlet);
   }
 });
-
-return AjaxSolr;
 
 }));
