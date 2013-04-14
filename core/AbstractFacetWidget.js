@@ -2,7 +2,8 @@
 
 (function (callback) {
   if (typeof $LAB === 'object') {
-    $LAB.script('core/AbstractWidget.js').script('core/Parameter.js').wait(function () {
+    var basePath = window.AjaxSolrBasePath || '';
+    $LAB.script(basePath + 'core/AbstractWidget.js').script(basePath + 'core/Parameter.js').wait(function () {
       callback();
     });
   }

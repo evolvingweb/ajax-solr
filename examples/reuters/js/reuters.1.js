@@ -2,9 +2,9 @@ var Manager;
 
 (function ($) {
 
-  $LAB.setGlobalDefaults({BasePath: '../../'});
+  AjaxSolrBasePath = '../../';
 
-  $LAB.script('managers/Manager.jquery.js').script('core/ParameterStore.js').wait(function () {
+  $LAB.script(AjaxSolrBasePath + 'managers/Manager.jquery.js').script(AjaxSolrBasePath + 'core/ParameterStore.js').wait(function () {
     $(function () {
       Manager = new AjaxSolr.Manager({
         solrUrl: 'http://evolvingweb.ca/solr/reuters/'
