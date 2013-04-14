@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/Core.js', 'ajaxsolr/core/Parameter.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets
  * expose some of these parameters to the user. Whenever the user changes the
@@ -369,3 +383,5 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     return '';
   }
 });
+
+}));

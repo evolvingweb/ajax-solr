@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/ParameterStore.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * A parameter store that stores the values of exposed parameters in the URL
  * hash to maintain the application's state.
@@ -124,3 +138,5 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     }
   }
 });
+
+}));

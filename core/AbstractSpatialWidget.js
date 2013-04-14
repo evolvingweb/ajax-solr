@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/AbstractWidget.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Offers an interface to the local parameters used by the Spatial Solr plugin.
  *
@@ -56,3 +70,5 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
     this.manager.store.get('q').remove('threadCount');
   }
 });
+
+}));

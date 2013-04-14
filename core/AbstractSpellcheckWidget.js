@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/AbstractWidget.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Interacts with Solr's SpellCheckComponent.
  *
@@ -78,3 +92,5 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    */
   handleSuggestions: function () {}
 });
+
+}));

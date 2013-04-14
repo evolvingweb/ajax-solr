@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/AbstractWidget.js', 'ajaxsolr/core/Parameter.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all facet widgets.
  *
@@ -289,3 +303,5 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     return (exclude ? '-' : '') + this.field + ':' + AjaxSolr.Parameter.escapeValue(value);
   }
 });
+
+}));

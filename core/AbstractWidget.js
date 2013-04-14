@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/Core.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all widgets. 
  * 
@@ -92,3 +106,5 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
     this.manager.doRequest(start || this.start, servlet || this.servlet);
   }
 });
+
+}));

@@ -1,5 +1,20 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/Core.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
+
 /**
  * Represents a Solr parameter.
  *
@@ -178,3 +193,5 @@ AjaxSolr.Parameter.escapeValue = function (value) {
   }
   return value;
 }
+
+}));

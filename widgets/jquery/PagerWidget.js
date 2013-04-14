@@ -1,5 +1,19 @@
 // $Id$
 
+(function (callback) {
+  if (typeof yepnope === 'function') {
+    yepnope({
+      load: ['ajaxsolr/core/AbstractWidget.js'],
+      complete: function () {
+        callback();
+      }
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 (function ($) {
 
 /**
@@ -285,3 +299,5 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
 });
 
 })(jQuery);
+
+}));
