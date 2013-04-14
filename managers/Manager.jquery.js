@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof head === 'function' && head.js) {
+    head.js('../../core/AbstractManager.js', function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * @see http://wiki.apache.org/solr/SolJSON#JSON_specific_parameters
  * @class Manager
@@ -29,3 +40,5 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend(
     jQuery.ajax(options).done(handler).fail(errorHandler);
   }
 });
+
+}));

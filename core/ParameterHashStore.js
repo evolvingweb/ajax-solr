@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof head === 'function' && head.js) {
+    head.js('../../core/ParameterStore.js', function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * A parameter store that stores the values of exposed parameters in the URL
  * hash to maintain the application's state.
@@ -124,3 +135,5 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     }
   }
 });
+
+}));

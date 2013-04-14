@@ -7,7 +7,7 @@ task :aggregate, :compress do |t, args|
   output_file = ENV['output'] || 'ajax-solr.min.js'
 
   core = [
-    'Core',
+    '../../core',
     'AbstractManager',
     'ParameterStore',
     'Parameter',
@@ -16,7 +16,7 @@ task :aggregate, :compress do |t, args|
   ]
 
   dirs = [
-    'core',
+    '../../core',
     'helpers',
     'managers',
     'widgets'

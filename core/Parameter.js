@@ -1,5 +1,17 @@
 // $Id$
 
+(function (callback) {
+  if (typeof head === 'function' && head.js) {
+    head.js('../../core/Core.js', function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
+
 /**
  * Represents a Solr parameter.
  *
@@ -178,3 +190,5 @@ AjaxSolr.Parameter.escapeValue = function (value) {
   }
   return value;
 }
+
+}));

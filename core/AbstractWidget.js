@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof head === 'function' && head.js) {
+    head.js('../../core/Core.js', function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all widgets. 
  * 
@@ -92,3 +103,5 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
     this.manager.doRequest(start || this.start, servlet || this.servlet);
   }
 });
+
+}));
