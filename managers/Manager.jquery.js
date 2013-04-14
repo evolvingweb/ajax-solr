@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * @see http://wiki.apache.org/solr/SolJSON#JSON_specific_parameters
  * @class Manager

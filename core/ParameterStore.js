@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets
  * expose some of these parameters to the user. Whenever the user changes the
