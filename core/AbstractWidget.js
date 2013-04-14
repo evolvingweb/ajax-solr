@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/Core.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all widgets. 
  * 
@@ -92,3 +103,5 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
     this.manager.doRequest(start || this.start, servlet || this.servlet);
   }
 });
+
+}));

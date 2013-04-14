@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/Core.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * The Manager acts as the controller in a Model-View-Controller framework. All
  * public calls should be performed on the manager object.
@@ -191,3 +202,5 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     window.console && console.log && console.log(message);
   }
 });
+
+}));

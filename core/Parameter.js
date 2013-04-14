@@ -1,5 +1,17 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/Core.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
+
 /**
  * Represents a Solr parameter.
  *
@@ -178,3 +190,5 @@ AjaxSolr.Parameter.escapeValue = function (value) {
   }
   return value;
 }
+
+}));

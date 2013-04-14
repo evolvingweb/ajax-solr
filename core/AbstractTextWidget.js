@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/AbstractWidget.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all free-text widgets.
  *
@@ -93,3 +104,5 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     }
   }
 });
+
+}));

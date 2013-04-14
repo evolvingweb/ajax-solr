@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/AbstractWidget.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Interacts with Solr's SpellCheckComponent.
  *
@@ -78,3 +89,5 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    */
   handleSuggestions: function () {}
 });
+
+}));

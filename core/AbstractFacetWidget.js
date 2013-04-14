@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/AbstractWidget.js').script('core/Parameter.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all facet widgets.
  *
@@ -289,3 +300,5 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     return (exclude ? '-' : '') + this.field + ':' + AjaxSolr.Parameter.escapeValue(value);
   }
 });
+
+}));

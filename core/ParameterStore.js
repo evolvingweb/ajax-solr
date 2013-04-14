@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/Core.js').script('core/Parameter.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets
  * expose some of these parameters to the user. Whenever the user changes the
@@ -369,3 +380,5 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     return '';
   }
 });
+
+}));

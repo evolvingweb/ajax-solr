@@ -1,5 +1,16 @@
 // $Id$
 
+(function (callback) {
+  if (typeof $LAB === 'object') {
+    $LAB.script('core/AbstractWidget.js').wait(function () {
+      callback();
+    });
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 (function ($) {
 
 /**
@@ -285,3 +296,5 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
 });
 
 })(jQuery);
+
+}));
