@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * Interacts with Solr's SpellCheckComponent.
  *
@@ -78,3 +87,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    */
   handleSuggestions: function () {}
 });
+
+return AjaxSolr;
+
+}));

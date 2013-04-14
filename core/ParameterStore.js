@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core', 'core/Parameter'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets
  * expose some of these parameters to the user. Whenever the user changes the
@@ -369,3 +378,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     return '';
   }
 });
+
+return AjaxSolr;
+
+}));

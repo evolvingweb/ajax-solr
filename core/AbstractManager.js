@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * The Manager acts as the controller in a Model-View-Controller framework. All
  * public calls should be performed on the manager object.
@@ -191,3 +200,7 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     window.console && console.log && console.log(message);
   }
 });
+
+return AjaxSolr;
+
+}));

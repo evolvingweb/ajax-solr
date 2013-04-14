@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * Offers an interface to the local parameters used by the Spatial Solr plugin.
  *
@@ -56,3 +65,13 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
     this.manager.store.get('q').remove('threadCount');
   }
 });
+
+if (typeof define === 'function' && define.amd) {
+  define(['core/AbstractWidget'], function () {
+    return AjaxSolr.AbstractSpatialWidget;
+  });
+}
+
+return AjaxSolr;
+
+}));

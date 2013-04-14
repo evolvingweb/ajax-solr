@@ -10,13 +10,18 @@ require.config({
   urlArgs: "bust=" +  (new Date()).getTime()
 });
 
-define(['managers/Manager.jquery', 'core/ParameterStore'], function (AjaxSolr) {
+define(['managers/Manager.jquery', 'core/ParameterStore', 'reuters/ResultWidget.2.0'], function () {
   $(function () {
     Manager = new AjaxSolr.Manager({
       solrUrl: 'http://evolvingweb.ca/solr/reuters/'
     });
+    Manager.addWidget(new AjaxSolr.ResultWidget({
+      id: 'result',
+      target: '#docs'
+    }));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     Manager.doRequest();
   });
 });
+

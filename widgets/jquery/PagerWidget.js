@@ -1,6 +1,13 @@
 // $Id$
 
-(function ($) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
 
 /**
  * A pager widget for jQuery.
@@ -284,4 +291,6 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
   }
 });
 
-})(jQuery);
+return AjaxSolr;
+
+}));

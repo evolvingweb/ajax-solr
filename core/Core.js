@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(factory);
+  }
+  else {
+    factory();
+  }
+}(this, function () {
+
 /**
  * @namespace A unique namespace for the AJAX Solr library.
  */
@@ -142,3 +151,7 @@ AjaxSolr.isRegExp = function (obj) {
 AjaxSolr.isString = function (obj) {
   return obj != null && typeof obj == 'string';
 };
+
+return AjaxSolr;
+
+}));

@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget', 'core/Parameter'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * Baseclass for all facet widgets.
  *
@@ -289,3 +298,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     return (exclude ? '-' : '') + this.field + ':' + AjaxSolr.Parameter.escapeValue(value);
   }
 });
+
+return AjaxSolr;
+
+}));

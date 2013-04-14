@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * A parameter store that stores the values of exposed parameters in the URL
  * hash to maintain the application's state.
@@ -124,3 +133,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
     }
   }
 });
+
+return AjaxSolr;
+
+}));

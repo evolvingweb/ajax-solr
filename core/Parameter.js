@@ -1,5 +1,14 @@
 // $Id$
 
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core'], factory);
+  }
+  else {
+    factory(root.AjaxSolr);
+  }
+}(this, function (AjaxSolr) {
+
 /**
  * Represents a Solr parameter.
  *
@@ -178,3 +187,7 @@ AjaxSolr.Parameter.escapeValue = function (value) {
   }
   return value;
 }
+
+return AjaxSolr;
+
+}));
