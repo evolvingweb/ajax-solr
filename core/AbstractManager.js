@@ -2,9 +2,7 @@
 
 (function (callback) {
   if (typeof head === 'function' && head.js) {
-    head.js('../../core/Core.js', function () {
-      callback();
-    });
+    head('Core.js', callback);
   }
   else {
     callback();

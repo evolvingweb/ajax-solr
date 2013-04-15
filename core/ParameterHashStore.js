@@ -2,9 +2,7 @@
 
 (function (callback) {
   if (typeof head === 'function' && head.js) {
-    head.js('../../core/ParameterStore.js', function () {
-      callback();
-    });
+    head('ParameterStore.js', callback);
   }
   else {
     callback();

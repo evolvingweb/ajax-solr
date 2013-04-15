@@ -2,9 +2,7 @@
 
 (function (callback) {
   if (typeof head === 'function' && head.js) {
-    head.js('../../core/AbstractManager.js', function () {
-      callback();
-    });
+    head('AbstractManager.js', callback);
   }
   else {
     callback();

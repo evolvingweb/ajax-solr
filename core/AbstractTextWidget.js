@@ -2,9 +2,7 @@
 
 (function (callback) {
   if (typeof head === 'function' && head.js) {
-    head.js('../../core/AbstractWidget.js', function () {
-      callback();
-    });
+    head('AbstractWidget.js', callback);
   }
   else {
     callback();

@@ -2,8 +2,8 @@
 
 (function (callback) {
   if (typeof head === 'function' && head.js) {
-    head.js('../../core/Core.js', '../../core/Parameter.js', function () {
-      callback();
+    head('Core.js', function () {
+      head('Parameter.js', callback);
     });
   }
   else {
