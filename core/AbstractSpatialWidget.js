@@ -64,10 +64,4 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
   }
 });
 
-if (typeof define === 'function' && define.amd) {
-  define(['core/AbstractWidget'], function () {
-    return AjaxSolr.AbstractSpatialWidget;
-  });
-}
-
 }));
