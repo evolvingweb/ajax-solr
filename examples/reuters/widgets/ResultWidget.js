@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof head === 'function' && head.js) {
+    head('AbstractWidget.js', callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 (function ($) {
 
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
@@ -92,3 +101,5 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 });
 
 })(jQuery);
+
+}));
