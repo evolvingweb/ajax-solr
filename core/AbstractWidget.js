@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all widgets. 
  * 
@@ -90,3 +99,5 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
     this.manager.doRequest(start || this.start, servlet || this.servlet);
   }
 });
+
+}));

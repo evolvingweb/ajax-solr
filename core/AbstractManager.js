@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * The Manager acts as the controller in a Model-View-Controller framework. All
  * public calls should be performed on the manager object.
@@ -189,3 +198,5 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
     window.console && console.log && console.log(message);
   }
 });
+
+}));
