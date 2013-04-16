@@ -2,7 +2,7 @@
 
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
-    require(['core/ParameterStore'], callback);
+    define(['core/ParameterStore'], callback);
   }
   else {
     callback();

@@ -2,7 +2,7 @@
 
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
-    require(['core/AbstractManager'], callback);
+    define(['core/AbstractManager'], callback);
   }
   else {
     callback();

@@ -2,7 +2,7 @@
 
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
-    require(['core/AbstractWidget', 'core/Parameter'], callback);
+    define(['core/AbstractWidget', 'core/Parameter'], callback);
   }
   else {
     callback();

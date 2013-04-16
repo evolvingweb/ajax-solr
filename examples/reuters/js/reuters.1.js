@@ -10,7 +10,7 @@ require.config({
   urlArgs: "bust=" +  (new Date()).getTime()
 });
 
-require(['managers/Manager.jquery', 'core/ParameterStore'], function () {
+define(['managers/Manager.jquery', 'core/ParameterStore'], function () {
   $(function () {
     Manager = new AjaxSolr.Manager({
       solrUrl: 'http://evolvingweb.ca/solr/reuters/'

@@ -2,7 +2,7 @@
 
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
-    require(['core/AbstractWidget'], callback);
+    define(['core/AbstractWidget'], callback);
   }
   else {
     callback();
@@ -67,7 +67,7 @@ AjaxSolr.AbstractSpatialWidget = AjaxSolr.AbstractWidget.extend(
 });
 
 if (typeof define === 'function' && define.amd) {
-  require(['core/AbstractWidget'], function () {
+  define(['core/AbstractWidget'], function () {
     return AjaxSolr.AbstractSpatialWidget;
   });
 }

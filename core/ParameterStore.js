@@ -2,7 +2,7 @@
 
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
-    require(['core/Core', 'core/Parameter'], callback);
+    define(['core/Core', 'core/Parameter'], callback);
   }
   else {
     callback();
