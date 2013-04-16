@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * @namespace A unique namespace for the AJAX Solr library.
  */

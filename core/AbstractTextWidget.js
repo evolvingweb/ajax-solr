@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all free-text widgets.
  *
@@ -91,3 +100,5 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
     }
   }
 });
+
+}));

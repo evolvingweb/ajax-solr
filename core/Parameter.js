@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Represents a Solr parameter.
  *
@@ -176,3 +185,5 @@ AjaxSolr.Parameter.escapeValue = function (value) {
   }
   return value;
 }
+
+}));

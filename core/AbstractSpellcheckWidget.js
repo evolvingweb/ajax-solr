@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Interacts with Solr's SpellCheckComponent.
  *
@@ -76,3 +85,5 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
    */
   handleSuggestions: function () {}
 });
+
+}));

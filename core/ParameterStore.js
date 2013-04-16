@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/Core', 'core/Parameter'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets
  * expose some of these parameters to the user. Whenever the user changes the
@@ -367,3 +376,5 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     return '';
   }
 });
+
+}));

@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 (function ($) {
 
 /**
@@ -283,3 +292,5 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
 });
 
 })(jQuery);
+
+}));

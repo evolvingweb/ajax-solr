@@ -1,3 +1,12 @@
+(function (callback) {
+  if (typeof define === 'function' && define.amd) {
+    define(['core/AbstractWidget', 'core/Parameter'], callback);
+  }
+  else {
+    callback();
+  }
+}(function () {
+
 /**
  * Baseclass for all facet widgets.
  *
@@ -287,3 +296,5 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     return (exclude ? '-' : '') + this.field + ':' + AjaxSolr.Parameter.escapeValue(value);
   }
 });
+
+}));
