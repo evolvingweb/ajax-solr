@@ -1,5 +1,3 @@
-// $Id$
-
 /**
  * A parameter store that stores the values of exposed parameters using the YUI
  * History Manager to maintain the application's state. Don't forget to add the

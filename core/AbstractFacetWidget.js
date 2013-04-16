@@ -1,5 +1,3 @@
-// $Id$
-
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
     define(['core/AbstractWidget', 'core/Parameter'], callback);
