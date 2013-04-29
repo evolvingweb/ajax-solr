@@ -270,74 +270,6 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractWidget.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a></b>
-								</div>
-								<div class="description">A unique identifier of this widget.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a></b>
-								</div>
-								<div class="description">A reference to the widget's manager.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#servlet">servlet</a></b>
-								</div>
-								<div class="description">The Solr servlet for this widget.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#start">start</a></b>
-								</div>
-								<div class="description">The offset parameter.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></b>
-								</div>
-								<div class="description">The CSS selector for this widget's target HTML element, e.g.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
@@ -368,6 +300,15 @@ ul.inheritsList
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#beforeRequest">beforeRequest</a></b>()
 								</div>
 								<div class="description">An abstract hook for child implementations.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractWidget.html#constructor">constructor</a></b>(attributes)
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -443,126 +384,6 @@ Provides abstract hooks for child classes.
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="id"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>id</b>
-					
-					</div>
-					<div class="description">
-						A unique identifier of this widget.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="manager"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{<a href="../symbols/AjaxSolr.AbstractManager.html">AjaxSolr.AbstractManager</a>}</span>
-					<b>manager</b>
-					
-					</div>
-					<div class="description">
-						A reference to the widget's manager. For internal use only.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="servlet"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>servlet</b>
-					
-					</div>
-					<div class="description">
-						The Solr servlet for this widget. You may prepend the servlet with a core
-if using multiple cores. If none is set, it will default to the manager's
-servlet.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="start"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Number}</span>
-					<b>start</b>
-					
-					</div>
-					<div class="description">
-						The offset parameter. Set this field to make the widget reset the offset
-parameter to the given value on each request.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="target"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>target</b>
-					
-					</div>
-					<div class="description">
-						The CSS selector for this widget's target HTML element, e.g. a specific
-<tt>div</tt> or <tt>ul</tt>. A Widget is usually implemented to perform
-all its UI changes relative to its target HTML element.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -614,6 +435,73 @@ all its UI changes relative to its target HTML element.
 					
 					
 					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="constructor"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>constructor</b>(attributes)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>attributes</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.id</b>
+									
+								</dt>
+								<dd>A unique identifier of this widget.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.target</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The CSS selector for this widget's
+  target HTML element, e.g. a specific <tt>div</tt> or <tt>ul</tt>. A
+  Widget is usually implemented to perform all its UI changes relative to
+  its target HTML element.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>attributes.start</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The offset parameter. Set this field to
+  make the widget reset the offset parameter to the given value on each
+  request.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.servlet</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The Solr servlet for this widget. You
+  may prepend the servlet with a core if using multiple cores. If none is
+  set, it will default to the manager's servlet.</dd>
+							
+							</dl>
 						
 						
 						
@@ -705,7 +593,7 @@ all its UI changes relative to its target HTML element.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Apr 16 2013 12:25:40 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Mon Apr 29 2013 14:55:21 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

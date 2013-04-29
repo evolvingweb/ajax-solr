@@ -273,58 +273,6 @@ hash to maintain the application's state.</div>
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.ParameterHashStore.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#hash">hash</a></b>
-								</div>
-								<div class="description">A local copy of the URL hash, so we can detect changes to it.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#interval">interval</a></b>
-								</div>
-								<div class="description">The interval in milliseconds to use in <tt>setInterval()</tt>.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.ParameterHashStore.html#intervalId">intervalId</a></b>
-								</div>
-								<div class="description">Reference to the setInterval() function.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.ParameterStore.html">AjaxSolr.ParameterStore</a>: </dt><dd><a href="../symbols/AjaxSolr.ParameterStore.html#exposed">exposed</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#manager">manager</a>, <a href="../symbols/AjaxSolr.ParameterStore.html#params">params</a></dd>
-				</dl>
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
@@ -339,6 +287,15 @@ hash to maintain the application's state.</div>
 						</tr>
 					</thead>
 					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.ParameterHashStore.html#constructor">constructor</a></b>(attributes)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
@@ -411,12 +368,7 @@ hash to maintain the application's state.
 parameters from the hash if it observes a change or if the hash is empty.
 The onhashchange event is used if the browser supports it.</p>
 
-
 <p>Configure the manager with:</p>
-
-<pre>
-Manager.setStore(new AjaxSolr.ParameterHashStore());
-</pre>
 					
 				</div>
 				
@@ -443,105 +395,56 @@ Manager.setStore(new AjaxSolr.ParameterHashStore());
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="hash"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{String}</span>
-					<b>hash</b>
-					
-					</div>
-					<div class="description">
-						A local copy of the URL hash, so we can detect changes to it.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								""
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="interval"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Number}</span>
-					<b>interval</b>
-					
-					</div>
-					<div class="description">
-						The interval in milliseconds to use in <tt>setInterval()</tt>. Do not set
-the interval too low as you may set up a race condition.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">See:</dt>
-							
-							<dd>ParameterHashStore#init()</dd>
-							
-							</dl>
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								250
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="intervalId"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Function}</span>
-					<b>intervalId</b>
-					
-					</div>
-					<div class="description">
-						Reference to the setInterval() function.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="constructor"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>constructor</b>(attributes)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>attributes</b>
+									<i>Optional</i>
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>attributes.interval</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The interval in milliseconds to use
+  in <tt>setInterval()</tt>. Do not set the interval too low as you may set
+  up a race condition. Defaults to 250.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
 				
 					<a name="init"> </a>
 					<div class="fixedFont">
@@ -676,7 +579,7 @@ URL hash. No other code should be made to change these two values.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Apr 16 2013 12:25:40 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Mon Apr 29 2013 14:55:21 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

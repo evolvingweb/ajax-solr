@@ -272,58 +272,6 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractFacetWidget.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#field">field</a></b>
-								</div>
-								<div class="description">The field to facet on.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#multivalue">multivalue</a></b>
-								</div>
-								<div class="description">Set to <tt>false</tt> to force a single "fq" parameter for this widget.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#start">start</a></b>
-								</div>
-								<div class="description">This widget will by default set the offset parameter to 0 on each request.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/AjaxSolr.AbstractWidget.html">AjaxSolr.AbstractWidget</a>: </dt><dd><a href="../symbols/AjaxSolr.AbstractWidget.html#id">id</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#manager">manager</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#servlet">servlet</a>, <a href="../symbols/AjaxSolr.AbstractWidget.html#target">target</a></dd>
-				</dl>
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
@@ -379,6 +327,15 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#clickHandler">clickHandler</a></b>(value)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractFacetWidget.html#constructor">constructor</a></b>(attributes)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -528,84 +485,6 @@ widget in order to determine where the facet counts are stored.</div>
 			
 
 <!-- ============================== field details ========================== -->		
-			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="field"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>field</b>
-					
-					</div>
-					<div class="description">
-						The field to facet on.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="multivalue"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Boolean}</span>
-					<b>multivalue</b>
-					
-					</div>
-					<div class="description">
-						Set to <tt>false</tt> to force a single "fq" parameter for this widget.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								true
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="start"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>start</b>
-					
-					</div>
-					<div class="description">
-						This widget will by default set the offset parameter to 0 on each request.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
 			
 
 <!-- ============================== method details ========================= -->		
@@ -797,6 +676,62 @@ widget in order to determine where the facet counts are stored.</div>
   filter query with the given value.</dd>
 							
 							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="constructor"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>constructor</b>(attributes)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>attributes</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.field</b>
+									
+								</dt>
+								<dd>The field to facet on.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>attributes.start</b>
+									<i>Optional</i>
+								</dt>
+								<dd>This widget will by default set the
+  offset parameter to 0 on each request.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>attributes.multivalue</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Set to <tt>false</tt> to force a
+  single "fq" parameter for this widget. Defaults to <tt>true</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+						
 						
 						
 						
@@ -1243,7 +1178,7 @@ widget in order to determine where the facet counts are stored.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Apr 16 2013 12:25:39 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Mon Apr 29 2013 14:55:20 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

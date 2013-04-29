@@ -29,75 +29,38 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
   /** @lends AjaxSolr.AutocompleteTermWidget.prototype */
   {
   /**
-   * The Solr field to autocomplete indexed terms from.
-   *
-   * @field
-   * @public
-   * @type String
-   * @default null
+   * @param {Object} attributes
+   * @param {String} attributes.field The Solr field to autocomplete indexed
+   *   terms from.
+   * @param {Boolean} [attributes.tokenized] Whether the underlying field is
+   *   tokenized. This component will take words before the last word
+   *   (whitespace separated) and generate a filter query for those words, while
+   *   only the last word will be used for facet.prefix. For field-value
+   *   completion (on just one field) or query log completion, you would have a
+   *   non-tokenized field to complete against. Defaults to <tt>true</tt>.
+   * @param {Boolean} [attributes.lowercase] Indicates whether to lowercase the
+   *   facet.prefix value. Defaults to <tt>true</tt>.
+   * @param {Number} [attributes.limit] The maximum number of results to show.
+   *   Defaults to 10.
+   * @param {Number} [attributes.minLength] The minimum number of characters
+   *   required to show suggestions. Defaults to 2.
+   * @param {String} [attributes.servlet] The URL path that follows the solr
+   *   webapp, for use in auto-complete queries. If not specified, the manager's
+   *   servlet property will be used. You may prepend the servlet with a core if
+   *   using multiple cores. It is a good idea to use a non-default one to
+   *   differentiate these requests in server logs and Solr statistics.
    */
-  field: null,
-  
-  /**
-   * Wether the underlying field is tokenized. This component will take words
-   * before the last word (whitespace separated) and generate a filter query
-   * for those words, while only the last word will be used for facet.prefix.
-   * For field-value completion (on just one field) or query log completion, 
-   * you would have a non-tokenized field to complete against.
-   * 
-   * @field
-   * @public
-   * @type Boolean
-   * @default true
-   */ 
-  tokenized: true,
-  
-  /**
-   * Indicates wether to lowercase the facet.prefix value.
-   *
-   * @field
-   * @public
-   * @type Boolean
-   * @default true
-   */
-  lowercase: true,
-  
-  /**
-   * The maximum number of results to show.
-   *
-   * @field
-   * @public
-   * @type Number
-   * @default 10
-   */
-  limit: 10,
-  
-  /**
-   * The minimum number of characters required to show suggestions.
-   *
-   * @field
-   * @public
-   * @type Number
-   * @default 2
-   */
-  minLength: 2,
-  
-  /**
-   * The URL path that follows the solr webapp, for use in auto-complete
-   * queries.
-   *
-   * If not specified, the manager's servlet property will be used. You may
-   * prepend the servlet with a core if using multiple cores. It is a good idea
-   * to use a non-default one to differentiate these requests in server logs and
-   * Solr statistics.
-   *
-   * @field
-   * @public
-   * @type String
-   * @default null
-   */
-  servlet: null,
-  
+  constructor: function (attributes) {
+    AjaxSolr.extend(this, {
+      field: null,
+      tokenized: true,
+      lowercase: true,
+      limit: 10,
+      minLength: 2,
+      servlet: null
+    }, attributes);
+  },
+
   init: function () {
     var self = this;
 

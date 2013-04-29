@@ -18,15 +18,12 @@
 AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractSpellcheckWidget.prototype */
   {
-  /**
-   * The suggestions.
-   *
-   * @field
-   * @private
-   * @type Object
-   * @default {}
-   */
-  suggestions: {},
+  constructor: function (attributes) {
+    AjaxSolr.extend(this, {
+      // The suggestions.
+      suggestions: {}
+    }, attributes);
+  },
 
   /**
    * Uses the top suggestion for each word to return a suggested query.

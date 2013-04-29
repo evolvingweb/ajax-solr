@@ -25,87 +25,62 @@
 <span class='line'> 18</span> </span><span class="NAME">AjaxSolr.AbstractWidget</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AjaxSolr.Class.extend</span><span class="PUNC">(</span><span class="WHIT">
 <span class='line'> 19</span> </span><span class="WHIT">  </span><span class="COMM">/** @lends AjaxSolr.AbstractWidget.prototype */</span><span class="WHIT">
 <span class='line'> 20</span> </span><span class="WHIT">  </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 21</span> </span><span class="WHIT">  </span><span class="COMM">/** 
-<span class='line'> 22</span>    * A unique identifier of this widget.
-<span class='line'> 23</span>    *
-<span class='line'> 24</span>    * @field 
-<span class='line'> 25</span>    * @public
-<span class='line'> 26</span>    * @type String
-<span class='line'> 27</span>    */</span><span class="WHIT">
-<span class='line'> 28</span> </span><span class="WHIT">  </span><span class="NAME">id</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 29</span> 
-<span class='line'> 30</span> </span><span class="WHIT">  </span><span class="COMM">/** 
-<span class='line'> 31</span>    * The CSS selector for this widget's target HTML element, e.g. a specific
-<span class='line'> 32</span>    * &lt;tt>div&lt;/tt> or &lt;tt>ul&lt;/tt>. A Widget is usually implemented to perform
-<span class='line'> 33</span>    * all its UI changes relative to its target HTML element.
-<span class='line'> 34</span>    * 
-<span class='line'> 35</span>    * @field 
-<span class='line'> 36</span>    * @public
-<span class='line'> 37</span>    * @type String
-<span class='line'> 38</span>    */</span><span class="WHIT">
-<span class='line'> 39</span> </span><span class="WHIT">  </span><span class="NAME">target</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 40</span> 
-<span class='line'> 41</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 42</span>    * A reference to the widget's manager. For internal use only.
-<span class='line'> 43</span>    *
-<span class='line'> 44</span>    * @field
-<span class='line'> 45</span>    * @private
-<span class='line'> 46</span>    * @type AjaxSolr.AbstractManager
-<span class='line'> 47</span>    */</span><span class="WHIT">
-<span class='line'> 48</span> </span><span class="WHIT">  </span><span class="NAME">manager</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 49</span> 
-<span class='line'> 50</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 51</span>    * The offset parameter. Set this field to make the widget reset the offset
-<span class='line'> 52</span>    * parameter to the given value on each request.
-<span class='line'> 53</span>    *
-<span class='line'> 54</span>    * @field
-<span class='line'> 55</span>    * @public
-<span class='line'> 56</span>    * @type Number
+<span class='line'> 21</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 22</span>    * @param {Object} attributes
+<span class='line'> 23</span>    * @param {String} attributes.id A unique identifier of this widget.
+<span class='line'> 24</span>    * @param {String} [attributes.target] The CSS selector for this widget's
+<span class='line'> 25</span>    *   target HTML element, e.g. a specific &lt;tt>div&lt;/tt> or &lt;tt>ul&lt;/tt>. A
+<span class='line'> 26</span>    *   Widget is usually implemented to perform all its UI changes relative to
+<span class='line'> 27</span>    *   its target HTML element.
+<span class='line'> 28</span>    * @param {Number} [attributes.start] The offset parameter. Set this field to
+<span class='line'> 29</span>    *   make the widget reset the offset parameter to the given value on each
+<span class='line'> 30</span>    *   request.
+<span class='line'> 31</span>    * @param {String} [attributes.servlet] The Solr servlet for this widget. You
+<span class='line'> 32</span>    *   may prepend the servlet with a core if using multiple cores. If none is
+<span class='line'> 33</span>    *   set, it will default to the manager's servlet.
+<span class='line'> 34</span>    */</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">  </span><span class="NAME">constructor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">attributes</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">    </span><span class="NAME">AjaxSolr.extend</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">      </span><span class="NAME">id</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">      </span><span class="NAME">target</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">      </span><span class="NAME">start</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">      </span><span class="NAME">servlet</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">      </span><span class="COMM">// A reference to the widget's manager.</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">      </span><span class="NAME">manager</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">attributes</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 45</span> 
+<span class='line'> 46</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 47</span>    * An abstract hook for child implementations.
+<span class='line'> 48</span>    *
+<span class='line'> 49</span>    * &lt;p>This method should do any necessary one-time initializations.&lt;/p>
+<span class='line'> 50</span>    */</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="WHIT">  </span><span class="NAME">init</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 52</span> 
+<span class='line'> 53</span> </span><span class="WHIT">  </span><span class="COMM">/** 
+<span class='line'> 54</span>    * An abstract hook for child implementations.
+<span class='line'> 55</span>    *
+<span class='line'> 56</span>    * &lt;p>This method is executed before the Solr request is sent.&lt;/p>
 <span class='line'> 57</span>    */</span><span class="WHIT">
-<span class='line'> 58</span> </span><span class="WHIT">  </span><span class="NAME">start</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">  </span><span class="NAME">beforeRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
 <span class='line'> 59</span> 
 <span class='line'> 60</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 61</span>    * The Solr servlet for this widget. You may prepend the servlet with a core
-<span class='line'> 62</span>    * if using multiple cores. If none is set, it will default to the manager's
-<span class='line'> 63</span>    * servlet.
-<span class='line'> 64</span>    *
-<span class='line'> 65</span>    * @field
-<span class='line'> 66</span>    * @public
-<span class='line'> 67</span>    * @type String
-<span class='line'> 68</span>    */</span><span class="WHIT">
-<span class='line'> 69</span> </span><span class="WHIT">  </span><span class="NAME">servlet</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 70</span> 
-<span class='line'> 71</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 72</span>    * An abstract hook for child implementations.
-<span class='line'> 73</span>    *
-<span class='line'> 74</span>    * &lt;p>This method should do any necessary one-time initializations.&lt;/p>
-<span class='line'> 75</span>    */</span><span class="WHIT">
-<span class='line'> 76</span> </span><span class="WHIT">  </span><span class="NAME">init</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 61</span>    * An abstract hook for child implementations.
+<span class='line'> 62</span>    *
+<span class='line'> 63</span>    * &lt;p>This method is executed after the Solr response is received.&lt;/p>
+<span class='line'> 64</span>    */</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="WHIT">  </span><span class="NAME">afterRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 66</span> 
+<span class='line'> 67</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 68</span>    * A proxy to the manager's doRequest method.
+<span class='line'> 69</span>    *
+<span class='line'> 70</span>    * @param {Boolean} [start] The Solr start offset parameter.
+<span class='line'> 71</span>    * @param {String} [servlet] The Solr servlet to send the request to.
+<span class='line'> 72</span>    */</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="WHIT">  </span><span class="NAME">doRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">start</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">servlet</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.doRequest</span><span class="PUNC">(</span><span class="NAME">start</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.start</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">servlet</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.servlet</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 77</span> 
-<span class='line'> 78</span> </span><span class="WHIT">  </span><span class="COMM">/** 
-<span class='line'> 79</span>    * An abstract hook for child implementations.
-<span class='line'> 80</span>    *
-<span class='line'> 81</span>    * &lt;p>This method is executed before the Solr request is sent.&lt;/p>
-<span class='line'> 82</span>    */</span><span class="WHIT">
-<span class='line'> 83</span> </span><span class="WHIT">  </span><span class="NAME">beforeRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 84</span> 
-<span class='line'> 85</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 86</span>    * An abstract hook for child implementations.
-<span class='line'> 87</span>    *
-<span class='line'> 88</span>    * &lt;p>This method is executed after the Solr response is received.&lt;/p>
-<span class='line'> 89</span>    */</span><span class="WHIT">
-<span class='line'> 90</span> </span><span class="WHIT">  </span><span class="NAME">afterRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 91</span> 
-<span class='line'> 92</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 93</span>    * A proxy to the manager's doRequest method.
-<span class='line'> 94</span>    *
-<span class='line'> 95</span>    * @param {Boolean} [start] The Solr start offset parameter.
-<span class='line'> 96</span>    * @param {String} [servlet] The Solr servlet to send the request to.
-<span class='line'> 97</span>    */</span><span class="WHIT">
-<span class='line'> 98</span> </span><span class="WHIT">  </span><span class="NAME">doRequest</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">start</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">servlet</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 99</span> </span><span class="WHIT">    </span><span class="NAME">this.manager.doRequest</span><span class="PUNC">(</span><span class="NAME">start</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.start</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">servlet</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.servlet</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>100</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>101</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>102</span> 
-<span class='line'>103</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>104</span> </span></pre></body></html>
+<span class='line'> 78</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 79</span> </span></pre></body></html>

@@ -36,35 +36,21 @@
 AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.ParameterStore.prototype */
   {
-  /**
-   * The names of the exposed parameters. Any parameters that your widgets
-   * expose to the user, directly or indirectly, should be listed here.
-   *
-   * @field
-   * @public
-   * @type String[]
-   * @default []
-   */
-  exposed: [],
-
-  /**
-   * The Solr parameters.
-   *
-   * @field
-   * @private
-   * @type Object
-   * @default {}
-   */
-  params: {},
-
-  /**
-   * A reference to the parameter store's manager. For internal use only.
-   *
-   * @field
-   * @private
-   * @type AjaxSolr.AbstractManager
-   */
-  manager: null,
+  constructor: function (attributes) {
+    /**
+     * @param {Object} [attributes]
+     * @param {String[]} [attributes.exposed] The names of the exposed
+     *   parameters. Any parameters that your widgets expose to the user,
+     *   directly or indirectly, should be listed here.
+     */
+    AjaxSolr.extend(this, {
+      exposed: [],
+      // The Solr parameters.
+      params: {},
+      // A reference to the parameter store's manager.
+      manager: null
+    }, attributes);
+  },
 
   /**
    * An abstract hook for child implementations.

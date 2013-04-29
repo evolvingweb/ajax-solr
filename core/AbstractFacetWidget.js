@@ -17,28 +17,20 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractFacetWidget.prototype */
   {
   /**
-   * This widget will by default set the offset parameter to 0 on each request.
+   * @param {Object} attributes
+   * @param {String} attributes.field The field to facet on.
+   * @param {Number} [attributes.start] This widget will by default set the
+   *   offset parameter to 0 on each request.
+   * @param {Boolean} [attributes.multivalue] Set to <tt>false</tt> to force a
+   *   single "fq" parameter for this widget. Defaults to <tt>true</tt>.
    */
-  start: 0,
-
-  /**
-   * The field to facet on.
-   *
-   * @field
-   * @public
-   * @type String
-   */
-  field: null,
-
-  /**
-   * Set to <tt>false</tt> to force a single "fq" parameter for this widget.
-   *
-   * @field
-   * @public
-   * @type Boolean
-   * @default true
-   */
-  multivalue: true,
+  constructor: function (attributes) {
+    AjaxSolr.extend(this, {
+      start: 0,
+      field: null,
+      multivalue: true
+    }, attributes);
+  },
 
   init: function () {
     this.initStore();

@@ -270,95 +270,6 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AjaxSolr.AbstractManager.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#initialized">initialized</a></b>
-								</div>
-								<div class="description">Whether <tt>init()</tt> has been called yet.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#proxyUrl">proxyUrl</a></b>
-								</div>
-								<div class="description">If we want to proxy queries through a script, rather than send queries
-to Solr directly, set this field to the fully-qualified URL of the script.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#response">response</a></b>
-								</div>
-								<div class="description">The most recent response from Solr.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#servlet">servlet</a></b>
-								</div>
-								<div class="description">The default Solr servlet.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#solrUrl">solrUrl</a></b>
-								</div>
-								<div class="description">The fully-qualified URL of the Solr application.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#store">store</a></b>
-								</div>
-								<div class="description">The parameter store for the manager and its widgets.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;private&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/AjaxSolr.AbstractManager.html#widgets">widgets</a></b>
-								</div>
-								<div class="description">A collection of all registered widgets.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
@@ -380,6 +291,15 @@ to Solr directly, set this field to the fully-qualified URL of the script.</div>
 								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#addWidget">addWidget</a></b>(widget)
 								</div>
 								<div class="description">Adds a widget to the manager.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AjaxSolr.AbstractManager.html#constructor">constructor</a></b>(attributes)
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -490,189 +410,6 @@ public calls should be performed on the manager object.
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="initialized"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Boolean}</span>
-					<b>initialized</b>
-					
-					</div>
-					<div class="description">
-						Whether <tt>init()</tt> has been called yet. For internal use only.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								false
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="proxyUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>proxyUrl</b>
-					
-					</div>
-					<div class="description">
-						If we want to proxy queries through a script, rather than send queries
-to Solr directly, set this field to the fully-qualified URL of the script.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="response"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>response</b>
-					
-					</div>
-					<div class="description">
-						The most recent response from Solr.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="servlet"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>servlet</b>
-					
-					</div>
-					<div class="description">
-						The default Solr servlet. You may prepend the servlet with a core if using
-multiple cores.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								"select"
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="solrUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>solrUrl</b>
-					
-					</div>
-					<div class="description">
-						The fully-qualified URL of the Solr application. You must include the
-trailing slash. Do not include the path to any Solr servlet.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Default Value:</dt>
-							<dd>
-								"http://localhost:8983/solr/"
-							</dd>
-							</dl>
-						
-
-					<hr />
-				
-					<a name="store"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>store</b>
-					
-					</div>
-					<div class="description">
-						The parameter store for the manager and its widgets. For internal use only.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="widgets"> </a>
-					<div class="fixedFont">&lt;private&gt; 
-					
-					<span class="light">{Object}</span>
-					<b>widgets</b>
-					
-					</div>
-					<div class="description">
-						A collection of all registered widgets. For internal use only.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -704,6 +441,66 @@ trailing slash. Do not include the path to any Solr servlet.
 									
 								</dt>
 								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="constructor"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>constructor</b>(attributes)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>attributes</b>
+									<i>Optional</i>
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.solrUrl</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The fully-qualified URL of the Solr
+  application. You must include the trailing slash. Do not include the path
+  to any Solr servlet. Defaults to "http://localhost:8983/solr/"</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.proxyUrl</b>
+									<i>Optional</i>
+								</dt>
+								<dd>If we want to proxy queries through a
+  script, rather than send queries to Solr directly, set this field to the
+  fully-qualified URL of the script.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>attributes.servlet</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The default Solr servlet. You may
+  prepend the servlet with a core if using multiple cores. Defaults to
+  "servlet".</dd>
 							
 							</dl>
 						
@@ -970,7 +767,7 @@ AjaxSolr.ParameterStore</tt>.</p>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Apr 16 2013 12:25:39 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Mon Apr 29 2013 14:55:20 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>
