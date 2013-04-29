@@ -24,72 +24,31 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.PagerWidget.prototype */
   {
   /**
-   * How many links are shown around the current page.
-   *
-   * @field
-   * @public
-   * @type Number
-   * @default 4
+   * @param {Object} [attributes]
+   * @param {Number} [attributes.innerWindow] How many links are shown around
+   *   the current page. Defaults to 4.
+   * @param {Number} [attributes.outerWindow] How many links are around the
+   *   first and the last page. Defaults to 1.
+   * @param {String} [attributes.prevLabel] The previous page link label.
+   *   Defaults to "&laquo; Previous".
+   * @param {String} [attributes.nextLabel] The next page link label. Defaults
+   *   to "Next &raquo;".
+   * @param {String} [attributes.separator] Separator between pagination links.
+   *   Defaults to " ".
    */
-  innerWindow: 4,
-
-  /**
-   * How many links are around the first and the last page.
-   *
-   * @field
-   * @public
-   * @type Number
-   * @default 1
-   */
-  outerWindow: 1,
-
-  /**
-   * The previous page link label.
-   *
-   * @field
-   * @public
-   * @type String
-   * @default "&laquo; previous"
-   */
-  prevLabel: '&laquo; Previous',
-
-  /**
-   * The next page link label.
-   *
-   * @field
-   * @public
-   * @type String
-   * @default "next &raquo;"
-   */
-  nextLabel: 'Next &raquo;',
-
-  /**
-   * Separator between pagination links.
-   *
-   * @field
-   * @public
-   * @type String
-   * @default ""
-   */
-  separator: ' ',
-
-  /**
-   * The current page number.
-   *
-   * @field
-   * @private
-   * @type Number
-   */
-  currentPage: null,
-
-  /**
-   * The total number of pages.
-   *
-   * @field
-   * @private
-   * @type Number
-   */
-  totalPages: null,
+  constructor: function (attributes) {
+    AjaxSolr.extend(this, {
+      innerWindow: 4,
+      outerWindow: 1,
+      prevLabel: '&laquo; Previous',
+      nextLabel: 'Next &raquo;',
+      separator: ' ',
+      // The current page number.
+      currentPage: null,
+      // The total number of pages.
+      totalPages: null
+    }, attributes);
+  },
 
   /**
    * @returns {String} The gap in page links, which is represented by:

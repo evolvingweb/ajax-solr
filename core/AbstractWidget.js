@@ -18,55 +18,30 @@
 AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.AbstractWidget.prototype */
   {
-  /** 
-   * A unique identifier of this widget.
-   *
-   * @field 
-   * @public
-   * @type String
-   */
-  id: null,
-
-  /** 
-   * The CSS selector for this widget's target HTML element, e.g. a specific
-   * <tt>div</tt> or <tt>ul</tt>. A Widget is usually implemented to perform
-   * all its UI changes relative to its target HTML element.
-   * 
-   * @field 
-   * @public
-   * @type String
-   */
-  target: null,
-
   /**
-   * A reference to the widget's manager. For internal use only.
-   *
-   * @field
-   * @private
-   * @type AjaxSolr.AbstractManager
+   * @param {Object} attributes
+   * @param {String} attributes.id A unique identifier of this widget.
+   * @param {String} [attributes.target] The CSS selector for this widget's
+   *   target HTML element, e.g. a specific <tt>div</tt> or <tt>ul</tt>. A
+   *   Widget is usually implemented to perform all its UI changes relative to
+   *   its target HTML element.
+   * @param {Number} [attributes.start] The offset parameter. Set this field to
+   *   make the widget reset the offset parameter to the given value on each
+   *   request.
+   * @param {String} [attributes.servlet] The Solr servlet for this widget. You
+   *   may prepend the servlet with a core if using multiple cores. If none is
+   *   set, it will default to the manager's servlet.
    */
-  manager: null,
-
-  /**
-   * The offset parameter. Set this field to make the widget reset the offset
-   * parameter to the given value on each request.
-   *
-   * @field
-   * @public
-   * @type Number
-   */
-  start: undefined,
-
-  /**
-   * The Solr servlet for this widget. You may prepend the servlet with a core
-   * if using multiple cores. If none is set, it will default to the manager's
-   * servlet.
-   *
-   * @field
-   * @public
-   * @type String
-   */
-  servlet: undefined,
+  constructor: function (attributes) {
+    AjaxSolr.extend(this, {
+      id: null,
+      target: null,
+      start: undefined,
+      servlet: undefined,
+      // A reference to the widget's manager.
+      manager: null
+    }, attributes);
+  },
 
   /**
    * An abstract hook for child implementations.

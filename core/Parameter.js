@@ -17,32 +17,18 @@ AjaxSolr.Parameter = AjaxSolr.Class.extend(
   /** @lends AjaxSolr.Parameter.prototype */
   {
   /**
-   * The parameter's name.
-   *
-   * @field
-   * @private
-   * @type String
+   * @param {Object} attributes
+   * @param {String} attributes.name The parameter's name.
+   * @param {String} [attributes.value] The parameter's value.
+   * @param {Object} [attributes.local] The parameter's local parameters.
    */
-  name: null,
-
-  /**
-   * The parameter's value.
-   *
-   * @field
-   * @private
-   * @type String
-   */
-  value: null,
-
-  /**
-   * The parameter's local parameters.
-   *
-   * @field
-   * @private
-   * @type Object
-   * @default {}
-   */
-  locals: {},
+  constructor: function (attributes) {
+    AjaxSolr.extend(this, {
+      name: null,
+      value: null,
+      locals: {}
+    }, attributes);
+  },
 
   /**
    * Returns the value. If called with an argument, sets the value.
