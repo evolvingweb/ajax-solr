@@ -5,6 +5,8 @@ var Manager;
   $(function () {
     Manager = new AjaxSolr.Manager({
       solrUrl: 'http://evolvingweb.ca/solr/reuters/'
+	// for local use (if you run in single-core remove the last /reuters part):
+	// solrUrl: 'http://localhost:8983/solr/reuters/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',

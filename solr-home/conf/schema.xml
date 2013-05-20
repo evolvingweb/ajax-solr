@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<schema name="pdfCollection" version="1.1">
+
+	<types>
+		<fieldtype name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true" />
+		<fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0" />
+		<!-- This will stop your Solr from crashing when Tika index fields that Solr don't know of. -->
+		<fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
+		<fieldType name="pdate" class="solr.DateField" sortMissingLast="true" />
+
+		<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+			<analyzer type="index">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+				<!-- in this example, we will only use synonyms at query time <filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/> -->
+				<filter class="solr.LowerCaseFilterFactory" />
+			</analyzer>
+			<analyzer type="query">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+				<filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true" />
+				<filter class="solr.LowerCaseFilterFactory" />
+			</analyzer>
+		</fieldType>
+
+
+	</types>
+
+	<fields>
+		<field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
+		<field name="title" type="text_general" indexed="true" stored="true" multiValued="true" />
+		<field name="places" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="countryCodes" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="topics" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="organisations" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="exchanges" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="companies" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="allText" type="text_general" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="text" type="text_general" indexed="true" stored="false" multiValued="true" />
+		<field name="date" type="pdate" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<field name="dateline" type="string" indexed="true" stored="true" multiValued="true" omitNorms="true" termVectors="true" />
+		<copyField source="title" dest="allText" />
+		<copyField source="text" dest="allText" />
+		<copyField source="places" dest="allText" />
+		<copyField source="topics" dest="allText" />
+		<copyField source="companies" dest="allText" />
+		<copyField source="exchanges" dest="allText" />
+	</fields>
+
+	<uniqueKey>id</uniqueKey>
+
+	<defaultSearchField>text</defaultSearchField>
+
+	<solrQueryParser defaultOperator="OR" />
+
+</schema>
+
