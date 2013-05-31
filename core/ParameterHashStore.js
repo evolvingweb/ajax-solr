@@ -31,6 +31,7 @@ AjaxSolr.ParameterHashStore = AjaxSolr.ParameterStore.extend(
    *   up a race condition. Defaults to 250.
    */
   constructor: function (attributes) {
+    AjaxSolr.ParameterHashStore.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       interval: 250,
       // Reference to the setInterval() function.

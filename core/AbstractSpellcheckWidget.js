@@ -19,6 +19,7 @@ AjaxSolr.AbstractSpellcheckWidget = AjaxSolr.AbstractWidget.extend(
   /** @lends AjaxSolr.AbstractSpellcheckWidget.prototype */
   {
   constructor: function (attributes) {
+    AjaxSolr.AbstractSpellcheckWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       // The suggestions.
       suggestions: {}

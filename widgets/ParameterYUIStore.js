@@ -36,6 +36,7 @@ AjaxSolr.ParameterYUIStore = AjaxSolr.ParameterStore.extend(
    * 
    */
   constructor: function (attributes) {
+    AjaxSolr.ParameterYUIStore.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       module: 'q',
       // Whether the YUI History Manager is initialized.
