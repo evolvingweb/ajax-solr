@@ -37,6 +37,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
    *   Defaults to " ".
    */
   constructor: function (attributes) {
+    AjaxSolr.PagerWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       innerWindow: 4,
       outerWindow: 1,

@@ -25,6 +25,7 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    *   single "fq" parameter for this widget. Defaults to <tt>true</tt>.
    */
   constructor: function (attributes) {
+    AjaxSolr.AbstractFacetWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       start: 0,
       field: null,

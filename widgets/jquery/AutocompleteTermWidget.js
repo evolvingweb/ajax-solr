@@ -51,6 +51,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
    *   differentiate these requests in server logs and Solr statistics.
    */
   constructor: function (attributes) {
+    AjaxSolr.AutocompleteTermWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       field: null,
       tokenized: true,
