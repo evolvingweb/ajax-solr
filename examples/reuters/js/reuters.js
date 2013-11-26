@@ -41,6 +41,12 @@ var Manager;
       fields: [ 'comment_id', 'comment_content']
     }));
     
+        Manager.addWidget(new AjaxSolr.HistogramWidget({
+      id: 'histogram',
+      target: '#histogram',
+      field: 'comment_date'
+    }));
+    
     Manager.addWidget(new AjaxSolr.CalendarWidget({
       id: 'calendar',
       target: '#calendar',
