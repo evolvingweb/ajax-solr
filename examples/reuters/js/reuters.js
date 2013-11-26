@@ -1,4 +1,4 @@
-var ip = location.host;
+var ip = location.hostname;
 var Manager;
 
 (function ($) {
@@ -62,8 +62,8 @@ var Manager;
       'f.topics.facet.limit': 50,
     //  'f.countryCodes.facet.limit': -1,
       'facet.date': 'comment_date',
-      'facet.date.start': '2007-01-01T00:00:00.000Z/DAY',
-      'facet.date.end': '2007-12-31T00:00:00.000Z/DAY+1DAY',
+      'facet.date.start': '2005-12-01T00:00:00.000Z/DAY',
+      'facet.date.end': '2006-12-31T00:00:00.000Z/DAY+1DAY',
       'facet.date.gap': '+1DAY',
       'json.nl': 'map'
     };
