@@ -1,7 +1,11 @@
 #map {
 	width: 320px; 
-	height: 520px; 
+	height: 580px; 
 	border: 1px solid #ccc;
-	margin: auto;
 	margin-top: 30px;
 	}
+
+#update_button{
+	background-color: grey;
+	z-index: 4;
+}
