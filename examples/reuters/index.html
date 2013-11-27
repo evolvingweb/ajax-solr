@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <title>AJAX Solr</title>
   <link rel="stylesheet" href="css/reuters.css">
+  <link rel="stylesheet" href="css/leaflet.css">
+  <link rel="stylesheet" href="css/leaflet.ie.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css">
   <script src="js/reuters.js"></script>
   <script src="../../core/Core.js"></script>
+  <script src="js/leaflet.js"></script>
   <script src="../../core/AbstractManager.js"></script>
   <script src="../../managers/Manager.jquery.js"></script>
   <script src="../../core/Parameter.js"></script>
@@ -17,12 +20,26 @@
   <script src="widgets/ResultWidget.js"></script>
   <script src="../../widgets/jquery/PagerWidget.js"></script>
   <script src="../../core/AbstractFacetWidget.js"></script>
-  <script src="widgets/TagcloudWidget.js"></script>
   <script src="widgets/CurrentSearchWidget.9.js"></script>
   <script src="../../core/AbstractTextWidget.js"></script>
   <script src="widgets/AutocompleteWidget.js"></script>
   <script src="widgets/CountryCodeWidget.js"></script>
   <script src="widgets/CalendarWidget.js"></script>
+  <script src="widgets/OSMBridge.js"></script>
+  <script src="widgets/MapQuery.js"></script>
+  
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.ie.css" /><![endif]-->
+  <script src="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.js"></script>
+  
+  <link rel="stylesheet" href="css/screen.css" />
+  <link rel="stylesheet" href="css/MarkerCluster.css" />
+  <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="css/MarkerCluster.Default.ie.css" /><![endif]-->
+  <script src="js/leaflet.markercluster-src.js"></script>
+  <script src="js/realworld.388.js"></script>
+
+  
 </head>
 <body>
   <div id="wrap"> 
@@ -40,7 +57,10 @@
         <div id="docs"></div>
       </div>
     </div>
-
+	
+	<div id="map">
+	</div>
+	
     <div class="left">
       <h2>Current Selection</h2>
       <ul id="selection"></ul>
@@ -50,22 +70,6 @@
       <ul id="search">
         <input type="text" id="query" name="query" autocomplete="off">
       </ul>
-
-      <h2>Top Topics</h2>
-      <div class="tagcloud" id="topics"></div>
-
-      <h2>Top Organisations</h2>
-      <div class="tagcloud" id="organisations"></div>
-
-      <h2>Top Exchanges</h2>
-      <div class="tagcloud" id="exchanges"></div>
-
-      <h2>By Country</h2>
-      <div id="countries"></div>
-      <div id="preview"></div>
-
-      <h2>By Date</h2>
-      <div id="calendar"></div>
 
       <div class="clear"></div>
     </div>
