@@ -1,9 +1,5 @@
 var Manager;
 
-   function prova(){
-      Manager.doRequest();
-   }
-
 (function ($) {
 
    $(function(){
