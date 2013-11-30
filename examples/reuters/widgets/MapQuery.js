@@ -3,6 +3,7 @@ var ini = false;
 
 AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
   start: 0,
+  currentGeolocQuery: null,
   beforeRequest: function () {
 	
 	//////////////
@@ -45,26 +46,27 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
   template: function (doc) {return false;},
 
   init: function () {
-	  $(this.target).html($('<img>').attr('src', 'images/ajax-loader.gif'));
+		self= this;
+		$(this.target).html($('<img>').attr('src', 'images/ajax-loader.gif'));
+		$("#button").append("<button id='updatebutton' >Update </button>");
 	
-	$("#button").append("<button id='updatebutton' >Update </button>");
-	
-	$("#button").click( function(){
+		//Hook for update button
+		$("#button").click( function(){
 		//Manager.store.addByValue('q', '*:*');
-		var geoLoc= map.getBounds();
-		//http://patexpert-engine.upf.edu:8080/pbpl/collection1/select?q=*:*&fq=geo_loc:[-48,-70 TO -46,-60]&wt=json&indent=true
+			var geoLoc= map.getBounds();
+			//http://patexpert-engine.upf.edu:8080/pbpl/collection1/select?q=*:*&fq=geo_loc:[-48,-70 TO -46,-60]&wt=json&indent=true
+			//Manager.store.remove('fq');
+			//Remove previous geo_loc filter query
+			Manager.store.removeByValue('fq',self.currentGeolocQuery);
+			//Add new filter query and refresh current filter query
+			self.currentGeolocQuery= 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
+			Manager.store.addByValue('fq', self.currentGeolocQuery);
+			//Manager.store.addByValue('fq', 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']');
+			Manager.doRequest();
 		
-		Manager.store.remove('fq');
-		Manager.store.addByValue('fq', 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']');
+			// borar todos los markers de leaflet porque se actualiza la búsqueda
 		
-		// si existeix query anterior de geo_loc l'has d'esborrar
-		
-		Manager.doRequest();
-	
-		// borar todos los markers de leaflet porque se actualiza la búsqueda
-	
-	});
-	//definir onclick
+		});
 	//crear mapar
 	var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
 			cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade, Points &copy 2012 LINZ',
