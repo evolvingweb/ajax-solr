@@ -55,11 +55,13 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	template: function (doc) {return false;},
 
 	_updateFunction: function(){
+		//Remove current layer of markers
+		map.removeLayer(markers);
 		var geoLoc= map.getBounds();
 		//Remove previous geo_loc filter query
 		Manager.store.removeByValue('fq',self.currentGeolocQuery);
 		//Add new filter query and refresh current filter query
-		self.currentGeolocQuery= 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
+		this.currentGeolocQuery= 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
 		Manager.store.addByValue('fq', self.currentGeolocQuery);
 		Manager.doRequest();
 	}
