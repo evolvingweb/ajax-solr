@@ -11,6 +11,8 @@ var Manager;
       id: 'result',
       target: '#docs'
     }));
+    
+   
     Manager.addWidget(new AjaxSolr.PagerWidget({
       id: 'pager',
       target: '#pager',
@@ -47,11 +49,23 @@ var Manager;
       field: 'comment_date'
     }));
     
+   //************** new widget trial pivots ********************
+    
+     Manager.addWidget(new AjaxSolr.TrialPivots({
+      id: 'trial_pivots',
+      target: '#trial_pivots',
+      field: 'user_sex,user_age,comment_karma',
+      'facet.pivot': true
+    }));
+   // **********************************************************
+    
     Manager.addWidget(new AjaxSolr.CalendarWidget({
       id: 'calendar',
       target: '#calendar',
       field: 'comment_date'
     }));
+    
+    
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
@@ -60,11 +74,12 @@ var Manager;
       'facet.limit': 20,
       'facet.mincount': 1,
       'f.topics.facet.limit': 50,
-    //  'f.countryCodes.facet.limit': -1,
       'facet.date': 'comment_date',
       'facet.date.start': '2005-12-01T00:00:00.000Z/DAY',
       'facet.date.end': '2006-12-31T00:00:00.000Z/DAY+1DAY',
       'facet.date.gap': '+1DAY',
+      //************** new line for trial pivot *******************************
+      'facet.pivot':'user_sex,user_age,comment_karma',   	
       'json.nl': 'map'
     };
     for (var name in params) {
