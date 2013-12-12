@@ -16,7 +16,12 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 			cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade, Points &copy 2012 LINZ',
 			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
 			latlng = new L.LatLng(37.6735925, -1.6968357000000651);
-			map = new L.Map('map', {center: latlng, zoom: 10 , layers: [cloudmade]});
+		var southWest = L.latLng(-90, -180),
+			northEast = L.latLng(90, 180),
+			bounds = L.latLngBounds(southWest, northEast);
+		map = new L.Map('map', {center: latlng, zoom: 0, layers: [cloudmade], maxBounds: [bounds]});
+
+
 	},
 	
 	beforeRequest: function () {
