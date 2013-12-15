@@ -1,15 +1,21 @@
 (function ($) {
 
 
+
 AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
   afterRequest: function () {
     var self = this;
   
+
+  
+	//alert("cargando");
+  
     var maxCount = 0;
     var objectedItems = [];
     
-    for (var facet in this.manager.response.facet_counts.facet_dates[this.field]) {
-      var count = parseInt(this.manager.response.facet_counts.facet_dates[this.field][facet]);
+    
+    for (var facet in this.manager.response.facet_counts.facet_dates[this.fields[0]]) {
+      var count = parseInt(this.manager.response.facet_counts.facet_dates[this.fields[0]][facet]);
       if (count > maxCount) {
         maxCount = count;
       }
@@ -19,17 +25,31 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 	  }
     }
     
-    if (objectedItems.length >= 1)
+    
+    var w = 360;
+	var h = 300;
+    var n;
+    var s;
+    var months = [];	
+	var facets = [];
+	var maxMonths = 12;
+	var monthAct;
+	var monthAnt;
+	var monthAcum = 0;
+	var monthAcumMax = 0;
+    var facets2 = [0,0,0,0,0,0,0,0,0,0,0,0], months2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+	var num2 = 1;
+    
+    if (objectedItems.length > 1)
 	{
-		var months = [];	
-		var facets = [];
-		var maxMonths = 12;
-		var monthAct = objectedItems[0].facet.substr(0,7);
-		var monthAcum = 0;
-		var monthAcumMax = 0;
+		
+		monthAct = objectedItems[0].facet.substr(0,7);
+		monthAnt = monthAct;
+		
 		for (var i=0; i<objectedItems.length; i++)
 		{
 			monthAcum += objectedItems[i].count;
+			
 			if (objectedItems[i].facet.substr(0,7) > monthAct)
 			{
 				if (monthAcum > monthAcumMax)
@@ -39,33 +59,141 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 				facets.push(monthAcum);
 				monthAcum = 0;
 				months.push(monthAct);
+				monthAnt = monthAct;
 				monthAct = objectedItems[i].facet.substr(0,7);
-				if (months.length >= 12)
+				
+				if (months.length >= 11)
 				{
 					break;
 				}	
 			}
 		}
 		
-		var w = 600;
-		var h = 300;
-		var n = maxMonths;
-		var s = parseInt(monthAcumMax/h);
+		//fill the gap betweens months
 		
+		facets2[0] = facets[0];
+		months2[0] = months[0];
+		
+		var dateAnt, dateAct
+		for (var i=0; i<maxMonths; i++)
+		{
+			if (i < months.length)
+			{
+				dateAct = months[i];
+			
+				if (i>0)
+				{
+					if (parseInt(dateAct.substr(5,2)) > (parseInt(dateAnt.substr(5,2)) + 1))
+					{
+						var dataGap = dateAnt;
+						
+						while(parseInt(dataGap.substr(5,2)) < parseInt(dateAct.substr(5,2)))
+						{
+							facets2[num2] = 0;
+							months2[num2] = dataGap;
+							num2++;
+							if (num2 == 12)
+							{
+								break;
+							}
+							dataGap = dataGap.substr(0,4) + '-' + (parseInt(dataGap.substr(5,2)) + 1);
+						}	
+					}
+					else if (parseInt(dateAct.substr(5,2)) == (parseInt(dateAnt.substr(5,2)) + 1))
+					{
+						facets2[num2] = facets[i];
+						months2[num2] = months[i];
+						num2++;
+						if (num2 == 12)
+						{
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				facets2[num2] = 0;
+				months2[num2] = months2[num2-1].substr(0,4) + '-' + (parseInt(months2[num2-1].substr(5,2)) + 1);
+				num2++;
+			}
+			
+			dateAnt = dateAct;
+		}
+		
+		
+			/*for (var k=facets2.length; k<maxMonths; k++)
+				{
+					facets2.push(0);
+					
+					months2.push(months2.substr(0,4) + '-' + parseInt(months2.substr(5,2)) + 1);
+				}*/
+			
+		n = maxMonths;
+		s = parseInt(monthAcumMax/h);
+			
+    }
+    else if (objectedItems.length == 1){
+		
+		var hours = [];
+		var posts = [];
+		monthAcumMax = 0;
+		
+		var testing = "";
+		
+		for (var facet in this.manager.response.facet_counts.facet_fields[this.fields[1]]){
+			var countHour = parseInt(this.manager.response.facet_counts.facet_fields[this.fields[1]][facet]);
+			hours.push(facet);
+			posts.push(parseInt(countHour));
+			
+			if (countHour > monthAcumMax)
+			{
+				monthAcumMax = countHour;
+			}
+		}
+
+		var hours2 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+		var posts2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+		var hourAct = 0;
+		var hourAnt = -1;
+
+		for (var i=0; i<24; i++)
+		{
+			for (var j=0; j<hours.length; j++)
+			{
+				if (hours[j] == i)
+				{
+					posts2[i] = posts[j];
+					break;
+				}
+			}
+		}
+
+
+		n = 24;
+		s = (monthAcumMax/h);
+		
+		facets2 = posts2;
+		months2 = hours2;
+			
+	}
+	
+	if (objectedItems.length > 0)
+	{
 		//definimos el elemento svg
 		var svg = d3.select("#histogram")
 			.html("")
 			.append("svg")
-			.attr("width", w)
-			.attr("height", h);
+			.attr("width", w+30)
+			.attr("height", h+30);
 			
 		//segun los datos de "facets", creamos las barras verticales	
 		svg.selectAll("rect")
-			.data(facets)
+			.data(facets2)
 			.enter()
 			.append("rect")
-			.attr("x", function(d, i) {return i*((w/n)+1);})
-			//.attr("x", function(d, i) {return i*21;})
+			.attr("x", function(d, i) {return (i*((w/n)+1))+5;})
 			.attr("y", function(d) {return h - (d/s);})
 			.attr("width", w/n - 1)
 			.attr("height", function(d) {return (d/s);})
@@ -76,20 +204,21 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 		//dado que en months tenemos las fechas en formato yyyy-mm, mostramos 
 		//un texto encima de cada barra, que dice a que fecha corresponse
 		svg.selectAll("text")
-			.data(months)
+			.data(months2)
 			.enter()
 			.append("text")
 			.text(function(d) {
 				return d;
 			})
 			.attr("x", function(d, i) {
-				return i * (w / n) + 6;
+				return (i * ((w / n) + 1))+5;
 				})
 			.attr("y", function(d) {
-				return h*0.1;
+				return h+15;
 			})
+			.attr("width", w/n - 1)
 			.attr("fill", "green")
-			.attr("font-size", "12");
+			.attr("font-size", "8");
 			
 			//definimos un elemento de escala de 0 al mes con el mayor número
 			//de posts
@@ -109,8 +238,9 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 				.attr("class", "axis")
 				.attr("transform", "translate(" + w - 20 + ",0)")
 				.call(yAxis);
-			
-    }
+
+	}
+	
   }
 });
 

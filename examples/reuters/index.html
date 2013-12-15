@@ -25,6 +25,28 @@
   <script src="widgets/CalendarWidget.js"></script>
   <script src="widgets/HistogramWidget.js"></script>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script> 
+  
+  $('CalendarWidget').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:0,
+      onChangeMonthYear: function(year, month, inst){
+        // set date to 1st on year or month change
+
+        // this seems  bit janky, but works
+        //$('#' + inst.id).datepicker( "setDate", month + '/1/' + year );
+		alert("hohoho");
+        // Can't I use the instatnce to set the date?
+
+        // $(inst).datepicker( "setDate", month + '/1/' + year ); // fails
+        // inst.datepicker( "setDate", month + '/1/' + year ); // fails
+        // inst.selectedDay = 1; // fails
+        // inst.currentDay = 1; // fails 
+      }
+  });
+  
+   </script>
 </head>
 <body>
   <div id="wrap"> 
