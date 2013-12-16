@@ -7,6 +7,7 @@
   }
 }(function () {
 
+
 /**
  * Baseclass for all facet widgets.
  *
@@ -80,6 +81,16 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
         'facet.range.hardend',
         'facet.range.other',
         'facet.range.include'
+      ]);
+    }
+    /***************************
+     * Added new parameter for facet.pivot: according to the documentation
+     * there is only facet.pivot.mincount
+     * ************************/
+    else if (this['facet.pivot'] !== undefined) {
+      this.manager.store.addByValue('facet.pivot', this.field);
+      parameters = parameters.concat([
+        'facet.pivot.mincount',
       ]);
     }
 
@@ -183,17 +194,40 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     else if (this['facet.range'] !== undefined) {
       property = 'facet_ranges';
     }
+    else if (this['facet.pivot'] !== undefined) {
+      property = 'facet_pivot';
+    }   
     if (property !== undefined) {
-      switch (this.manager.store.get('json.nl').val()) {
-        case 'map':
-          return this.getFacetCountsMap(property);
-        case 'arrarr':
-          return this.getFacetCountsArrarr(property);
-        default:
-          return this.getFacetCountsFlat(property);
-      }
+	 /* -------------------------------------------------------------------------------------------------
+		New If added to control the case of the facet_pivots: we do not know how the
+		* json.nl value would affect pivots, therefore this special case.
+	 -----------------------------------------*/
+		if (property==='facet_pivot'){
+			return this.getPivotCountsMap(property);
+		}else{
+	//---------------------------------------------------------------------------------------------------
+			switch (this.manager.store.get('json.nl').val()) {
+			case 'map':
+			  return this.getFacetCountsMap(property);
+			case 'arrarr':
+			  return this.getFacetCountsArrarr(property);
+			default:
+			  return this.getFacetCountsFlat(property);
+			}	
+		}
     }
     throw 'Cannot get facet counts unless one of the following properties is set to "true" on widget "' + this.id + '": "facet.field", "facet.date", or "facet.range".';
+  },
+
+/** ----------------------------------------------------------------------------
+   * Used "if" it is facet.pivot data.
+   *
+   * * @param {JSON} as the solr output for facet.pivots.
+   * @returns {Map} A map associating to each key an array of two elements (total count, and another map),
+   * or the count.
+   */
+  getPivotCountsMap: function (property) {
+    return parse_pivots(this.manager.response.facet_counts[property][this.field]);
   },
 
   /**
@@ -290,4 +324,26 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
   }
 });
 
+/*********************************
+ * Method for parsing pivots output: it works recursively such that at each level
+ * which has a new pivot the ouput will indicate the counts and then the map of other results.
+ * It follows the same structure than the solr ourput.
+ *
+ * @param {JSON} as the solr output for facet.pivots.
+ * @returns {Map} A map associating to each key an array of two elements (total count, and another map),
+ * or the count.
+ * 
+ * *********************************/
+function parse_pivots(data_input){
+	var output = {}
+	for (var i = 0, l = data_input.length; i < l; i++) {
+			if ("pivot" in data_input[i]){
+					output[data_input[i]["value"]] = [data_input[i]["count"],parse_pivots(data_input[i]["pivot"])];
+			} else {
+					output[data_input[i]["value"]] = data_input[i]["count"];
+			}
+	}
+	return output
+}
+/********************************************************/
 }));

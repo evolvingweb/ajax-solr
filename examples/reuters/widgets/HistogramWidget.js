@@ -69,66 +69,54 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 			}
 		}
 		
+		facets.push(monthAcum);
+		months.push(monthAct);
+		
 		//fill the gap betweens months
 		
 		facets2[0] = facets[0];
 		months2[0] = months[0];
 		
-		var dateAnt, dateAct
-		for (var i=0; i<maxMonths; i++)
+		var lastMonth;
+		var lastYear;
+		
+		for (var i=1; i<12; i++)
+		{
+			lastMonth = parseInt(months2[i-1].substr(5,2));
+			lastYear = parseInt(months2[i-1].substr(0,4));
+			
+			if (lastMonth < 12)
+			{
+				if (lastMonth < 9)
+				{
+					months2[i] = lastYear.toString() + "-0" + (lastMonth + 1).toString();
+				}
+				else
+				{
+					months2[i] = lastYear.toString() + "-" + (lastMonth + 1).toString();
+				}
+			}
+			else if (lastMonth > 11)
+			{
+				months2[i] = (lastYear + 1).toString() + "-01";
+			}
+		}
+		
+		for (var i=0; i<12; i++)
 		{
 			if (i < months.length)
 			{
-				dateAct = months[i];
-			
-				if (i>0)
+				if (months2[i] == months[i])
 				{
-					if (parseInt(dateAct.substr(5,2)) > (parseInt(dateAnt.substr(5,2)) + 1))
-					{
-						var dataGap = dateAnt;
-						
-						while(parseInt(dataGap.substr(5,2)) < parseInt(dateAct.substr(5,2)))
-						{
-							facets2[num2] = 0;
-							months2[num2] = dataGap;
-							num2++;
-							if (num2 == 12)
-							{
-								break;
-							}
-							dataGap = dataGap.substr(0,4) + '-' + (parseInt(dataGap.substr(5,2)) + 1);
-						}	
-					}
-					else if (parseInt(dateAct.substr(5,2)) == (parseInt(dateAnt.substr(5,2)) + 1))
-					{
-						facets2[num2] = facets[i];
-						months2[num2] = months[i];
-						num2++;
-						if (num2 == 12)
-						{
-							break;
-						}
-					}
+					facets2[i] = facets[i];
 				}
 			}
 			else
 			{
-				facets2[num2] = 0;
-				months2[num2] = months2[num2-1].substr(0,4) + '-' + (parseInt(months2[num2-1].substr(5,2)) + 1);
-				num2++;
+				break;
 			}
-			
-			dateAnt = dateAct;
 		}
 		
-		
-			/*for (var k=facets2.length; k<maxMonths; k++)
-				{
-					facets2.push(0);
-					
-					months2.push(months2.substr(0,4) + '-' + parseInt(months2.substr(5,2)) + 1);
-				}*/
-			
 		n = maxMonths;
 		s = parseInt(monthAcumMax/h);
 			
