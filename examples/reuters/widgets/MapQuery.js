@@ -42,8 +42,11 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		//es torna a omplir el mapa
 		//TODO: cargar las coordenadas de los comentarios
 		//
-		markers = new L.MarkerClusterGroup();
-		for( var i=0; i<this.manager.response.response.docs.length; i++)
+		//TODO coger lso bounds de la propia respueta porque puede ser que se haya modificado el mapa (de momento dejamos el mapa quieto)
+		//this.manager.response.facet_counts.facet_pivot["_lat,_long"];
+		
+		//markers = new L.MarkerClusterGroup();
+		/*for( var i=0; i<this.manager.response.response.docs.length; i++)
 		{
 			var title = this.manager.response.response.docs[i].comment_content;
 			var a =this.manager.response.response.docs[i].geo_loc[0].split(",");
@@ -53,7 +56,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		}
 		
 		map.addLayer(markers);
-   		Manager.store.addByValue('boundingBox', map.getBounds() );
+   		Manager.store.addByValue('boundingBox', map.getBounds() );*/
 		//$(".leaflet-top.leaflet-right").append("<button id='update_button'> Update </button>");
 	},
 
@@ -61,7 +64,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 
 	_updateFunction: function(){
 		//Remove current layer of markers
-		map.removeLayer(markers);
+		/*map.removeLayer(markers);*/
 		var geoLoc= map.getBounds();
 		//Remove previous geo_loc filter query
 		Manager.store.removeByValue('fq',self.currentGeolocQuery);

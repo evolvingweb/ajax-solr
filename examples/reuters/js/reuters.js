@@ -4,7 +4,7 @@ var Manager;
 
    $(function(){
     Manager = new AjaxSolr.Manager({
-	  solrUrl: 'http://80.28.253.45:8080/solr/collection1/'
+	  solrUrl: 'http://80.28.253.45:8080/solr/collection2/'
     });
 
    Manager.addWidget(new AjaxSolr.ResultWidget({
@@ -46,6 +46,7 @@ var Manager;
 
     var params = {
       facet: true,
+	  indent: true,
       'facet.field': [ 'comment_user_id', 'comment_date', 'comment_id', 'comment_content','geo_loc'],
       'facet.limit': 20,
       'facet.mincount': 1,
@@ -59,6 +60,7 @@ var Manager;
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
+	Manager.store.addByValue('facet.pivot', '_lat,_long');
     Manager.doRequest();
   });
 
