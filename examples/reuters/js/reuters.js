@@ -60,7 +60,7 @@ var Manager;
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
-	Manager.store.addByValue('facet.pivot', '_lat,_long');
+	Manager.store.addByValue('facet.pivot', '_lat,_long'); //Línea añadida para los facets
     Manager.doRequest();
   });
 

@@ -39,12 +39,11 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	buttonRequest: function prova(){   alert("hpl");  },
 
 	afterRequest: function () {
+		self.clusterFunction(); //funcion de Tomás
 		//es torna a omplir el mapa
 		//TODO: cargar las coordenadas de los comentarios
 		//
-		//TODO coger lso bounds de la propia respueta porque puede ser que se haya modificado el mapa (de momento dejamos el mapa quieto)
-		//this.manager.response.facet_counts.facet_pivot["_lat,_long"];
-		
+		//console.log("hola");
 		//markers = new L.MarkerClusterGroup();
 		/*for( var i=0; i<this.manager.response.response.docs.length; i++)
 		{
@@ -58,6 +57,48 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		map.addLayer(markers);
    		Manager.store.addByValue('boundingBox', map.getBounds() );*/
 		//$(".leaflet-top.leaflet-right").append("<button id='update_button'> Update </button>");
+	},
+	
+	clusterFunction: function(){ //pseudocodigo tomás
+		//TODO coger lso bounds de la propia respueta porque puede ser que se haya modificado el mapa (de momento dejamos el mapa quieto)
+		var coordenadas= map.getBounds();
+		var coordenadas_xmin=coordenadas._southWest.lat;
+		var coordenadas_xmax=coordenadas._northEast.lat;
+		var coordenadas_ymin=coordenadas._southWest.lng;
+		var coordenadas_ymax=coordenadas._northEast.lng;
+		//Tamaño de las celdas
+		var stepx= (coordenadas_xmin-coordenadas_xmax)/10;
+		var stepy= (coordenadas_ymin-coordenadas_ymax)/10;
+		//Parseo del json
+		var objetoJson=this.manager.response.facet_counts.facet_pivot["_lat,_long"];
+		for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
+		{
+			var currentCelda=0;
+			for(var Lat in objetoJson)
+			{
+				var latitude= objetonJson[Lat].value;
+				if(latitude>i && value< (i+stepx))
+				{
+					for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
+					{
+						for(var Long in objetoJson[Lat].pivot)
+						{
+							var longitude= objetoJson[Lat].pivot[Long];
+							if(longitude.value >j && longitude.value<(j+stepy))
+							{
+								currentCelda+=longitude.count;
+							}
+						}
+					}
+				}
+			}
+			//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
+			if(currentCelda!=0)
+			{
+				var marker = new L.Marker(new L.LatLng(parseFloat(latitude), parseFloat(longitude.value)), { title: currentCelda });
+				map.addLayer(marker);
+			}
+		}
 	},
 
 	template: function (doc) {return false;},
