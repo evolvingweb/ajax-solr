@@ -1,15 +1,15 @@
 (function ($) {
 
-AjaxSolr.TrialPivots = AjaxSolr.AbstractFacetWidget.extend({
+AjaxSolr.PyramidAges = AjaxSolr.AbstractFacetWidget.extend({
 
   afterRequest: function () {
 	  
 var self = this;
-	d3.select("#trial_pivots").html("");
-   var result=this.getFacetCounts();
+	d3.select("#pyramidAges").html("");
+   var resultPivot=this.getFacetCounts();
 
-   var female = result.F;
-   var male = result.M;
+   var female = resultPivot.F;
+   var male = resultPivot.M;
    
    var femaleAges10 = [0,0,0,0,0,0,0,0,0,0];
    var maleAges10 = [0,0,0,0,0,0,0,0,0,0];
@@ -22,7 +22,7 @@ var self = this;
    var maleAges1 = [];
    var maleAges11 = [];
    
-   if (result.F !== undefined)
+   if (resultPivot.F !== undefined)
    {
    
    femaleAges = female[1];
@@ -33,41 +33,41 @@ var self = this;
 		
 		switch (true){
 			case ((parseInt(key) >= 0) && (parseInt(key) <= 10)):
-				femaleAges10[0] = femaleAges10[0] + femaleAges1[0];
+				femaleAges10[0] = femaleAges10[0] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 11) && (parseInt(key) <= 20)):
-				femaleAges10[1] = femaleAges10[1] + femaleAges1[0];
+				femaleAges10[1] = femaleAges10[1] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 21) && (parseInt(key) <= 30)):
-				femaleAges10[2] = femaleAges10[2] + femaleAges1[0];
+				femaleAges10[2] = femaleAges10[2] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 31) && (parseInt(key) <= 40)):
-				femaleAges10[3] = femaleAges10[3] + femaleAges1[0];
+				femaleAges10[3] = femaleAges10[3] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 41) && (parseInt(key) <= 50)):
-				femaleAges10[4] = femaleAges10[4] + femaleAges1[0];
+				femaleAges10[4] = femaleAges10[4] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 51) && (parseInt(key) <= 60)):
-				femaleAges10[5] = femaleAges10[5] + femaleAges1[0];
+				femaleAges10[5] = femaleAges10[5] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 61) && (parseInt(key) <= 70)):
-				femaleAges10[6] = femaleAges10[6] + femaleAges1[0];
+				femaleAges10[6] = femaleAges10[6] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 71) && (parseInt(key) <= 80)):
-				femaleAges10[7] = femaleAges10[7] + femaleAges1[0];
+				femaleAges10[7] = femaleAges10[7] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 81) && (parseInt(key) <= 90)):
-				femaleAges10[8] = femaleAges10[8] + femaleAges1[0];
+				femaleAges10[8] = femaleAges10[8] + femaleAges1;
 				break;
 			case (parseInt(key) >= 91):
-				femaleAges10[9] = femaleAges10[9] + femaleAges1[0];
+				femaleAges10[9] = femaleAges10[9] + femaleAges1;
 				break;
 			}	
 	}
 	
 }
 
-if (result.M !== undefined)
+if (resultPivot.M !== undefined)
    { 
 	maleAges = male[1];
 	
@@ -78,34 +78,34 @@ if (result.M !== undefined)
 		
 		switch (true){
 			case ((parseInt(key) >= 0) && (parseInt(key) <= 9)):
-				maleAges10[0] = maleAges10[0] + maleAges1[0];
+				maleAges10[0] = maleAges10[0] + maleAges1;
 				break;
 			case ((parseInt(key) >= 10) && (parseInt(key) <= 19)):
-				maleAges10[1] = maleAges10[1] + maleAges1[0];
+				maleAges10[1] = maleAges10[1] + maleAges1;
 				break;
 			case ((parseInt(key) >= 20) && (parseInt(key) <= 29)):
-				maleAges10[2] = maleAges10[2] + maleAges1[0];
+				maleAges10[2] = maleAges10[2] + maleAges1;
 				break;
 			case ((parseInt(key) >= 30) && (parseInt(key) <= 39)):
-				maleAges10[3] = maleAges10[3] + maleAges1[0];
+				maleAges10[3] = maleAges10[3] + maleAges1;
 				break;
 			case ((parseInt(key) >= 40) && (parseInt(key) <= 49)):
-				maleAges10[4] = maleAges10[4] + maleAges1[0];
+				maleAges10[4] = maleAges10[4] + maleAges1;
 				break;
 			case ((parseInt(key) >= 50) && (parseInt(key) <= 59)):
-				maleAges10[5] = maleAges10[5] + maleAges1[0];
+				maleAges10[5] = maleAges10[5] + maleAges1;
 				break;
 			case ((parseInt(key) >= 60) && (parseInt(key) <= 69)):
-				maleAges10[6] = maleAges10[6] + maleAges1[0];
+				maleAges10[6] = maleAges10[6] + maleAges1;
 				break;
 			case ((parseInt(key) >= 70) && (parseInt(key) <= 79)):
-				maleAges10[7] = maleAges10[7] + maleAges1[0];
+				maleAges10[7] = maleAges10[7] + maleAges1;
 				break;
 			case ((parseInt(key) >= 80) && (parseInt(key) <= 89)):
-				maleAges10[8] = maleAges10[8] + maleAges1[0];
+				maleAges10[8] = maleAges10[8] + maleAges1;
 				break;
 			case (parseInt(key) >= 90):
-				maleAges10[9] = maleAges10[9] + maleAges1[0];
+				maleAges10[9] = maleAges10[9] + maleAges1;
 				break;
 			}
 	}
@@ -146,7 +146,7 @@ var chartWidth = w - innerMargin - outerMargin,
     commas = d3.format(",.0f");
 
 /* main panel */
-var vis = d3.select("#trial_pivots").html("").append("svg")
+var vis = d3.select("#pyramidAges").html("").append("svg")
     .attr("width", w)
     .attr("height", h);
 

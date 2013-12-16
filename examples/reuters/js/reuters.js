@@ -52,10 +52,10 @@ var Manager;
     
    //************** new widget trial pivots ********************
     
-     Manager.addWidget(new AjaxSolr.TrialPivots({
-      id: 'trial_pivots',
-      target: '#trial_pivots',
-      field: 'user_sex,user_age,comment_karma',
+     Manager.addWidget(new AjaxSolr.PyramidAges({
+      id: 'pyramidAges',
+      target: '#pyramidAges',
+      field: 'user_sex,user_age',
       'facet.pivot': true
     }));
    // **********************************************************
