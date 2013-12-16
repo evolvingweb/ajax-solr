@@ -1,14 +1,8 @@
 (function ($) {
 
-
-
 AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
   afterRequest: function () {
     var self = this;
-  
-
-  
-	//alert("cargando");
   
     var maxCount = 0;
     var objectedItems = [];
@@ -25,7 +19,6 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 	  }
     }
     
-    
     var w = 360;
 	var h = 300;
     var n;
@@ -38,7 +31,6 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 	var monthAcum = 0;
 	var monthAcumMax = 0;
     var facets2 = [0,0,0,0,0,0,0,0,0,0,0,0], months2 = [0,0,0,0,0,0,0,0,0,0,0,0];
-	var num2 = 1;
     
     if (objectedItems.length > 1)
 	{
@@ -71,6 +63,11 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 		
 		facets.push(monthAcum);
 		months.push(monthAct);
+		
+		if (monthAcumMax == 0)
+		{
+			monthAcumMax = monthAcum;
+		}
 		
 		//fill the gap betweens months
 		
@@ -118,7 +115,7 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 		}
 		
 		n = maxMonths;
-		s = parseInt(monthAcumMax/h);
+		s = monthAcumMax/h;
 			
     }
     else if (objectedItems.length == 1){
@@ -169,6 +166,7 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 	
 	if (objectedItems.length > 0)
 	{
+		
 		//definimos el elemento svg
 		var svg = d3.select("#histogram")
 			.html("")
@@ -185,9 +183,37 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 			.attr("y", function(d) {return h - (d/s);})
 			.attr("width", w/n - 1)
 			.attr("height", function(d) {return (d/s);})
-			.attr("fill", function(d) {
+			.attr("class", "femalebar")
+			.on("click", function (rect, bar) {
+				
+				var query;
+				if (objectedItems.length > 1)
+				{
+					if (parseInt(months2[bar].substr(5,2)) < 12)
+					{
+						query = '[' + months2[bar] + '-01T00:00:00Z TO ' + months2[bar+1] + '-01T00:00:00Z]';
+					}
+					else
+					{
+						query = '[' + months2[bar] + '-01T00:00:00Z TO ' + (parseInt(months2[bar].substr(0,4)) + 1) + '-01-01T00:00:00Z]'
+					}
+					if (self.addByField('comment_date', query)) {
+							self.doRequest();
+					}
+				}
+				else if (objectedItems.length == 1)
+				{
+					if (self.addByField('comment_hour', bar)) {
+						self.doRequest();
+					}
+				}
+
+      });
+			;
+			
+			/*.attr("fill", function(d) {
 				return "rgb(0,0, " + (255) + ")";
-				});
+				});*/
 		
 		//dado que en months tenemos las fechas en formato yyyy-mm, mostramos 
 		//un texto encima de cada barra, que dice a que fecha corresponse
@@ -227,6 +253,11 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 				.attr("transform", "translate(" + w - 20 + ",0)")
 				.call(yAxis);
 
+	}
+	else 
+	{
+		var svg = d3.select("#histogram")
+			.html("");
 	}
 	
   }

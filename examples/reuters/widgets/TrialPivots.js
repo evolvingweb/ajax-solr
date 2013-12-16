@@ -3,10 +3,13 @@
 AjaxSolr.TrialPivots = AjaxSolr.AbstractFacetWidget.extend({
 
   afterRequest: function () {
+	  
+var self = this;
+	d3.select("#trial_pivots").html("");
    var result=this.getFacetCounts();
 
-   var female = result.f;
-   var male = result.m;
+   var female = result.F;
+   var male = result.M;
    
    var femaleAges10 = [0,0,0,0,0,0,0,0,0,0];
    var maleAges10 = [0,0,0,0,0,0,0,0,0,0];
@@ -18,6 +21,9 @@ AjaxSolr.TrialPivots = AjaxSolr.AbstractFacetWidget.extend({
    var maleAges = [];
    var maleAges1 = [];
    var maleAges11 = [];
+   
+   if (result.F !== undefined)
+   {
    
    femaleAges = female[1];
 	
@@ -59,7 +65,10 @@ AjaxSolr.TrialPivots = AjaxSolr.AbstractFacetWidget.extend({
 			}	
 	}
 	
-	
+}
+
+if (result.M !== undefined)
+   { 
 	maleAges = male[1];
 	
 	for (var key in maleAges)
@@ -68,53 +77,53 @@ AjaxSolr.TrialPivots = AjaxSolr.AbstractFacetWidget.extend({
 		
 		
 		switch (true){
-			case ((parseInt(key) >= 0) && (parseInt(key) <= 10)):
+			case ((parseInt(key) >= 0) && (parseInt(key) <= 9)):
 				maleAges10[0] = maleAges10[0] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 11) && (parseInt(key) <= 20)):
+			case ((parseInt(key) >= 10) && (parseInt(key) <= 19)):
 				maleAges10[1] = maleAges10[1] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 21) && (parseInt(key) <= 30)):
+			case ((parseInt(key) >= 20) && (parseInt(key) <= 29)):
 				maleAges10[2] = maleAges10[2] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 31) && (parseInt(key) <= 40)):
+			case ((parseInt(key) >= 30) && (parseInt(key) <= 39)):
 				maleAges10[3] = maleAges10[3] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 41) && (parseInt(key) <= 50)):
+			case ((parseInt(key) >= 40) && (parseInt(key) <= 49)):
 				maleAges10[4] = maleAges10[4] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 51) && (parseInt(key) <= 60)):
+			case ((parseInt(key) >= 50) && (parseInt(key) <= 59)):
 				maleAges10[5] = maleAges10[5] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 61) && (parseInt(key) <= 70)):
+			case ((parseInt(key) >= 60) && (parseInt(key) <= 69)):
 				maleAges10[6] = maleAges10[6] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 71) && (parseInt(key) <= 80)):
+			case ((parseInt(key) >= 70) && (parseInt(key) <= 79)):
 				maleAges10[7] = maleAges10[7] + maleAges1[0];
 				break;
-			case ((parseInt(key) >= 81) && (parseInt(key) <= 90)):
+			case ((parseInt(key) >= 80) && (parseInt(key) <= 89)):
 				maleAges10[8] = maleAges10[8] + maleAges1[0];
 				break;
-			case (parseInt(key) >= 91):
+			case (parseInt(key) >= 90):
 				maleAges10[9] = maleAges10[9] + maleAges1[0];
 				break;
 			}
 	}
 	
-
+}
 	
 	/* edit/input your data */
 var data = [
-  {"sharedLabel": "91-100", "barData1": maleAges10[9], "barData2": femaleAges10[9]},
-  {"sharedLabel": "81-90", "barData1": maleAges10[8], "barData2": femaleAges10[8]},
-  {"sharedLabel": "71-80", "barData1": maleAges10[7], "barData2": femaleAges10[7]},
-  {"sharedLabel": "61-70", "barData1": maleAges10[6], "barData2": femaleAges10[6]},
-  {"sharedLabel": "51-60", "barData1": maleAges10[5], "barData2": femaleAges10[5]},
-  {"sharedLabel": "41-50", "barData1": maleAges10[4], "barData2": femaleAges10[4]},
-  {"sharedLabel": "31-40", "barData1": maleAges10[3], "barData2": femaleAges10[3]},
-  {"sharedLabel": "21-30", "barData1": maleAges10[2], "barData2": femaleAges10[2]},
-  {"sharedLabel": "11-20", "barData1": maleAges10[1], "barData2": femaleAges10[1]},
-  {"sharedLabel": "0-10", "barData1": maleAges10[0], "barData2": femaleAges10[0]}
+  {"sharedLabel": "90-99", "barData1": maleAges10[9], "barData2": femaleAges10[9]},
+  {"sharedLabel": "80-89", "barData1": maleAges10[8], "barData2": femaleAges10[8]},
+  {"sharedLabel": "70-79", "barData1": maleAges10[7], "barData2": femaleAges10[7]},
+  {"sharedLabel": "60-69", "barData1": maleAges10[6], "barData2": femaleAges10[6]},
+  {"sharedLabel": "50-59", "barData1": maleAges10[5], "barData2": femaleAges10[5]},
+  {"sharedLabel": "40-49", "barData1": maleAges10[4], "barData2": femaleAges10[4]},
+  {"sharedLabel": "30-39", "barData1": maleAges10[3], "barData2": femaleAges10[3]},
+  {"sharedLabel": "20-29", "barData1": maleAges10[2], "barData2": femaleAges10[2]},
+  {"sharedLabel": "10-19", "barData1": maleAges10[1], "barData2": femaleAges10[1]},
+  {"sharedLabel": "0-9", "barData1": maleAges10[0], "barData2": femaleAges10[0]}
 ];
 
 /* edit these settings freely */  
@@ -181,7 +190,12 @@ var highlight = function(c) {
 
 bar
   .on("mouseover", highlight("highlight bar"))
-  .on("mouseout", highlight("bar"));
+  .on("mouseout", highlight("bar"))
+  .on("click", function (rect, bar) {
+        if (self.addByField('user_age','['+ (90-(bar*10)).toString() + ' TO ' + (99-(bar*10)).toString() + ']')) {
+          self.doRequest();
+        }
+      });
 
 bar.append("rect")
     .attr("class", "femalebar")

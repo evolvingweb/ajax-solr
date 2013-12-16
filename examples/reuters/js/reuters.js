@@ -66,7 +66,6 @@ var Manager;
       field: 'comment_date'
     }));
     
-//<<<<<<< HEAD =======>>>>>>> dba6e37c7ce73ae4f0254d24bfd76b61473bd29b
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
@@ -80,7 +79,7 @@ var Manager;
       'facet.date.end': '2006-12-31T00:00:00.000Z/DAY+1DAY',
       'facet.date.gap': '+1DAY',
       //************** new line for trial pivot *******************************
-      'facet.pivot':'user_sex,user_age,comment_karma',   	
+      'facet.pivot':'user_sex,user_age',   	
       'json.nl': 'map'
     };
     for (var name in params) {

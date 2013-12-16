@@ -106,6 +106,7 @@ a:hover {
 }
 #calendar {
   width: 160px;
+  margin-top: 10px;
 }
 #search_help {
   font-size: 80%;
@@ -166,5 +167,34 @@ div.bar {
 		width: 20px;
 		height: 75px;
 		background-color: teal;
-		margin-right: 2px;
+		margin-right: 2px;		
 	}
+	
+bar2 {
+	background-color: blue;
+}
+
+.shared, .bar, .label {
+  font-size: 8pt;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+.femalebar, .malebar {
+  fill: #a7b6c1;
+}
+.highlight rect.malebar, .highlight rect.femalebar {
+  fill: #a14538;
+}
+text.malebar, text.femalebar {
+  display: none;
+}
+.highlight text {
+  display: block;
+  fill: #000;
+}
+
+#histogram
+{
+margin-top: 10px;
+}
+	

@@ -132,6 +132,17 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
       return this.manager.store.addByValue('fq', this.fq(value));
     });
   },
+  
+    /**
+   * Adds a filter query independent of the widget facet field.
+   *
+   * @returns {Boolean} Whether a filter query was added.
+   */
+  addByField: function (field, value) {
+		  var a = this.manager.store.removeByValue('fq', new RegExp('^-?' + field + ':')),
+          b = this.manager.store.addByValue('q', (field+':'+value));
+      return a || b;
+  },
 
   /**
    * Removes a filter query.
