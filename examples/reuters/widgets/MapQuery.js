@@ -75,7 +75,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 			for(var Lat in objetoJson)
 			{
 				var latitude= objetoJson[Lat].value;
-				if(latitude>i && value< (i+stepx))
+				if(latitude>i && latitude< (i+stepx))
 				{
 					for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
 					{
