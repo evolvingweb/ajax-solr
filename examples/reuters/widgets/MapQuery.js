@@ -1,5 +1,6 @@
 (function ($) {
 var ini = false;
+var markers;
 
 AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	start: 0,
@@ -69,6 +70,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/10 );
 		//Parseo del json
 		var objetoJson = this.manager.response.facet_counts.facet_pivot["_lat,_long"];
+		markers = new L.LayerGroup();
 		for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
 		{
 			var currentCelda=0;
@@ -94,16 +96,19 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 			if(currentCelda!=0)
 			{
 				var marker = new L.Marker(new L.LatLng(parseFloat(latitude), parseFloat(longitude.value)), { title: currentCelda });
-				map.addLayer(marker);
+				markers.addLayer(marker);
 			}
 		}
+		map.addLayer(markers);
+		
 	},
 
 	template: function (doc) {return false;},
 
 	_updateFunction: function(){
 		//Remove current layer of markers
-		/*map.removeLayer(markers);*/
+		map.removeLayer(markers);
+
 		var geoLoc= map.getBounds();
 		//Remove previous geo_loc filter query
 		Manager.store.removeByValue('fq',self.currentGeolocQuery);
