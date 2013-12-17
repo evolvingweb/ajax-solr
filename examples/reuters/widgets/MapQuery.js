@@ -66,48 +66,52 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var coordenadas_ymin=coordenadas._southWest.lng;
 		var coordenadas_ymax=coordenadas._northEast.lng;
 		//Tamaño de las celdas
-		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/5 );
-		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/5 );
+		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/15 );
+		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/15 );
 		//Parseo del json
 		var objetoJson = this.manager.response.facet_counts.facet_pivot["_lat,_long"];
 		markers = new L.LayerGroup();
-		// fasdfadsf
+		var countTotal=0;
+		for (var i in objetoJson)
+		{
+			countTotal+=objetoJson[i].count;
+		}
 		for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
 		{
+		
+			for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
+			{
 			var currentCelda=0;
-			// asdfsadfsadf
 			for(var Lat in objetoJson)
 			{
 				var latitude= objetoJson[Lat].value;
-				if(latitude>i && latitude< (i+stepx))
+				var latitudeMaxGrilla= i+stepx
+				
+				if(latitude>=i && latitude< latitudeMaxGrilla)
 				{
-					// asdfasdf
-					for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
-					{
-						// asdfasñlkjfsad
 						for(var Long in objetoJson[Lat].pivot)
 						{
 							var longitude= objetoJson[Lat].pivot[Long];
-							if(longitude.value >j && longitude.value<(j+stepy))
+							var longitudeMaxGrilla=j+stepy 
+							if(longitude.value >=j && longitude.value<(longitudeMaxGrilla))
 							{
 								currentCelda+=longitude.count;
 							}
 						}
-					
-						//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
-						if(currentCelda!=0)
-						{
-							var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
-							marker.bindPopup(currentCelda);
-							markers.addLayer(marker);
-						}
+						
 					}
 				}
+				
+				if(currentCelda!=0)
+				{
+					//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
+					var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
+					//marker.bindPopup(currentCelda);
+					markers.addLayer(marker);
+				}
 			}
-			
 		}
 		map.addLayer(markers);
-		
 	},
 
 	template: function (doc) {return false;},
