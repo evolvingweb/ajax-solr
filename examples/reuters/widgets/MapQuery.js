@@ -65,8 +65,8 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var coordenadas_ymin=coordenadas._southWest.lng;
 		var coordenadas_ymax=coordenadas._northEast.lng;
 		//Tamaño de las celdas
-		var stepx= (coordenadas_xmin-coordenadas_xmax)/10;
-		var stepy= (coordenadas_ymin-coordenadas_ymax)/10;
+		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/10 );
+		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/10 );
 		//Parseo del json
 		var objetoJson = this.manager.response.facet_counts.facet_pivot["_lat,_long"];
 		for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
