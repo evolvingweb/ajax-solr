@@ -66,21 +66,25 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var coordenadas_ymin=coordenadas._southWest.lng;
 		var coordenadas_ymax=coordenadas._northEast.lng;
 		//Tamaño de las celdas
-		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/10 );
-		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/10 );
+		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/5 );
+		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/5 );
 		//Parseo del json
 		var objetoJson = this.manager.response.facet_counts.facet_pivot["_lat,_long"];
 		markers = new L.LayerGroup();
+		// fasdfadsf
 		for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
 		{
 			var currentCelda=0;
+			// asdfsadfsadf
 			for(var Lat in objetoJson)
 			{
 				var latitude= objetoJson[Lat].value;
 				if(latitude>i && latitude< (i+stepx))
 				{
+					// asdfasdf
 					for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
 					{
+						// asdfasñlkjfsad
 						for(var Long in objetoJson[Lat].pivot)
 						{
 							var longitude= objetoJson[Lat].pivot[Long];
@@ -89,15 +93,18 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 								currentCelda+=longitude.count;
 							}
 						}
+					
+						//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
+						if(currentCelda!=0)
+						{
+							var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
+							marker.bindPopup(currentCelda);
+							markers.addLayer(marker);
+						}
 					}
 				}
 			}
-			//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
-			if(currentCelda!=0)
-			{
-				var marker = new L.Marker(new L.LatLng(parseFloat(latitude), parseFloat(longitude.value)), { title: currentCelda });
-				markers.addLayer(marker);
-			}
+			
 		}
 		map.addLayer(markers);
 		
