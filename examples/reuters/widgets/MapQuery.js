@@ -20,8 +20,6 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 			northEast = L.latLng(90, 180),
 			bounds = L.latLngBounds(southWest, northEast);
 		map = new L.Map('map', {center: latlng, zoom: 0, layers: [cloudmade], maxBounds: [bounds]});
-
-
 	},
 	
 	beforeRequest: function () {
@@ -70,13 +68,13 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var stepx= (coordenadas_xmin-coordenadas_xmax)/10;
 		var stepy= (coordenadas_ymin-coordenadas_ymax)/10;
 		//Parseo del json
-		var objetoJson=this.manager.response.facet_counts.facet_pivot["_lat,_long"];
+		var objetoJson = this.manager.response.facet_counts.facet_pivot["_lat,_long"];
 		for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
 		{
 			var currentCelda=0;
 			for(var Lat in objetoJson)
 			{
-				var latitude= objetonJson[Lat].value;
+				var latitude= objetoJson[Lat].value;
 				if(latitude>i && value< (i+stepx))
 				{
 					for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
