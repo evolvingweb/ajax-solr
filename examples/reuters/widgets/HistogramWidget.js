@@ -184,6 +184,8 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 			.attr("width", w/n - 1)
 			.attr("height", function(d) {return (d/s);})
 			.attr("class", "femalebar")
+			.on("mouseover", function () {d3.select(this).classed("highlight2", true);})
+			.on("mouseout", function () {d3.select(this).classed("highlight2", false);})
 			.on("click", function (rect, bar) {
 				
 				var query;
@@ -210,10 +212,6 @@ AjaxSolr.HistogramWidget = AjaxSolr.AbstractFacetWidget.extend({
 
       });
 			;
-			
-			/*.attr("fill", function(d) {
-				return "rgb(0,0, " + (255) + ")";
-				});*/
 		
 		//dado que en months tenemos las fechas en formato yyyy-mm, mostramos 
 		//un texto encima de cada barra, que dice a que fecha corresponse

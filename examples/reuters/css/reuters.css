@@ -193,6 +193,10 @@ text.malebar, text.femalebar {
   fill: #000;
 }
 
+rect.highlight2{
+	fill: #a14538;
+}
+
 #histogram
 {
 margin-top: 10px;
