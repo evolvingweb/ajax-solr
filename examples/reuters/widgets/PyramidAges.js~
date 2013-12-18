@@ -32,22 +32,22 @@ var self = this;
 		femaleAges1 = femaleAges[key];
 		
 		switch (true){
-			case ((parseInt(key) >= 0) && (parseInt(key) < 10)):
+			case ((parseInt(key) >= 0) && (parseInt(key) <= 10)):
 				femaleAges10[0] = femaleAges10[0] + femaleAges1;
 				break;
-			case ((parseInt(key) >= 11) && (parseInt(key) < 20)):
+			case ((parseInt(key) >= 11) && (parseInt(key) <= 20)):
 				femaleAges10[1] = femaleAges10[1] + femaleAges1;
 				break;
-			case ((parseInt(key) >= 21) && (parseInt(key) < 30)):
+			case ((parseInt(key) >= 21) && (parseInt(key) <= 30)):
 				femaleAges10[2] = femaleAges10[2] + femaleAges1;
 				break;
-			case ((parseInt(key) >= 31) && (parseInt(key) < 40)):
+			case ((parseInt(key) >= 31) && (parseInt(key) <= 40)):
 				femaleAges10[3] = femaleAges10[3] + femaleAges1;
 				break;
-			case ((parseInt(key) >= 41) && (parseInt(key) < 50)):
+			case ((parseInt(key) >= 41) && (parseInt(key) <= 50)):
 				femaleAges10[4] = femaleAges10[4] + femaleAges1;
 				break;
-			case ((parseInt(key) >= 51) && (parseInt(key) < 60)):
+			case ((parseInt(key) >= 51) && (parseInt(key) <= 60)):
 				femaleAges10[5] = femaleAges10[5] + femaleAges1;
 				break;
 			case ((parseInt(key) >= 61) && (parseInt(key) <= 70)):

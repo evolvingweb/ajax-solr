@@ -1,17 +1,19 @@
-//var ip = location.host;
+var ip = location.hostname;
+//var ip = "localhost";
 var Manager;
 
 (function ($) {
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      //solrUrl: 'http://' + ip + ':8983/solr/collection1/'
-	solrUrl: 'http://localhost:8983/solr/collection1/'
+      solrUrl: 'http://' + ip + ':8983/solr/collection1/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
       target: '#docs'
     }));
+    
+   
     Manager.addWidget(new AjaxSolr.PagerWidget({
       id: 'pager',
       target: '#pager',
@@ -45,27 +47,39 @@ var Manager;
         Manager.addWidget(new AjaxSolr.HistogramWidget({
       id: 'histogram',
       target: '#histogram',
-      field: 'comment_date'
+      fields: ['comment_date', 'comment_hour']
     }));
+    
+   //************** new widget trial pivots ********************
+    
+     Manager.addWidget(new AjaxSolr.PyramidAges({
+      id: 'pyramidAges',
+      target: '#pyramidAges',
+      field: 'user_sex,user_age',
+      'facet.pivot': true
+    }));
+   // **********************************************************
     
     Manager.addWidget(new AjaxSolr.CalendarWidget({
       id: 'calendar',
       target: '#calendar',
       field: 'comment_date'
     }));
+    
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['comment_id', 'comment_order', 'comment_karma', 'comment_randkey', 'comment_date', 'comment_user_id', 'comment_link_id', 'comment_content', 'comment_votes', 'comment_parent' ],
+      'facet.field': ['comment_id', 'comment_order', 'comment_karma', 'comment_randkey', 'comment_date', 'comment_user_id', 'comment_link_id', 'comment_content', 'comment_votes', 'comment_parent', 'comment_hour' ],
       'facet.limit': 20,
       'facet.mincount': 1,
       'f.topics.facet.limit': 50,
-    //  'f.countryCodes.facet.limit': -1,
       'facet.date': 'comment_date',
-      'facet.date.start': '2007-01-01T00:00:00.000Z/DAY',
-      'facet.date.end': '2007-12-31T00:00:00.000Z/DAY+1DAY',
+      'facet.date.start': '2005-12-01T00:00:00.000Z/DAY',
+      'facet.date.end': '2006-12-31T00:00:00.000Z/DAY+1DAY',
       'facet.date.gap': '+1DAY',
+      //************** new line for trial pivot *******************************
+      'facet.pivot':'user_sex,user_age',   	
       'json.nl': 'map'
     };
     for (var name in params) {
