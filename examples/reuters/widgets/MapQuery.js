@@ -5,6 +5,7 @@ var markers;
 AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	start: 0,
 	currentGeolocQuery: null,
+	gridSize: 15,
 	
 	init: function () {
 		self= this;
@@ -65,11 +66,14 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var coordenadas_xmax=coordenadas._northEast.lat;
 		var coordenadas_ymin=coordenadas._southWest.lng;
 		var coordenadas_ymax=coordenadas._northEast.lng;
+		var objetoJsonIdentifier= "";
+		objetoJsonIdentifier= map.getZoom()>5 ? "_lat_zero,_long_zero": "_lat,_long";
 		//Tamaño de las celdas
-		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/15 );
-		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/15 );
+		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/self.gridSize );
+		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/self.gridSize );
 		//Parseo del json
-		var objetoJson = this.manager.response.facet_counts.facet_pivot["_lat,_long"];
+		
+		var objetoJson = this.manager.response.facet_counts.facet_pivot[objetoJsonIdentifier];
 		markers = new L.LayerGroup();
 		var countTotal=0;
 		for (var i in objetoJson)
@@ -126,6 +130,10 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		//Add new filter query and refresh current filter query
 		this.currentGeolocQuery= 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
 		Manager.store.addByValue('fq', self.currentGeolocQuery);
+		Manager.store.remove('facet.pivot');
+		if(map.getZoom()>5) Manager.store.addByValue('facet.pivot', '_lat_zero,_long_zero');
+		else Manager.store.addByValue('facet.pivot', '_lat,_long');
+        //Línea añadida para los facets
 		Manager.doRequest();
 	}
   
