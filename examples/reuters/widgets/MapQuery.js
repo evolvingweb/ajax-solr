@@ -67,7 +67,8 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		var coordenadas_ymin=coordenadas._southWest.lng;
 		var coordenadas_ymax=coordenadas._northEast.lng;
 		var objetoJsonIdentifier= "";
-		objetoJsonIdentifier= map.getZoom()>5 ? "_lat_zero,_long_zero": "_lat,_long";
+		objetoJsonIdentifier= map.getZoom()<5 ? "_lat_zero,_long_zero": "_lat,_long";
+		//if(map.getZoom()>5){objetoJsonIdentifier="_lat_zero,_long_zero";}else{objetoJsonIdentifier="_lat,_long";}
 		//Tamaño de las celdas
 		var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/self.gridSize );
 		var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/self.gridSize );
@@ -108,21 +109,25 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 				
 				if(currentCelda!=0)
 				{
+					var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
+					markers.addLayer(marker);
+				
+					// esto no funciona
 					//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
 					//var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
 					//marker.bindPopup(currentCelda);
 					//markers.addLayer(marker);
 					//var maxCountMarkerStep = /3;
-					var size;
+					//var size;
 					/*if ()
 					size = "small"; // 1/3
 					if
 					size = "medium"; // 2/3
 					if*/
-					size = "large"; // 3/3
-					var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
-					m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
-					markers.addLayer(m2);
+					//size = "large"; // 3/3
+					//var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
+					//m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
+					//markers.addLayer(m2);
 				}
 			}
 		}
@@ -142,7 +147,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 		this.currentGeolocQuery= 'geo_loc:['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
 		Manager.store.addByValue('fq', self.currentGeolocQuery);
 		Manager.store.remove('facet.pivot');
-		if(map.getZoom()>5) Manager.store.addByValue('facet.pivot', '_lat_zero,_long_zero');
+		if(map.getZoom()<5) Manager.store.addByValue('facet.pivot', '_lat_zero,_long_zero');
 		else Manager.store.addByValue('facet.pivot', '_lat,_long');
         //Línea añadida para los facets
 		Manager.doRequest();
