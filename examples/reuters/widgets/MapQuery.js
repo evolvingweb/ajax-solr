@@ -109,9 +109,20 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 				if(currentCelda!=0)
 				{
 					//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
-					var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
+					//var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
 					//marker.bindPopup(currentCelda);
-					markers.addLayer(marker);
+					//markers.addLayer(marker);
+					//var maxCountMarkerStep = /3;
+					var size;
+					/*if ()
+					size = "small"; // 1/3
+					if
+					size = "medium"; // 2/3
+					if*/
+					size = "large"; // 3/3
+					var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
+					m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
+					markers.addLayer(m2);
 				}
 			}
 		}
