@@ -47,20 +47,20 @@ var Manager;
     var params = {
       facet: true,
 	  indent: true,
-      'facet.field': [ 'comment_user_id', 'comment_date', 'comment_id', 'comment_content','geo_loc'],
-      'facet.limit': 20,
-      'facet.mincount': 1,
-      'f.topics.facet.limit': 50,
-      'facet.date': 'comment_date',
-      'facet.date.start': '2006-02-26T00:00:00.000Z/DAY',
-      'facet.date.end': '2006-03-20T00:00:00.000Z/DAY+1DAY',
-      'facet.date.gap': '+1DAY',
+      //'facet.field': [ 'comment_user_id', 'comment_date', 'comment_id', 'comment_content','geo_loc'],
+	  //'facet.limit': -1, //20
+      //'facet.mincount': 1,
+      //'f.topics.facet.limit': 50,
+      //'facet.date': 'comment_date',
+      //'facet.date.start': '2006-02-26T00:00:00.000Z/DAY',
+      //'facet.date.end': '2006-03-20T00:00:00.000Z/DAY+1DAY',
+      //'facet.date.gap': '+1DAY',
       'json.nl': 'map'
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
-	Manager.store.addByValue('facet.pivot', '_lat,_long')
+	Manager.store.addByValue('facet.pivot', '_lat_zero,_long_zero');
     Manager.doRequest();
   });
 
