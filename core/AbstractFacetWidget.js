@@ -139,9 +139,9 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    * @returns {Boolean} Whether a filter query was added.
    */
   addByField: function (field, value) {
-		  var a = this.manager.store.removeByValue('fq', new RegExp('^-?' + field + ':')),
-          b = this.manager.store.addByValue('fq', (field+':'+value));
-      return a || b;
+   	return this.changeSelection(function () {
+      return this.manager.store.addByValue('fq', (field+':'+value));
+    });
   },
 
   /**
