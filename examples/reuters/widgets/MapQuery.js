@@ -5,7 +5,7 @@ var markers;
 AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	start: 0,
 	currentGeolocQuery: null,
-	gridSize: 15,
+	gridSize: 5,
 	
 	init: function () {
 		self= this;
@@ -111,28 +111,17 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 				{
 					//var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
 					//markers.addLayer(marker);
-					
-					var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-large leaflet-clickable leaflet-zoom-animated' , iconSize: new L.Point(40, 40) });
-					//markers.addLayer(marker);
-					m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
-					markers.addLayer(m2);
-					
-					// esto no funciona
-					//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
-					//var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
-					//marker.bindPopup(currentCelda);
-					//markers.addLayer(marker);
-					//var maxCountMarkerStep = /3;
-					//var size;
-					/*if ()
-					size = "small"; // 1/3
-					if
-					size = "medium"; // 2/3
-					if*/
-					//size = "large"; // 3/3
-					//var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
-					//m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
-					//markers.addLayer(m2);
+				    
+				    var size;
+				    var c = parseFloat(currentCelda)/countTotal;
+				    if(c<1/3)size = "small";
+				    else if(c <2/3) size = "medium";
+				    else size = "large";
+
+				    var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
+				    //markers.addLayer(marker);
+				    m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
+				    markers.addLayer(m2);
 				}
 			}
 		}
