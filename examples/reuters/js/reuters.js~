@@ -1,5 +1,5 @@
-var ip = location.hostname;
-//var ip = "localhost";
+//var ip = location.hostname;
+var ip = "localhost";
 var Manager;
 
 (function ($) {

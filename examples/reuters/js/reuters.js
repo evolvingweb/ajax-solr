@@ -50,7 +50,7 @@ var Manager;
       fields: ['comment_date', 'comment_hour']
     }));
     
-   //************** new widget trial pivots ********************
+   //************** new widget pyramid pivots ********************
     
      Manager.addWidget(new AjaxSolr.PyramidAges({
       id: 'pyramidAges',
@@ -78,7 +78,7 @@ var Manager;
       'facet.date.start': '2005-12-01T00:00:00.000Z/DAY',
       'facet.date.end': '2006-12-31T00:00:00.000Z/DAY+1DAY',
       'facet.date.gap': '+1DAY',
-      //************** new line for trial pivot *******************************
+      //************** new line for pyramid pivot *******************************
       'facet.pivot':'user_sex,user_age',   	
       'json.nl': 'map'
     };
