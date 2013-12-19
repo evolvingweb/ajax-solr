@@ -109,9 +109,14 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 				
 				if(currentCelda!=0)
 				{
-					var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
-					markers.addLayer(marker);
-				
+					//var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
+					//markers.addLayer(marker);
+					
+					var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-large leaflet-clickable leaflet-zoom-animated' , iconSize: new L.Point(40, 40) });
+					//markers.addLayer(marker);
+					m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
+					markers.addLayer(m2);
+					
 					// esto no funciona
 					//Agregar un marcador en posicion i+stepx/2 j+stepy/2 con el valor de current Celda
 					//var marker = new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), { title: currentCelda });
