@@ -23,12 +23,37 @@
   <script src="widgets/AutocompleteWidget.js"></script>
   <script src="widgets/CountryCodeWidget.js"></script>
   <script src="widgets/CalendarWidget.js"></script>
+  <script src="widgets/HistogramWidget.js"></script>
+  <script src="widgets/PyramidAges.js"></script>  <!--*********************************************************************** -->
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script> 
+  
+  $('CalendarWidget').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate:0,
+      onChangeMonthYear: function(year, month, inst){
+        // set date to 1st on year or month change
+
+        // this seems  bit janky, but works
+        //$('#' + inst.id).datepicker( "setDate", month + '/1/' + year );
+		alert("hohoho");
+        // Can't I use the instatnce to set the date?
+
+        // $(inst).datepicker( "setDate", month + '/1/' + year ); // fails
+        // inst.datepicker( "setDate", month + '/1/' + year ); // fails
+        // inst.selectedDay = 1; // fails
+        // inst.currentDay = 1; // fails 
+      }
+  });
+  
+   </script>
 </head>
 <body>
   <div id="wrap"> 
     <div id="header">
-      <h1>AJAX Solr Demonstration</h1>
-      <h2>Browse Reuters business news from 1987</h2>
+      <h1>Meneame database</h1>
+      <h2>Comments</h2>
     </div>
 
     <div class="right">
@@ -51,21 +76,22 @@
         <input type="text" id="query" name="query" autocomplete="off">
       </ul>
 
-      <h2>Top Topics</h2>
-      <div class="tagcloud" id="topics"></div>
-
-      <h2>Top Organisations</h2>
-      <div class="tagcloud" id="organisations"></div>
-
-      <h2>Top Exchanges</h2>
-      <div class="tagcloud" id="exchanges"></div>
-
-      <h2>By Country</h2>
-      <div id="countries"></div>
-      <div id="preview"></div>
+      <h2>Most commun Words</h2>
+      <div class="tagcloud" id="comment_content"></div>
+      
+      <h2>Most commun Users</h2>
+      <div class="tagcloud" id="comment_user_id"></div>
 
       <h2>By Date</h2>
       <div id="calendar"></div>
+      
+      <h2>Histogram</h2>
+      <div id="histogram"></div>
+      
+      <!-- ********************************************************************************* -->
+      <h2>Pyramid age-gender</h2>
+      <div id="pyramidAges"></div>
+      <!-- *********************************************************************************-->
 
       <div class="clear"></div>
     </div>
