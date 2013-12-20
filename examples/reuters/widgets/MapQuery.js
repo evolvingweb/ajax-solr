@@ -25,7 +25,11 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	},
 	
 	beforeRequest: function () {
-
+	    //Remove current layer of markers if we find
+	    if ( markers )
+	    {
+		map.removeLayer(markers);
+	    }
 	//////////////
 
 	////////////
@@ -120,7 +124,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 
 				    var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
 				    //markers.addLayer(marker);
-				    m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
+				    m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon, title: currentCelda});
 				    markers.addLayer(m2);
 				}
 			}
@@ -131,9 +135,6 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	template: function (doc) {return false;},
 
 	_updateFunction: function(){
-		//Remove current layer of markers
-		map.removeLayer(markers);
-
 		var geoLoc= map.getBounds();
 		//Remove previous geo_loc filter query
 		Manager.store.removeByValue('fq',self.currentGeolocQuery);
