@@ -14,6 +14,7 @@
   <script src="../../core/Parameter.js"></script>
   <script src="../../core/ParameterStore.js"></script>
   <script src="../../core/AbstractWidget.js"></script>
+  <script src="../../core/AbstractWidget2.js"></script>
   <script src="widgets/ResultWidget.js"></script>
   <script src="../../widgets/jquery/PagerWidget.js"></script>
   <script src="../../core/AbstractFacetWidget.js"></script>
@@ -21,7 +22,6 @@
   <script src="widgets/CurrentSearchWidget.9.js"></script>
   <script src="../../core/AbstractTextWidget.js"></script>
   <script src="widgets/AutocompleteWidget.js"></script>
-  <script src="widgets/CountryCodeWidget.js"></script>
   <script src="widgets/CalendarWidget.js"></script>
 </head>
 <body>
@@ -51,18 +51,16 @@
         <input type="text" id="query" name="query" autocomplete="off">
       </ul>
 
-      <h2>Top Topics</h2>
-      <div class="tagcloud" id="topics"></div>
+      <h2>Top Karmas</h2>
+      <div class="tagcloud" id="comment_karma"></div>
 
-      <h2>Top Organisations</h2>
-      <div class="tagcloud" id="organisations"></div>
+      <h2>Age</h2>
+      <div class="tagcloud" id="user_age"></div>
 
-      <h2>Top Exchanges</h2>
-      <div class="tagcloud" id="exchanges"></div>
+      <h2>Sex</h2>
+      <div class="tagcloud" id="user_sex"></div>
 
-      <h2>By Country</h2>
-      <div id="countries"></div>
-      <div id="preview"></div>
+
 
       <h2>By Date</h2>
       <div id="calendar"></div>

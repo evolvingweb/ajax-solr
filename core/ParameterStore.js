@@ -5,7 +5,8 @@
   else {
     callback();
   }
-}(function () {
+}
+(function () {
 
 /**
  * The ParameterStore, as its name suggests, stores Solr parameters. Widgets

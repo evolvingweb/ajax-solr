@@ -43,11 +43,12 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       $(this.target).append(this.template(doc));
 
       var items = [];
-      items = items.concat(this.facetLinks('topics', doc.topics));
-      items = items.concat(this.facetLinks('organisations', doc.organisations));
-      items = items.concat(this.facetLinks('exchanges', doc.exchanges));
 
-      var $links = $('#links_' + doc.id);
+      items = items.concat(this.facetLinks('comment_id', doc.comment_id));
+      items = items.concat(this.facetLinks('comment_date', doc.comment_date));
+	items = items.concat(this.facetLinks('comment_content', doc.comment_content));
+
+      var $links = $('#links_' +doc.comment_id);
       $links.empty();
       for (var j = 0, m = items.length; j < m; j++) {
         $links.append($('<li></li>').append(items[j]));
@@ -57,17 +58,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
   template: function (doc) {
     var snippet = '';
-    if (doc.text.length > 300) {
-      snippet += doc.dateline + ' ' + doc.text.substring(0, 300);
-      snippet += '<span style="display:none;">' + doc.text.substring(300);
+    if (doc.comment_content.length > 300) {
+      snippet += 'DATE: '+doc.comment_date +'  USER:'+doc.comment_user_id +' '+ doc.comment_content.substring(0, 300);
+      snippet += '<span style="display:none;">' + doc.comment_content.substring(300);
       snippet += '</span> <a href="#" class="more">more</a>';
     }
     else {
-      snippet += doc.dateline + ' ' + doc.text;
+      snippet += 'DATE: '+doc.comment_date +'  USER:'+doc.comment_user_id +' '+ doc.comment_content;
     }
 
-    var output = '<div><h2>' + doc.title + '</h2>';
-    output += '<p id="links_' + doc.id + '" class="links"></p>';
+    var output = '<div><h2>' + 'ID: '+doc.comment_id + '     -- AGE: ' + doc.user_age + '     -- KARMA: ' + doc.comment_karma + '     -- SEX: ' + doc.user_sex + '</h2>';
+    output += '<p id="links_' + doc.comment_content + '" class="links"></p>';
     output += '<p>' + snippet + '</p></div>';
     return output;
   },
@@ -92,3 +93,4 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 });
 
 })(jQuery);
+
