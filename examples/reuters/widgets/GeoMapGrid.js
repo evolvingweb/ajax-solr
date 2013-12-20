@@ -60,7 +60,7 @@ function zoomToMarker(lat, lon){
             var coordinates_ymin=coordinates._southWest.lng;
             var coordinates_ymax=coordinates._northEast.lng;
             var jsonIdentifier= "";
-            jsonIdentifier= map.getZoom()<self.zoomThreshold ? '"'+_lat[0]+','+_long[0]'"' : "'"+_lat[1]+','+_long[1]+'"';
+            jsonIdentifier= map.getZoom()<self.zoomThreshold ? self._lat[0]+','+self_long[0] : self._lat[1]+','+self._long[1];
             //Grid size
             var stepx= Math.abs( (coordinates_xmin-coordinates_xmax)/self.gridSize );
             var stepy= Math.abs( (coordinates_ymin-coordinates_ymax)/self.gridSize );
@@ -122,12 +122,12 @@ function zoomToMarker(lat, lon){
             //Remove previous geo_loc filter query
             Manager.store.removeByValue('fq',self.currentGeolocQuery);
             //Add new filter query and refresh current filter query
-            this.currentGeolocQuery= geo_loc + ':['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
+            this.currentGeolocQuery= self.geo_loc + ':['+geoLoc._southWest.lat+','+geoLoc._southWest.lng+' TO '+geoLoc._northEast.lat+','+geoLoc._northEast.lng+']';
             Manager.store.addByValue('fq', self.currentGeolocQuery);
             //Different request for different levels of zoom, round at solr
             Manager.store.remove('facet.pivot');
-            if(map.getZoom()<self.zoomThreshold) Manager.store.addByValue('facet.pivot', '"'+_lat[0]+','+_long[0]+'"');
-            else Manager.store.addByValue('facet.pivot', '"'+_lat[1]+','+_long[1]+'"');
+            if(map.getZoom()<self.zoomThreshold) Manager.store.addByValue('facet.pivot', self._lat[0]+','+self._long[0]);
+            else Manager.store.addByValue('facet.pivot', self._lat[1]+','+self._long[1]);
             Manager.doRequest();
         }
         
