@@ -60,7 +60,7 @@ function zoomToMarker(lat, lon){
             var coordinates_ymin=coordinates._southWest.lng;
             var coordinates_ymax=coordinates._northEast.lng;
             var jsonIdentifier= "";
-            jsonIdentifier= map.getZoom()<self.zoomThreshold ? self._lat[0]+','+self_long[0] : self._lat[1]+','+self._long[1];
+            jsonIdentifier= map.getZoom()<self.zoomThreshold ? self._lat[0]+','+self._long[0] : self._lat[1]+','+self._long[1];
             //Grid size
             var stepx= Math.abs( (coordinates_xmin-coordinates_xmax)/self.gridSize );
             var stepy= Math.abs( (coordinates_ymin-coordinates_ymax)/self.gridSize );
