@@ -124,7 +124,7 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 
 				    var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
 				    //markers.addLayer(marker);
-				    m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon});
+				    m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon, title: currentCelda});
 				    markers.addLayer(m2);
 				}
 			}
