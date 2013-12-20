@@ -25,7 +25,11 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	},
 	
 	beforeRequest: function () {
-
+	    //Remove current layer of markers if we find
+	    if ( markers )
+	    {
+		map.removeLayer(markers);
+	    }
 	//////////////
 
 	////////////
@@ -131,9 +135,6 @@ AjaxSolr.MapQuery = AjaxSolr.AbstractWidget.extend({
 	template: function (doc) {return false;},
 
 	_updateFunction: function(){
-		//Remove current layer of markers
-		map.removeLayer(markers);
-
 		var geoLoc= map.getBounds();
 		//Remove previous geo_loc filter query
 		Manager.store.removeByValue('fq',self.currentGeolocQuery);
