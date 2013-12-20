@@ -15,12 +15,12 @@
 	    $("#button").click( function(){self._updateFunction()});
 	    //Leaflet map
 	    var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-	    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade, Points &copy 2012 LINZ',
-	    cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
-	    latlng = new L.LatLng(37.6735925, -1.6968357000000651);
+		cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade, Points &copy 2012 LINZ',
+		cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
+		latlng = new L.LatLng(37.6735925, -1.6968357000000651);
 	    var southWest = L.latLng(-90, -180),
-	    northEast = L.latLng(90, 180),
-	    bounds = L.latLngBounds(southWest, northEast);
+		northEast = L.latLng(90, 180),
+		bounds = L.latLngBounds(southWest, northEast);
 	    map = new L.Map('map', {center: latlng, zoom: 0, layers: [cloudmade], maxBounds: [bounds]});
 	},
 	
@@ -36,7 +36,7 @@
 
 	facetHandler: function (facet_field, facet_value) {return false;},
 
-	buttonRequest: function prova(){   alert("hpl");  },
+	buttonRequest: function test(){   alert("hpl");  },
 
 	afterRequest: function () {
 	    self._gridPivot(); 
@@ -47,62 +47,62 @@
 	//Function that put the markers on the map
 	_gridPivot: function(){ 
 	    //Map bounds
-	    var coordenadas= map.getBounds();
-	    var coordenadas_xmin=coordenadas._southWest.lat;
-	    var coordenadas_xmax=coordenadas._northEast.lat;
-	    var coordenadas_ymin=coordenadas._southWest.lng;
-	    var coordenadas_ymax=coordenadas._northEast.lng;
+	    var coordinates= map.getBounds();
+	    var coordinates_xmin=coordinates._southWest.lat;
+	    var coordinates_xmax=coordinates._northEast.lat;
+	    var coordinates_ymin=coordinates._southWest.lng;
+	    var coordinates_ymax=coordinates._northEast.lng;
 	    var jsonIdentifier= "";
 	    jsonIdentifier= map.getZoom()<self.zoomThreshold ? "_lat_zero,_long_zero": "_lat,_long";
 	    //Grid size
-	    var stepx= Math.abs( (coordenadas_xmin-coordenadas_xmax)/self.gridSize );
-	    var stepy= Math.abs( (coordenadas_ymin-coordenadas_ymax)/self.gridSize );
-	    var objetoJson = this.manager.response.facet_counts.facet_pivot[jsonIdentifier];
+	    var stepx= Math.abs( (coordinates_xmin-coordinates_xmax)/self.gridSize );
+	    var stepy= Math.abs( (coordinates_ymin-coordinates_ymax)/self.gridSize );
+	    var objJson = this.manager.response.facet_counts.facet_pivot[jsonIdentifier];
 	    self.currentMarkers = new L.LayerGroup();
 	    var countTotal=0;
 	    //Total of pivots 
-	    for (var i in objetoJson)
+	    for (var i in objJson)
 	    {
-		countTotal+=objetoJson[i].count;
+		countTotal+=objJson[i].count;
 	    }
 	    //Calculation of pivots for every cell of the grid
-	    for(var i= coordenadas_xmin; i<coordenadas_xmax;i+=stepx)
+	    for(var i= coordinates_xmin; i<coordinates_xmax;i+=stepx)
 	    {
 		
-		for(var j= coordenadas_ymin; j<coordenadas_ymax;j+=stepy)
+		for(var j= coordinates_ymin; j<coordinates_ymax;j+=stepy)
 		{
-		    var currentCelda=0;
-		    for(var Lat in objetoJson)
+		    var currentCell=0;
+		    for(var Lat in objJson)
 		    {
-			var latitude= objetoJson[Lat].value;
-			var latitudeMaxGrilla= i+stepx
+			var latitude= objJson[Lat].value;
+			var latitudeMaxGrid= i+stepx
 			
-			if(latitude>=i && latitude< latitudeMaxGrilla)
+			if(latitude>=i && latitude< latitudeMaxGrid)
 			{
-			    for(var Long in objetoJson[Lat].pivot)
+			    for(var Long in objJson[Lat].pivot)
 			    {
-				var longitude= objetoJson[Lat].pivot[Long];
-				var longitudeMaxGrilla=j+stepy 
-				if(longitude.value >=j && longitude.value<(longitudeMaxGrilla))
+				var longitude= objJson[Lat].pivot[Long];
+				var longitudeMaxGrid=j+stepy 
+				if(longitude.value >=j && longitude.value<(longitudeMaxGrid))
 				{
-				    currentCelda+=longitude.count;
+				    currentCell+=longitude.count;
 				}
 			    }
 			    
 			}
 		    }
 		    //If there are any document in this cell...
-		    if(currentCelda!=0)
+		    if(currentCell!=0)
 		    {	    
 			//Different colors for different weight related to the total
 			var size;
-			var c = parseFloat(currentCelda)/countTotal;
+			var c = parseFloat(currentCell)/countTotal;
 			if(c<1/3)size = "small";
 			else if(c <2/3) size = "medium";
 			else size = "large";
 			//Insert marker at grid's center
-			var myIcon = new L.DivIcon({ html: '<div><span>' + currentCelda + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
-			m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon, title: currentCelda});
+			var myIcon = new L.DivIcon({ html: '<div><span>' + currentCell + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
+			m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon, title: currentCell});
 			self.currentMarkers.addLayer(m2);
 		    }
 		}
