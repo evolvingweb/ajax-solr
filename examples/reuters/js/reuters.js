@@ -15,11 +15,11 @@ var Manager;
         Manager.addWidget(new AjaxSolr.GeoMapGrid({
             id: 'map',
             target: '#map',
-	    _lat: ['_lat_zero','_lat'],
-	    _long: ['_long_zero','_long'],
-	    geo_loc: ['geo_loc'],
-	    gridSize: 15,
-	    zoomThreshold: 8,
+            _lat: ['_lat_zero','_lat'],
+            _long: ['_long_zero','_long'],
+            geo_loc: ['geo_loc'],
+            gridSize: 15,
+            zoomThreshold: 8,
         }));
         
         Manager.addWidget(new AjaxSolr.PagerWidget({
