@@ -17,7 +17,7 @@ var Manager;
       target: '#map'
     }));
 	
-    Manager.addWidget(new AjaxSolr.PagerWidget({
+   /* Manager.addWidget(new AjaxSolr.PagerWidget({
       id: 'pager',
       target: '#pager',
       prevLabel: '&lt;',
@@ -26,7 +26,7 @@ var Manager;
       renderHeader: function (perPage, offset, total) {
         $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
-    }));
+    }));*/
 
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
       id: 'currentsearch',
@@ -48,7 +48,7 @@ var Manager;
       facet: true,
 	  indent: true,
       //'facet.field': [ 'comment_user_id', 'comment_date', 'comment_id', 'comment_content','geo_loc'],
-	  //'facet.limit': -1, //20
+	  'facet.limit': 20, //20
       //'facet.mincount': 1,
       //'f.topics.facet.limit': 50,
       //'facet.date': 'comment_date',

@@ -31,6 +31,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     return function () {
       self.manager.store.remove('fq');
       self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
+	  
+	//Manager.store.remove('facet.limit'); //tmp fix
+	//Manager.store.add('facet.limit', '10');
+	  
       self.doRequest();
       return false;
     };
