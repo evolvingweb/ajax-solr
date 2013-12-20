@@ -62,12 +62,12 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   template: function (doc) {
     var snippet = '';
     if ( doc.comment_content.length > 300) {
-      snippet += doc.dateline + ' ' + doc.comment_content.substring(0, 300);
+      snippet +=  doc.comment_content.substring(0, 300);
       snippet += '<span style="display:none;">' + doc.comment_content.substring(300);
       snippet += '</span> <a href="#" class="more">more</a>';
     }
     else {
-      snippet += doc.dateline + ' ' + doc.comment_content;
+      snippet += doc.comment_content;
     }
 
     var output = '<div><h2>' + doc.comment_date + '</h2>';
