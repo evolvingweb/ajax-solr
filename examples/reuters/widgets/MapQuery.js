@@ -1,3 +1,10 @@
+function zoomToMarker(lat, lon){
+    map.panTo(new L.LatLng(lat, lon));
+    map.setZoom(map.getZoom()+1);
+    //map.setView(new L.LatLng(40.737, -73.923), 8);
+    self._updateFunction();
+}
+
 (function ($) {
     var ini = false;
 
@@ -101,7 +108,7 @@
                         else if(c <2/3) size = "medium";
                         else size = "large";
                         //Insert marker at grid's center
-                        var myIcon = new L.DivIcon({ html: '<div><span>' + currentCell + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
+                        var myIcon = new L.DivIcon({ html: "<div onclick=' zoomToMarker("+parseFloat(i+stepx/2)+","+parseFloat(j+stepy/2)+")'><span>" + currentCell + '</span></div>', className: 'leaflet-marker-icon marker-cluster marker-cluster-'+size , iconSize: new L.Point(40, 40) });
                         m2=new L.Marker(new L.LatLng(parseFloat(i+stepx/2), parseFloat(j+stepy/2)), {icon: myIcon, title: currentCell});
                         self.currentMarkers.addLayer(m2);
                     }
