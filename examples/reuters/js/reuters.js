@@ -4,7 +4,7 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://evolvingweb.ca/solr/reuters/'
+      solrUrl: 'http://localhost:8080/solr/collection1/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
@@ -20,12 +20,14 @@ var Manager;
         $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
     }));
-    var fields = [ 'topics', 'organisations', 'exchanges' ];
+
+    var fields = [ 'comment_id', 'comment_karma' ,'comment_content', 'comment_date', 'comment_randkey', 'comment_user_id', 'comment_link_id', 'user_age', 'user_sex' ];
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.TagcloudWidget({
         id: fields[i],
         target: '#' + fields[i],
-        field: fields[i]
+        field: fields[i],
+        multivalue: false
       }));
     }
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
@@ -35,32 +37,24 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'text',
       target: '#search',
-      fields: [ 'topics', 'organisations', 'exchanges' ]
-    }));
-    Manager.addWidget(new AjaxSolr.CountryCodeWidget({
-      id: 'countries',
-      target: '#countries',
-      field: 'countryCodes'
+      fields: [ 'comment_content' ]
     }));
     Manager.addWidget(new AjaxSolr.CalendarWidget({
       id: 'calendar',
       target: '#calendar',
-      field: 'date'
+      field: 'comment_date'
     }));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': [ 'topics', 'organisations', 'exchanges', 'countryCodes' ],
-      'facet.limit': 20,
-      'facet.mincount': 1,
-      'f.topics.facet.limit': 50,
-      'f.countryCodes.facet.limit': -1,
-      'facet.date': 'date',
-      'facet.date.start': '1987-02-26T00:00:00.000Z/DAY',
-      'facet.date.end': '1987-10-20T00:00:00.000Z/DAY+1DAY',
-      'facet.date.gap': '+1DAY',
-      'json.nl': 'map'
+      'facet.field': [ 'comment_id', 'comment_karma' ,'comment_content', 'comment_date', 'comment_randkey', 'comment_user_id', 'comment_link_id', 'user_age', 'user_sex' ],
+      'facet.limit': 10,
+      'facet.mincount': 20,
+      'facet.date': 'comment_date',
+      'facet.date.start': '2005-12-01T00:00:00.000Z/DAY',
+      'facet.date.end': '2006-04-01T00:00:00.000Z/DAY+1DAY',
+      'facet.date.gap': '+1DAY'
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);

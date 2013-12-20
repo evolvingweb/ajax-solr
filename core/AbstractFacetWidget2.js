@@ -33,18 +33,11 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     }, attributes);
   },
 
-init: function () {
-            this.manager.store.add('facet.field', new AjaxSolr.Parameter({
-                name: 'facet.field',
-                value: this.field,
-                locals: {
-                    ex: this.field
-                }
-            }));
-            this.initStore();
-        },   
-  
-   /**
+ init: function () {
+	this.manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: this.field, locals: { ex:this.field } }));
+                                }, 
+
+  /**
    * Add facet parameters to the parameter store.
    */
   initStore: function () {
@@ -110,56 +103,34 @@ init: function () {
    *
    * @returns {Boolean} Whether the selection changed.
    */
-
-set: function (value) {       
-           
-         	//checkedValue = value;
-            return this.changeSelection(function () {          
-           
-                var indices = this.manager.store.find('fq', new RegExp('^-?' +
-                    this.field + ':'));
-                if (indices) {
-                    this.manager.store.params['fq'][indices[0]] = new
-                    AjaxSolr.Parameter({
-                        name: 'fq',
-                        value: this.manager.store.params['fq']
-                        [indices[0]].val() + ' OR ' + this.fq(value),
-                        locals: {
-                            tag: this.field
-                        }
-                    });
-                    return true;
-                } else {
-                    return this.manager.store.add('fq', new AjaxSolr.Parameter({
-                        name: 'fq',
-                        value: this.fq(value),
-                        locals: {
-                            tag: this.field
-                        }
-                    }));
-                }               
-            });
-        },
+  set: function (value) {
+	return this.changeSelection(function () {
+  	var indices = this.manager.store.find('fq', new RegExp('^-?' + this.field + ':'));
+  	if (indices) {
+    		this.manager.store.params['fq'][indices[0]] = new AjaxSolr.Parameter({ name: 'fq', value: this.manager.store.params['fq'][indices[0]].val() + ' OR ' + this.fq(value), locals: { tag:this.field } });
+    return true;
+  }
+  else {
+    return this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(value), locals: { tag: this.field } }));
+  }
+});
+    /*return this.changeSelection(function () {
+      var a = this.manager.store.removeByValue('fq', new RegExp('^-?' + this.field + ':')),
+          b = this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(value), locals: { tag: this.field } }));
+      return a || b;
+    });*/
+  },
 
   /**
    * Adds a filter query.
    *
    * @returns {Boolean} Whether a filter query was added.
    */
-
-add: function (value) {       
-       
-            return this.changeSelection(function () {
-                return this.manager.store.add('fq', new AjaxSolr.Parameter({
-                    name: 'fq',
-                    value: this.fq(value),
-                    locals: {
-                        tag: this.field
-                    }
-                }));
-            });
-        },
-
+  add: function (value) {
+    return this.changeSelection(function () {
+      return this.manager.store.add('fq', new AjaxSolr.Parameter({ name: 'fq', value: this.fq(value), locals: { tag: this.field } }));
+    });
+  },
 
   /**
    * Removes a filter query.
@@ -168,43 +139,45 @@ add: function (value) {
    */
 
 remove: function (value, field) {
-            var self = this;
-            return this.changeSelection(function () {
-                 
-            for (var i = 0, l = this.manager.store.params['fq'].length; i < l; i++) {
-                    var mySplitResult = this.manager.store.params['fq']
-                    [i].value.split(" OR ");
-                    var count = mySplitResult.length;
-                    for (var j = 0; j < mySplitResult.length; j++) {
-                        var v = field + ":" + value;
-                        if (value.match(" ") != null &&
-                            mySplitResult[j].localeCompare(v) != 0 && mySplitResult[j].split(":")[0].localeCompare(field) === 0) {
-                            value = '"' + value + '"';
-                        }
-                        v = field + ":" + value;
-                        if (mySplitResult[j].localeCompare(v) == 0) {
-                            mySplitResult.splice(j, 1);
-                            var str = mySplitResult.join(" OR ");
-                            if (count > 1) {
-                                this.manager.store.params['fq'][i].value = str;
-                            } else {
-                                this.manager.store.params['fq'].splice(i, 1);
-                            }
-                            return true;
-                        }
+        var self = this;
+	return this.changeSelection(function () {
+	for (var i = 0, l = this.manager.store.params['fq'].length; i< l; i++) {
+            var mySplitResult = this.manager.store.params['fq'][i].value.split(" OR ");
+            var count = mySplitResult.length;
+            for(var j = 0; j < mySplitResult.length; j++){
+	            var v = field + ":" + value;
+                    if (value.match(" ") != null &&mySplitResult[j].localeCompare(v) != 0 && mySplitResult[j].split(":")[0].localeCompare(field)===0) {
+                    	value = '"' + value + '"';	
                     }
-                }
-                return false;
-            });
-        },
+                    v = field + ":" + value;
+	            if (mySplitResult[j].localeCompare(v) == 0) {
+                        mySplitResult.splice(j,1);
+                        var str = mySplitResult.join(" OR ");
+                        if (count > 1) {
+                        this.manager.store.params['fq'][i].value = str;
+                        } else {
+                        this.manager.store.params['fq'].splice(i,1);
+                        }
+	            return true;
+                    }
+            }
+    }
+    return false;
+});
+}, 
 
+
+  /*remove: function (value) {
+    return this.changeSelection(function () {
+      return this.manager.store.removeByValue('fq', this.fq(value));
+    });
+  }, */
 
   /**
    * Removes all filter queries using the widget's facet field.
    *
    * @returns {Boolean} Whether a filter query was removed.
    */
-
   clear: function () {
     return this.changeSelection(function () {
       return this.manager.store.removeByValue('fq', new RegExp('^-?' + this.field + ':'));
@@ -325,7 +298,7 @@ remove: function (value, field) {
   clickHandler: function (value) {
     var self = this, meth = this.multivalue ? 'add' : 'set';
     return function () {
-      if (self[meth].call(self,value)) {
+      if (self[meth].call(self, value)) {
         self.doRequest(0);
       }
       return false;
@@ -337,26 +310,24 @@ remove: function (value, field) {
    * @returns {Function} Sends a request to Solr if it successfully removes a
    *   filter query with the given value.
    */
+  unclickHandler: function (value) {
+    var self = this;
+    return function () {
+      if (self.remove(value)) {
+        self.doRequest(0);
+      }
+      return false;
+    }
+  },
 
-	unclickHandler: function (value,field) {        	
-            var self = this;
-            return function () {
-                if (self.remove(value,field)) {
-                    self.manager.doRequest(0);
-                }
-                return false;
-            }
-        }, 
   /**
    * @param {String} value The facet value.
    * @param {Boolean} exclude Whether to exclude this fq parameter value.
    * @returns {String} An fq parameter value.
    */
-
   fq: function (value, exclude) {
     return (exclude ? '-' : '') + this.field + ':' + AjaxSolr.Parameter.escapeValue(value);
   }
-
 });
 
 }));
