@@ -4,7 +4,7 @@ var Manager;
 
     $(function(){
         Manager = new AjaxSolr.Manager({
-	    solrUrl: 'http://80.28.253.45:8080/solr/collection2/'
+            solrUrl: 'http://80.28.253.45:8080/solr/collection2/'
         });
 
         Manager.addWidget(new AjaxSolr.ResultWidget({
@@ -12,7 +12,7 @@ var Manager;
             target: '#docs'
         }));
 
-        Manager.addWidget(new AjaxSolr.MapQuery({
+        Manager.addWidget(new AjaxSolr.GeoMapGrid({
             id: 'map',
             target: '#map'
         }));
