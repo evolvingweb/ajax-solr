@@ -58,12 +58,13 @@
       <h2>Top Karmas</h2>
       <div class="tagcloud" id="comment_karma"></div>
 
-      <h2>Word counter</h2>
-      <div id="counter"></div>
-
+    
 
       <h2>By Date</h2>
       <div id="calendar"></div>
+
+<h2>Word counter</h2>
+      <div id="counter"></div>
 
       <div class="clear"></div>
     </div>

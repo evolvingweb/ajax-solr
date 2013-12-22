@@ -42,10 +42,9 @@ var Manager;
       target: '#calendar',
       field: 'comment_date'
     }));
-	Manager.addWidget(new AjaxSolr.CounterWidget({
-	id: 'counter',
-	target: '#counter'
-	}));
+	//Manager.addWidget(new AjaxSolr.CounterWidget({	id: 'counter',
+	//	target: '#counter'
+	//}));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
