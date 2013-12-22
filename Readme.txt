@@ -1,0 +1,1 @@
+This is an uncompleted little widget created for an UPF Course, do not include it on the final build. The widget is supposed to show the most repeated words in a D3.js multiline chart from a Pivot query. The widget was not done with the Reuters example data.
