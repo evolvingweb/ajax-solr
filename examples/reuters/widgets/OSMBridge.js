@@ -1,6 +1,6 @@
 (function ($) {
 
-AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
+AjaxSolr.OSMBridge = AjaxSolr.AbstractWidget.extend({
   start: 0,
 
   beforeRequest: function () {
@@ -31,10 +31,6 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     return function () {
       self.manager.store.remove('fq');
       self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
-	  
-	//Manager.store.remove('facet.limit'); //tmp fix
-	//Manager.store.add('facet.limit', '10');
-	  
       self.doRequest();
       return false;
     };
@@ -61,16 +57,16 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
   template: function (doc) {
     var snippet = '';
-    if ( doc.comment_content.length > 300) {
-      snippet +=  doc.comment_content.substring(0, 300);
+    if (doc.comment_content.length > 300) {
+      snippet += doc.comment_date + ' ' + doc.comment_content.substring(0, 300);
       snippet += '<span style="display:none;">' + doc.comment_content.substring(300);
       snippet += '</span> <a href="#" class="more">more</a>';
     }
     else {
-      snippet += doc.comment_content;
+      snippet += doc.comment_date + ' ' + doc.comment_content;
     }
 
-    var output = '<div><h2>' + doc.comment_date + '</h2>';
+    var output = '<div><h2>' + 'titulo' + '</h2>';
     output += '<p id="links_' + doc.comment_id + '" class="links"></p>';
     output += '<p>' + snippet + '</p></div>';
     return output;
