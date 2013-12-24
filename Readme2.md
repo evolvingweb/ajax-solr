@@ -40,7 +40,7 @@ You have to provide ip for the solr instance and collection: for example,
 
 solrUrl: 'http://1.2.3.4:8080/solr/collection1/'
 
-For link your solr variables to this widget, consider:
+To link your solr variables to this widget, consider:
 * geo\_loc, latitude and longitude of the type: string like: "41.981795,2.823699" we get this from our database with (latitude and longitude are geopoints): SELECT CAST( CONCAT( X( geo\_pt ) , ',', Y( geo\_pt ) ) AS CHAR ) as geo\_loc
 * \_lat\_zero (\_lat[0]), \_long\_zero (_long[0]) are latitude and longitude of type int
 * \_lat (\_lat[1]), \_long (\_long[1]) that are latitude and longitude of type double/float
