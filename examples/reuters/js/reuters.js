@@ -66,13 +66,14 @@ var Manager;
 	  }));
 	  
 	  
-	  /*Manager.addWidget(new AjaxSolr.BubbleChartWidget({
-		id: 'bubbles_exchanges',
-		target: '#' + 'bubbles_exchanges',
-		field: 'exchanges',
-		diameter: 300,
-		padding: 1.5
-	  }));*/
+	  Manager.addWidget(new AjaxSolr.TreeMapWidget({
+                id: 'treemap_topics',
+                target: '#' + 'treemap_topics',
+                field: 'topics',
+                width: 382,
+                height: 202,
+                margin: {top: 40,right: 10,bottom: 10,left: 10}
+      }));
 							
 							
 

@@ -165,7 +165,7 @@ font-size: 180%;
 }
 
 
-/* BUBBLECHART NODE */
+/*  NODE */
 .node {
   border: solid 1px white;
   font: 10px sans-serif;
@@ -175,6 +175,7 @@ font-size: 180%;
   text-indent: 2px;
 
 }
+
 
 }
 
