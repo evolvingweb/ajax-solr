@@ -43,7 +43,7 @@ var Manager;
       target: '#search',
       fields: [ 'topics', 'organisations', 'exchanges' ]
     }));
-    
+
 	
 	/*Manager.addWidget(new AjaxSolr.CountryCodeWidget({
       id: 'countries',
@@ -57,24 +57,21 @@ var Manager;
     }));*/
 
 	
-
-	
-	Manager.addWidget(new AjaxSolr.TreeMapWidget({
-		id: 'treemap_topics',
-		target: '#' + 'treemap_topics',
+	Manager.addWidget(new AjaxSolr.BubbleChartWidget({
+		id: 'bubbles_topics',
+		target: '#' + 'bubbles_topics',
 		field: 'topics',
-		width: 382,
-		height: 202,
-		margin: {top: 40,right: 10,bottom: 10,left: 10}
+		diameter: 382,
+		padding: 1.5
 	  }));
 	  
-	  /*Manager.addWidget(new AjaxSolr.TreeMapWidget({
-		id: 'treemap_exchanges',
-		target: '#' + 'treemap_exchanges',
+	  
+	  /*Manager.addWidget(new AjaxSolr.BubbleChartWidget({
+		id: 'bubbles_exchanges',
+		target: '#' + 'bubbles_exchanges',
 		field: 'exchanges',
-		width: 960,
-		height: 500,
-		margin: {top: 40,right: 10,bottom: 10,left: 10}
+		diameter: 300,
+		padding: 1.5
 	  }));*/
 							
 							

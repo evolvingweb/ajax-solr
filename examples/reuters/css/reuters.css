@@ -165,7 +165,7 @@ font-size: 180%;
 }
 
 
-/*TREEMAP NODE*/
+/* BUBBLECHART NODE */
 .node {
   border: solid 1px white;
   font: 10px sans-serif;
@@ -173,8 +173,7 @@ font-size: 180%;
   overflow: hidden;
   position: absolute;
   text-indent: 2px;
-}
-}
+
 }
 
 }
