@@ -6,9 +6,13 @@
 body {
   background: #fff url(../images/header.gif) repeat-x;
   color: #333;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 18px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+  height: 500px;
 }
 img {
   border: none;
@@ -110,6 +114,7 @@ a:hover {
 #search_help {
   font-size: 80%;
 }
+
 .tagcloud {
   padding: 10px 15px 0;
 }
@@ -158,3 +163,19 @@ font-size: 170%;
 a.tagcloud_size_10 {
 font-size: 180%;
 }
+
+
+/*  NODE */
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+
+}
+
+
+}
+
