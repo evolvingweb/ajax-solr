@@ -1,3 +1,5 @@
+* Play with the [DEMO page with both widgets][9]
+
 # BubbleChartWidget
 
 BubbleChartWidget is a widget implemented in .js which is implemented using AbstractFacetWidget structure and uses facets taken from the m AJAX Solr.
@@ -9,8 +11,6 @@ This witget uses the d3.js library to represent its data.
 TreeMapWidget is a widget implemented in .js which is implemented using AbstractFacetWidget structure and uses facets taken from the m AJAX Solr.
 This witget uses the d3.js library to represent its data. 
 * See the widget code [TreeMapWidget.js][11]
-
-* Play with the [DEMO of both widgets][9]
 
 # AJAX Solr
 
