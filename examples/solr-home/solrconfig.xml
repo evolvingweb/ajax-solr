@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config>
+	<luceneMatchVersion>LUCENE_42</luceneMatchVersion>
+	<directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}" />
+
+	<!-- These directories are relative to this file's location. -->
+	<lib dir="../../../solr/contrib/extraction/lib" />
+	<lib dir="../../../solr/contrib/dataimporthandler/lib/" regex=".*jar$" />
+
+	<requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
+
+	<requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers" />
+	<admin>
+		<defaultQuery>*:*</defaultQuery>
+	</admin>
+
+	<requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+		<lst name="invariants">
+			<str name="q">solrpingquery</str>
+		</lst>
+		<lst name="defaults">
+			<str name="echoParams">all</str>
+		</lst>
+	</requestHandler>
+</config>
