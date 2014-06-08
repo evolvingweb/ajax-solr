@@ -79,7 +79,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
 
   /**
    * @returns {Array} The visible page numbers according to the window options.
-   */ 
+   */
   visiblePageNumbers: function () {
     var windowFrom = this.currentPage - this.innerWindow;
     var windowTo = this.currentPage + this.innerWindow;
@@ -168,7 +168,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
         return 'next';
       case 1:
         return 'start';
-      default: 
+      default:
         return '';
     }
   },

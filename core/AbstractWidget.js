@@ -8,8 +8,8 @@
 }(function () {
 
 /**
- * Baseclass for all widgets. 
- * 
+ * Baseclass for all widgets.
+ *
  * Provides abstract hooks for child classes.
  *
  * @param properties A map of fields to set. May be new or public fields.
@@ -50,7 +50,7 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
    */
   init: function () {},
 
-  /** 
+  /**
    * An abstract hook for child implementations.
    *
    * <p>This method is executed before the Solr request is sent.</p>

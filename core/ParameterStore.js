@@ -342,7 +342,7 @@ AjaxSolr.ParameterStore = AjaxSolr.Class.extend(
     }
     this.parseString(this.storedString());
   },
-  
+
   /**
    * An abstract hook for child implementations.
    *
