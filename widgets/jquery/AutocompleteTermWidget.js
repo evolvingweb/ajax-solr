@@ -1,5 +1,5 @@
 (function ($) {
-  
+
 /**
  * A <i>term</i> autocomplete search box, using jQueryUI.autocomplete. This
  * implementation uses Solr's facet.prefix technique. This technique benefits
@@ -7,7 +7,7 @@
  * the last one the user is typing into a filter query as well to get even more
  * relevant completion suggestions.
  *
- * Index instructions: 
+ * Index instructions:
  * 1. Put a facet warming query into Solr's "firstSearcher" in solrconfig.xml,
  * for the target field.
  * 2. Use appropriate text analysis to include a tokenizer (not keyword) and do
@@ -18,7 +18,7 @@
  * then you might want to use a catch-all search field to autocomplete on.
  *
  * For large indexes, another implementation approach like the Suggester feature
- * or TermsComponent might be better than a faceting approach. 
+ * or TermsComponent might be better than a faceting approach.
  *
  * Other types of autocomplete (a.k.a. suggest) are "search-results",
  * "query-log", and "facet-value". This widget does term autocompletion.
@@ -51,6 +51,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
    *   differentiate these requests in server logs and Solr statistics.
    */
   constructor: function (attributes) {
+    AjaxSolr.AutocompleteTermWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       field: null,
       tokenized: true,
@@ -124,7 +125,7 @@ AjaxSolr.AutocompleteTermWidget = AjaxSolr.AbstractTextWidget.extend(
       select: function(event, ui) {
         if (self.set(ui.item.value)) {
           self.doRequest();
-        }      
+        }
       }
     });
   }

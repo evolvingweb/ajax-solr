@@ -37,6 +37,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
    *   Defaults to " ".
    */
   constructor: function (attributes) {
+    AjaxSolr.PagerWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       innerWindow: 4,
       outerWindow: 1,
@@ -78,7 +79,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
 
   /**
    * @returns {Array} The visible page numbers according to the window options.
-   */ 
+   */
   visiblePageNumbers: function () {
     var windowFrom = this.currentPage - this.innerWindow;
     var windowTo = this.currentPage + this.innerWindow;
@@ -167,7 +168,7 @@ AjaxSolr.PagerWidget = AjaxSolr.AbstractWidget.extend(
         return 'next';
       case 1:
         return 'start';
-      default: 
+      default:
         return '';
     }
   },

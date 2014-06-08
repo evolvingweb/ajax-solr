@@ -22,6 +22,7 @@ AjaxSolr.AbstractTextWidget = AjaxSolr.AbstractWidget.extend(
    *   offset parameter to 0 on each request.
    */
   constructor: function (attributes) {
+    AjaxSolr.AbstractTextWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       start: 0
     }, attributes);

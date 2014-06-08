@@ -72,22 +72,22 @@ AjaxSolr.AbstractManager = AjaxSolr.Class.extend(
    *
    * @param {AjaxSolr.ParameterStore} store
    */
-  setStore: function (store) { 
+  setStore: function (store) {
     store.manager = this;
     this.store = store;
   },
 
-  /** 
+  /**
    * Adds a widget to the manager.
    *
    * @param {AjaxSolr.AbstractWidget} widget
    */
-  addWidget: function (widget) { 
+  addWidget: function (widget) {
     widget.manager = this;
     this.widgets[widget.id] = widget;
   },
 
-  /** 
+  /**
    * Stores the Solr parameters to be sent to Solr and sends a request to Solr.
    *
    * @param {Boolean} [start] The Solr start offset parameter.

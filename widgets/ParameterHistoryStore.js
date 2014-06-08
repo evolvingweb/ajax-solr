@@ -1,7 +1,7 @@
 ;(function(history) {
   /**
    * A parameter store that stores the values of exposed parameters in the URL via History.js
-   * to maintain the application's state. This uses the HTML5 History API for newer browsers, and 
+   * to maintain the application's state. This uses the HTML5 History API for newer browsers, and
    * falls back to using the hash in older browsers. Don't forget to add the following (or similar)
    * inside your <tt>head</tt> tag:
    *
@@ -64,7 +64,7 @@
     },
 
     /**
-     * Called when History.js detects a state change. Checks if state is different to previous state, 
+     * Called when History.js detects a state change. Checks if state is different to previous state,
      * and if so, sends a request to Solr. This needs to check if the state has changed since it also
      * gets called when we call pushState above.
      */
