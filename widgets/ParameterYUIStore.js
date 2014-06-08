@@ -33,7 +33,6 @@ AjaxSolr.ParameterYUIStore = AjaxSolr.ParameterStore.extend(
    * @param {Object} [attributes]
    * @param {String} [attributes.module] The name of the YUI History Manager
    *   module to use for the parameter store. Defaults to "q".
-   * 
    */
   constructor: function (attributes) {
     AjaxSolr.ParameterYUIStore.__super__.constructor.apply(this, arguments);
