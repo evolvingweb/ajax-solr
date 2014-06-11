@@ -39,7 +39,6 @@
      */
     save: function () {
       this.hash = this.exposedString();
-      console.log(this.hash);
       history.pushState({ params: this.hash }, null, '?' + this.hash);
     },
 
