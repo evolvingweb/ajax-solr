@@ -15,7 +15,7 @@
 AjaxSolr.Manager = AjaxSolr.AbstractManager.extend(
   /** @lends AjaxSolr.Manager.prototype */
   {
-  executeRequest: function (servlet, string, handler, errorHandler) {
+  executeRequest: function (servlet, string, handler, errorHandler, disableJsonp) {
     var self = this,
         options = {dataType: 'json'};
     string = string || this.store.string();
@@ -31,7 +31,7 @@ AjaxSolr.Manager = AjaxSolr.AbstractManager.extend(
       options.type = 'POST';
     }
     else {
-      options.url = this.solrUrl + servlet + '?' + string + '&wt=json&json.wrf=?';
+      options.url = this.solrUrl + servlet + '?' + string + '&wt=json' + (disableJsonp ? '' : '&json.wrf=?');
     }
     jQuery.ajax(options).done(handler).fail(errorHandler);
   }
