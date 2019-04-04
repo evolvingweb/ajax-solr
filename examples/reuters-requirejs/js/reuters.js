@@ -25,7 +25,7 @@ define([
 ], function () {
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://reuters-demo.tree.ewdev.ca:9090/reuters/'
+      solrUrl: 'https://reuters-demo.tree.ewdev.ca:9090/reuters/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
