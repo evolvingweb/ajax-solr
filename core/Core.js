@@ -140,7 +140,7 @@ AjaxSolr.equals = function (foo, bar) {
  *
  * @static
  * @see http://thinkweb2.com/projects/prototype/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/
- * @see http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
+ * @see https://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js
  */
 AjaxSolr.isArray = function (obj) {
   return obj != null && typeof obj == 'object' && 'splice' in obj && 'join' in obj;

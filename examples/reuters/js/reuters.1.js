@@ -4,7 +4,7 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://reuters-demo.tree.ewdev.ca:9090/reuters/'
+      solrUrl: 'https://reuters-demo.tree.ewdev.ca:9090/reuters/'
     });
     Manager.init();
     Manager.store.addByValue('q', '*:*');
